@@ -1,0 +1,5 @@
+{
+  "id": "heavy-native-001",
+  "status": "done",
+  "result": "Fixed coupon/tax ordering in fixture/calculate.js and verified all supplied cases."
+}
