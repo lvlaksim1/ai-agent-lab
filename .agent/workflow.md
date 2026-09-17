@@ -1,16 +1,57 @@
 # Worker Workflow
 
-For each run:
+This workflow is used only after `.agent/wake.json` says work is pending.
 
-1. Look in `.agent/queue/pending/` and select exactly one pending event.
-2. Read the event and set `.agent/state.json` to `processing` with the event id.
-3. Read only the repository files required by that event plus this profile/workflow.
-4. Reconstruct the intended behavior before changing anything.
-5. Identify the root cause and make the smallest justified code change.
-6. Verify the resulting behavior against every test case supplied by the fixture. Show the calculations used for verification.
-7. Write `.agent/journal/<event-id>.md` with evidence, root cause, change, and verification.
-8. Move the queue item logically to done by deleting the pending file and creating `.agent/queue/done/<event-id>.json` with status `done` and a short result.
-9. Set `.agent/state.json` back to `idle`.
-10. Stop. Do not process a second event in the same run.
+## 0. Immutable scheduler rule
 
-If blocked, do not modify the target code. Record the blocker in the journal and done event with status `blocked`, then return state to `idle`.
+The scheduler is an immutable clock. Never create, update, re-arm, enable, disable or reschedule Scheduled Tasks during a worker run. All coordination happens through GitHub.
+
+## 1. Claim
+
+1. Read `.agent/config.json`, `.agent/state.json` and list JSON files in `.agent/queue/pending/`.
+2. Ignore `.gitkeep` and non-JSON files.
+3. If the queue is empty, reconcile `.agent/wake.json` according to `.agent/protocol.md` and stop.
+4. Select exactly one event: highest numeric `priority` first; for equal priority, oldest `created_at` first.
+5. Claim work by updating `.agent/state.json` from `idle` to `processing` with:
+   - `active_event`;
+   - `worker_id`;
+   - `started_at`;
+   - `lease_until`.
+6. The state update must use the current GitHub blob SHA. If it conflicts, another worker won the claim: stop without processing the event.
+7. If state is already `processing` and its lease has not expired, stop. If the lease expired, recovery is allowed and must be recorded in the journal.
+
+## 2. Execute
+
+1. Read the selected event, `.agent/profile.md` and only the repository files required by the event.
+2. Reconstruct the intended behavior before changing anything.
+3. Identify the root cause or required change.
+4. Make the smallest justified modification.
+5. Verify against every supplied test/evidence relevant to the event.
+6. Do not weaken specifications, configuration or tests merely to make verification pass.
+
+## 3. Persist result
+
+Write `.agent/journal/<event-id>.md` containing:
+- event/source;
+- evidence inspected;
+- reasoning summary;
+- root cause;
+- changes;
+- verification;
+- blockers, if any.
+
+Create `.agent/queue/done/<event-id>.json` with `done` or `blocked`.
+Delete the corresponding pending JSON file.
+Return `.agent/state.json` to `idle`.
+
+## 4. Reconcile wake flag
+
+Use the generation/CAS rules in `.agent/protocol.md`.
+
+- If another pending event exists, keep `pending=true`.
+- Set `pending=false` only when the pending queue is empty and no producer advanced `generation` while this run was working.
+- If a wake update conflicts, re-read it. Never overwrite a newer producer generation.
+
+## 5. Stop
+
+Process only one event in one scheduled run.
