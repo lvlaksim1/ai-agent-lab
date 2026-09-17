@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Wake Flag",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "pending", "generation", "last_event", "updated_at"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "pending": { "type": "boolean" },
+    "generation": { "type": "integer", "minimum": 0 },
+    "last_event": { "type": ["string", "null"] },
+    "updated_at": { "type": ["string", "null"], "format": "date-time" }
+  }
+}
