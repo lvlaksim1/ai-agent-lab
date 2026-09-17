@@ -1,1 +1,0 @@
-{"id":"heavy-test-001","type":"diagnose-and-fix","status":"pending","target_files":["fixture/spec.md","fixture/config.json","fixture/cases.json","fixture/calculate.js"],"goal":"Identify the root cause of failing supplied cases, make the smallest implementation fix, verify all cases, and record the result."}
