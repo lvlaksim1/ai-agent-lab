@@ -10,11 +10,11 @@ function calculateOrderTotal(order) {
     0
   );
 
-  const taxedSubtotal = subtotal * (1 + order.tax_rate);
   const couponAmount = order.coupon && config.coupons[order.coupon]
     ? config.coupons[order.coupon].amount
     : 0;
-  const total = Math.max(0, taxedSubtotal - couponAmount);
+  const discountedSubtotal = Math.max(0, subtotal - couponAmount);
+  const total = discountedSubtotal * (1 + order.tax_rate);
 
   return roundMoney(total);
 }
