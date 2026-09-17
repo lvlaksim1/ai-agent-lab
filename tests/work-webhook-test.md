@@ -1,6 +1,5 @@
-# Work webhook write test
+# Event channel fixture
 
-This file exists only to keep the test pull request open.
+This file exists only to keep PR #1 open as a stable GitHub event source for agent infrastructure tests.
 
-Trigger token: `[WORK_WRITE_TEST]`
-Expected Work response: `[WORK_WRITE_OK]`
+Do not use it as agent state storage.
