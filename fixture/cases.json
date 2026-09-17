@@ -1,0 +1,26 @@
+[
+  {
+    "id": "coupon-standard",
+    "items": [{"quantity": 2, "unit_price": 50.0}],
+    "coupon": "SAVE10",
+    "tax_rate": 0.20,
+    "expected_total": 108.00
+  },
+  {
+    "id": "coupon-rounding",
+    "items": [{"quantity": 3, "unit_price": 19.99}],
+    "coupon": "SAVE10",
+    "tax_rate": 0.05,
+    "expected_total": 52.47
+  },
+  {
+    "id": "no-coupon",
+    "items": [
+      {"quantity": 1, "unit_price": 120.0},
+      {"quantity": 2, "unit_price": 15.0}
+    ],
+    "coupon": null,
+    "tax_rate": 0.20,
+    "expected_total": 180.00
+  }
+]
