@@ -10,12 +10,13 @@ function calculateOrderTotal(order) {
     0
   );
 
-  const taxedSubtotal = subtotal * (1 + order.tax_rate);
   const couponAmount = order.coupon && config.coupons[order.coupon]
     ? config.coupons[order.coupon].amount
     : 0;
+  const discountedSubtotal = Math.max(0, subtotal - couponAmount);
+  const taxedSubtotal = discountedSubtotal * (1 + order.tax_rate);
 
-  return roundMoney(Math.max(0, taxedSubtotal - couponAmount));
+  return roundMoney(taxedSubtotal);
 }
 
 module.exports = { calculateOrderTotal };
