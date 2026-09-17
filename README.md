@@ -1,5 +1,9 @@
 # AI Agent Lab
 
-Изолированная лаборатория для экспериментов с event-driven AI-агентом на ChatGPT Plus.
+Изолированная лаборатория для разработки event-driven AI-агента на ChatGPT Plus без OpenAI API.
 
-Цель первого эксперимента: проверить канал GitHub PR event → ChatGPT Work → GitHub write без изменения рабочих проектов.
+Текущая подтверждённая архитектура:
+
+`GitHub event → Work dispatcher → re-arm ordinary Chat Scheduled Task → Chat worker → GitHub state/results`
+
+Репозиторий используется только для безопасных инфраструктурных экспериментов и хранения состояния будущего агента.
