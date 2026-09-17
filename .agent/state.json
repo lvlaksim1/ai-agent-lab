@@ -1,1 +1,11 @@
-{"status":"idle","active_event":null}
+{
+  "schema_version": 1,
+  "status": "idle",
+  "active_event": null,
+  "worker_id": null,
+  "started_at": null,
+  "lease_until": null,
+  "last_event": "heavy-native-001",
+  "last_result": "done",
+  "last_completed_at": null
+}
