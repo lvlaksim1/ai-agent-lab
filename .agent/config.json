@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "queue_ref": "work-webhook-test",
+  "idle_probe": ".agent/wake.json",
+  "max_events_per_run": 1,
+  "lease_minutes": 45,
+  "priority_policy": "higher-first",
+  "scheduler_policy": "immutable",
+  "work_allowed": false,
+  "scheduler_mutation_allowed": false
+}
