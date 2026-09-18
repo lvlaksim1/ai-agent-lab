@@ -13,6 +13,7 @@ Hard concurrency invariant:
 - one scheduled production run may contain at most ONE production shift.
 
 Read `.agent/production-topology.md` for the topology.
+Read `.agent/evidence-acquisition.md` before production work; it is authoritative for actionable-next-step and BLOCKED closure.
 
 ## 1. Resolve eligible work
 
@@ -60,23 +61,32 @@ No other two-event combination is allowed.
 6. Read `.agent/brigade.json` and `.agent/competition.md`.
 7. Materialize exactly `next_member_id`. Proposed shift number is `shift_counter + 1`.
 8. Before the substantive change, write down two things for the internal report: (a) a fair evidence-based assessment of the immediately preceding worker, and (b) the current worker's concrete plan/success criterion. Do not rewrite the plan with hindsight.
-9. Execute one production shift continuously until a **natural stop condition** is reached. The scheduled clock interval is NOT a shift-duration limit.
-   - keep working through successive justified steps while the same worker still has actionable evidence;
-   - after starting CI/build/test, enter **active evidence wait**: keep ownership of the shift, poll/inspect the exact run until it becomes terminal while the current Chat and tools remain available, then consume that result and continue the same reasoning/action loop;
+9. Execute one production shift continuously until a **proven natural stop condition** is reached. The scheduled clock interval is NOT a shift-duration limit and the queued event goal is NOT a micro-task boundary.
+   - treat the event as the entry point into the current causal engineering chain;
+   - keep working through successive justified steps while the same worker still has an actionable next step;
+   - if consuming CI/test evidence exposes the next directly related blocker, continue into that blocker in the SAME shift when the current tools can act on it;
+   - merely naming/localizing the next blocker does not close the work package;
+   - after starting CI/build/test, enter **active evidence wait**: keep ownership of the shift, poll/inspect the exact run until terminal while the current Chat and tools remain available, consume the result, and continue the same reasoning/action loop;
+   - before declaring evidence unavailable or BLOCKED, execute the applicable evidence-acquisition ladder in `.agent/evidence-acquisition.md`;
    - pending CI/build/test is work-in-progress, not a handoff boundary, even when it takes many minutes;
-   - do not hand work to the next shift merely because one commit/push/test was produced or because an external run has started;
+   - do not hand work to the next shift merely because one commit/push/test was produced, one requested result was consumed, or a new blocker was discovered;
    - if the lease is approaching expiry while useful work or active evidence wait is still progressing, renew the lease with SHA/CAS before continuing; the lease is a stale-worker safety lock, not a work-time budget;
    - persist intermediate journal/checkpoint state before long external waits so recovery is safe if the platform terminates the Chat.
 10. Never weaken tests, proof gates, Definition of Done or anti-cheat controls.
 11. Any continuation MUST inherit the same object_id.
 12. End the production shift only at a natural stop condition, then write the technical journal and internal first-person shift report using the four sections from `.agent/reporting.md`. The journal/handoff commit is the preferred authoritative end marker: capture its returned commit SHA, fetch the GitHub server timestamp and record it as `shift_completed_at_utc`.
 
+Before ending the shift, execute the **closure gate**:
+1. apply the actionable-next-step test from `.agent/evidence-acquisition.md`;
+2. if the answer is YES, continue working;
+3. if the proposed stop is BLOCKED or speculation-boundary, persist the evidence-acquisition attempts and why no available route can advance the chain;
+4. only then choose a natural stop kind and end the shift.
+
 Natural stop conditions are limited to:
-- the event goal / current bounded work package is actually complete **and every mandatory verification started by this shift has reached a terminal state and has been consumed by the worker**;
-- a genuine blocker requires owner/manager/external action that the worker cannot perform;
-- the required external evidence cannot be observed or polled from the current live Chat because the platform/tooling is forcing termination or has become unavailable;
-- continuing would require speculation without any obtainable evidence;
-- the platform/runtime is forcing termination, in which case persist a safe recovery continuation first when possible.
+- **project_or_phase_complete**: the current causal work package/phase is genuinely closed, all mandatory verification started by the shift is terminal and consumed, and no directly actionable same-object next step remains;
+- **blocked**: owner/manager/external action is genuinely required, the applicable evidence-acquisition ladder is exhausted, no actionable next step remains, and the exact external action is identified;
+- **forced_stop**: platform/runtime/tooling is forcing termination or can no longer observe required evidence; persist safe recovery state first when possible;
+- **speculation_boundary**: continuing would require speculation AND all obtainable evidence routes that could discriminate the remaining hypotheses have been exhausted.
 
 Pending CI/build/test by itself is NEVER a natural stop condition.
 
@@ -85,10 +95,20 @@ A worker MUST NOT stop merely because:
 - 15, 30, 45 or 60 minutes have elapsed;
 - one patch/commit/push has been made;
 - CI has started or is still running;
-- a convenient handoff point exists while the worker can still wait for, inspect, or act on evidence.
+- the event's originally worded goal has been consumed but it exposed another directly related actionable blocker;
+- one evidence-access route returned unavailable/404/unsupported while alternatives remain;
+- a convenient handoff point exists while the worker can still wait for, inspect, diagnose, instrument or act on evidence.
 
 If a worker is forced to terminate while external evidence is still running, a `wait_for` continuation is an emergency recovery checkpoint. Record the exact external run and the forced-stop reason. Do not use this path as normal shift choreography.
-13. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id. Include `shift_started_at_utc`, `shift_completed_at_utc`, predecessor identity when known, the original plan, evidence references, target/ref and continuation id if any.
+
+13. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id. Include `shift_started_at_utc`, `shift_completed_at_utc`, predecessor identity when known, the original plan, evidence references, target/ref and continuation id if any. New reviews MUST also include:
+   - `shift_policy_version: 2`;
+   - `stop.kind` = `project_or_phase_complete`, `blocked`, `forced_stop` or `speculation_boundary`;
+   - `stop.actionable_next_step: false`;
+   - a concrete `stop.reason`;
+   - for `blocked` or `speculation_boundary`, non-empty `stop.exhaustion_evidence`;
+   - for `blocked`, exact `stop.external_action`;
+   - when duration is below `config.short_shift_review_threshold_seconds` and unresolved work/continuation remains, `stop.short_shift_justification`.
 14. Persist done/state/wake. The production done record SHOULD also contain `shift_started_at_utc` and `shift_completed_at_utc`.
 14. STOP. The run MUST NOT review the shift it just performed.
 
