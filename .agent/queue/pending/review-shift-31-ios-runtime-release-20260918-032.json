@@ -40,5 +40,6 @@
     }
   },
   "shift_number": 31,
-  "reporting_policy_version": 1
+  "reporting_policy_version": 1,
+  "score_policy_version": 1
 }
