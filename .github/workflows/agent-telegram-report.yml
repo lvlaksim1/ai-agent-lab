@@ -6,6 +6,8 @@ on:
       - work-webhook-test
     paths:
       - '.agent/reports/published/*.md'
+      - '.agent/reports/redelivery/*.request'
+      - '.github/workflows/agent-telegram-report.yml'
 
 concurrency:
   group: agent-telegram-report
@@ -19,36 +21,56 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Checkout report
+      - name: Checkout triggering commit
         uses: actions/checkout@v4
         with:
-          ref: work-webhook-test
+          ref: ${{ github.sha }}
           fetch-depth: 2
 
-      - name: Build Telegram message
-        id: report
+      - name: Resolve reports from triggering commit
+        id: reports
         shell: bash
         run: |
           set -euo pipefail
-          REPORT_FILE="$(git diff-tree --no-commit-id --name-only --diff-filter=A -r HEAD -- '.agent/reports/published/*.md' | head -n 1)"
-          if [ -z "$REPORT_FILE" ]; then
+          : > reports-to-send.txt
+
+          git diff-tree --root --no-commit-id --name-only --diff-filter=A -r "$GITHUB_SHA" -- '.agent/reports/published/*.md' > direct-reports.txt
+          while IFS= read -r REPORT_FILE; do
+            [ -n "$REPORT_FILE" ] || continue
+            printf '%s\n' "$REPORT_FILE" >> reports-to-send.txt
+          done < direct-reports.txt
+
+          git diff-tree --root --no-commit-id --name-only --diff-filter=A -r "$GITHUB_SHA" -- '.agent/reports/redelivery/*.request' > redelivery-requests.txt
+          while IFS= read -r REQUEST_FILE; do
+            [ -n "$REQUEST_FILE" ] || continue
+            REPORT_FILE="$(tr -d '\r\n' < "$REQUEST_FILE")"
+            case "$REPORT_FILE" in
+              .agent/reports/published/*.md) ;;
+              *)
+                echo "::error::Invalid redelivery target in $REQUEST_FILE: $REPORT_FILE"
+                exit 1
+                ;;
+            esac
+            test -f "$REPORT_FILE" || {
+              echo "::error::Redelivery target does not exist: $REPORT_FILE"
+              exit 1
+            }
+            printf '%s\n' "$REPORT_FILE" >> reports-to-send.txt
+          done < redelivery-requests.txt
+
+          sort -u -o reports-to-send.txt reports-to-send.txt
+
+          if [ -s reports-to-send.txt ]; then
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            echo "Reports selected from immutable event commit $GITHUB_SHA:"
+            cat reports-to-send.txt
+          else
             echo "publish=false" >> "$GITHUB_OUTPUT"
-            echo "No newly created immutable report in this commit."
-            exit 0
+            echo "No newly published report or explicit redelivery request in triggering commit."
           fi
-          echo "publish=true" >> "$GITHUB_OUTPUT"
-          python - "$REPORT_FILE" <<'PY'
-          from pathlib import Path
-          import sys
-          report = Path(sys.argv[1]).read_text(encoding="utf-8").strip()
-          if not report:
-              raise SystemExit("Empty brigade report")
-          if len(report) > 3900:
-              report = report[:3898].rstrip() + "…"
-          Path("telegram-message.txt").write_text(report, encoding="utf-8")
-          PY
-      - name: Send report to Telegram
-        if: steps.report.outputs.publish == 'true'
+
+      - name: Send reports to Telegram
+        if: steps.reports.outputs.publish == 'true'
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -59,14 +81,39 @@ jobs:
           test -n "${TELEGRAM_CHAT_ID:-}" || { echo "::error::TELEGRAM_CHAT_ID is not configured"; exit 1; }
 
           API="https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage"
-          SUCCESS=false
-          for ATTEMPT in 1 2 3; do
-            RESPONSE="$RUNNER_TEMP/telegram-response.json"
-            HTTP=$(curl --silent --show-error --output "$RESPONSE" --write-out "%{http_code}"               -X POST "$API"               --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}"               --data-urlencode "text@telegram-message.txt" || true)
-            if [ "$HTTP" = "200" ] && jq -e '.ok == true' "$RESPONSE" >/dev/null 2>&1; then
-              SUCCESS=true
-              break
-            fi
-            [ "$ATTEMPT" -lt 3 ] && sleep $((ATTEMPT * 5))
-          done
-          [ "$SUCCESS" = "true" ] || { echo "::error::Telegram delivery failed"; exit 1; }
+
+          while IFS= read -r REPORT_FILE; do
+            [ -n "$REPORT_FILE" ] || continue
+
+            python - "$REPORT_FILE" "$RUNNER_TEMP/telegram-message.txt" <<'PY'
+          from pathlib import Path
+          import sys
+
+          report = Path(sys.argv[1]).read_text(encoding="utf-8").strip()
+          if not report:
+              raise SystemExit("Empty brigade report: " + sys.argv[1])
+          if len(report) > 3900:
+              report = report[:3898].rstrip() + "…"
+          Path(sys.argv[2]).write_text(report, encoding="utf-8")
+          PY
+
+            SUCCESS=false
+            for ATTEMPT in 1 2 3; do
+              RESPONSE="$RUNNER_TEMP/telegram-response.json"
+              HTTP=$(curl --silent --show-error --output "$RESPONSE" --write-out "%{http_code}" \
+                -X POST "$API" \
+                --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+                --data-urlencode "text@$RUNNER_TEMP/telegram-message.txt" || true)
+              if [ "$HTTP" = "200" ] && jq -e '.ok == true' "$RESPONSE" >/dev/null 2>&1; then
+                SUCCESS=true
+                break
+              fi
+              [ "$ATTEMPT" -lt 3 ] && sleep $((ATTEMPT * 5))
+            done
+
+            [ "$SUCCESS" = "true" ] || {
+              echo "::error::Telegram delivery failed for $REPORT_FILE"
+              exit 1
+            }
+            echo "Telegram delivery confirmed for $REPORT_FILE"
+          done < reports-to-send.txt
