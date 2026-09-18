@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 8,
-  "purpose": "lease_claim",
+  "sequence": 9,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "palych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Starting decoded-layer APFS structural evidence implementation after shift 31 OTK.",
+  "activity_detail": "Checkpointed exact decoded-layer APFS evidence implementation boundary; next action is read-only tool instrumentation, then gates/E2E.",
   "fence_generation": 8
 }
