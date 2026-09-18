@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-012",
+  "type": "project-mission-continuation",
+  "object_id": "ios-research-runtime",
+  "worker_id": "sanych",
+  "proposed_shift": 10,
+  "status": "done",
+  "target_commit": "9651ad5fce73419e256ca57c25b137bb5c92e14a",
+  "result": "Exact E2E proves X2=0x12ed0000 is loaded from the boot-state slot near 0xfffffff007090b80, stored to global +0x730 at 0x...0b3980, then reloaded before the SPTM call. Root logic remains unchanged; diagnostic caller window moved earlier to trace the boot-state source.",
+  "completed_at": "2026-09-18T05:20:10Z",
+  "review_event": "review-ios-runtime-release-20260918-012",
+  "continuation_id": null
+}
