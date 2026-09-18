@@ -8,18 +8,18 @@
   "definition_of_done": ["Windows Build PASS","qemu-sptm Windows Gate PASS","Provisioning PASS","Darwin/XNU boot PASS","launchd PASS","root shell proof PASS","Windows Full Package PASS","VERSION 0.1.0","GitHub Release v0.1.0 published with verified package and SHA-256"],
   "current_phase": "boot-debugging",
   "health": "YELLOW",
-  "current_blocker_summary": "Exact E2E evidence now proves X2=0x12ed0000 is loaded from the boot-state structure at 0xfffffff007090b80 by the instruction at 0x...0b3978. Next proof target is the producer that initializes that slot and its offset-vs-absolute-PA semantics before any root address fix.",
-  "shifts_since_manager_review": 2,
+  "current_blocker_summary": "Exact ffaa8cb E2E evidence confirms 0x12ed0000 still first appears at the boot-state load near 0x...0b3978; widening the caller trace back to 0x...0b3000 did not expose the slot producer. Next proof target is earlier initialization of boot-state slot 0x...090b80 before any address-semantics fix.",
+  "shifts_since_manager_review": 3,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
-  "last_scored_shift": 10,
+  "last_progress_class": "incremental",
+  "last_scored_shift": 11,
   "manager_review_count": 2,
   "last_manager_review_at": "2026-09-18T04:57:08Z",
   "last_manager_decision": "DEC-002: KEEP_COURSE",
   "active_directive": null,
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-18T05:31:00Z"
+  "updated_at": "2026-09-18T05:52:00Z"
 }
