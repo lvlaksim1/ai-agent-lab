@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-025",
+  "type": "task",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "kuzmich",
+  "proposed_shift": 23,
+  "shift_started_at_utc": "2026-09-18T11:48:59Z",
+  "shift_completed_at_utc": "2026-09-18T11:50:03Z",
+  "summary": "Terminal gate passed. Exact E2E falsified the proposed topOfKernelData-minus-physBase equality: topOfKernelData itself is 0x12ed0000 and subtraction underflows. No semantic fix was made; continuation will prove blob_head/topOfKernelData ABI semantics.",
+  "journal": ".agent/journal/ios-runtime-release-20260918-025.md",
+  "review_event": "review-ios-runtime-release-20260918-025",
+  "continuation_id": "ios-runtime-release-20260918-026"
+}
