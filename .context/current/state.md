@@ -98,3 +98,19 @@ The first generic :24 clock successfully dispatched from GitHub state:
 This proves the core `clock -> dispatcher -> OTK -> next worker` path is functioning.
 
 The remaining experiment is to observe later generic ticks while Петрович is still active and confirm they do not replace him; if management attention appears, a generic tick may instead run the manager concurrently.
+
+
+## Active evidence wait — 2026-09-18
+
+Fresh shift #25 proved the remaining short-shift defect was not scheduler-related. The worker fixed one patch conflict, started replacement CI, then handed off after 3m14s while mandatory CI was still running.
+
+Root cause: the runtime still treated pending external evidence as a normal continuation boundary through the old `wait_for` handoff model.
+
+Policy corrected:
+- mandatory CI/build/test started by a worker stays inside that same shift while the live Chat/tools can observe it;
+- worker keeps/renews the lease, polls exact evidence to terminal state, consumes the result and continues;
+- pending CI is never by itself a natural stop condition;
+- `wait_for` is recovery-only for forced runtime/tool termination;
+- unjustified pending-CI handoff gets Efficiency/focus 0/2 and cannot receive APPROVED solely on that handoff.
+
+Runtime validator passed on the control-plane commit.
