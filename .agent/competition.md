@@ -15,10 +15,17 @@ Logical production workers rotate fairly and permanently:
 3. Михалыч
 4. Борисыч
 5. Иваныч
+6. Федорыч
+7. Кузьмич
+8. Палыч
 
 The rotation is stored in `.agent/brigade.json`. Rating never changes turn order.
 
 A normal work event is one production shift. Supervisor-review is quality control (ОТК), not a production shift and does not consume a roster turn.
+
+## Relay rotation
+
+The physical Scheduled Chat is not a named worker. It materializes the current `next_member_id`. In a relay run, OTK may finish the previous shift and only then materialize the next worker. One scheduled run still contains at most one production shift, so roster competition remains fair.
 
 ## Shift scoring
 
