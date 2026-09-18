@@ -26,7 +26,11 @@ Read `.agent/production-topology.md` for the topology.
    - ordinary production event whose object is assignment.active_object AND assignment.transfer_state=working.
 5. If there is no eligible event, reconcile wake using `.agent/protocol.md` and stop.
 6. If `.agent/state.json` has an unexpired processing lease, stop immediately. Never start a second worker.
-7. Event selection for the FIRST phase:
+7. For a normal production event carrying a `wait_for` condition, perform a **wait_for preflight before claiming the lease or materializing a brigade member**:
+   - inspect only the referenced external evidence/status;
+   - if it is still non-terminal, leave the event pending, keep wake pending, make no brigade/rating change, and stop quietly;
+   - if it is terminal, continue normally and let the worker act on the final evidence.
+8. Event selection for the FIRST phase:
    - supervisor-review has precedence;
    - otherwise higher numeric priority;
    - then older created_at;
@@ -46,6 +50,7 @@ No other two-event combination is allowed.
 
 ### 2A. If the first event is normal production
 
+0. Apply the `wait_for` preflight from section 1 when present. Do not claim a worker while a mandatory external run is still in progress.
 1. Read `.agent/management/state.json`.
 2. If `stop_production=true`, leave the event queued and stop with `PRODUCTION_STOPPED_BY_MANAGER`.
 3. If an active directive applies to this object and NEXT_SHIFT, read and follow it.
