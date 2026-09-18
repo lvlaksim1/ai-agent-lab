@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-026",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "palych",
+  "proposed_shift": 24,
+  "result": "ABI proven absolute-physical from Apple/XNU and canonical qemu-sptm; added diagnostic-only blob_head producer boundary tracing, no speculative semantic repair.",
+  "target_commit": "93ed5429484fdc1b266488b3c1c9130d5067e450",
+  "journal": ".agent/journal/ios-runtime-release-20260918-026.md",
+  "continuation_id": "ios-runtime-release-20260918-027",
+  "review_event": "review-ios-runtime-release-20260918-026",
+  "shift_started_at_utc": "2026-09-18T12:17:07Z",
+  "shift_completed_at_utc": "2026-09-18T12:18:28Z",
+  "completed_at": "2026-09-18T12:18:28Z"
+}
