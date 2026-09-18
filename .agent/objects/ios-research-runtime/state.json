@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Instruction-level SPTM tracing now works and exposes the address-construction registers; the next blocker is to establish the semantic provenance of the loaded globals/arithmetic that leads toward the first Data Abort, then make only an evidence-backed root-cause fix.",
-  "last_scored_shift": 3,
+  "current_blocker_summary": "SPTM phys->virt arithmetic is internally consistent, but its caller supplies offset-valued X22 instead of an established absolute PA; the new caller+callee E2E trace must establish X22 provenance/contract before a root-cause fix.",
+  "last_scored_shift": 4,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
-  "last_event": "review-ios-runtime-release-20260918-005",
+  "last_event": "review-ios-runtime-release-20260918-006",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T03:11:00Z"
+  "updated_at": "2026-09-18T03:46:30Z"
 }
