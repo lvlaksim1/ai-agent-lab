@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 12 exact b1295ce E2E rules out the newly added upstream producer page: 0x12ed0000 still first appears only after the boot-state slot load near 0x...0b3978. The slot producer remains earlier or outside the executed traced range; address semantics remain unproven.",
+  "current_blocker_summary": "Shift 13 extended the evidence-only producer trace one more page upstream at target cbd8783 after exact b1295ce evidence again showed 0x12ed0000 only after the boot-state slot load. Exact cbd8783 CI/E2E evidence is pending OTK; address semantics remain unproven.",
   "last_scored_shift": 12,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
-  "last_event": "review-ios-runtime-release-20260918-014",
+  "last_event": "ios-runtime-release-20260918-015",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T06:08:00Z"
+  "updated_at": "2026-09-18T06:11:00Z"
 }
