@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-028",
+  "created_at": "2026-09-18T13:08:47Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {"kind":"worker-shift","event":"ios-runtime-release-20260918-028","worker_id":"sanych"},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main","commit":"7e6ecb9a15b1a0252ad02b0f82d2e71b1fb1737f"},
+  "shift_started_at_utc": "2026-09-18T13:00:54Z",
+  "shift_completed_at_utc": "2026-09-18T13:08:47Z",
+  "predecessor_worker_id": "kuzmich",
+  "original_plan": "Confirm the inherited gate, correlate blob producer/layout/boot-args evidence, localize the exact LLP64-sensitive loss of high DRAM bits, make only the minimal proven type repair, and consume terminal verification if observable.",
+  "evidence": [".agent/journal/ios-runtime-release-20260918-028.md","target commit 7e6ecb9a15b1a0252ad02b0f82d2e71b1fb1737f","qemu gate 35347936254"],
+  "continuation_id": "ios-runtime-release-20260918-029"
+}
