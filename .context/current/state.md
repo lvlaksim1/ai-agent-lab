@@ -72,3 +72,16 @@ New rule:
 - production lease is renewable and acts only as a stale-worker lock;
 - the next clock exits if a worker is still active;
 - premature handoff while actionable work remains is an efficiency defect.
+
+
+## Generic dispatcher experiment — Variant C-5
+
+Owner approved an experiment using the same five active Scheduled Tasks as generic clocks.
+
+New exact-schedule slots: :00, :12, :24, :36, :48 MSK.
+
+Each clock first dispatches from GitHub state to MANAGER, PRODUCTION RELAY or IDLE. This reduces nominal handoff polling latency from 15 to 12 minutes without increasing active task count.
+
+Worker+worker remains forbidden. Worker+manager remains allowed.
+
+Variant A (:02/:17/:32/:47 production + :59 manager) is preserved as an explicit rollback plan.
