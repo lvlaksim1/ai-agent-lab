@@ -32,7 +32,7 @@ If production state is `processing` and lease is valid:
 - manager attention=true -> materialize one manager review; active worker continues concurrently;
 - manager attention=false -> quiet no-op.
 
-A stale heartbeat does NOT by itself authorize a second worker while the lease is still valid. It means worker liveness is suspect/lost and must be reported as such; lease recovery remains governed by the safe recovery policy.
+A stale heartbeat never lets a normal production clock directly start a second worker. The dedicated recovery guard in `.agent/emergency-recovery.md` may independently verify STALE, fence the dead execution and release the lease before the next normal clock.
 
 ### Idle station
 
@@ -76,7 +76,7 @@ An active worker continues until the natural stop condition in `.agent/workflow.
 
 ## Notifications
 
-Normal no-op ticks stay silent. Human reports continue through the immutable Telegram publication path.
+Normal no-op ticks stay silent. Worker start reports and independent OTK result reports use separate immutable Telegram publication paths.
 
 ## Fallback
 
