@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-002",
+  "status": "done",
+  "completed_at": "2026-09-18T01:49:00Z",
+  "worker_id": "scheduled-chat-worker-47",
+  "summary": "CORRECTED: diagnostic commit approved; new artifact already localizes X0 transformation, so continuation was sharpened to analyze existing caller trace before any rerun or fix.",
+  "journal": ".agent/journal/review-ios-runtime-release-20260918-002.md",
+  "result": ".agent/reviews/ios-runtime-release-20260918-002.md"
+}
