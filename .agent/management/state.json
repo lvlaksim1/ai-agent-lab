@@ -8,18 +8,18 @@
   "definition_of_done": ["Windows Build PASS","qemu-sptm Windows Gate PASS","Provisioning PASS","Darwin/XNU boot PASS","launchd PASS","root shell proof PASS","Windows Full Package PASS","VERSION 0.1.0","GitHub Release v0.1.0 published with verified package and SHA-256"],
   "current_phase": "boot-debugging",
   "health": "YELLOW",
-  "current_blocker_summary": "Patch 0009 hunk counts are structurally repaired and independently verified; Windows Build passes, but qemu-sptm Windows Gate was still in progress at OTK time. Full gate PASS remains mandatory before exact E2E.",
-  "shifts_since_manager_review": 2,
+  "current_blocker_summary": "Exact E2E localized the first post-SPTM_MAP failure to an EL2 Data Abort involving 0x12ed0000 versus DRAM base. Diagnostic boot-args correlation is awaiting mandatory qemu-sptm Windows Gate completion before any semantic change.",
+  "shifts_since_manager_review": 3,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
-  "last_scored_shift": 21,
+  "last_progress_class": "substantial",
+  "last_scored_shift": 22,
   "manager_review_count": 5,
   "last_manager_review_at": "2026-09-18T08:01:26Z",
   "last_manager_decision": "DEC-005: KEEP_COURSE",
   "active_directive": null,
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-18T08:31:56Z"
+  "updated_at": "2026-09-18T11:31:22Z"
 }
