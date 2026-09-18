@@ -21,6 +21,17 @@ function git(args) {
   return execFileSync("git", args, { cwd: root, encoding: "utf8" }).trim();
 }
 
+function verifyCommitChangedPath(commitSha, expectedPath, label) {
+  check(typeof commitSha === "string" && /^[0-9a-f]{40}$/.test(commitSha), label + " commit SHA must be 40 lowercase hex");
+  if (!(typeof commitSha === "string" && /^[0-9a-f]{40}$/.test(commitSha))) return;
+  try {
+    const changed = git(["diff-tree", "--root", "--no-commit-id", "--name-only", "-r", commitSha]).split("\n").filter(Boolean);
+    check(changed.includes(expectedPath), label + " commit must modify " + expectedPath);
+  } catch {
+    fail(label + " commit/path verification failed");
+  }
+}
+
 function verifyCommitTimeAnchor(commitSha, expectedTimestamp, expectedPath, label) {
   check(typeof commitSha === "string" && /^[0-9a-f]{40}$/.test(commitSha), label + " commit SHA must be 40 lowercase hex");
   if (!(typeof commitSha === "string" && /^[0-9a-f]{40}$/.test(commitSha))) return;
@@ -114,6 +125,18 @@ if (state.status === "idle") {
     check(typeof state.heartbeat.stale_at === "string" && Number.isFinite(Date.parse(state.heartbeat.stale_at)), "processing heartbeat.stale_at must be valid timestamp");
     check(["working", "external_wait", "persisting", "closing", "otk_review"].includes(state.heartbeat.activity_kind), "invalid heartbeat.activity_kind");
     check(typeof state.heartbeat.activity_detail === "string" && state.heartbeat.activity_detail.trim().length > 0, "heartbeat.activity_detail is required");
+    if (state.heartbeat.role === "production") {
+      check(state.reporting_policy_version === 2, "active production state must use reporting policy v2");
+      check(state.score_policy_version === 2, "active production state must use scoring policy v2");
+      check(Number.isInteger(state.shift_number) && state.shift_number >= 1, "active production state requires shift_number");
+      check(state.shift_start_report_path === null || typeof state.shift_start_report_path === "string", "shift_start_report_path must be null or string");
+      check(state.shift_start_report_commit === null || typeof state.shift_start_report_commit === "string", "shift_start_report_commit must be null or string");
+      if (typeof state.shift_start_report_path === "string") {
+        check(state.shift_start_report_path.startsWith(".agent/reports/starts/"), "active production start report must be under .agent/reports/starts/");
+        check(fs.existsSync(path.join(root, state.shift_start_report_path)), "active production start report must exist");
+        verifyCommitChangedPath(state.shift_start_report_commit, state.shift_start_report_path, "active production start report");
+      }
+    }
     check(state.heartbeat.time_source === "github_commit_committer_date", "heartbeat time_source must be github_commit_committer_date");
     check(typeof state.heartbeat.time_anchor_path === "string" && state.heartbeat.time_anchor_path.length > 0, "heartbeat.time_anchor_path is required");
     verifyCommitTimeAnchor(state.heartbeat.time_anchor_commit, state.heartbeat.last_seen_at, state.heartbeat.time_anchor_path, "heartbeat");
@@ -160,6 +183,19 @@ check(config.wait_for_continuation_policy === "emergency-recovery-only", "wait_f
 check(config.verification_closes_work_package === true, "mandatory verification must close the work package before handoff");
 check(config.premature_pending_ci_efficiency_score === 0, "premature pending-CI handoff efficiency score must remain zero");
 check(config.shift_policy_version === 4, "shift policy version must remain 4");
+check(config.reporting_policy_version === 2, "reporting policy version must remain 2");
+check(config.worker_start_report_required === true, "worker start report must remain required");
+check(config.worker_end_report_required === false, "worker end narrative must remain disabled");
+check(config.worker_start_report_before_substantive_work === true, "worker start report must precede substantive work");
+check(config.otk_result_report_required === true, "independent OTK result report must remain required");
+check(config.otk_result_report_voice === "independent-supervisor", "OTK result report must remain independent supervisor voice");
+check(config.score_policy_version === 2, "score policy version must remain 2");
+check(config.score_weights && config.score_weights.verified_useful_progress === 4, "score weight progress must remain 4");
+check(config.score_weights && config.score_weights.engineering_quality === 3, "score weight engineering quality must remain 3");
+check(config.score_weights && config.score_weights.efficiency_focus_while_alive === 2, "score weight efficiency/focus must remain 2");
+check(config.score_weights && config.score_weights.start_assessment_and_plan_quality === 1, "score weight start assessment/plan must remain 1");
+check(config.unique_review_event_per_shift === true, "review events must remain unique per shift");
+check(config.review_event_id_pattern === "review-shift-<shift-number>-<production-event>", "review event id pattern must remain shift-unique");
 check(config.work_package_policy === "causal-chain-until-natural-boundary", "work package must follow the causal chain");
 check(config.actionable_next_step_required === true, "actionable-next-step closure must remain required");
 check(config.continuation_policy === "natural-boundary-or-objective-forced-stop-only", "continuation policy must remain objective-forced-stop-only");
@@ -297,6 +333,31 @@ if (fs.existsSync(pendingDir)) {
     check(Number.isInteger(event.priority) && event.priority >= 0 && event.priority <= 100, file + ": priority must be 0..100");
     if (event.type === "supervisor-review") {
       check(event.source && typeof event.source.production_event === "string" && event.source.production_event.length > 0, file + ": supervisor-review requires source.production_event");
+      if (Number.isInteger(event.shift_number) && event.source && typeof event.source.production_event === "string") {
+        const expectedReviewId = "review-shift-" + event.shift_number + "-" + event.source.production_event;
+        check(event.id === expectedReviewId, file + ": shift review id must be unique and equal " + expectedReviewId);
+        check(file === expectedReviewId + ".json", file + ": shift review filename must match its unique id");
+      }
+      if (event.reporting_policy_version === 2) {
+        check(event.score_policy_version === 2, file + ": reporting policy v2 requires score policy v2");
+        check(Number.isInteger(event.shift_number) && event.shift_number >= 1, file + ": reporting policy v2 requires shift_number");
+        const startPath = event.start_report_path || (event.evidence && event.evidence.start_report_path);
+        const mayBeMissingForRuntimeLoss = event.stop && event.stop.kind === "runtime_loss";
+        check(typeof startPath === "string" || mayBeMissingForRuntimeLoss, file + ": v2 review requires immutable start report unless runtime died before publication");
+        if (typeof startPath === "string") {
+          check(startPath.startsWith(".agent/reports/starts/"), file + ": start report path must be under .agent/reports/starts/");
+          check(fs.existsSync(path.join(root, startPath)), file + ": start report file must exist");
+          check(typeof event.start_report_commit === "string" && /^[0-9a-f]{40}$/.test(event.start_report_commit), file + ": v2 review with start report requires start_report_commit");
+          if (typeof event.start_report_commit === "string") {
+            verifyCommitChangedPath(event.start_report_commit, startPath, file + " start report");
+          }
+        }
+      } else if (event.reporting_policy_version !== undefined) {
+        check(event.reporting_policy_version === 1, file + ": reporting_policy_version must be legacy 1 or current 2");
+        if (event.score_policy_version !== undefined) {
+          check(event.score_policy_version === 1, file + ": legacy reporting review must retain legacy scoring policy 1");
+        }
+      }
       if (event.shift_policy_version !== undefined) {
         check([2, 3, 4].includes(event.shift_policy_version), file + ": shift_policy_version must be legacy 2/3 or current 4");
         const stop = event.stop;
@@ -394,6 +455,9 @@ check(fs.existsSync(telegramWorkflowPath), "Telegram report workflow must exist"
 if (fs.existsSync(telegramWorkflowPath)) {
   const telegramWorkflow = fs.readFileSync(telegramWorkflowPath, "utf8");
   check(telegramWorkflow.includes("ref: ${{ github.sha }}"), "Telegram workflow must checkout the triggering commit SHA");
+  check(telegramWorkflow.includes(".agent/reports/starts/*.md"), "Telegram workflow must publish immutable worker start reports");
+  check(telegramWorkflow.includes(".agent/reports/otk/*.md"), "Telegram workflow must publish immutable OTK result reports");
+  check(telegramWorkflow.includes(".agent/reports/published/*.md"), "Telegram workflow must preserve legacy report delivery");
   check(telegramWorkflow.includes(".agent/reports/redelivery/*.request"), "Telegram workflow must support explicit immutable redelivery requests");
   check(telegramWorkflow.includes("git diff-tree --root"), "Telegram workflow must resolve newly added reports from the triggering commit");
 }
@@ -402,24 +466,39 @@ const reportPath = path.join(root, ".agent/reports/latest.md");
 check(fs.existsSync(reportPath), "latest human report must exist");
 if (fs.existsSync(reportPath)) {
   const humanReport = fs.readFileSync(reportPath, "utf8");
-  for (const marker of [
-    "Проект:",
-    "Работник:",
-    "Смена:",
-    "Начало смены:",
-    "Конец смены:",
-    "Доклад:",
-    "ОЦЕНКА ПРЕДЫДУЩЕГО:",
-    "МОЙ ПЛАН:",
-    "ЧТО ПОЛУЧИЛОСЬ:",
-    "СЛЕДУЮЩЕМУ:",
-    "Оценка ОТК:",
-    "Рейтинг:"
-  ]) {
+  for (const marker of ["Проект:", "Работник:", "Смена:", "Начало смены:"]) {
     check(humanReport.includes(marker), "latest human report missing marker: " + marker);
   }
-  check(/Начало смены: \d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2} МСК/.test(humanReport), "latest human report start time must be Moscow timestamp");
-  check(/Конец смены: \d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2} МСК/.test(humanReport), "latest human report end time must be Moscow timestamp");
+  const legacy = humanReport.includes("Доклад:") && humanReport.includes("ОЦЕНКА ПРЕДЫДУЩЕГО:") && humanReport.includes("МОЙ ПЛАН:");
+  const otkV2 = humanReport.includes("ЗАКЛЮЧЕНИЕ ОТК:") && humanReport.includes("ЧТО ФАКТИЧЕСКИ СДЕЛАНО:") && humanReport.includes("ЧТО ПОДТВЕРЖДЕНО:");
+  check(legacy || otkV2, "latest human report must be legacy report or independent OTK v2 report");
+}
+
+const startsDir = path.join(root, ".agent/reports/starts");
+if (fs.existsSync(startsDir)) {
+  for (const name of fs.readdirSync(startsDir).filter((name) => name.endsWith(".md"))) {
+    const body = fs.readFileSync(path.join(startsDir, name), "utf8");
+    for (const marker of ["Проект:", "Работник:", "Смена:", "Начало смены:", "СТАРТОВЫЙ ДОКЛАД:", "ОЦЕНКА ПРЕДШЕСТВЕННИКА:", "МОЙ ПЛАН:"]) {
+      check(body.includes(marker), ".agent/reports/starts/" + name + " missing marker: " + marker);
+    }
+    check(!body.includes("ЧТО ПОЛУЧИЛОСЬ:"), ".agent/reports/starts/" + name + " must not contain end-of-shift result");
+    check(!body.includes("Оценка ОТК:"), ".agent/reports/starts/" + name + " must not contain OTK score");
+  }
+}
+
+const otkReportsDir = path.join(root, ".agent/reports/otk");
+if (fs.existsSync(otkReportsDir)) {
+  for (const name of fs.readdirSync(otkReportsDir).filter((name) => name.endsWith(".md"))) {
+    const body = fs.readFileSync(path.join(otkReportsDir, name), "utf8");
+    for (const marker of [
+      "Проект:", "Работник:", "Смена:", "Начало смены:", "Конец смены:", "Причина завершения:",
+      "ЗАКЛЮЧЕНИЕ ОТК:", "ЧТО ПЛАНИРОВАЛ:", "ЧТО ФАКТИЧЕСКИ СДЕЛАНО:", "ЧТО ПОДТВЕРЖДЕНО:",
+      "ГДЕ ОСТАНОВИЛСЯ:", "СЛЕДУЮЩЕМУ:", "Оценка ОТК:", "Прогресс:", "Инженерное качество:",
+      "Эффективность/фокус:", "Стартовая оценка и план:", "Итого:", "Рейтинг:"
+    ]) {
+      check(body.includes(marker), ".agent/reports/otk/" + name + " missing marker: " + marker);
+    }
+  }
 }
 
 if (!process.exitCode) {
