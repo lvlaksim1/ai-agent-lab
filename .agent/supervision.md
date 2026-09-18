@@ -124,7 +124,7 @@ If transfer is draining, STOP after OTK and do not start another production shif
 
 After rating, follow `.agent/reporting.md` exactly.
 
-OTK must publish `.agent/reports/latest.md` in this order:
+OTK must build the final report in this order:
 
 ```text
 Проект: <human project name>
@@ -162,5 +162,11 @@ The narrative is written from the worker's point of view, but every material sta
 The four sections are mandatory. Keep real technical detail understandable to a non-specialist owner. Humor/irony is encouraged and should be more visible than before, but it must not blur status, uncertainty or evidence.
 
 OTK score and rating are separate metadata after the report and must never be hidden inside the prose.
+
+Publication protocol:
+1. Create immutable `.agent/reports/published/<review-event-id>.md` with the final report.
+2. Never overwrite an existing published report.
+3. Update `.agent/reports/latest.md` with the same text only as a convenience mirror.
+4. External delivery must be tied to creation of the immutable published file, never to edits of `latest.md`.
 
 Private evidence remains in reviews/journals.
