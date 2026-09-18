@@ -52,6 +52,9 @@ check(config.max_events_per_run === 2, "relay runtime allows at most two queue e
 check(config.max_production_shifts_per_run === 1, "relay runtime allows exactly one production shift maximum per run");
 check(config.max_parallel_workers === 1, "parallel production workers must remain disabled");
 check(config.run_policy === "review-then-production", "run_policy must remain review-then-production");
+check(config.shift_duration_policy === "natural-boundary", "shift duration policy must remain natural-boundary");
+check(config.clock_is_shift_limit === false, "scheduled clock must not be a shift-duration limit");
+check(Number.isInteger(config.lease_renew_before_minutes) && config.lease_renew_before_minutes > 0 && config.lease_renew_before_minutes < config.lease_minutes, "lease renewal threshold must be inside lease horizon");
 check(Array.isArray(config.production_clock_minutes) && config.production_clock_minutes.join(",") === "2,17,32,47", "production clocks must remain evenly spaced at :02/:17/:32/:47");
 check(config.manager_clock_minute === 59, "manager clock must remain at :59");
 check(config.queue_scope_policy === "active-object", "queue must remain active-object scoped");
