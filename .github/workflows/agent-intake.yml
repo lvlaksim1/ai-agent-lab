@@ -1,0 +1,107 @@
+name: Agent Intake
+
+on:
+  issue_comment:
+    types: [created]
+  repository_dispatch:
+    types: [agent-task]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: agent-intake
+  cancel-in-progress: false
+
+env:
+  AGENT_BRANCH: work-webhook-test
+
+jobs:
+  enqueue:
+    if: >-
+      github.event_name == 'repository_dispatch' ||
+      (
+        github.event_name == 'issue_comment' &&
+        github.event.comment.user.login == github.repository_owner &&
+        startsWith(github.event.comment.body, '[AGENT_TASK]')
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout intake code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.AGENT_BRANCH }}
+
+      - name: Build and enqueue event atomically
+        uses: actions/github-script@v7
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_ID: ${{ github.event.comment.id }}
+          COMMENT_URL: ${{ github.event.comment.html_url }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          DISPATCH_PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+        with:
+          script: |
+            const enqueue = require('./.github/scripts/enqueue-agent-event.cjs');
+
+            let rawEvent;
+
+            if (process.env.EVENT_NAME === 'issue_comment') {
+              const marker = '[AGENT_TASK]';
+              const body = process.env.COMMENT_BODY || '';
+              const goal = body.slice(marker.length).trim();
+
+              if (!goal) {
+                core.setFailed('Owner comment contains [AGENT_TASK] but no task text.');
+                return;
+              }
+
+              rawEvent = {
+                id: `comment-${process.env.COMMENT_ID}`,
+                type: 'github-comment-task',
+                priority: 50,
+                goal,
+                source: {
+                  kind: 'github_issue_comment',
+                  repository: `${context.repo.owner}/${context.repo.repo}`,
+                  issue_number: Number(process.env.ISSUE_NUMBER),
+                  comment_id: Number(process.env.COMMENT_ID),
+                  url: process.env.COMMENT_URL || null
+                },
+                target: {
+                  repository: `${context.repo.owner}/${context.repo.repo}`,
+                  ref: process.env.AGENT_BRANCH
+                }
+              };
+            } else {
+              const payload = JSON.parse(process.env.DISPATCH_PAYLOAD || '{}');
+
+              rawEvent = {
+                id: payload.id || `dispatch-${context.runId}-${context.runAttempt}`,
+                type: payload.type || 'repository-dispatch-task',
+                priority: Number.isInteger(payload.priority) ? payload.priority : 50,
+                goal: payload.goal,
+                files: Array.isArray(payload.files) ? payload.files : [],
+                constraints: Array.isArray(payload.constraints) ? payload.constraints : [],
+                source: {
+                  kind: 'repository_dispatch',
+                  repository: `${context.repo.owner}/${context.repo.repo}`,
+                  sender: context.actor
+                },
+                target: {
+                  repository:
+                    payload.target_repository ||
+                    `${context.repo.owner}/${context.repo.repo}`,
+                  ref: payload.target_ref || process.env.AGENT_BRANCH
+                }
+              };
+            }
+
+            await enqueue({
+              github,
+              context,
+              core,
+              branch: process.env.AGENT_BRANCH,
+              rawEvent
+            });
