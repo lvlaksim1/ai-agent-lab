@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "pending": true,
-  "generation": 2,
-  "last_event": "ios-runtime-release-20260918-001",
-  "updated_at": "2026-09-18T00:49:29Z"
+  "generation": 3,
+  "last_event": "ios-runtime-release-20260918-002",
+  "updated_at": "2026-09-18T01:10:31Z"
 }
