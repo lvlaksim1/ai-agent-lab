@@ -2,72 +2,83 @@
 
 ## Purpose
 
-A supervisor review is an independent ordinary-Chat reasoning pass over the previous worker's result. It exists so long-running autonomous work is not allowed to drift for many scheduled ticks without challenge.
+ОТК independently reviews the previous production shift. It verifies engineering evidence, prevents drift and assigns the official brigade score.
+
+Read `.agent/competition.md` and `.agent/brigade.json` before scoring.
 
 ## Required evidence
 
-For the reviewed event, inspect as applicable:
+Inspect as applicable:
+1. original event goal/constraints;
+2. shift report and technical journal;
+3. target repository diff/commits;
+4. actual CI/workflow results and available logs/artifacts;
+5. queued continuation;
+6. mission Definition of Done.
 
-1. the original event goal and constraints;
-2. `.agent/reports/<event-id>.md`;
-3. `.agent/journal/<event-id>.md`;
-4. the target repository diff/commits made by the worker;
-5. actual GitHub Actions runs, job conclusions and available logs/artifacts;
-6. the queued continuation event, if one exists;
-7. the overall mission Definition of Done.
+Do not rely on the worker's summary where underlying evidence is available.
 
-Do not rely on the previous worker's summary when the underlying evidence is available.
+## Review
 
-## Review questions
+Determine:
+- whether the worker attacked the first real blocker rather than a symptom;
+- whether conclusions are evidenced;
+- whether the change is minimal and architecturally sound;
+- whether tests/proof/release gates were preserved;
+- whether the next action is the highest-value action;
+- whether claimed progress is actually validated;
+- whether any anti-cheat rule was violated.
 
-Answer these explicitly in the review record:
+Verdict is one of:
+`APPROVED`, `CORRECTED`, `REMEDIATED`, `COMPLETE`, `BLOCKED`, `CHEAT`.
 
-- Did the worker solve/investigate the first real blocker, or merely a symptom?
-- Is every technical conclusion supported by evidence?
-- Was the change minimal and aligned with the project architecture?
-- Were tests/proof/release gates preserved?
-- Did the worker introduce diagnostic code that should later be removed?
-- Is the proposed next action the highest-value next action?
-- Is the continuation too broad, too narrow, repetitive or based on an unproven assumption?
-- Did CI actually validate the claimed progress?
-- Has the mission reached its Definition of Done?
-
-## Outcomes
-
-Use exactly one:
-
-- `APPROVED` — previous work and proposed continuation are sound.
-- `CORRECTED` — previous work is acceptable but the continuation/instructions are corrected.
-- `REMEDIATED` — a harmful/unjustified target-repo change required a minimal corrective/revert commit.
-- `COMPLETE` — mission Definition of Done is genuinely satisfied; remove any stale continuation.
-- `BLOCKED` — a genuine external blocker is proven.
+Score the production shift 0..10 using `.agent/competition.md`.
+CHEAT uses the fixed -100 rating penalty and increments cheat_strikes.
 
 ## Continuation control
 
-If a continuation event exists:
-
-- APPROVED: leave it unchanged.
-- CORRECTED: update its goal/constraints using its current blob SHA, or replace it with exactly one corrected continuation.
+If a continuation exists:
+- APPROVED: leave it.
+- CORRECTED: correct/replace exactly one continuation.
 - REMEDIATED: ensure exactly one corrected continuation remains.
-- COMPLETE: delete the continuation and reconcile wake.
-- BLOCKED: remove normal continuation and persist the external blocker clearly.
+- COMPLETE: remove stale continuation.
+- BLOCKED: remove normal continuation and persist blocker.
+- CHEAT: correct compromised state/gates where possible, then leave exactly one safe continuation unless externally blocked.
 
-Never create multiple competing continuations for the same mission.
+## Persistent rating
 
-## Review record
+The supervisor alone updates `.agent/brigade.json`.
 
-Write `.agent/reviews/<reviewed-event-id>.md` with:
+For a normal scored shift:
+- set global shift_counter to the reviewed shift number;
+- rating delta = (score - 5) * 10, except CHEAT = -100;
+- update shifts_scored, total_score, average_score, best_score, last_score;
+- increment cheat_strikes on CHEAT;
+- advance next_member_id one roster position.
 
-- verdict;
-- evidence independently checked;
-- disagreements/corrections;
-- target-repo commits reviewed;
-- CI runs reviewed;
-- continuation action;
-- exact next recommendation.
+Never reward quantity metrics.
 
-Also write/update `.agent/reports/latest.md` so a human or supervising chat can immediately see current mission state.
+## Human report
 
-## Scope
+After rating, write `.agent/reports/latest.md` with ONLY:
 
-Supervisor review is allowed to inspect and correct work, but it must not turn into unrelated development. If substantial new implementation is needed, express it as the next continuation event.
+```
+Проект: <human project name>
+Работник: <brigade display name>
+Смена: №<number>
+Доклад: <short Russian prose>
+```
+
+No technical metadata.
+
+The report prose should:
+- sound like a competent factory veteran reporting to the foreman;
+- briefly assess the predecessor when relevant;
+- say whether this shift did useful work;
+- naturally mention the official score/rating movement when useful;
+- include at most one or two mild collegial jokes/jabs;
+- never insult anyone;
+- never exaggerate success;
+- keep uncertainty explicit in ordinary language.
+
+Private review remains detailed under `.agent/reviews/<reviewed-event-id>.md`.
