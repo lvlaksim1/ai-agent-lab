@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-029",
+  "created_at": "2026-09-18T13:08:47Z",
+  "type": "task",
+  "priority": 90,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {"kind":"production-continuation","parent_event":"ios-runtime-release-20260918-028"},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main","commit":"7e6ecb9a15b1a0252ad02b0f82d2e71b1fb1737f"},
+  "wait_for": {"kind":"github_actions_run","repository":"lvlaksim1/iOS-Research-Runtime","run_id":35347936254,"required_status":"completed"},
+  "goal": "Consume the terminal qemu-sptm Windows Gate for the Win64 page-rounding fix. If successful, confirm companion Windows Build and consume the resulting Windows E2E. Verify that SPTM_BOOTARGS topOfKernelData retains the high DRAM bits after ROUND_NEXT_PAGE; then continue the boot-debugging chain from the new terminal evidence. If the gate fails, inspect durable evidence and repair only the proven failure.",
+  "constraints": ["Do not weaken any proof gate or timeout.","Do not change Definition of Done.","Do not claim CI PASS without terminal successful evidence.","Do not add physBase at boot-args publication as a blind repair."]
+}
