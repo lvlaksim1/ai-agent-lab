@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Exact Windows E2E reaches BSD root md0; rebuilt recovery APFS is rejected by mountroot error 79. Rebuild evidence points to synthesized NX/APFS superblock/checkpoint metadata; the first causally incompatible field is not yet proven.",
-  "last_scored_shift": 27,
-  "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
-  "last_event": "ios-runtime-release-20260918-029",
+  "current_blocker_summary": "Exact Windows E2E reaches BSD root md0 and rebuilt recovery APFS fails mountroot error 79. Runtime cannot access the exact E2E binary artifact/full job log needed to prove the first incompatible NX/APFS/checkpoint field; APFS writer changes remain blocked pending equivalent structural evidence.",
+  "last_scored_shift": 28,
+  "last_otk_verdict": "BLOCKED",
+  "last_progress_class": "incremental",
+  "last_event": "ios-runtime-release-20260918-030",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T19:13:20Z"
+  "updated_at": "2026-09-18T19:26:39Z"
 }
