@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-010",
+  "created_at": "2026-09-18T04:39:05Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "reviewed_event": "ios-runtime-release-20260918-010",
+  "worker_id": "palych",
+  "proposed_shift": 8,
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main","commit":"bca98466239f3cd128d6233f8d29e34e8817ba80"},
+  "journal": ".agent/journal/ios-runtime-release-20260918-010.md",
+  "continuation_id": "ios-runtime-release-20260918-011"
+}
