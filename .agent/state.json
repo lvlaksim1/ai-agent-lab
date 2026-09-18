@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "status": "processing",
-  "active_event": "review-ios-runtime-release-20260918-001",
-  "worker_id": "native-scheduled-chat",
-  "started_at": "2026-09-18T01:21:03Z",
-  "lease_until": "2026-09-18T02:06:03Z",
-  "last_event": "ios-runtime-release-20260918-001",
+  "status": "idle",
+  "active_event": null,
+  "worker_id": null,
+  "started_at": null,
+  "lease_until": null,
+  "last_event": "review-ios-runtime-release-20260918-001",
   "last_result": "done",
-  "last_completed_at": "2026-09-18T01:10:35Z"
+  "last_completed_at": "2026-09-18T01:24:30Z"
 }
