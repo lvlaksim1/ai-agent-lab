@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-009",
+  "type": "project-mission-continuation",
+  "object_id": "ios-research-runtime",
+  "status": "done",
+  "worker_id": "kuzmich",
+  "proposed_shift": 7,
+  "result": "diagnostic-window-moved-earlier",
+  "journal": ".agent/journal/ios-runtime-release-20260918-009.md",
+  "review_event": "review-ios-runtime-release-20260918-009",
+  "continuation_id": "ios-runtime-release-20260918-010",
+  "target_commit": "20317e6ef5a67b1b0c046d062b23c538e85662c6",
+  "completed_at": "2026-09-18T04:19:30Z"
+}
