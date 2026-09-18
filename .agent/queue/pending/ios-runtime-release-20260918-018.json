@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-018",
+  "created_at": "2026-09-18T06:48:00Z",
+  "type": "production",
+  "priority": 80,
+  "status": "pending",
+  "source": {"kind":"supervisor-continuation","review":"review-ios-runtime-release-20260918-017"},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
+  "goal": "Prove the boot-state slot virtual-to-physical mapping from existing Darwin/QEMU mapping evidence. Only after that proof, identify the narrow pinned qemu-sptm TCG guest-memory store path suitable for diagnostic instrumentation that reports stores hitting exactly that physical slot with guest PC and value. Keep guest semantics and all proof gates unchanged; do not make any speculative address-semantics fix.",
+  "object_id": "ios-research-runtime"
+}
