@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "sequence": 2,
+  "sequence": 3,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent review of recovered runtime-loss shift 30."
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "working",
+  "activity_detail": "Resume DIR-011 from recovered checkpoint; move APFS structural evidence to decoded image layer."
 }
