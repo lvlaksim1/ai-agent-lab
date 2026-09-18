@@ -1,15 +1,15 @@
-# Latest agent report
+# Последний отчёт бригады
 
-Mission: `lvlaksim1/iOS-Research-Runtime` v0.1.0
+Проект: `lvlaksim1/iOS-Research-Runtime` v0.1.0
 
-Latest gate: **supervisor CORRECTED** `ios-runtime-release-20260918-001`.
+Последняя смена: **ios-runtime-release-20260918-002 — продолжаем**.
 
-- Target diagnostic commit: `a36d2b00fa538bd713594bb68bbf9fb94abc46bc` — approved.
-- Windows Build `35294190796` — PASS.
-- Windows E2E `35294190788` — FAIL, but diagnostic artifact `10527486163` captured the missing faulting TB.
-- Proven fault: EL2 Data Abort at `0xfffffff0070a3bc4`; instruction is `STNP Q0, Q0, [X0]`; failing `X0 == FAR == 0x00003ef012ed0000`.
-- Secondary Prefetch Abort loop is not the root cause.
-- Active continuation: `ios-runtime-release-20260918-002`.
-- Next action: prove where malformed X0 is formed on the failing call path, compare against the successful invocation of the same block, apply the smallest root-cause fix, then rerun E2E.
+- E2E `35294190788`: Provisioning PASS, boot-proof FAIL.
+- Подтверждено: аварийный блок SPTM получает уже неправильный `X0=0x00003ef012ed0000`; `STNP Q0,Q0,[X0]` затем закономерно вызывает Data Abort с `FAR == X0`.
+- Для сравнения успешный вызов того же блока использует корректный высокий VA `X0=0xfffffff006f60000`.
+- Возврат аварийного вызова: `X30=0xfffffff0070d7d04`; прежняя трассировка caller не захватывала.
+- Commit `311187181363ed039df28b2e9d99d9d9eda2c38d` переносит только диагностический dfilter на caller `0xfffffff0070d7000+0x2000`; gates не ослаблены.
+- Следующая смена должна разобрать новый E2E artifact, доказать источник неправильного X0 и внести минимальный root-cause fix.
+- Перед продолжением поставлена независимая supervisor-приёмка `review-ios-runtime-release-20260918-002`.
 
-Definition of Done is not reached; no release yet.
+Definition of Done ещё не достигнут; релиза пока нет.
