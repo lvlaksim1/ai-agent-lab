@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-001",
+  "created_at": "2026-09-18T00:49:29Z",
+  "type": "project-mission",
+  "priority": 95,
+  "status": "pending",
+  "source": {
+    "kind": "user-delegated-project",
+    "repository": "lvlaksim1/ai-agent-lab",
+    "conversation_goal": "Continue iOS-Research-Runtime autonomously to the first verified release."
+  },
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "goal": "Take autonomous ownership of the continued development of lvlaksim1/iOS-Research-Runtime and drive it to the first verified GitHub Release v0.1.0.\n\nPROJECT PURPOSE\niOS-Research-Runtime is a Windows-native GUI application for provisioning, booting and investigating modern iOS/Darwin on Windows using the qemu-sptm Darwin machine. The end user must not need macOS, Xcode, Python, Go, Rust, MSYS2, WSL or command-line tooling. The application itself must prepare the required Apple firmware inputs, bundle/drive the runtime, expose provisioning/boot logs in the GUI, and reach at least launchd plus a usable root shell. SpringBoard, graphics/touch, app installation, Apple Account, Family Sharing and Screen Time are later milestones and must not distract from v0.1.0.\n\nVERIFIED STARTING STATE\n- main HEAD at delegation time: cbdfe49625201beea4922b311b4b07dd1ecf80c2 (\"fix: repair Win64 Boot_Video ABI patch\")\n- VERSION: 0.1.0-dev\n- Windows Build run 35261337249: SUCCESS\n- qemu-sptm Windows Gate run 35261337200: SUCCESS\n- Windows End-to-End Boot run 35263107244: FAILURE\n- failing step: \"Run provisioning and Darwin root-shell proof\"\n- E2E evidence artifact: ios-darwin-windows-e2e, artifact id 10515742786\n- Windows Full Package run 35263867829: SKIPPED because E2E failed\n- GitHub Releases: none\n- recent work has been forensic Win64 qemu-sptm early-boot debugging around SPTM/MMU handoff, XNU boot args ABI and Boot_Video ABI. Do not restart the architecture or discard this evidence trail.\n\nMISSION\n1. Inspect README.md, ARCHITECTURE.md, REFACTORING.md, current workflows, recent commits and especially the latest E2E evidence/logs/artifacts.\n2. Identify the first real current blocker in the Windows Darwin/iOS boot path. Do not assume the root cause from commit messages; prove it from evidence.\n3. Make the smallest technically justified fix. Commit directly to main. Preserve the Windows-native GUI-only product boundary.\n4. Use GitHub Actions as the execution oracle. Follow the relevant chain: Windows Build, qemu-sptm Windows Gate, Windows End-to-End Boot and Windows Full Package. Inspect actual logs/artifacts for failures.\n5. Iterate autonomously until the E2E proof demonstrates genuine boot progress through SPTM/TXM/XNU to launchd and a root shell, with the existing proof commands (uname, whoami, ls /) succeeding. Do not weaken or bypass this proof.\n6. Once E2E is genuinely green, make the packaging/release path complete: ensure Windows Full Package succeeds, set VERSION to 0.1.0 only when the proven runtime is ready, produce the self-contained Windows x64 package and SHA-256, and publish GitHub Release v0.1.0 with the verified package assets. Verify the release points to the tested revision and that the downloadable artifact/hash are consistent.\n7. Do not stop at \"build succeeds\". Definition of Done is a real verified v0.1.0 release.\n8. Do not ask the user for routine technical decisions. Stop only for a true external blocker that cannot be solved from repository/code/CI evidence.\n\nHARD CONSTRAINTS\n- no Work and no OpenAI API;\n- do not weaken tests, boot-proof checks, release gates or evidence collection to obtain green CI;\n- do not replace the Windows-native architecture with macOS/Xcode or a manually maintained developer environment;\n- do not commit Apple firmware/copyrighted Apple binaries;\n- keep third-party provenance/license requirements intact;\n- avoid unrelated refactors;\n- prefer root-cause fixes over accumulating diagnostic hacks;\n- retain enough boot evidence to diagnose every failed iteration.\n\nCONTINUATION ACROSS SCHEDULED RUNS\nThis is a long-running mission and may require multiple CI cycles. Process only this one event during the current scheduled run, as required by the agent protocol. If v0.1.0 is not fully released by the time the run must end (for example because CI is still running or another iteration is required), create exactly one new continuation event in lvlaksim1/ai-agent-lab branch work-webhook-test under .agent/queue/pending/ before finishing. The continuation event must target lvlaksim1/iOS-Research-Runtime main, use priority 95, summarize verified progress/current blocker/last relevant run IDs and state the exact next action. Advance .agent/wake.json generation and leave pending=true using the existing generation/CAS rules. Then complete the current event normally with status done and a summary that the mission was continued. Do not create more than one continuation event per run. Repeat this handoff chain across future native Scheduled Chat ticks until the release is complete or a genuine external blocker is proven.\n\nFINAL SUCCESS CONDITION\nWindows Build PASS\nqemu-sptm Windows Gate PASS\nProvisioning PASS\nDarwin/XNU boot PASS\nlaunchd PASS\nroot shell proof PASS\nWindows Full Package PASS\nVERSION 0.1.0\nGitHub Release v0.1.0 published with verified Windows package + SHA-256.",
+  "files": [
+    "README.md",
+    "ARCHITECTURE.md",
+    "REFACTORING.md",
+    ".github/workflows/qemu-sptm-windows.yml",
+    ".github/workflows/windows-e2e.yml",
+    ".github/workflows/windows-package.yml",
+    "runtime/qemu/patches/",
+    "src/IOSResearchRuntime/Services/",
+    "tools/IOSResearchRuntime.Integration/Program.cs",
+    "VERSION"
+  ],
+  "constraints": [
+    "Continue from current main; do not restart the project.",
+    "Inspect actual GitHub Actions evidence before each fix.",
+    "No Work or OpenAI API.",
+    "Do not weaken proof/test/release gates.",
+    "Do not require end users to install developer toolchains.",
+    "Keep Apple firmware out of the repository.",
+    "Carry the mission across native Scheduled Chat runs by enqueuing exactly one continuation event when needed."
+  ]
+}
