@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "X2 already carries 0x12ed0000 on callee entry; LR=0xfffffff0070b3a58 moves the investigation to caller-side X2 preparation before the BL. Exact E2E evidence for 24c3206 is the next proof gate before any root logic fix.",
-  "last_scored_shift": 8,
+  "current_blocker_summary": "Caller-side preparation of X2 before the BL returning near 0x...0b3a58 is now the proof target; exact E2E evidence for 24c3206 must identify the instruction/source producing X2=0x12ed0000 before any root logic fix.",
+  "last_scored_shift": 9,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-011",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T04:57:08Z"
+  "updated_at": "2026-09-18T05:02:00Z"
 }
