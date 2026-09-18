@@ -17,3 +17,11 @@
 ```
 
 Точка входа: `MANAGER_ENTRYPOINT.md`. Она переводит Chat на актуальный runtime в ветке `work-webhook-test` и восстанавливает постоянную личность, управленческое состояние, активный объект, бригаду и текущие директивы из GitHub.
+
+## Project Context Capsule
+
+Универсальная инструкция установки постоянной памяти проекта в любой GitHub-репозиторий: `CONTEXT_CAPSULE_INSTALL_PROMPT.md`.
+
+Спецификация механизма: `docs/PROJECT_CONTEXT_CAPSULE_SPEC.md`.
+
+После установки в целевом репозитории новый Chat сможет начать с команды `восстанови Project Context Capsule и продолжи проект <URL>`.
