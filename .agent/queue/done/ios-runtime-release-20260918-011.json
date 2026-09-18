@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-011",
+  "type": "project-mission-continuation",
+  "object_id": "ios-research-runtime",
+  "worker_id": "petrovich",
+  "proposed_shift": 9,
+  "status": "done",
+  "target_commit": "24c320627651c84dd1d0d4f923ec301cb855d642",
+  "result": "Exact prior artifact proves X2 is caller-supplied: callee entry X2=0x12ed0000 with LR=0xfffffff0070b3a58. Diagnostic trace moved to the caller window; root logic intentionally unchanged pending proof.",
+  "completed_at": "2026-09-18T04:52:10Z",
+  "review_event": "review-ios-runtime-release-20260918-011",
+  "continuation_id": "ios-runtime-release-20260918-012"
+}
