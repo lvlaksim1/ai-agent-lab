@@ -32,16 +32,53 @@ check(Number.isInteger(wake.generation) && wake.generation >= 0, "wake.generatio
 
 check(state.schema_version === 1, "state schema_version must be 1");
 check(["idle", "processing"].includes(state.status), "state.status must be idle or processing");
+check(state.heartbeat && typeof state.heartbeat === "object", "state.heartbeat is required");
+if (state.heartbeat && typeof state.heartbeat === "object") {
+  check(state.heartbeat.schema_version === 1, "heartbeat schema_version must be 1");
+  check(typeof state.heartbeat.active === "boolean", "heartbeat.active must be boolean");
+  check(Number.isInteger(state.heartbeat.sequence) && state.heartbeat.sequence >= 0, "heartbeat.sequence must be non-negative integer");
+  check(typeof state.heartbeat.last_seen_at === "string" && Number.isFinite(Date.parse(state.heartbeat.last_seen_at)), "heartbeat.last_seen_at must be valid timestamp");
+}
 if (state.status === "idle") {
   check(state.active_event === null, "idle state must not have active_event");
   check(state.worker_id === null, "idle state must not have worker_id");
   check(state.started_at === null, "idle state must not have started_at");
   check(state.lease_until === null, "idle state must not have lease_until");
+  if (state.heartbeat && typeof state.heartbeat === "object") {
+    check(state.heartbeat.active === false, "idle state heartbeat must be inactive");
+    check(state.heartbeat.role === null, "idle heartbeat.role must be null");
+    check(state.heartbeat.worker_id === null, "idle heartbeat.worker_id must be null");
+    check(state.heartbeat.object_id === null, "idle heartbeat.object_id must be null");
+    check(state.heartbeat.active_event === null, "idle heartbeat.active_event must be null");
+    check(state.heartbeat.stale_at === null, "idle heartbeat.stale_at must be null");
+    check(state.heartbeat.external_wait === null, "idle heartbeat.external_wait must be null");
+  }
 } else {
   check(typeof state.active_event === "string" && state.active_event.length > 0, "processing state requires active_event");
   check(typeof state.worker_id === "string" && state.worker_id.length > 0, "processing state requires worker_id");
   check(typeof state.started_at === "string", "processing state requires started_at");
   check(typeof state.lease_until === "string", "processing state requires lease_until");
+  if (state.heartbeat && typeof state.heartbeat === "object") {
+    check(state.heartbeat.active === true, "processing heartbeat must be active");
+    check(["production", "otk"].includes(state.heartbeat.role), "processing heartbeat.role must be production or otk");
+    check(state.heartbeat.worker_id === state.worker_id, "heartbeat.worker_id must match state.worker_id");
+    check(state.heartbeat.active_event === state.active_event, "heartbeat.active_event must match state.active_event");
+    check(typeof state.heartbeat.object_id === "string" && state.heartbeat.object_id.length > 0, "processing heartbeat.object_id is required");
+    check(typeof state.heartbeat.stale_at === "string" && Number.isFinite(Date.parse(state.heartbeat.stale_at)), "processing heartbeat.stale_at must be valid timestamp");
+    check(["working", "external_wait", "persisting", "closing", "otk_review"].includes(state.heartbeat.activity_kind), "invalid heartbeat.activity_kind");
+    check(typeof state.heartbeat.activity_detail === "string" && state.heartbeat.activity_detail.trim().length > 0, "heartbeat.activity_detail is required");
+    check(state.heartbeat.external_wait === null || (state.heartbeat.external_wait && typeof state.heartbeat.external_wait === "object"), "heartbeat.external_wait must be object or null");
+    if (state.heartbeat.activity_kind === "external_wait") {
+      check(state.heartbeat.external_wait && state.heartbeat.external_wait.active === true, "external_wait activity requires active external_wait");
+    }
+    if (state.heartbeat.external_wait && typeof state.heartbeat.external_wait === "object") {
+      check(state.heartbeat.external_wait.active === true, "external_wait.active must be true when object exists");
+      check(typeof state.heartbeat.external_wait.kind === "string" && state.heartbeat.external_wait.kind.length > 0, "external_wait.kind is required");
+      check(typeof state.heartbeat.external_wait.worker_observed_status === "string" && state.heartbeat.external_wait.worker_observed_status.length > 0, "external_wait.worker_observed_status is required");
+      check(typeof state.heartbeat.external_wait.since_at === "string" && Number.isFinite(Date.parse(state.heartbeat.external_wait.since_at)), "external_wait.since_at must be timestamp");
+      check(typeof state.heartbeat.external_wait.last_polled_at === "string" && Number.isFinite(Date.parse(state.heartbeat.external_wait.last_polled_at)), "external_wait.last_polled_at must be timestamp");
+    }
+  }
 }
 
 check(config.schema_version === 1, "config schema_version must be 1");
@@ -78,6 +115,14 @@ check(config.evidence_acquisition_ladder_required === true, "evidence acquisitio
 check(Number.isInteger(config.short_shift_review_threshold_seconds) && config.short_shift_review_threshold_seconds >= 60, "short shift review threshold must be a sane positive integer");
 check(config.short_shift_with_unresolved_work_requires_special_review === true, "short unresolved shifts must require special review");
 check(config.premature_handoff_efficiency_score === 0, "premature handoff efficiency score must remain zero");
+check(config.heartbeat_policy_version === 1, "heartbeat policy version must remain 1");
+check(config.heartbeat_required_while_processing === true, "processing heartbeat must remain mandatory");
+check(Number.isInteger(config.heartbeat_interval_seconds) && config.heartbeat_interval_seconds >= 30, "heartbeat interval must be at least 30 seconds");
+check(Number.isInteger(config.heartbeat_stale_after_seconds) && config.heartbeat_stale_after_seconds >= config.heartbeat_interval_seconds * 2, "heartbeat stale threshold must provide at least 2x heartbeat interval");
+check(config.heartbeat_activity_required === true, "heartbeat activity visibility must remain required");
+check(config.heartbeat_external_wait_visibility_required === true, "external wait visibility must remain required");
+check(config.lease_is_liveness_signal === false, "lease must never be treated as liveness signal");
+check(config.heartbeat_stale_does_not_bypass_valid_lease === true, "stale heartbeat must not bypass valid lease");
 check(config.queue_scope_policy === "active-object", "queue must remain active-object scoped");
 
 check(assignment.schema_version === 1, "assignment schema_version must be 1");
