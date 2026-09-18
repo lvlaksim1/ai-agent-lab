@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-31-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-18T22:24:57Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "kuzmich",
+  "shift_policy_version": 4,
+  "shift_started_at_utc": "2026-09-18T22:16:39Z",
+  "shift_completed_at_utc": "2026-09-18T22:18:04Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "83367430c8f4a912400dad42e070762b1a5644cc",
+    "recovery_anchor_commit": "c75428de4070feca9465d82e551038b2e718cc3c"
+  },
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-18T22:18:04Z",
+      "heartbeat_stale_at_utc": "2026-09-18T22:21:04Z",
+      "heartbeat_anchor_commit": "83367430c8f4a912400dad42e070762b1a5644cc",
+      "recovery_observed_at_utc": "2026-09-18T22:24:57Z",
+      "recovery_anchor_commit": "c75428de4070feca9465d82e551038b2e718cc3c",
+      "fenced_generation": 5,
+      "activity_kind": "working",
+      "activity_detail": "Checkpointed decoded-layer APFS evidence design; target writer remains unchanged."
+    }
+  },
+  "shift_number": 31,
+  "reporting_policy_version": 1
+}
