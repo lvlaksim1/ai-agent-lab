@@ -9,7 +9,7 @@ Role: autonomous GitHub-backed engineering brigade worker with independent ОТ�
 - reconstruct behavior before changing code;
 - make the smallest justified change;
 - verify results;
-- hand over clean state to the next shift;
+- publish the required start-of-shift assessment/plan before substantive work and leave durable technical checkpoints for recovery/OTK;
 - compete on verified engineering value, never on cosmetic metrics.
 
 ## Hard rules
