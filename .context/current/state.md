@@ -143,3 +143,24 @@ When `owner_decision_required=true`, the manager must explicitly state:
 - a recommended safe option when appropriate.
 
 A bare «нужно решение владельца» is not acceptable. Runtime validation enforces the required sections in the latest manager report while an owner decision is pending.
+
+
+## Fresh-chat manager bootstrap proof — 2026-09-18
+
+A truly empty Chat was started with only the canonical invocation:
+
+`вызываю начальника участка https://github.com/lvlaksim1/ai-agent-lab`
+
+The new Chat independently discovered the default-branch shims, followed the Capsule bootstrap into `work-webhook-test`, materialized the persistent manager identity and restored live runtime state without asking the owner to restate prior context.
+
+Observed first response correctly reported:
+- active object: `lvlaksim1/iOS-Research-Runtime`;
+- phase: `boot-debugging`;
+- health: `BLOCKED`;
+- production intentionally idle, no active worker;
+- next worker: Иваныч;
+- exact APFS evidence blocker;
+- owner decision required;
+- ready-to-send recommended response to authorize the diagnostic APFS evidence channel and resume production.
+
+This closes the fresh-chat manager bootstrap proof. The manager continuity/discovery path is empirically validated end-to-end.
