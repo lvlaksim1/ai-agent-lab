@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-001",
+  "status": "done",
+  "completed_at": "2026-09-18T01:24:30Z",
+  "worker_id": "native-scheduled-chat",
+  "summary": "CORRECTED: diagnostic commit approved; new E2E proves the faulting instruction is STNP Q0,Q0,[X0] with X0==FAR, so the continuation now targets provenance of malformed X0 rather than re-identifying the instruction.",
+  "journal": ".agent/journal/review-ios-runtime-release-20260918-001.md",
+  "result": {
+    "verdict": "CORRECTED",
+    "review": ".agent/reviews/ios-runtime-release-20260918-001.md",
+    "report": ".agent/reports/review-ios-runtime-release-20260918-001.md",
+    "continuation_event": "ios-runtime-release-20260918-002",
+    "target_commit_reviewed": "a36d2b00fa538bd713594bb68bbf9fb94abc46bc",
+    "windows_build_run": 35294190796,
+    "windows_e2e_run": 35294190788,
+    "e2e_artifact": 10527486163
+  }
+}
