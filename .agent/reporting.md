@@ -1,31 +1,135 @@
-# Brigade Human Reporting Standard
+# Brigade Human Reporting Standard v2
 
 ## Purpose
 
-Human-facing worker reports must be useful to the owner without forcing him to read raw CI logs or internal journals.
+Worker reporting happens at the **beginning** of the production shift, while the worker is definitely alive.
 
-The report is written in first person singular from the reviewed worker's point of view, but ОТК remains the factual authority and publishes it only after independent verification.
+OTK reporting happens **after** the shift ends or is recovered from runtime loss.
+
+These are two different authoritative documents:
+- the worker owns the immutable start report;
+- OTK owns the immutable result report.
+
+OTK MUST NOT reconstruct later events in the worker's first-person voice.
+
+## Reporting policy
+
+Current policy version: **2**.
+
+Every new production shift after this policy is active uses:
+- `reporting_policy_version: 2`;
+- one immutable worker start report;
+- one independent OTK result report after closure/recovery.
+
+Legacy shifts and legacy OTK reports remain valid historical evidence and are not rewritten.
 
 ## Authoritative time
 
-Every production shift MUST preserve two authoritative timestamps:
+All shift timestamps follow `.agent/liveness.md`.
 
-- `shift_started_at_utc`
-- `shift_completed_at_utc`
+For production:
+- `shift_started_at_utc` comes from the exact GitHub time-pulse commit used to claim the lease;
+- factual shift end is the last authoritative worker action/heartbeat appropriate to the closure;
+- for `runtime_loss`, factual end is exactly the last verified heartbeat, never the later administrative recovery time.
 
-Do not invent them from the scheduler minute or from conversational memory.
-
-Preferred source:
-1. `shift_started_at_utc` = GitHub server timestamp of the commit that successfully claims the production lease;
-2. `shift_completed_at_utc` = GitHub server timestamp of the final production journal/handoff commit, or the production-lease release commit if that is the first authoritative end marker available.
-
-The worker must carry both timestamps into the supervisor-review event. ОТК may recover them from GitHub commit history if an older event lacks them.
-
-Human output converts them to Moscow time using `Europe/Moscow` / UTC+03:00 and prints:
+Human-facing timestamps are converted to Europe/Moscow / UTC+03:00 and printed:
 
 `DD.MM.YYYY HH:MM:SS МСК`
 
-## Required report format
+## Worker start report
+
+### When
+
+Immediately after production lease claim and worker materialization, and **before any substantive target-repository work**, the worker MUST publish the start report.
+
+No target-repository mutation, CI launch, evidence-changing action, or engineering patch may precede the start report.
+
+Reading evidence needed to understand the inherited state is allowed.
+
+### Immutable path
+
+Create exactly one file:
+
+`.agent/reports/starts/shift-<shift-number>-<worker-id>-<production-event>.md`
+
+Create once. Never overwrite or revise it.
+
+Persist its exact path and creation commit in runtime state:
+- `shift_number`;
+- `shift_start_report_path`;
+- `shift_start_report_commit`;
+- `reporting_policy_version: 2`.
+
+If the worker dies before creating the report, OTK records that fact. OTK must never fabricate the missing report.
+
+### Required worker format
+
+```text
+Проект: <human project name>
+Работник: <brigade display name>
+Смена: №<global brigade shift number>
+Начало смены: <DD.MM.YYYY HH:MM:SS МСК>
+
+СТАРТОВЫЙ ДОКЛАД:
+
+ОЦЕНКА ПРЕДШЕСТВЕННИКА:
+<first-person evidence-based assessment>
+
+МОЙ ПЛАН:
+<first-person concrete plan, immediate objective and success criterion>
+```
+
+Only these two narrative sections are required.
+
+### ОЦЕНКА ПРЕДШЕСТВЕННИКА
+
+The new worker evaluates the immediately preceding scored production shift using OTK evidence, journal/checkpoint and inherited project state.
+
+It should state:
+- what useful evidence/state was inherited;
+- what the predecessor did well;
+- what remains incomplete, doubtful or needs re-checking;
+- no invented criticism and no hindsight about events that have not happened yet.
+
+### МОЙ ПЛАН
+
+This is a genuine pre-work plan, not a later rewrite.
+
+It should state:
+- immediate technical objective;
+- blocker/hypothesis being attacked;
+- intended evidence or verification;
+- concrete success criterion;
+- any important constraint from manager/OTK.
+
+A later evidence-driven deviation is allowed and is not a defect by itself. OTK judges whether the deviation was justified.
+
+## OTK result report
+
+OTK independently reconstructs the actual shift from:
+- immutable start report, when present;
+- technical journal/checkpoints;
+- exact heartbeat/time anchors;
+- target repository commits/diffs;
+- CI/tests/artifacts;
+- continuation;
+- management directive and Definition of Done.
+
+The result report is written in the **OTK voice**, not in first person as the worker.
+
+### Immutable path
+
+Create exactly one file:
+
+`.agent/reports/otk/shift-<shift-number>-<review-event-id>.md`
+
+Create once. Never overwrite it.
+
+Update convenience mirrors:
+- `.agent/reports/latest-otk.md` = newest OTK result;
+- `.agent/reports/latest.md` MAY mirror the newest OTK result for legacy consumers.
+
+### Required OTK format
 
 ```text
 Проект: <human project name>
@@ -33,146 +137,92 @@ Human output converts them to Moscow time using `Europe/Moscow` / UTC+03:00 and 
 Смена: №<global brigade shift number>
 Начало смены: <DD.MM.YYYY HH:MM:SS МСК>
 Конец смены: <DD.MM.YYYY HH:MM:SS МСК>
+Причина завершения: <natural stop kind / runtime_loss>
 
-Доклад:
+ЗАКЛЮЧЕНИЕ ОТК:
 
-ОЦЕНКА ПРЕДЫДУЩЕГО:
-<first-person paragraph>
+ЧТО ПЛАНИРОВАЛ:
+<concise summary of the immutable start report; if absent, say so>
 
-МОЙ ПЛАН:
-<first-person paragraph>
+ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
+<independently reconstructed actions>
 
-ЧТО ПОЛУЧИЛОСЬ:
-<first-person paragraph>
+ЧТО ПОДТВЕРЖДЕНО:
+<verified technical result, tests, CI or evidence>
+
+ГДЕ ОСТАНОВИЛСЯ:
+<exact factual boundary; for runtime_loss use last verified heartbeat/action>
 
 СЛЕДУЮЩЕМУ:
-<first-person paragraph>
+<the exact continuation / first thing to verify next>
 
-Оценка ОТК: <score>/10 — <verdict>
+Оценка ОТК:
+Прогресс: <0..4>/4
+Инженерное качество: <0..3>/3
+Эффективность/фокус: <0..2>/2
+Стартовая оценка и план: <0..1>/1
+Итого: <0..10>/10 — <verdict>
 Рейтинг: <new rating> (<signed delta>)
 ```
 
-The four report sections are mandatory and stay inside the worker's `Доклад`.
+OTK may add one short explanatory paragraph when a verdict needs context, but must not turn the result into a raw log.
 
-ОТК score and rating are NOT part of the narrative. They always appear as separate lines after the report.
+## Scoring relationship
 
-## Meaning of the sections
+The start report itself is not proof of progress.
 
-### ОЦЕНКА ПРЕДЫДУЩЕГО
+OTK evaluates:
+- whether the predecessor assessment was fair and evidence-based;
+- whether the plan targeted the real blocker and had a useful success criterion;
+- whether later deviations were justified by new evidence.
 
-The current worker assesses the immediately preceding production shift:
-- what useful evidence or working state was inherited;
-- what predecessor did well;
-- what remained incomplete or awkward;
-- no invented criticism.
+The worker is not penalized merely because the runtime died before a planned step could be completed.
 
-A friendly jab is encouraged when it fits the evidence.
-
-### МОЙ ПЛАН
-
-This must reflect what the worker intended to do BEFORE making the substantive change, not a hindsight rewrite.
-
-State:
-- the immediate technical objective;
-- the hypothesis or blocker being attacked;
-- the success criterion.
-
-### ЧТО ПОЛУЧИЛОСЬ
-
-Explain:
-- what was actually changed or established;
-- what passed/failed;
-- what the technical result means in plain Russian;
-- any mismatch between plan and outcome.
-
-### СЛЕДУЮЩЕМУ
-
-Give the next worker a practical handoff:
-- what to verify first;
-- what not to repeat;
-- what result unlocks the next stage.
+A missing required start report yields 0/1 for the planning category, but runtime loss itself is not an automatic efficiency penalty.
 
 ## Technical depth
 
-Reports must contain real technical substance, but remain readable to a technically literate owner who is not immersed in every implementation detail.
+Both report types should remain readable to a technically literate owner.
 
 Good:
-- subsystem/component names;
-- concrete failing stage;
-- nature of data corruption;
-- exact kind of validation/test that passed or failed;
-- a short explanation of specialized jargon.
+- component/subsystem names;
+- real blocker;
+- concise evidence;
+- exact class of validation that passed/failed;
+- short explanation of specialized terms.
 
-Avoid:
-- raw hashes;
-- run IDs;
-- long addresses;
+Avoid unless owner explicitly asks:
+- long commit hashes;
+- raw run IDs;
 - stack dumps;
-- file paths unless essential;
-- raw log walls.
+- long addresses;
+- raw log walls;
+- unnecessary file-path inventories.
 
 ## Humor and brigade voice
 
-Humor is part of the brigade culture and should be more noticeable than before.
+Worker start reports remain first-person brigade voice. Light factory-floor humor is welcome when it does not hide status.
 
-Allowed:
-- 2–4 short jokes, ironic remarks or collegial jabs when the report length supports it;
-- teasing the predecessor for leaving a crooked bolt, a half-dug trench, or an overenthusiastic hypothesis;
-- teasing oneself for a failed experiment;
-- dry factory-floor metaphors.
+OTK reports may retain dry factory-floor tone but must remain clearly independent supervision, not imitation of the worker.
 
-Requirements:
-- humor must never alter factual meaning;
-- no humiliation, insults, slurs or personal attacks;
-- no invented biography or off-work behavior;
-- do not joke over a serious blocker in a way that hides its severity.
-
-Examples:
-- «Борисыч наконец заставил CI назвать виновный патч по имени — до этого станок только мигал красной лампочкой и делал вид, что это исчерпывающая диагностика.»
-- «Я в сам C-код не полез: когда табличка на ящике подписана криво, двигатель разбирать рановато.»
-- «Следующему оставляю не ребус, а одну проверку. Если и тут умудримся заблудиться, придётся рисовать мелом стрелки на полу.»
-
-## Evidence discipline
-
-First-person prose is presentation only. ОТК verifies every material statement against journal/review/CI/repository evidence.
-
-If the worker claimed something that ОТК cannot verify, the final human report must correct or qualify it.
-
+No invented biography, humiliation or factual distortion.
 
 ## Publication semantics
 
-Human report publication is append-only.
+Both new report classes are append-only publication events:
 
-For every completed OTK review, create one immutable report file:
+- worker starts: `.agent/reports/starts/*.md`;
+- OTK results: `.agent/reports/otk/*.md`.
 
-`.agent/reports/published/<review-event-id>.md`
+Legacy immutable OTK reports remain under:
+- `.agent/reports/published/*.md`.
 
-The file contains exactly the final human report that is intended for Telegram.
+Telegram delivery is triggered by creation of a new immutable report in any of those three locations.
 
-Rules:
-- create it once;
-- never edit or overwrite an existing published report;
-- if the same review is retried and the published file already exists, verify that it matches and do NOT republish it;
-- after creating the immutable report, update `.agent/reports/latest.md` as a convenience mirror of the newest report;
-- changing `latest.md` later is NOT a publication event.
-
-Telegram delivery is triggered only by creation of a new immutable file under `.agent/reports/published/`.
-
-This prevents an old shift from being resent merely because its formatting, documentation or `latest.md` was edited later.
-
-
-## Telegram delivery integrity
-
-External delivery must be bound to the **triggering commit**, not to the moving branch head.
-
-Required behavior:
-- GitHub Actions checks out `${{ github.sha }}` for the publication event;
-- newly added immutable reports are resolved from that exact commit;
-- never hard-code checkout of the moving `work-webhook-test` branch when deciding which report triggered the workflow;
-- otherwise later OTK commits may advance the branch before checkout, causing the workflow to inspect the wrong commit and silently skip the report.
-
-Explicit recovery is allowed through an immutable request file under:
+Redelivery requests remain under:
 
 `.agent/reports/redelivery/*.request`
 
-The request contains exactly one path to an existing immutable published report. Redelivery never edits or duplicates the published report itself.
+A request may point to one existing immutable report in `starts/`, `otk/`, or legacy `published/`.
+
+External delivery must always be tied to the exact triggering commit (`${{ github.sha }}`), never the moving branch head.
