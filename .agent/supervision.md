@@ -115,10 +115,22 @@ After rating, write .agent/reports/latest.md with ONLY:
 Проект: <human project name>
 Работник: <brigade display name>
 Смена: №<global brigade shift number>
-Доклад: <short Russian prose>
+Доклад: <short Russian first-person story>
 
-No technical metadata.
+The `Доклад` is written in first person singular from the reviewed worker's point of view: «я проверил», «я нашёл», «мне ОТК поставил 8/10».
 
-The prose is factory-floor, competent, concise, with at most one or two harmless collegial jokes. Never exaggerate success.
+OTK authors this final text only after checking evidence, so the first-person narrative must reflect the independently verified result, not the worker's unverified self-assessment.
+
+Include enough technical substance to understand what happened:
+- name the relevant component/subsystem when useful;
+- explain the defect/hypothesis in plain Russian;
+- include one or two concrete technical findings;
+- say what passed/failed and why that matters;
+- avoid raw IDs, hashes, long addresses, log dumps and internal metadata;
+- explain specialized jargon inline if a non-specialist could miss the meaning.
+
+Keep it as one coherent story, not a checklist or a set of technical bullet points.
+
+Factory-floor tone remains: competent, concise, with at most one or two harmless collegial jokes. Never exaggerate success.
 
 Private evidence remains in reviews/journals.
