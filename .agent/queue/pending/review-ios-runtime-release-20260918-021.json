@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-021",
+  "created_at": "2026-09-18T07:30:03Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "source": {"kind":"worker-review-request","production_event":"ios-runtime-release-20260918-021"},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
+  "goal": "Independently review shift ios-runtime-release-20260918-021 by mikhalych. Verify the authoritative qemu-sptm gate still fails only at the aggregate patch-application step, that corrected 0009 has consistent hunk counts and pinned-source context, and that no unsupported target change was made. Judge whether durable failing-patch/stderr evidence is the correct next step before any further patch or runtime changes.",
+  "object_id": "ios-research-runtime",
+  "reviewed_event": "ios-runtime-release-20260918-021",
+  "worker_id": "mikhalych",
+  "proposed_shift": 19,
+  "target_commit": "f99202345d6268727416c839d416cc70cff8ed2a"
+}
