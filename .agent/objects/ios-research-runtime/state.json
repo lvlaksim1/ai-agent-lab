@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Runtime SPTM mapping is the current evidence gate: derive the boot-state slot PA from actual loaded physlo/virtlo, then use only that PA for a narrow observational TCG-store probe; no speculative hard-coded PA or address-semantics change.",
-  "last_scored_shift": 16,
-  "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
-  "last_event": "ios-runtime-release-20260918-018",
+  "current_blocker_summary": "qemu-sptm Windows Gate now blocks runtime mapping evidence: the diagnostic patch stack fails during Apply Windows portability patch before build. Repair patch applicability first; then obtain SPTM_MAP and only afterward add any runtime-derived TCG-store probe.",
+  "last_scored_shift": 17,
+  "last_otk_verdict": "CORRECTED",
+  "last_progress_class": "none",
+  "last_event": "ios-runtime-release-20260918-019",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T07:02:55Z"
+  "updated_at": "2026-09-18T07:16:14Z"
 }
