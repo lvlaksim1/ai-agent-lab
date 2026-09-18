@@ -6,7 +6,8 @@ on:
       - ".agent/**"
       - ".github/scripts/enqueue-agent-event.cjs"
       - ".github/scripts/stale-worker-recovery.cjs"
-      - ".github/workflows/agent-stale-recovery.yml"
+      - ".github/scripts/stale-worker-watchdog.cjs"
+      - ".github/workflows/agent-stale-worker-recovery.yml"
       - ".github/workflows/agent-intake.yml"
       - "tools/validate-agent-runtime.mjs"
 
@@ -20,7 +21,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Check stale-worker recovery script syntax
-        run: node --check .github/scripts/stale-worker-recovery.cjs
+      - name: Check stale-worker recovery scripts syntax
+        run: |
+          node --check .github/scripts/stale-worker-recovery.cjs
+          node --check .github/scripts/stale-worker-watchdog.cjs
       - name: Validate agent runtime invariants
         run: node tools/validate-agent-runtime.mjs
