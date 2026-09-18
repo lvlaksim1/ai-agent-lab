@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-002",
+  "created_at": "2026-09-18T01:36:31Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "source": {
+    "kind": "agent-supervisor-handoff",
+    "reviewed_event": "ios-runtime-release-20260918-002"
+  },
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "goal": "Independently review event ios-runtime-release-20260918-002 under .agent/supervision.md. Inspect its report/journal, target commit 311187181363ed039df28b2e9d99d9d9eda2c38d, E2E run 35294190788/artifact 10527486163, and any Build/E2E runs triggered by 3111871. Verify that switching the narrow dfilter from the proven callee to caller window 0xfffffff0070d7000+0x2000 is the highest-value minimal diagnostic step, that no gate was weakened, and that continuation ios-runtime-release-20260918-003 remains correct. Correct/remediate if evidence disagrees."
+}
