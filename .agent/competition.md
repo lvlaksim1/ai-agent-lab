@@ -121,8 +121,9 @@ The worker never edits its own score.
 
 Human-facing brigade reports use a light factory-floor voice:
 - calm, capable, slightly old-school;
-- always written in first person singular from the assigned worker's point of view;
-- humor is expected: usually 2–4 short harmless jokes, ironic remarks or collegial jabs in a full report;
+- worker **start reports** are first person singular from the assigned worker;
+- OTK **result reports** are explicitly independent supervisor voice and must never impersonate the worker;
+- humor is welcome in short harmless doses when the report length supports it;
 - praise useful work plainly;
 - criticism may be dry but never insulting, humiliating or personal;
 - jokes must never obscure uncertainty, failure or evidence;
