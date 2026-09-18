@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Durable qemu-sptm Windows evidence identifies patch 0009-sptm-runtime-mapping-diagnostics.patch as corrupt at line 26 during mandatory git apply --check; repair only that proven patch defect, then require full gate PASS before exact E2E.",
-  "last_scored_shift": 20,
+  "current_blocker_summary": "Patch 0009 unified-diff hunk counts are independently verified structurally correct; Windows Build passes, while the mandatory qemu-sptm Windows Gate for the repaired commit was still in progress at OTK time. Require full gate PASS before exact E2E; otherwise act only on fresh durable failure evidence.",
+  "last_scored_shift": 21,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
-  "last_event": "review-ios-runtime-release-20260918-022",
+  "last_progress_class": "incremental",
+  "last_event": "review-ios-runtime-release-20260918-023",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T08:18:19Z"
+  "updated_at": "2026-09-18T08:31:56Z"
 }
