@@ -55,6 +55,14 @@ Lease and heartbeat answer different questions:
 
 Never infer liveness from an unexpired lease.
 
+## Authoritative runtime time
+
+All live control-plane timestamps use the exact GitHub commit time-anchor protocol in `.agent/liveness.md`.
+
+Runtime workers must not manufacture current UTC values. They first update `.agent/time-pulse.json`, fetch the exact resulting commit and use only its `commit.committer.date`.
+
+This applies to heartbeat observation time, stale deadlines, shift start, lease claim/renewal, and external-wait timing.
+
 If another production clock sees an unexpired lease, it stops. An expired lease may be recovered and recovery must be documented.
 
 The manager uses `.agent/management/` state and may run concurrently with one production worker. Conflicting GitHub writes require SHA/CAS retry. A valid production lease blocks only another production worker, not the manager.
