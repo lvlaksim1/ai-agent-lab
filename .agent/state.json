@@ -7,5 +7,28 @@
   "lease_until": "2026-09-18T21:12:00Z",
   "last_event": "review-ios-runtime-release-20260918-031",
   "last_result": "CORRECTED",
-  "last_completed_at": "2026-09-18T20:26:00Z"
+  "last_completed_at": "2026-09-18T20:26:00Z",
+  "heartbeat": {
+    "schema_version": 1,
+    "active": true,
+    "role": "production",
+    "worker_id": "fedorych",
+    "object_id": "ios-research-runtime",
+    "active_event": "ios-runtime-release-20260918-032",
+    "sequence": 1,
+    "last_seen_at": "2026-09-18T20:28:23Z",
+    "stale_at": "2026-09-18T20:31:23Z",
+    "activity_kind": "external_wait",
+    "activity_detail": "Waiting for APFS Evidence Marker run 35391593053 after launching the robust marker workflow; shift checkpoint says the worker intended to continue.",
+    "external_wait": {
+      "active": true,
+      "kind": "github_actions_run",
+      "repository": "lvlaksim1/iOS-Research-Runtime",
+      "run_id": 35391593053,
+      "worker_observed_status": "in_progress",
+      "since_at": "2026-09-18T20:27:56Z",
+      "last_polled_at": "2026-09-18T20:28:23Z"
+    },
+    "source": "migration_from_last_worker_checkpoint"
+  }
 }
