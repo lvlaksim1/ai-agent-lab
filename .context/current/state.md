@@ -22,3 +22,5 @@ Recent control-plane changes:
 - OTK score/rating are outside narrative;
 - Telegram publication is immutable append-only;
 - standard Project Context Capsule installed.
+
+- all five active Scheduled Tasks now use quiet condition-watch notifications: idle/no-op runs do not notify; substantive outcomes may notify.
