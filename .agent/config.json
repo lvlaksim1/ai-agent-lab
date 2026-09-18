@@ -15,14 +15,19 @@
   "max_production_shifts_per_run": 1,
   "max_parallel_workers": 1,
   "run_policy": "review-then-production",
-  "production_clock_minutes": [
-    2,
-    17,
-    32,
-    47
-  ],
-  "manager_clock_minute": 59,
   "shift_duration_policy": "natural-boundary",
   "lease_renew_before_minutes": 10,
-  "clock_is_shift_limit": false
+  "clock_is_shift_limit": false,
+  "clock_architecture": "generic-dispatcher",
+  "dispatcher_clock_minutes": [
+    0,
+    12,
+    24,
+    36,
+    48
+  ],
+  "physical_clock_count": 5,
+  "nominal_max_dispatch_latency_minutes": 12,
+  "manager_priority_when_idle": true,
+  "manager_concurrent_with_worker": true
 }
