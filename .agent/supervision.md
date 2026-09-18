@@ -18,12 +18,13 @@ Never transfer evidence, continuation or score context from one object to anothe
 
 Inspect as applicable:
 1. original goal/constraints;
-2. shift report and journal;
-3. target diff/commits;
-4. CI results/logs/artifacts;
-5. continuation;
-6. object mission / Definition of Done;
-7. applicable management directive.
+2. immutable worker start report (reporting policy v2) or legacy shift report;
+3. technical journal/checkpoints and heartbeat/time anchors;
+4. target diff/commits;
+5. CI results/logs/artifacts;
+6. continuation;
+7. object mission / Definition of Done;
+8. applicable management directive.
 
 ## Shift-closure audit
 
@@ -41,13 +42,15 @@ Mandatory questions:
 - Can that forced-stop signal be independently verified?
 - Did ordinary GitHub/tool calls continue succeeding after the claimed stop signal, indicating that the worker could still have continued?
 
-If any actionable next step existed at shift end, the handoff was premature:
+For a **voluntary/natural worker closure**, if any actionable next step existed at shift end, the handoff was premature:
 - Efficiency/focus = 0/2;
 - APPROVED is forbidden;
 - use CORRECTED unless a stronger verdict applies;
 - preserve or repair exactly one safe continuation.
 
-A shift shorter than `config.short_shift_review_threshold_seconds` is NOT automatically bad. But if unresolved work or a continuation remains, it triggers a mandatory special closure review. OTK must explicitly justify why no actionable next step remained. Missing justification is a closure defect.
+For `runtime_loss`, an actionable next step is expected and is NOT evidence of premature handoff: the worker did not choose to stop.
+
+A shift shorter than `config.short_shift_review_threshold_seconds` is NOT automatically bad. Short unresolved voluntary closures require special justification. A verified `runtime_loss` is reviewed from its exact last heartbeat and does not need a fictional closure justification.
 
 BLOCKED is valid only when the required evidence/capability, exhausted routes and exact external action are all demonstrated. One unavailable artifact/log call is insufficient.
 
@@ -73,15 +76,19 @@ A 404 on a guessed optional predecessor-review path is not a reason to mutate sc
 ## Review
 
 Determine whether:
+- the immutable start report exists when reporting policy v2 required it;
+- the predecessor assessment was fair and evidence-based;
+- the pre-work plan targeted the real blocker/objective and stated a useful success criterion;
 - first real blocker was attacked;
 - conclusions are evidenced;
 - change is minimal and sound;
 - tests/proof gates were preserved;
 - manager directive was followed;
+- any evidence-driven deviation from the initial plan was justified;
 - proposed next action is highest-value;
 - claimed progress is actually validated;
-- the worker ended only at a valid natural stop boundary after the actionable-next-step test;
-- the worker did not treat discovery of the next actionable blocker as a handoff boundary;
+- for voluntary closure, the worker ended only at a valid natural stop boundary after the actionable-next-step test;
+- the worker did not voluntarily treat discovery of the next actionable blocker as a handoff boundary;
 - any BLOCKED/speculation claim contains adequate exhaustion evidence from the acquisition ladder;
 - any pending external evidence handoff was caused by an objectively evidenced runtime/tooling stop rather than ordinary CI latency or predicted turn expiry;
 - anti-cheat was violated.
@@ -196,50 +203,31 @@ If transfer is draining, STOP after OTK and do not start another production shif
 
 After rating, follow `.agent/reporting.md` exactly.
 
-OTK must build the final report in this order:
+For reporting policy v2, OTK writes an **independent supervision report**, never a reconstructed first-person worker report.
 
-```text
-Проект: <human project name>
-Работник: <brigade display name>
-Смена: №<global brigade shift number>
-Начало смены: <DD.MM.YYYY HH:MM:SS МСК>
-Конец смены: <DD.MM.YYYY HH:MM:SS МСК>
+Required sections:
+- ЧТО ПЛАНИРОВАЛ;
+- ЧТО ФАКТИЧЕСКИ СДЕЛАНО;
+- ЧТО ПОДТВЕРЖДЕНО;
+- ГДЕ ОСТАНОВИЛСЯ;
+- СЛЕДУЮЩЕМУ;
+- four component scores, total verdict and rating.
 
-Доклад:
-
-ОЦЕНКА ПРЕДЫДУЩЕГО:
-<verified first-person paragraph>
-
-МОЙ ПЛАН:
-<verified first-person paragraph>
-
-ЧТО ПОЛУЧИЛОСЬ:
-<verified first-person paragraph>
-
-СЛЕДУЮЩЕМУ:
-<verified first-person paragraph>
-
-Оценка ОТК: <score>/10 — <verdict>
-Рейтинг: <new rating> (<signed delta>)
-```
+The `ЧТО ПЛАНИРОВАЛ` section summarizes the immutable start report. If the required start report is missing, say that explicitly; do not reconstruct or fabricate it.
 
 Time rules:
 - use authoritative production timestamps carried in the review event;
 - if absent in a legacy event, recover from GitHub server timestamps of the production lease claim/end commits;
-- convert to Europe/Moscow (UTC+03:00);
-- never substitute the OTK review time for the worker's shift end.
+- for runtime_loss, the worker end is exactly the last verified heartbeat/action, not recovery time;
+- convert to Europe/Moscow (UTC+03:00).
 
-The narrative is written from the worker's point of view, but every material statement must be independently supported by evidence.
+Publication protocol for v2:
+1. Create immutable `.agent/reports/otk/shift-<shift-number>-<review-event-id>.md`.
+2. Never overwrite an existing OTK result.
+3. Update `.agent/reports/latest-otk.md` and optionally legacy convenience mirror `.agent/reports/latest.md`.
+4. External delivery is tied only to creation of the immutable OTK file.
 
-The four sections are mandatory. Keep real technical detail understandable to a non-specialist owner. Humor/irony is encouraged and should be more visible than before, but it must not blur status, uncertainty or evidence.
-
-OTK score and rating are separate metadata after the report and must never be hidden inside the prose.
-
-Publication protocol:
-1. Create immutable `.agent/reports/published/<review-event-id>.md` with the final report.
-2. Never overwrite an existing published report.
-3. Update `.agent/reports/latest.md` with the same text only as a convenience mirror.
-4. External delivery must be tied to creation of the immutable published file, never to edits of `latest.md`.
+Legacy pre-v2 reviews may keep their historical `.agent/reports/published/` format. Do not rewrite them.
 
 Private evidence remains in reviews/journals.
 
@@ -251,6 +239,7 @@ For `stop.kind=runtime_loss`:
 - do not classify runtime loss itself as voluntary premature handoff;
 - do not apply an automatic Efficiency/focus penalty merely because the platform execution disappeared;
 - score only evidenced engineering progress/quality/focus up to the last verified heartbeat;
+- evaluate the immutable start assessment/plan normally if it exists; if a required v2 start report is missing, that category is 0/1 without fabricating one;
 - repair/preserve exactly one actionable same-object continuation;
 - advance brigade rotation normally so the next worker can take over.
 
