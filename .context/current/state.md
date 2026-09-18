@@ -23,7 +23,7 @@ Recent control-plane changes:
 - Telegram publication is immutable append-only;
 - standard Project Context Capsule installed.
 
-- all five active Scheduled Tasks now use quiet condition-watch notifications: idle/no-op runs do not notify; substantive outcomes may notify.
+- browser notifications for the five shop tasks are disabled; the tasks themselves are exact-schedule.
 
 
 ## Recovery note — 2026-09-18
@@ -31,3 +31,10 @@ Recent control-plane changes:
 A real continuity defect was found: OTK could finish while mandatory CI was still running and leave no continuation, causing the brigade to idle after CI later completed. Event 024 was queued to resume iOS work from the completed E2E failure. OTK/workflow now include a queue-continuity guard and non-scored external-evidence preflight.
 
 The temporary condition-watch scheduler experiment was reverted; all five shop clocks are again exact-schedule because timing reliability is part of production correctness.
+
+
+## Explicit schedule re-anchor — 2026-09-18 14:18 MSK
+
+After reverting timing mode, production still did not fire: event 024 remained pending and the expected :17 tick was not reflected in Scheduled Task `last_run_time`.
+
+All five active tasks were therefore re-anchored with explicit future DTSTART values while preserving :02/:17/:32/:47 production and :59 manager cadence. First expected recovery production tick: 14:32 MSK. This remains OPEN until empirically observed.
