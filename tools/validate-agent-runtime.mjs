@@ -24,6 +24,7 @@ const objectIndex = readJson(".agent/objects/index.json");
 const transferRequest = readJson(".agent/transfer/request.json");
 const managerWake = readJson(".agent/management/wake.json");
 const managerState = readJson(".agent/management/state.json");
+const brigade = readJson(".agent/brigade.json");
 
 check(wake.schema_version === 1, "wake schema_version must be 1");
 check(typeof wake.pending === "boolean", "wake.pending must be boolean");
@@ -47,7 +48,12 @@ check(config.schema_version === 1, "config schema_version must be 1");
 check(config.scheduler_policy === "immutable", "scheduler_policy must remain immutable");
 check(config.work_allowed === false, "Work must remain disabled");
 check(config.scheduler_mutation_allowed === false, "scheduler mutation must remain disabled");
-check(config.max_events_per_run === 1, "runtime must process exactly one event per run");
+check(config.max_events_per_run === 2, "relay runtime allows at most two queue events per run");
+check(config.max_production_shifts_per_run === 1, "relay runtime allows exactly one production shift maximum per run");
+check(config.max_parallel_workers === 1, "parallel production workers must remain disabled");
+check(config.run_policy === "review-then-production", "run_policy must remain review-then-production");
+check(Array.isArray(config.production_clock_minutes) && config.production_clock_minutes.join(",") === "2,17,32,47", "production clocks must remain evenly spaced at :02/:17/:32/:47");
+check(config.manager_clock_minute === 59, "manager clock must remain at :59");
 check(config.queue_scope_policy === "active-object", "queue must remain active-object scoped");
 
 check(assignment.schema_version === 1, "assignment schema_version must be 1");
@@ -109,6 +115,13 @@ for (const field of ["shifts_since_manager_review", "consecutive_no_progress", "
 }
 check(typeof managerState.owner_decision_required === "boolean", "owner_decision_required must be boolean");
 check(typeof managerState.stop_production === "boolean", "stop_production must be boolean");
+
+check(brigade.schema_version === 1, "brigade schema_version must be 1");
+check(Array.isArray(brigade.rotation_order) && brigade.rotation_order.length === 8, "brigade must contain eight workers");
+check(Array.isArray(brigade.members) && brigade.members.length === 8, "brigade members must contain eight workers");
+check(new Set(brigade.rotation_order).size === 8, "brigade rotation ids must be unique");
+check(brigade.members.every((m) => brigade.rotation_order.includes(m.id)), "every brigade member must be in rotation");
+check(brigade.rotation_order.includes(brigade.next_member_id), "next_member_id must be in rotation");
 
 const pendingDir = path.join(root, ".agent/queue/pending");
 let eligibleCount = 0;
