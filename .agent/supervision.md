@@ -133,6 +133,14 @@ COMPLETE: remove stale continuation.
 BLOCKED: remove normal continuation and persist blocker.
 CHEAT: repair compromised state/gates where possible and leave exactly one safe continuation unless externally blocked.
 
+For every continuation that remains after OTK:
+- persist exact `predecessor_review_event_id`;
+- persist exact `predecessor_review_path`;
+- for reporting policy v2, persist exact `predecessor_otk_report_path`;
+- persist `predecessor_shift_number` and `predecessor_worker_id`.
+
+These fields are the authoritative input for the next worker's start-of-shift predecessor assessment.
+
 ## Queue continuity guard
 
 Normal case: a live worker does **not** finish while mandatory external evidence is still running. The worker keeps the shift, waits for terminal evidence and continues.
