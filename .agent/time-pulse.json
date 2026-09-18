@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 12,
-  "purpose": "lease_claim",
+  "sequence": 13,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Resuming decoded-layer APFS evidence work after approved shift 32 runtime-loss review.",
+  "activity_detail": "Inspected APFS evidence path; repaired an accidental transient overwrite of ios-ramdisk-tool main.go before continuing verification.",
   "fence_generation": 11
 }
