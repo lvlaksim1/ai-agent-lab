@@ -62,6 +62,7 @@ check(Number.isInteger(wake.generation) && wake.generation >= 0, "wake.generatio
 
 check(state.schema_version === 1, "state schema_version must be 1");
 check(["idle", "processing"].includes(state.status), "state.status must be idle or processing");
+check(Number.isInteger(state.fence_generation) && state.fence_generation >= 1, "state.fence_generation must be a positive integer");
 check(state.heartbeat && typeof state.heartbeat === "object", "state.heartbeat is required");
 if (state.heartbeat && typeof state.heartbeat === "object") {
   check(state.heartbeat.schema_version === 2, "heartbeat schema_version must be 2");
@@ -158,7 +159,7 @@ check(config.external_evidence_wait_policy === "active-until-terminal-or-objecti
 check(config.wait_for_continuation_policy === "emergency-recovery-only", "wait_for continuation must remain recovery-only");
 check(config.verification_closes_work_package === true, "mandatory verification must close the work package before handoff");
 check(config.premature_pending_ci_efficiency_score === 0, "premature pending-CI handoff efficiency score must remain zero");
-check(config.shift_policy_version === 3, "shift policy version must remain 3");
+check(config.shift_policy_version === 4, "shift policy version must remain 4");
 check(config.work_package_policy === "causal-chain-until-natural-boundary", "work package must follow the causal chain");
 check(config.actionable_next_step_required === true, "actionable-next-step closure must remain required");
 check(config.continuation_policy === "natural-boundary-or-objective-forced-stop-only", "continuation policy must remain objective-forced-stop-only");
@@ -178,7 +179,7 @@ check(Number.isInteger(config.heartbeat_stale_after_seconds) && config.heartbeat
 check(config.heartbeat_activity_required === true, "heartbeat activity visibility must remain required");
 check(config.heartbeat_external_wait_visibility_required === true, "external wait visibility must remain required");
 check(config.lease_is_liveness_signal === false, "lease must never be treated as liveness signal");
-check(config.heartbeat_stale_does_not_bypass_valid_lease === true, "stale heartbeat must not bypass valid lease");
+check(config.heartbeat_stale_does_not_bypass_valid_lease === false, "verified stale heartbeat must be recoverable before lease expiry");
 check(config.runtime_time_authority === "github_commit_committer_date", "runtime time authority must remain GitHub commit committer date");
 check(config.runtime_time_anchor_file === ".agent/time-pulse.json", "runtime time anchor file must remain .agent/time-pulse.json");
 check(config.local_runtime_timestamps_allowed === false, "local/model runtime timestamps must remain forbidden");
@@ -186,7 +187,19 @@ check(config.heartbeat_time_anchor_required === true, "heartbeat time anchor mus
 check(config.heartbeat_action_order_policy === "action-then-pulse-then-state", "heartbeat action ordering must remain action-then-pulse-then-state");
 check(config.lease_time_anchor_required === true, "lease time anchor must remain required");
 check(fs.existsSync(path.join(root, config.runtime_time_anchor_file)), "runtime time anchor file must exist");
+check(config.stale_worker_recovery_enabled === true, "stale-worker recovery must remain enabled");
+check(config.stale_worker_recovery_policy_version === 1, "stale-worker recovery policy must remain v1");
+check(config.recovery_guard_minutes_before_clock === 2, "recovery guard must run two minutes before production clock");
+check(Array.isArray(config.recovery_guard_clock_minutes) && config.recovery_guard_clock_minutes.join(",") === "10,22,34,46,58", "recovery guard clocks must remain at :10/:22/:34/:46/:58");
+check(config.recovery_guard_only_when_heartbeat_stale === true, "recovery guard may act only on stale heartbeat");
+check(config.runtime_loss_stop_kind === "runtime_loss", "runtime-loss stop kind must remain runtime_loss");
+check(config.runtime_loss_is_forced_stop === false, "runtime loss must remain distinct from forced_stop");
+check(config.runtime_loss_auto_efficiency_penalty === false, "runtime loss must not carry automatic efficiency penalty");
+check(config.fence_generation_required === true, "execution fence generation must remain required");
+check(config.zombie_write_fencing_required === true, "zombie write fencing must remain required");
+check(config.normal_live_worker_crosses_clock_boundary === true, "healthy workers must be allowed to cross clock boundaries");
 check(config.queue_scope_policy === "active-object", "queue must remain active-object scoped");
+check(fs.existsSync(path.join(root, ".agent/emergency-recovery.md")), "emergency recovery contract must exist");
 
 check(assignment.schema_version === 1, "assignment schema_version must be 1");
 check(typeof assignment.active_object === "string" && assignment.active_object.length > 0, "assignment.active_object is required");
@@ -282,12 +295,30 @@ if (fs.existsSync(pendingDir)) {
     if (event.type === "supervisor-review") {
       check(event.source && typeof event.source.production_event === "string" && event.source.production_event.length > 0, file + ": supervisor-review requires source.production_event");
       if (event.shift_policy_version !== undefined) {
-        check([2, 3].includes(event.shift_policy_version), file + ": shift_policy_version must be legacy 2 or current 3");
+        check([2, 3, 4].includes(event.shift_policy_version), file + ": shift_policy_version must be legacy 2/3 or current 4");
         const stop = event.stop;
         check(stop && typeof stop === "object", file + ": shift policy requires stop record");
         if (stop && typeof stop === "object") {
-          check(["project_or_phase_complete", "blocked", "forced_stop", "speculation_boundary"].includes(stop.kind), file + ": invalid stop.kind");
-          check(stop.actionable_next_step === false, file + ": shift may close only with actionable_next_step=false");
+          check(["project_or_phase_complete", "blocked", "forced_stop", "speculation_boundary", "runtime_loss"].includes(stop.kind), file + ": invalid stop.kind");
+          if (stop.kind === "runtime_loss") {
+            check(event.shift_policy_version === 4, file + ": runtime_loss requires shift policy v4");
+            check(stop.actionable_next_step === true || stop.actionable_next_step === false, file + ": runtime_loss actionable_next_step must be boolean");
+            check(stop.runtime_loss_evidence && typeof stop.runtime_loss_evidence === "object", file + ": runtime_loss requires runtime_loss_evidence");
+            if (stop.runtime_loss_evidence && typeof stop.runtime_loss_evidence === "object") {
+              const loss = stop.runtime_loss_evidence;
+              check(typeof loss.worker_last_seen_at_utc === "string" && Number.isFinite(Date.parse(loss.worker_last_seen_at_utc)), file + ": runtime_loss worker_last_seen_at_utc is required");
+              check(typeof loss.heartbeat_stale_at_utc === "string" && Number.isFinite(Date.parse(loss.heartbeat_stale_at_utc)), file + ": runtime_loss heartbeat_stale_at_utc is required");
+              check(typeof loss.heartbeat_anchor_commit === "string" && /^[0-9a-f]{40}$/.test(loss.heartbeat_anchor_commit), file + ": runtime_loss heartbeat_anchor_commit is required");
+              check(typeof loss.recovery_observed_at_utc === "string" && Number.isFinite(Date.parse(loss.recovery_observed_at_utc)), file + ": runtime_loss recovery_observed_at_utc is required");
+              check(typeof loss.recovery_anchor_commit === "string" && /^[0-9a-f]{40}$/.test(loss.recovery_anchor_commit), file + ": runtime_loss recovery_anchor_commit is required");
+              check(Number.isInteger(loss.fenced_generation) && loss.fenced_generation >= 1, file + ": runtime_loss fenced_generation is required");
+              check(Date.parse(loss.recovery_observed_at_utc) > Date.parse(loss.heartbeat_stale_at_utc), file + ": runtime_loss recovery must occur after heartbeat stale_at");
+              verifyCommitTimeAnchor(loss.heartbeat_anchor_commit, loss.worker_last_seen_at_utc, null, file + " runtime_loss heartbeat");
+              verifyCommitTimeAnchor(loss.recovery_anchor_commit, loss.recovery_observed_at_utc, config.runtime_time_anchor_file, file + " runtime_loss recovery");
+            }
+          } else {
+            check(stop.actionable_next_step === false, file + ": normal shift may close only with actionable_next_step=false");
+          }
           check(typeof stop.reason === "string" && stop.reason.trim().length > 0, file + ": stop.reason is required");
           if (["blocked", "speculation_boundary"].includes(stop.kind)) {
             check(Array.isArray(stop.exhaustion_evidence) && stop.exhaustion_evidence.length > 0, file + ": blocker/speculation stop requires exhaustion_evidence");
@@ -295,7 +326,7 @@ if (fs.existsSync(pendingDir)) {
           if (stop.kind === "blocked") {
             check(typeof stop.external_action === "string" && stop.external_action.trim().length > 0, file + ": blocked stop requires external_action");
           }
-          if (event.shift_policy_version === 3 && stop.kind === "forced_stop") {
+          if ([3, 4].includes(event.shift_policy_version) && stop.kind === "forced_stop") {
             check(Array.isArray(stop.forced_stop_evidence) && stop.forced_stop_evidence.length > 0, file + ": policy v3 forced_stop requires objective forced_stop_evidence");
             if (Array.isArray(stop.forced_stop_evidence)) {
               for (const [index, item] of stop.forced_stop_evidence.entries()) {
