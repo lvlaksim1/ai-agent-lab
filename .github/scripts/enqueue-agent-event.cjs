@@ -16,14 +16,24 @@ function decodeContent(data) {
   return Buffer.from(data.content, data.encoding || "base64").toString("utf8");
 }
 
-async function readWake(github, owner, repo, branch) {
+async function readJson(github, owner, repo, branch, filePath) {
   const res = await github.rest.repos.getContent({
     owner,
     repo,
-    path: ".agent/wake.json",
+    path: filePath,
     ref: branch,
   });
-  const wake = JSON.parse(decodeContent(res.data));
+  return JSON.parse(decodeContent(res.data));
+}
+
+async function readWake(github, owner, repo, branch) {
+  const wake = await readJson(
+    github,
+    owner,
+    repo,
+    branch,
+    ".agent/wake.json"
+  );
   if (
     wake.schema_version !== 1 ||
     typeof wake.pending !== "boolean" ||
@@ -33,6 +43,64 @@ async function readWake(github, owner, repo, branch) {
     throw new Error("invalid .agent/wake.json");
   }
   return wake;
+}
+
+async function readAssignment(github, owner, repo, branch) {
+  const assignment = await readJson(
+    github,
+    owner,
+    repo,
+    branch,
+    ".agent/assignment.json"
+  );
+  if (
+    assignment.schema_version !== 1 ||
+    typeof assignment.active_object !== "string" ||
+    typeof assignment.transfer_state !== "string"
+  ) {
+    throw new Error("invalid .agent/assignment.json");
+  }
+  return assignment;
+}
+
+async function readObjectIndex(github, owner, repo, branch) {
+  const index = await readJson(
+    github,
+    owner,
+    repo,
+    branch,
+    ".agent/objects/index.json"
+  );
+  if (index.schema_version !== 1 || !Array.isArray(index.objects)) {
+    throw new Error("invalid .agent/objects/index.json");
+  }
+  return index;
+}
+
+function resolveObjectId({ rawObjectId, targetRepository, index, assignment, controlRepository }) {
+  if (rawObjectId) {
+    const requested = cleanId(rawObjectId);
+    if (!index.objects.some((item) => item.id === requested)) {
+      throw new Error("unknown object_id: " + requested);
+    }
+    return requested;
+  }
+
+  const matches = index.objects.filter(
+    (item) => item.repository === targetRepository
+  );
+  if (matches.length === 1) return matches[0].id;
+  if (matches.length > 1) {
+    throw new Error("target repository maps to multiple objects: " + targetRepository);
+  }
+
+  if (targetRepository === controlRepository) {
+    return assignment.active_object;
+  }
+
+  throw new Error(
+    "target repository is not registered as an object: " + targetRepository
+  );
 }
 
 async function eventExists(github, owner, repo, branch, eventPath) {
@@ -54,7 +122,7 @@ async function buildAtomicCommit({ github, owner, repo, branch, event }) {
   const ref = await github.rest.git.getRef({
     owner,
     repo,
-    ref: `heads/${branch}`,
+    ref: "heads/" + branch,
   });
   const parentSha = ref.data.object.sha;
 
@@ -65,17 +133,23 @@ async function buildAtomicCommit({ github, owner, repo, branch, event }) {
   });
 
   const wake = await readWake(github, owner, repo, branch);
-  const eventPath = `.agent/queue/pending/${event.id}.json`;
+  const assignment = await readAssignment(github, owner, repo, branch);
+  const eventPath = ".agent/queue/pending/" + event.id + ".json";
 
   if (await eventExists(github, owner, repo, branch, eventPath)) {
     return { duplicate: true, eventPath, parentSha };
   }
 
+  const eligibleNow =
+    event.object_id === assignment.active_object &&
+    (event.type === "supervisor-review" ||
+      assignment.transfer_state === "working");
+
   const nextWake = {
     schema_version: 1,
-    pending: true,
+    pending: wake.pending || eligibleNow,
     generation: wake.generation + 1,
-    last_event: event.id,
+    last_event: eligibleNow ? event.id : wake.last_event,
     updated_at: event.created_at,
   };
 
@@ -116,7 +190,7 @@ async function buildAtomicCommit({ github, owner, repo, branch, event }) {
   const commit = await github.rest.git.createCommit({
     owner,
     repo,
-    message: `agent: enqueue ${event.id}`,
+    message: "agent: enqueue " + event.id,
     tree: tree.data.sha,
     parents: [parentSha],
   });
@@ -124,7 +198,7 @@ async function buildAtomicCommit({ github, owner, repo, branch, event }) {
   await github.rest.git.updateRef({
     owner,
     repo,
-    ref: `heads/${branch}`,
+    ref: "heads/" + branch,
     sha: commit.data.sha,
     force: false,
   });
@@ -133,6 +207,7 @@ async function buildAtomicCommit({ github, owner, repo, branch, event }) {
     duplicate: false,
     eventPath,
     generation: nextWake.generation,
+    eligibleNow,
     commitSha: commit.data.sha,
   };
 }
@@ -144,21 +219,38 @@ module.exports = async function enqueueAgentEvent({
   branch,
   rawEvent,
 }) {
-  const { owner, repo } = context.repo;
+  const owner = context.repo.owner;
+  const repo = context.repo.repo;
   const now = new Date().toISOString();
+
+  const assignment = await readAssignment(github, owner, repo, branch);
+  const index = await readObjectIndex(github, owner, repo, branch);
+  const targetRepository =
+    (rawEvent.target && rawEvent.target.repository) ||
+    owner + "/" + repo;
+
+  const objectId = resolveObjectId({
+    rawObjectId: rawEvent.object_id,
+    targetRepository,
+    index,
+    assignment,
+    controlRepository: owner + "/" + repo,
+  });
 
   const event = {
     schema_version: 1,
     id: cleanId(rawEvent.id),
+    object_id: objectId,
     created_at: rawEvent.created_at || now,
     type: String(rawEvent.type || "task"),
     priority: Number.isInteger(rawEvent.priority) ? rawEvent.priority : 50,
     status: "pending",
     source: rawEvent.source || { kind: context.eventName },
     target: {
-      repository:
-        rawEvent.target?.repository || `${owner}/${repo}`,
-      ref: rawEvent.target?.ref || branch,
+      repository: targetRepository,
+      ref:
+        (rawEvent.target && rawEvent.target.ref) ||
+        branch,
     },
     goal: String(rawEvent.goal || "").trim(),
     files: Array.isArray(rawEvent.files) ? rawEvent.files : [],
@@ -184,10 +276,14 @@ module.exports = async function enqueueAgentEvent({
       });
 
       if (result.duplicate) {
-        core.notice(`Event ${event.id} already exists; intake is idempotent.`);
+        core.notice("Event " + event.id + " already exists; intake is idempotent.");
       } else {
         core.notice(
-          `Queued ${event.id}; wake generation=${result.generation}; commit=${result.commitSha}`
+          "Queued " + event.id +
+          " for object " + event.object_id +
+          "; eligibleNow=" + result.eligibleNow +
+          "; wake generation=" + result.generation +
+          "; commit=" + result.commitSha
         );
       }
       return result;
@@ -195,7 +291,7 @@ module.exports = async function enqueueAgentEvent({
       lastError = error;
       if (![409, 422].includes(error.status) || attempt === 3) throw error;
       core.warning(
-        `Branch changed during atomic enqueue; retrying (${attempt}/3).`
+        "Branch changed during atomic enqueue; retrying (" + attempt + "/3)."
       );
     }
   }
