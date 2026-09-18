@@ -215,3 +215,21 @@ Implemented:
 - current Федорыч state was migrated from his last real checkpoint at 20:28:23Z, with stale_at 20:31:23Z, so the programmer change does not falsely resurrect him.
 
 This is observability only: STALE heartbeat by itself does not bypass an otherwise valid production lease; safe lease recovery remains a separate control-plane decision.
+
+
+## Authoritative runtime time v2 — 2026-09-19
+
+Owner required all runtime times to be exact and unambiguous after shift 30 showed a 73-second mismatch between worker-generated heartbeat time and GitHub commit time.
+
+New invariant:
+- live runtime timestamps must never come from model/local/system/scheduler time;
+- the only authority is GitHub `commit.committer.date` of an explicit `.agent/time-pulse.json` commit;
+- runtime uses pulse -> fetch exact commit -> project timestamp into state;
+- heartbeat last_seen_at/stale_at, shift started_at, lease claim/renewal and external-wait timing all use this source;
+- validator fetches full git history and verifies heartbeat/shift/lease anchors against exact commit timestamps;
+- heartbeat update ordering is action/checkpoint -> pulse -> state, preventing last_seen_at from preceding the action it proves.
+
+Historical shift 30 was corrected without resurrecting Федорыч:
+- exact shift claim anchor: 960067fe5243588fea275262b6eeec53ecca0ce8 at 20:26:30Z;
+- exact recovery lease anchor: 918275b33960c5d1794fd4c8f1f3029afbe8783b at 21:24:00Z, giving lease_until 22:09:00Z;
+- exact last worker action anchor: c54d6f4dd4c1afe5a8fcbaaeb69935e0cd6ca7de at 21:26:03Z, giving stale_at 21:29:03Z.
