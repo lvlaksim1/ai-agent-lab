@@ -64,3 +64,19 @@ Scheduler correction:
 - switching the five shop clocks to `condition_watch` made their execution timing approximate and unsuitable as the factory clock;
 - all five tasks were returned to `exact_schedule`;
 - production reliability takes precedence over suppressing idle UI notifications. Notification suppression must be solved separately from timing mode.
+
+
+### Exact-schedule re-anchor incident
+
+Owner again reported no worker reports. Live inspection at 14:18 MSK showed event 024 still pending, production state idle, wake=true, and no shift after #21. The active Scheduled Tasks were enabled, but their `last_run_time` values had not advanced through the expected 14:17 production tick after the earlier timing-mode change.
+
+The prior repair had changed `timing_mode` back to `exact_schedule` while leaving old DTSTART anchors in place. That was not sufficient to restore observed firing.
+
+Corrective action:
+- explicitly re-anchored all five recurring schedules with future Moscow DTSTART values while preserving the intended minutes;
+- production: 14:32, 14:47, 15:02, 15:17 then hourly;
+- manager: 14:59 then hourly;
+- kept exact-schedule mode and kept browser notifications disabled;
+- event 024 remains pending with wake=true, so the 14:32 tick should be the first recovery production start.
+
+Do not claim the scheduler repair is proven until a post-reanchor `last_run_time` and corresponding GitHub production state change are observed.
