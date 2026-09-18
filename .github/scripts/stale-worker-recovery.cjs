@@ -320,6 +320,7 @@ async function main() {
     activity_detail: hb.activity_detail,
     shift_number: Number.isInteger(shiftNumber) ? shiftNumber : null,
     reporting_policy_version: currentState.reporting_policy_version ?? null,
+    score_policy_version: currentState.score_policy_version ?? null,
     start_report_path: currentState.shift_start_report_path ?? null,
     start_report_commit: currentState.shift_start_report_commit ?? null
   };
@@ -339,6 +340,7 @@ async function main() {
     lease_anchor_commit: null,
     shift_number: null,
     reporting_policy_version: null,
+    score_policy_version: null,
     shift_start_report_path: null,
     shift_start_report_commit: null,
     fence_generation: nextFence,
@@ -392,6 +394,7 @@ async function main() {
       worker_id: currentState.worker_id,
       shift_policy_version: 4,
       reporting_policy_version: currentState.reporting_policy_version === 2 ? 2 : 1,
+      score_policy_version: currentState.score_policy_version === 2 ? 2 : 1,
       shift_number: shiftNumber,
       shift_started_at_utc: currentState.started_at,
       shift_completed_at_utc: hb.last_seen_at,
