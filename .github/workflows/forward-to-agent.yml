@@ -1,0 +1,124 @@
+name: Forward Event to AI Agent
+
+on:
+  workflow_call:
+    inputs:
+      event_id:
+        description: Stable idempotency key. Leave empty to derive it from the caller run.
+        required: false
+        type: string
+        default: ""
+      event_type:
+        description: Logical event type for the agent queue.
+        required: true
+        type: string
+      goal:
+        description: Task goal for the ordinary-Chat worker.
+        required: true
+        type: string
+      priority:
+        description: Queue priority from 0 to 100.
+        required: false
+        type: number
+        default: 50
+      target_repository:
+        description: Repository the worker should operate on. Defaults to the caller repository.
+        required: false
+        type: string
+        default: ""
+      target_ref:
+        description: Branch/ref the worker should operate on. Defaults to the caller ref name.
+        required: false
+        type: string
+        default: ""
+      files_json:
+        description: JSON array of relevant file paths.
+        required: false
+        type: string
+        default: "[]"
+      constraints_json:
+        description: JSON array of constraints.
+        required: false
+        type: string
+        default: "[]"
+    secrets:
+      AGENT_TOKEN:
+        description: GitHub token allowed to create repository_dispatch in lvlaksim1/ai-agent-lab.
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  forward:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Normalize and forward
+        shell: bash
+        env:
+          AGENT_TOKEN: ${{ secrets.AGENT_TOKEN }}
+          INPUT_EVENT_ID: ${{ inputs.event_id }}
+          INPUT_EVENT_TYPE: ${{ inputs.event_type }}
+          INPUT_GOAL: ${{ inputs.goal }}
+          INPUT_PRIORITY: ${{ inputs.priority }}
+          INPUT_TARGET_REPOSITORY: ${{ inputs.target_repository }}
+          INPUT_TARGET_REF: ${{ inputs.target_ref }}
+          INPUT_FILES_JSON: ${{ inputs.files_json }}
+          INPUT_CONSTRAINTS_JSON: ${{ inputs.constraints_json }}
+          SOURCE_REPOSITORY: ${{ github.repository }}
+          SOURCE_EVENT: ${{ github.event_name }}
+          SOURCE_ACTION: ${{ github.event.action }}
+          SOURCE_REF: ${{ github.ref }}
+          SOURCE_REF_NAME: ${{ github.ref_name }}
+          SOURCE_SHA: ${{ github.sha }}
+          SOURCE_RUN_ID: ${{ github.run_id }}
+          SOURCE_RUN_ATTEMPT: ${{ github.run_attempt }}
+          SOURCE_ACTOR: ${{ github.actor }}
+          SOURCE_SERVER_URL: ${{ github.server_url }}
+        run: |
+          set -euo pipefail
+
+          jq -e 'type == "array"' <<<"$INPUT_FILES_JSON" >/dev/null
+          jq -e 'type == "array"' <<<"$INPUT_CONSTRAINTS_JSON" >/dev/null
+
+          event_id="$INPUT_EVENT_ID"
+          if [[ -z "$event_id" ]]; then
+            safe_repo="${SOURCE_REPOSITORY//\//-}"
+            event_id="${safe_repo}-run-${SOURCE_RUN_ID}"
+          fi
+
+          target_repository="$INPUT_TARGET_REPOSITORY"
+          if [[ -z "$target_repository" ]]; then
+            target_repository="$SOURCE_REPOSITORY"
+          fi
+
+          target_ref="$INPUT_TARGET_REF"
+          if [[ -z "$target_ref" ]]; then
+            target_ref="$SOURCE_REF_NAME"
+          fi
+
+          run_url="${SOURCE_SERVER_URL}/${SOURCE_REPOSITORY}/actions/runs/${SOURCE_RUN_ID}"
+
+          client_payload="$(jq -n             --arg id "$event_id"             --arg type "$INPUT_EVENT_TYPE"             --arg goal "$INPUT_GOAL"             --argjson priority "$INPUT_PRIORITY"             --arg source_kind "github_actions_forwarder"             --arg source_repository "$SOURCE_REPOSITORY"             --arg source_event "$SOURCE_EVENT"             --arg source_action "$SOURCE_ACTION"             --arg source_ref "$SOURCE_REF"             --arg source_sha "$SOURCE_SHA"             --arg source_run_id "$SOURCE_RUN_ID"             --arg source_run_url "$run_url"             --arg source_actor "$SOURCE_ACTOR"             --arg target_repository "$target_repository"             --arg target_ref "$target_ref"             --argjson files "$INPUT_FILES_JSON"             --argjson constraints "$INPUT_CONSTRAINTS_JSON"             '{
+              id: $id,
+              type: $type,
+              goal: $goal,
+              priority: $priority,
+              source_kind: $source_kind,
+              source_repository: $source_repository,
+              source_event: $source_event,
+              source_action: $source_action,
+              source_ref: $source_ref,
+              source_sha: $source_sha,
+              source_run_id: $source_run_id,
+              source_run_url: $source_run_url,
+              source_actor: $source_actor,
+              target_repository: $target_repository,
+              target_ref: $target_ref,
+              files: $files,
+              constraints: $constraints
+            }')"
+
+          jq -n             --argjson client_payload "$client_payload"             '{event_type:"agent-task", client_payload:$client_payload}'             > dispatch.json
+
+          curl --fail-with-body --silent --show-error             -X POST             -H "Accept: application/vnd.github+json"             -H "Authorization: Bearer $AGENT_TOKEN"             -H "X-GitHub-Api-Version: 2022-11-28"             "https://api.github.com/repos/lvlaksim1/ai-agent-lab/dispatches"             --data-binary @dispatch.json
