@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 
 const root = process.cwd();
 
@@ -14,6 +15,35 @@ function fail(message) {
 
 function check(condition, message) {
   if (!condition) fail(message);
+}
+
+function git(args) {
+  return execFileSync("git", args, { cwd: root, encoding: "utf8" }).trim();
+}
+
+function verifyCommitTimeAnchor(commitSha, expectedTimestamp, expectedPath, label) {
+  check(typeof commitSha === "string" && /^[0-9a-f]{40}$/.test(commitSha), label + " commit SHA must be 40 lowercase hex");
+  if (!(typeof commitSha === "string" && /^[0-9a-f]{40}$/.test(commitSha))) return;
+  let commitTime;
+  try {
+    commitTime = git(["show", "-s", "--format=%cI", commitSha]);
+  } catch {
+    fail(label + " commit must exist in repository history");
+    return;
+  }
+  const actualMs = Date.parse(commitTime);
+  const expectedMs = Date.parse(expectedTimestamp);
+  check(Number.isFinite(actualMs) && Number.isFinite(expectedMs) && actualMs === expectedMs, label + " timestamp must exactly equal GitHub commit committer time");
+  if (expectedPath) {
+    let changed = [];
+    try {
+      changed = git(["diff-tree", "--root", "--no-commit-id", "--name-only", "-r", commitSha]).split("\n").filter(Boolean);
+    } catch {
+      fail(label + " changed-path verification failed");
+      return;
+    }
+    check(changed.includes(expectedPath), label + " anchor commit must modify " + expectedPath);
+  }
 }
 
 const wake = readJson(".agent/wake.json");
@@ -34,7 +64,7 @@ check(state.schema_version === 1, "state schema_version must be 1");
 check(["idle", "processing"].includes(state.status), "state.status must be idle or processing");
 check(state.heartbeat && typeof state.heartbeat === "object", "state.heartbeat is required");
 if (state.heartbeat && typeof state.heartbeat === "object") {
-  check(state.heartbeat.schema_version === 1, "heartbeat schema_version must be 1");
+  check(state.heartbeat.schema_version === 2, "heartbeat schema_version must be 2");
   check(typeof state.heartbeat.active === "boolean", "heartbeat.active must be boolean");
   check(Number.isInteger(state.heartbeat.sequence) && state.heartbeat.sequence >= 0, "heartbeat.sequence must be non-negative integer");
   check(typeof state.heartbeat.last_seen_at === "string" && Number.isFinite(Date.parse(state.heartbeat.last_seen_at)), "heartbeat.last_seen_at must be valid timestamp");
@@ -58,6 +88,22 @@ if (state.status === "idle") {
   check(typeof state.worker_id === "string" && state.worker_id.length > 0, "processing state requires worker_id");
   check(typeof state.started_at === "string", "processing state requires started_at");
   check(typeof state.lease_until === "string", "processing state requires lease_until");
+  check(state.time_authority === "github_commit_committer_date", "processing state time_authority must be github_commit_committer_date");
+  verifyCommitTimeAnchor(state.started_at_anchor_commit, state.started_at, ".agent/state.json", "shift start");
+  check(typeof state.lease_anchor_commit === "string" && /^[0-9a-f]{40}$/.test(state.lease_anchor_commit), "processing state lease_anchor_commit is required");
+  if (typeof state.lease_anchor_commit === "string" && /^[0-9a-f]{40}$/.test(state.lease_anchor_commit)) {
+    let leaseAnchorTime;
+    try {
+      leaseAnchorTime = git(["show", "-s", "--format=%cI", state.lease_anchor_commit]);
+      const leaseMs = Date.parse(state.lease_until);
+      const anchorMs = Date.parse(leaseAnchorTime);
+      check(Number.isFinite(leaseMs) && Number.isFinite(anchorMs) && leaseMs - anchorMs === config.lease_minutes * 60 * 1000, "lease_until must equal lease anchor commit time + lease_minutes");
+      const changed = git(["diff-tree", "--root", "--no-commit-id", "--name-only", "-r", state.lease_anchor_commit]).split("\n").filter(Boolean);
+      check(changed.includes(".agent/state.json") || changed.includes(config.runtime_time_anchor_file), "lease anchor commit must be a runtime ownership/time-anchor commit");
+    } catch {
+      fail("lease anchor commit must exist in repository history");
+    }
+  }
   if (state.heartbeat && typeof state.heartbeat === "object") {
     check(state.heartbeat.active === true, "processing heartbeat must be active");
     check(["production", "otk"].includes(state.heartbeat.role), "processing heartbeat.role must be production or otk");
@@ -67,6 +113,12 @@ if (state.status === "idle") {
     check(typeof state.heartbeat.stale_at === "string" && Number.isFinite(Date.parse(state.heartbeat.stale_at)), "processing heartbeat.stale_at must be valid timestamp");
     check(["working", "external_wait", "persisting", "closing", "otk_review"].includes(state.heartbeat.activity_kind), "invalid heartbeat.activity_kind");
     check(typeof state.heartbeat.activity_detail === "string" && state.heartbeat.activity_detail.trim().length > 0, "heartbeat.activity_detail is required");
+    check(state.heartbeat.time_source === "github_commit_committer_date", "heartbeat time_source must be github_commit_committer_date");
+    check(typeof state.heartbeat.time_anchor_path === "string" && state.heartbeat.time_anchor_path.length > 0, "heartbeat.time_anchor_path is required");
+    verifyCommitTimeAnchor(state.heartbeat.time_anchor_commit, state.heartbeat.last_seen_at, state.heartbeat.time_anchor_path, "heartbeat");
+    const hbSeenMs = Date.parse(state.heartbeat.last_seen_at);
+    const hbStaleMs = Date.parse(state.heartbeat.stale_at);
+    check(Number.isFinite(hbSeenMs) && Number.isFinite(hbStaleMs) && hbStaleMs - hbSeenMs === config.heartbeat_stale_after_seconds * 1000, "heartbeat.stale_at must equal last_seen_at + configured threshold");
     check(state.heartbeat.external_wait === null || (state.heartbeat.external_wait && typeof state.heartbeat.external_wait === "object"), "heartbeat.external_wait must be object or null");
     if (state.heartbeat.activity_kind === "external_wait") {
       check(state.heartbeat.external_wait && state.heartbeat.external_wait.active === true, "external_wait activity requires active external_wait");
@@ -77,6 +129,10 @@ if (state.status === "idle") {
       check(typeof state.heartbeat.external_wait.worker_observed_status === "string" && state.heartbeat.external_wait.worker_observed_status.length > 0, "external_wait.worker_observed_status is required");
       check(typeof state.heartbeat.external_wait.since_at === "string" && Number.isFinite(Date.parse(state.heartbeat.external_wait.since_at)), "external_wait.since_at must be timestamp");
       check(typeof state.heartbeat.external_wait.last_polled_at === "string" && Number.isFinite(Date.parse(state.heartbeat.external_wait.last_polled_at)), "external_wait.last_polled_at must be timestamp");
+      check(typeof state.heartbeat.external_wait.since_anchor_commit === "string" && /^[0-9a-f]{40}$/.test(state.heartbeat.external_wait.since_anchor_commit), "external_wait.since_anchor_commit is required");
+      check(typeof state.heartbeat.external_wait.last_polled_anchor_commit === "string" && /^[0-9a-f]{40}$/.test(state.heartbeat.external_wait.last_polled_anchor_commit), "external_wait.last_polled_anchor_commit is required");
+      verifyCommitTimeAnchor(state.heartbeat.external_wait.since_anchor_commit, state.heartbeat.external_wait.since_at, config.runtime_time_anchor_file, "external_wait since");
+      verifyCommitTimeAnchor(state.heartbeat.external_wait.last_polled_anchor_commit, state.heartbeat.external_wait.last_polled_at, config.runtime_time_anchor_file, "external_wait last poll");
     }
   }
 }
@@ -115,7 +171,7 @@ check(config.evidence_acquisition_ladder_required === true, "evidence acquisitio
 check(Number.isInteger(config.short_shift_review_threshold_seconds) && config.short_shift_review_threshold_seconds >= 60, "short shift review threshold must be a sane positive integer");
 check(config.short_shift_with_unresolved_work_requires_special_review === true, "short unresolved shifts must require special review");
 check(config.premature_handoff_efficiency_score === 0, "premature handoff efficiency score must remain zero");
-check(config.heartbeat_policy_version === 1, "heartbeat policy version must remain 1");
+check(config.heartbeat_policy_version === 2, "heartbeat policy version must remain 2");
 check(config.heartbeat_required_while_processing === true, "processing heartbeat must remain mandatory");
 check(Number.isInteger(config.heartbeat_interval_seconds) && config.heartbeat_interval_seconds >= 30, "heartbeat interval must be at least 30 seconds");
 check(Number.isInteger(config.heartbeat_stale_after_seconds) && config.heartbeat_stale_after_seconds >= config.heartbeat_interval_seconds * 2, "heartbeat stale threshold must provide at least 2x heartbeat interval");
@@ -123,6 +179,13 @@ check(config.heartbeat_activity_required === true, "heartbeat activity visibilit
 check(config.heartbeat_external_wait_visibility_required === true, "external wait visibility must remain required");
 check(config.lease_is_liveness_signal === false, "lease must never be treated as liveness signal");
 check(config.heartbeat_stale_does_not_bypass_valid_lease === true, "stale heartbeat must not bypass valid lease");
+check(config.runtime_time_authority === "github_commit_committer_date", "runtime time authority must remain GitHub commit committer date");
+check(config.runtime_time_anchor_file === ".agent/time-pulse.json", "runtime time anchor file must remain .agent/time-pulse.json");
+check(config.local_runtime_timestamps_allowed === false, "local/model runtime timestamps must remain forbidden");
+check(config.heartbeat_time_anchor_required === true, "heartbeat time anchor must remain required");
+check(config.heartbeat_action_order_policy === "action-then-pulse-then-state", "heartbeat action ordering must remain action-then-pulse-then-state");
+check(config.lease_time_anchor_required === true, "lease time anchor must remain required");
+check(fs.existsSync(path.join(root, config.runtime_time_anchor_file)), "runtime time anchor file must exist");
 check(config.queue_scope_policy === "active-object", "queue must remain active-object scoped");
 
 check(assignment.schema_version === 1, "assignment schema_version must be 1");
