@@ -1,21 +1,19 @@
-# Начальник участка — решение владельца
+# Начальник участка — обзор DEC-013
 
 **Объект:** `ios-research-runtime`  
-**Решение:** `AUTHORIZE_APFS_EVIDENCE_AND_RESUME`  
+**Решение:** `KEEP_COURSE`  
 **Здоровье:** `YELLOW`
 
 ## Обстановка
 
-Владелец разрешил добавить диагностический APFS evidence channel и возобновить производство.
+Производственная станция сейчас свободна после recovery смены 32: runtime был потерян, сохранённый checkpoint указывает, что работа дошла до границы реализации read-only decoded-layer APFS evidence. Независимая приёмка этой смены ещё обязательна.
 
-Предыдущая причинная граница сохраняется: exact Windows E2E доходит до BSD root `md0`, rebuilt recovery APFS падает с `mountroot error 79`. Теперь у бригады есть разрешение получить недостающее source-vs-rebuilt structural evidence непосредственно через Windows E2E.
+Это не меняет технический курс. Последняя независимо принятая цепочка по-прежнему требует сравнить source и rebuilt NXSB/checkpoint metadata на декодированном partition-relative уровне и только после доказательства причинно несовместимого поля менять APFS writer.
 
 ## Управленческое решение
 
-Снята блокировка `owner_decision_required`. Создана директива `DIR-011` и производственное продолжение `ios-runtime-release-20260918-031`.
+`DIR-011` оставлена без изменений. После ОТК производство должно продолжить с сохранённой границы decoded-layer APFS evidence. Гадательные изменения writer semantics и ослабление proof gates запрещены.
 
-Следующая смена обязана сначала добавить компактный diagnostic structural dump NX/APFS/checkpoint metadata, затем получить и потребить exact E2E evidence. APFS writer разрешено менять только после доказательства конкретного причинно несовместимого поля.
+Решение владельца не требуется. Дополнительный STOP не вводится; действует обычный порядок recovery -> независимый ОТК -> продолжение.
 
-Proof gates и Definition of Done не ослабляются. Производство возобновлено штатным GitHub wake; Scheduled Tasks не изменялись.
-
-**Decision:** `DEC-011`.
+**Decision:** `DEC-013`.
