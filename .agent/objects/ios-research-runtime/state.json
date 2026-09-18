@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 12 extended the exact producer trace one page earlier at target b1295ce; the first producer/initialization of boot-state slot 0x...090b80 is still unproven. Next gate is independent OTK plus exact b1295ce E2E evidence before any offset-vs-absolute-PA fix.",
-  "last_scored_shift": 11,
+  "current_blocker_summary": "Shift 12 exact b1295ce E2E rules out the newly added upstream producer page: 0x12ed0000 still first appears only after the boot-state slot load near 0x...0b3978. The slot producer remains earlier or outside the executed traced range; address semantics remain unproven.",
+  "last_scored_shift": 12,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
-  "last_event": "ios-runtime-release-20260918-014",
+  "last_event": "review-ios-runtime-release-20260918-014",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T05:58:12Z"
+  "updated_at": "2026-09-18T06:08:00Z"
 }
