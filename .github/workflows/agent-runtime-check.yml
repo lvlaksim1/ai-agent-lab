@@ -1,0 +1,20 @@
+name: Agent Runtime Check
+
+on:
+  push:
+    paths:
+      - ".agent/**"
+      - ".github/scripts/enqueue-agent-event.cjs"
+      - ".github/workflows/agent-intake.yml"
+      - "tools/validate-agent-runtime.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate agent runtime invariants
+        run: node tools/validate-agent-runtime.mjs
