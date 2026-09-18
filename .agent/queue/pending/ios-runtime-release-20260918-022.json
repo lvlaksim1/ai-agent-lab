@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-022",
+  "created_at": "2026-09-18T07:30:03Z",
+  "type": "production",
+  "priority": 90,
+  "status": "pending",
+  "source": {"kind":"worker-continuation","production_event":"ios-runtime-release-20260918-021"},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
+  "goal": "Make the qemu-sptm Windows Gate expose durable exact patch-application failure evidence without weakening git apply --check: capture the failing patch name and stderr in a CI-visible summary/log that survives failure. Use that evidence to repair only the proven patch applicability defect, then require full qemu-sptm Windows Gate PASS before exact E2E. Do not add TCG-store instrumentation or change address semantics before SPTM_MAP.",
+  "object_id": "ios-research-runtime"
+}
