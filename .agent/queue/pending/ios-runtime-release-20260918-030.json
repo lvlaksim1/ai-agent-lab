@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-030",
+  "created_at": "2026-09-18T18:24:48Z",
+  "type": "task",
+  "priority": 90,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {"kind":"production-continuation","parent_event":"ios-runtime-release-20260918-029"},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main","commit":"7e6ecb9a15b1a0252ad02b0f82d2e71b1fb1737f"},
+  "goal": "Inspect exact Windows E2E failure evidence after the Win64 page-rounding fix. Correlate rebuilt recovery APFS/NX superblock and checkpoint metadata with mountroot error 79, identify the first causally incompatible field, and change code only after that field is proven.",
+  "constraints": ["Do not weaken root-shell proof gates or timeouts.","Do not revisit the proven BIT_ULL Win64 repair without contradictory evidence.","Do not edit APFS synthesis speculatively."]
+}
