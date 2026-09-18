@@ -72,3 +72,12 @@ Do not cap production shifts at 10, 12 or 15 minutes.
 The four production clock slots are wake/start opportunities only. Once a worker owns the production lease, he continues until a natural stop condition. The lease is renewable and is not a shift timer. Another clock must not start a second worker while the lease remains active.
 
 A worker should wait for and consume near-term CI/test evidence in the same live Chat instead of handing off immediately after one push.
+
+
+## Variant C-5 scheduler experiment
+
+The five existing tasks are now generic exact-schedule clocks at :00/:12/:24/:36/:48 MSK.
+
+They dispatch MANAGER / PRODUCTION RELAY / IDLE from GitHub state. A running worker remains in charge across later ticks; manager may run concurrently; a second worker may not.
+
+Rollback to Variant A is explicitly documented in .agent/scheduler-rollback-variant-a.md and does not require reverting queue, ratings or target-repository history.
