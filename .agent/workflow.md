@@ -14,6 +14,7 @@ Hard concurrency invariant:
 
 Read `.agent/production-topology.md` for the topology.
 Read `.agent/evidence-acquisition.md` before production work; it is authoritative for actionable-next-step and BLOCKED closure.
+Read `.agent/liveness.md`; its heartbeat contract is mandatory for every processing production/OTK lease.
 
 ## 1. Resolve eligible work
 
@@ -57,6 +58,7 @@ No other two-event combination is allowed.
 2. If `stop_production=true`, leave the event queued and stop with `PRODUCTION_STOPPED_BY_MANAGER`.
 3. If an active directive applies to this object and NEXT_SHIFT, read and follow it.
 4. Claim the global lease with SHA/CAS. Capture the returned GitHub commit SHA, fetch that commit, and record its GitHub server timestamp as `shift_started_at_utc`. Never invent start time from the scheduler minute.
+4a. Immediately initialize/refresh `.agent/state.json -> heartbeat` per `.agent/liveness.md`: identify worker, object, event, current activity and exact stale deadline. From this point onward refresh heartbeat at every mandatory refresh point and at least once per configured interval while the Chat remains alive.
 5. Read active object mission/state/handoff as needed.
 6. Read `.agent/brigade.json` and `.agent/competition.md`.
 7. Materialize exactly `next_member_id`. Proposed shift number is `shift_counter + 1`.
@@ -66,7 +68,7 @@ No other two-event combination is allowed.
    - keep working through successive justified steps while the same worker still has an actionable next step;
    - if consuming CI/test evidence exposes the next directly related blocker, continue into that blocker in the SAME shift when the current tools can act on it;
    - merely naming/localizing the next blocker does not close the work package;
-   - after starting CI/build/test, enter **active evidence wait**: keep ownership of the shift, poll/inspect the exact run until terminal while the current Chat and tools remain available, consume the result, and continue the same reasoning/action loop;
+   - after starting CI/build/test, enter **active evidence wait**: keep ownership of the shift, write the exact wait target/status into heartbeat, poll/inspect the exact run until terminal while the current Chat and tools remain available, refresh heartbeat after every poll, consume the result, clear/update external_wait, and continue the same reasoning/action loop;
    - before declaring evidence unavailable or BLOCKED, execute the applicable evidence-acquisition ladder in `.agent/evidence-acquisition.md`;
    - pending CI/build/test is work-in-progress, not a handoff boundary, even when it takes many minutes;
    - do not hand work to the next shift merely because one commit/push/test was produced, one requested result was consumed, or a new blocker was discovered;
@@ -120,6 +122,7 @@ If an objective forced-stop signal is actually observed and persistence remains 
 ### 2B. If the first event is supervisor-review
 
 1. Claim the global lease as OTK.
+1a. Initialize `.agent/state.json -> heartbeat` with role=`otk`, worker_id=`otk`, reviewed event/object, activity_kind=`otk_review`, and refresh it throughout review according to `.agent/liveness.md`.
 2. Follow `.agent/supervision.md` and `.agent/competition.md`.
 3. Independently inspect and score the PREVIOUS production shift.
 4. Fully persist verdict, rating, brigade rotation, object/management signals, human report, done record and lease release.
@@ -147,7 +150,7 @@ The production lease is renewable.
 
 - `config.lease_minutes` is the stale-lock horizon, not maximum shift duration.
 - While the same live worker is still making useful progress, renew `lease_until` with SHA/CAS before the remaining lease window falls below `config.lease_renew_before_minutes`.
-- Keep the same `active_event`, `worker_id` and `started_at`; only extend `lease_until` and record a heartbeat timestamp if present.
+- Keep the same `active_event`, `worker_id` and `started_at`; only extend `lease_until` when renewal is due. Heartbeat refresh is independent and must not silently renew the lease.
 - Another production clock that sees the renewed unexpired lease exits immediately.
 - Manager concurrency remains allowed.
 
@@ -168,6 +171,17 @@ While NORMAL transfer is draining:
 - no new production phase starts;
 - OTK may still finish the last shift;
 - after OTK, do not enter the second production phase.
+
+## 2D. Heartbeat discipline
+
+Heartbeat is operational state, not narrative logging.
+
+- Update it with minimal SHA/CAS writes.
+- Keep `activity_detail` concrete enough that the manager can answer "чем занят?" without opening the target repository.
+- During external wait, always expose the exact repository/run/job/artifact target and the last status actually observed by this worker.
+- Never mark a terminal status merely because the external system probably finished.
+- If the Chat disappears abruptly, do not fabricate a final heartbeat later; the last real heartbeat must age into STALE naturally.
+- On every normal lease release to idle, convert heartbeat to the idle shape from `.agent/liveness.md`.
 
 ## 5. Wake reconciliation
 
