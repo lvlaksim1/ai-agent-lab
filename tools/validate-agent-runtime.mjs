@@ -65,6 +65,15 @@ check(config.external_evidence_wait_policy === "active-until-terminal-or-forced-
 check(config.wait_for_continuation_policy === "emergency-recovery-only", "wait_for continuation must remain recovery-only");
 check(config.verification_closes_work_package === true, "mandatory verification must close the work package before handoff");
 check(config.premature_pending_ci_efficiency_score === 0, "premature pending-CI handoff efficiency score must remain zero");
+check(config.shift_policy_version === 2, "shift policy version must remain 2");
+check(config.work_package_policy === "causal-chain-until-natural-boundary", "work package must follow the causal chain");
+check(config.actionable_next_step_required === true, "actionable-next-step closure must remain required");
+check(config.continuation_policy === "natural-boundary-or-forced-stop-only", "continuation policy must remain natural-boundary-only");
+check(config.blocked_requires_exhaustion_evidence === true, "BLOCKED must require exhaustion evidence");
+check(config.evidence_acquisition_ladder_required === true, "evidence acquisition ladder must remain required");
+check(Number.isInteger(config.short_shift_review_threshold_seconds) && config.short_shift_review_threshold_seconds >= 60, "short shift review threshold must be a sane positive integer");
+check(config.short_shift_with_unresolved_work_requires_special_review === true, "short unresolved shifts must require special review");
+check(config.premature_handoff_efficiency_score === 0, "premature handoff efficiency score must remain zero");
 check(config.queue_scope_policy === "active-object", "queue must remain active-object scoped");
 
 check(assignment.schema_version === 1, "assignment schema_version must be 1");
@@ -147,6 +156,32 @@ if (fs.existsSync(pendingDir)) {
     check(Number.isInteger(event.priority) && event.priority >= 0 && event.priority <= 100, file + ": priority must be 0..100");
     if (event.type === "supervisor-review") {
       check(event.source && typeof event.source.production_event === "string" && event.source.production_event.length > 0, file + ": supervisor-review requires source.production_event");
+      if (event.shift_policy_version !== undefined) {
+        check(event.shift_policy_version === 2, file + ": shift_policy_version must be 2");
+        const stop = event.stop;
+        check(stop && typeof stop === "object", file + ": shift policy v2 requires stop record");
+        if (stop && typeof stop === "object") {
+          check(["project_or_phase_complete", "blocked", "forced_stop", "speculation_boundary"].includes(stop.kind), file + ": invalid stop.kind");
+          check(stop.actionable_next_step === false, file + ": shift may close only with actionable_next_step=false");
+          check(typeof stop.reason === "string" && stop.reason.trim().length > 0, file + ": stop.reason is required");
+          if (["blocked", "speculation_boundary"].includes(stop.kind)) {
+            check(Array.isArray(stop.exhaustion_evidence) && stop.exhaustion_evidence.length > 0, file + ": blocker/speculation stop requires exhaustion_evidence");
+          }
+          if (stop.kind === "blocked") {
+            check(typeof stop.external_action === "string" && stop.external_action.trim().length > 0, file + ": blocked stop requires external_action");
+          }
+          if (typeof event.shift_started_at_utc === "string" && typeof event.shift_completed_at_utc === "string") {
+            const start = Date.parse(event.shift_started_at_utc);
+            const end = Date.parse(event.shift_completed_at_utc);
+            if (Number.isFinite(start) && Number.isFinite(end) && end >= start) {
+              const durationSeconds = Math.floor((end - start) / 1000);
+              if (durationSeconds < config.short_shift_review_threshold_seconds && event.continuation_id) {
+                check(typeof stop.short_shift_justification === "string" && stop.short_shift_justification.trim().length > 0, file + ": short unresolved shift requires stop.short_shift_justification");
+              }
+            }
+          }
+        }
+      }
     } else {
       check(typeof event.goal === "string" && event.goal.trim().length > 0, file + ": goal is required");
     }
