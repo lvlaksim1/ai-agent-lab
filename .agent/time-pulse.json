@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "sequence": 3,
-  "purpose": "lease_claim",
+  "sequence": 4,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Resume DIR-011 from recovered checkpoint; move APFS structural evidence to decoded image layer."
+  "activity_detail": "Checkpointed decoded-layer APFS evidence design; target writer remains unchanged."
 }
