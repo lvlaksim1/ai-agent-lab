@@ -182,3 +182,19 @@ Runtime consequence:
 The next worker must first obtain compact source-vs-rebuilt NX/APFS/checkpoint structural evidence, identify the first causally incompatible field, and only then make an evidence-supported writer correction.
 
 This independently bootstrapped manager Chat also completed the remaining dynamic write-back proof for Project Context Capsule continuity.
+
+
+## Objective forced-stop policy v3 — 2026-09-18
+
+Owner rejected predictive `forced_stop` after shift 29 ended while ordinary GitHub/tool operations were still succeeding.
+
+New invariant:
+- `forced_stop` requires an objective, independently reviewable platform/runtime/tool termination signal;
+- elapsed time, pending CI, scheduled/non-interactive execution, or belief that the turn may end soon are not sufficient;
+- while normal tool/GitHub calls still work, the worker must continue polling/acting;
+- before long waits, persist an intermediate checkpoint without ending the shift or releasing the lease;
+- abrupt termination with no chance to persist a normal end is recovered through checkpoint + stale lease;
+- v3 forced-stop review records require structured `forced_stop_evidence`;
+- OTK gives Efficiency/focus 0/2 and forbids APPROVED for an unproven predictive forced-stop handoff.
+
+Shift 29 / event 031 remains historical evidence of the old v2 behavior; its pending OTK review is explicitly marked for audit under the new forced-stop standard.
