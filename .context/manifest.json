@@ -6,8 +6,8 @@
   "authoritative_context_branch": "work-webhook-test",
   "context_version": "1.0",
   "installed_from": "Project Context Capsule Installer v1.0",
-  "last_context_update": "2026-09-18T12:50:00Z",
-  "last_session_id": "CHAT-20260918-123600-context-capsule-and-factory",
+  "last_context_update": "2026-09-18T20:03:00Z",
+  "last_session_id": "CHAT-20260918-200300-manager-apfs-resume",
   "active_handoff": ".context/handoffs/latest.md",
   "bootstrap_entrypoint": ".context/ENTRYPOINT.md",
   "authoritative_files": {
