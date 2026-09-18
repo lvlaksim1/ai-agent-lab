@@ -143,6 +143,29 @@ Also mirror meaningful active-object status into:
 Write concise manager report:
 .agent/management/reports/latest.md
 
+If `owner_decision_required=true`, the report MUST contain these exact sections:
+
+```text
+## Что требуется от владельца
+<one concrete action, permission or choice>
+
+## Зачем это нужно
+<what production can do after the owner answers>
+
+## Варианты ответа
+1. <ready-to-send exact response> — <consequence>
+2. <ready-to-send exact response> — <consequence>
+...
+```
+
+Rules:
+- do not write only «нужно решение владельца»;
+- make each response option directly sendable by the owner;
+- if there is one clearly preferable safe option, mark it `Рекомендуемый`;
+- when no genuine alternatives exist, still provide at least one exact ready-to-send response;
+- distinguish a permission request from a request to supply an external file/resource;
+- say whether production will automatically resume after the response or whether another external step is still required.
+
 Do not alter brigade ratings.
 
 ## 6. Reconcile manager wake
