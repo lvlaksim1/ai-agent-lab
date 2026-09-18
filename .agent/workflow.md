@@ -40,7 +40,16 @@ Write `.agent/journal/<event-id>.md` containing:
 - verification;
 - blockers, if any.
 
-Create `.agent/queue/done/<event-id>.json` with `done` or `blocked`.
+Create `.agent/queue/done/<event-id>.json` with:
+- `schema_version`;
+- `id`;
+- `status` = `done` or `blocked`;
+- `completed_at`;
+- `worker_id`;
+- short `summary`;
+- `journal` path;
+- optional `result` path/reference.
+
 Delete the corresponding pending JSON file.
 Return `.agent/state.json` to `idle`.
 
@@ -52,6 +61,18 @@ Use the generation/CAS rules in `.agent/protocol.md`.
 - Set `pending=false` only when the pending queue is empty and no producer advanced `generation` while this run was working.
 - If a wake update conflicts, re-read it. Never overwrite a newer producer generation.
 
-## 5. Stop
+## 5. Report to source
+
+After persistent state is safely written, report the outcome when the source supports a reply.
+
+For `source.kind=github_issue_comment`:
+- add one top-level comment to the same PR/issue;
+- first line: `[AGENT_RESULT] <event-id> <status>`;
+- second line: the same concise summary stored in the done record;
+- do not use the `[AGENT_TASK]` prefix.
+
+If reporting fails, do not roll back a successfully completed task. Record/reporting failure in the journal on the next recovery opportunity.
+
+## 6. Stop
 
 Process only one event in one scheduled run.
