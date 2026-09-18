@@ -109,3 +109,17 @@ Correction:
 - validator protects the trigger-SHA invariant.
 
 This incident is separate from the earlier scheduler timing problem, although both appeared after the request to silence technical notifications.
+
+
+### Shift duration policy revised
+
+Owner rejected pre-set 10–12 minute budgets and any assumption that the 15-minute clock interval is a shift length.
+
+Decision:
+- workers continue while they can make useful evidence-driven progress;
+- no artificial shift time cap;
+- scheduled clock is only a chance to start a worker when the station is free;
+- active worker may run across later clock slots;
+- lease is renewable and only protects against stale/dead workers;
+- near-term CI/test results should be awaited and consumed in the same run;
+- premature handoff with actionable work remaining is scored as an efficiency defect.
