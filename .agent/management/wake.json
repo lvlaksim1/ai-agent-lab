@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "attention": true,
+  "attention": false,
   "generation": 10,
-  "reasons": ["owner_decision_required","evidence_access_blocker"],
-  "updated_at": "2026-09-18T19:33:20Z"
+  "reasons": [],
+  "updated_at": "2026-09-18T20:03:00Z"
 }
