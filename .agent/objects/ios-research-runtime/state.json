@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Exact E2E localized the first post-SPTM_MAP failure to an EL2 Data Abort where 0x12ed0000 is used in address construction against DRAM base. A diagnostic-only SPTM_BOOTARGS correlation patch is queued for validation; mandatory qemu-sptm Windows Gate run 35339282982 is still in progress, so no semantic fix is authorized yet.",
+  "current_blocker_summary": "Exact E2E falsified the earlier topOfKernelData-minus-physBase hypothesis. The next evidence boundary is the producer/ABI contract of blob_head and boot_args.topOfKernelData; no semantic repair is authorized before that contract is proven.",
   "last_scored_shift": 22,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
-  "last_event": "review-ios-runtime-release-20260918-024",
+  "last_event": "ios-runtime-release-20260918-025",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T11:31:22Z"
+  "updated_at": "2026-09-18T12:00:41Z"
 }
