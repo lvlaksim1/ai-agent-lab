@@ -29,5 +29,6 @@
   },
   "time_authority": "github_commit_committer_date",
   "started_at_anchor_commit": "960067fe5243588fea275262b6eeec53ecca0ce8",
-  "lease_anchor_commit": "918275b33960c5d1794fd4c8f1f3029afbe8783b"
+  "lease_anchor_commit": "918275b33960c5d1794fd4c8f1f3029afbe8783b",
+  "fence_generation": 1
 }
