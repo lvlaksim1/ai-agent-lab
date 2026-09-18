@@ -1,9 +1,10 @@
 {
   "schema_version": 1,
   "attention": true,
-  "generation": 1,
+  "generation": 2,
   "reasons": [
-    "bootstrap-manager"
+    "bootstrap-manager",
+    "three-shifts-since-manager-review"
   ],
-  "updated_at": "2026-09-18T02:10:03.179Z"
+  "updated_at": "2026-09-18T03:46:30Z"
 }
