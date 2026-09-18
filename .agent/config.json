@@ -21,5 +21,8 @@
     32,
     47
   ],
-  "manager_clock_minute": 59
+  "manager_clock_minute": 59,
+  "shift_duration_policy": "natural-boundary",
+  "lease_renew_before_minutes": 10,
+  "clock_is_shift_limit": false
 }
