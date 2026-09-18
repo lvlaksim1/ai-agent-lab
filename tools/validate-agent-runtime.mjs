@@ -90,7 +90,7 @@ if (state.status === "idle") {
   check(typeof state.started_at === "string", "processing state requires started_at");
   check(typeof state.lease_until === "string", "processing state requires lease_until");
   check(state.time_authority === "github_commit_committer_date", "processing state time_authority must be github_commit_committer_date");
-  verifyCommitTimeAnchor(state.started_at_anchor_commit, state.started_at, ".agent/state.json", "shift start");
+  verifyCommitTimeAnchor(state.started_at_anchor_commit, state.started_at, config.runtime_time_anchor_file, "shift start");
   check(typeof state.lease_anchor_commit === "string" && /^[0-9a-f]{40}$/.test(state.lease_anchor_commit), "processing state lease_anchor_commit is required");
   if (typeof state.lease_anchor_commit === "string" && /^[0-9a-f]{40}$/.test(state.lease_anchor_commit)) {
     let leaseAnchorTime;
