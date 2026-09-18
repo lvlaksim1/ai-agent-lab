@@ -29,13 +29,16 @@ Inspect as applicable:
 
 OTK must reconstruct the worker's situation at the exact shift end, not merely check whether the event's original sentence was satisfied.
 
-For shift policy v2, require and inspect `shift_policy_version: 2` and the `stop` record from the pending supervisor-review event.
+For shift policy v3, require and inspect `shift_policy_version: 3` and the `stop` record from the pending supervisor-review event. Legacy v2 reviews already queued before this policy are still reviewable, but OTK MUST apply the current forced-stop standard when judging them.
 
 Mandatory questions:
 - Did consuming the requested evidence expose another directly related actionable same-object step?
 - Could the worker have inspected, diagnosed, instrumented, repaired or verified that next step with the live tools?
 - If BLOCKED/speculation-boundary was claimed, was the applicable evidence-acquisition ladder actually exhausted?
 - Is the claimed external action precise and truly outside the worker's current capability?
+- If forced_stop was claimed, what objective platform/tool signal actually occurred?
+- Can that forced-stop signal be independently verified?
+- Did ordinary GitHub/tool calls continue succeeding after the claimed stop signal, indicating that the worker could still have continued?
 
 If any actionable next step existed at shift end, the handoff was premature:
 - Efficiency/focus = 0/2;
@@ -46,6 +49,14 @@ If any actionable next step existed at shift end, the handoff was premature:
 A shift shorter than `config.short_shift_review_threshold_seconds` is NOT automatically bad. But if unresolved work or a continuation remains, it triggers a mandatory special closure review. OTK must explicitly justify why no actionable next step remained. Missing justification is a closure defect.
 
 BLOCKED is valid only when the required evidence/capability, exhausted routes and exact external action are all demonstrated. One unavailable artifact/log call is insufficient.
+
+A `forced_stop` claim is invalid when it is based only on expected turn duration, scheduled/non-interactive execution, pending CI, or a desire to leave a clean continuation. If tools were still operational and no objective termination signal existed, treat the handoff as premature:
+- Efficiency/focus = 0/2;
+- APPROVED is forbidden;
+- use CORRECTED unless a stronger verdict applies;
+- preserve exactly one safe continuation if work remains.
+
+For v3, `stop.forced_stop_evidence` is mandatory and OTK must verify it. For legacy v2 reviews, absence of such evidence does not make the JSON structurally invalid, but it DOES make the forced-stop claim unproven unless independent evidence exists.
 
 ## Review-path resolution
 
@@ -71,7 +82,7 @@ Determine whether:
 - the worker ended only at a valid natural stop boundary after the actionable-next-step test;
 - the worker did not treat discovery of the next actionable blocker as a handoff boundary;
 - any BLOCKED/speculation claim contains adequate exhaustion evidence from the acquisition ladder;
-- any pending external evidence handoff was caused by a documented forced runtime/tooling stop rather than ordinary CI latency;
+- any pending external evidence handoff was caused by an objectively evidenced runtime/tooling stop rather than ordinary CI latency or predicted turn expiry;
 - anti-cheat was violated.
 
 Verdict:
