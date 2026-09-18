@@ -5,7 +5,7 @@ on:
     branches:
       - work-webhook-test
     paths:
-      - '.agent/reports/latest.md'
+      - '.agent/reports/published/*.md'
 
 concurrency:
   group: agent-telegram-report
@@ -23,20 +23,32 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: work-webhook-test
-          fetch-depth: 1
+          fetch-depth: 2
 
       - name: Build Telegram message
-        shell: python
+        id: report
+        shell: bash
         run: |
+          set -euo pipefail
+          REPORT_FILE="$(git diff-tree --no-commit-id --name-only --diff-filter=A -r HEAD -- '.agent/reports/published/*.md' | head -n 1)"
+          if [ -z "$REPORT_FILE" ]; then
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "No newly created immutable report in this commit."
+            exit 0
+          fi
+          echo "publish=true" >> "$GITHUB_OUTPUT"
+          python - "$REPORT_FILE" <<'PY'
           from pathlib import Path
-          report = Path(".agent/reports/latest.md").read_text(encoding="utf-8").strip()
+          import sys
+          report = Path(sys.argv[1]).read_text(encoding="utf-8").strip()
           if not report:
               raise SystemExit("Empty brigade report")
           if len(report) > 3900:
               report = report[:3898].rstrip() + "…"
           Path("telegram-message.txt").write_text(report, encoding="utf-8")
-
+          PY
       - name: Send report to Telegram
+        if: steps.report.outputs.publish == 'true'
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
