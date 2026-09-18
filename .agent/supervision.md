@@ -64,14 +64,26 @@ For v3, `stop.forced_stop_evidence` is mandatory and OTK must verify it. For leg
 
 ## Review-path resolution
 
-When prior OTK evidence is needed, NEVER construct or guess a review filename from an event id.
-Resolve it from the completed supervisor-review done record first:
-- read `.agent/queue/done/review-<production-event>.json` when available;
-- if it contains `review_path`, read exactly that path;
-- otherwise use an explicitly supplied `predecessor_review_path` from the pending review event;
-- only if neither exists, inspect existing review/report metadata instead of synthesizing a filename.
+Review ids are shift-unique. The same production continuation may be worked by several brigade members after runtime losses, so `review-<production-event>` is no longer a safe identifier.
 
-A 404 on a guessed optional predecessor-review path is not a reason to mutate scheduler state or abandon an otherwise evidenced OTK review. Stop only if required evidence is genuinely unavailable after path resolution above.
+When prior OTK evidence is needed, NEVER construct or guess a review filename.
+
+Resolution order:
+1. use exact `predecessor_review_path` / `predecessor_otk_report_path` carried by the pending production/review event when present;
+2. otherwise use the exact done record for the known **review event id** and its stored `review_path` / `otk_report_path`;
+3. otherwise inspect done metadata by exact `source.production_event` plus `shift_number`;
+4. only then inspect existing review/report metadata; never synthesize a legacy filename.
+
+New OTK done records MUST store:
+- `shift_number`;
+- `source_event`;
+- `review_path`;
+- `otk_report_path`;
+- `start_report_path` when one existed.
+
+When OTK leaves a continuation, it MUST attach exact `predecessor_review_path` and `predecessor_otk_report_path` so the next worker can evaluate the predecessor without guessing.
+
+A 404 on an optional/guessed legacy path is not fatal. Stop only if genuinely required evidence is unavailable after this resolution procedure.
 
 ## Review
 
