@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-031",
+  "type": "task",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "ivanych",
+  "result": "apfs_structural_evidence_channel_added_forced_wait",
+  "target_commit": "3645cc63e25f524097b29ea784ddf90fe412f827",
+  "journal": ".agent/journal/ios-runtime-release-20260918-031.md",
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "shift_started_at_utc": "2026-09-18T20:10:29Z",
+  "shift_completed_at_utc": "2026-09-18T20:12:46Z"
+}
