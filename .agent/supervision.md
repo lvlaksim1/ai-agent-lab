@@ -108,7 +108,12 @@ Determine whether:
 Verdict:
 APPROVED, CORRECTED, REMEDIATED, COMPLETE, BLOCKED or CHEAT.
 
-Score 0..10 using competition policy.
+Score 0..10 using the scoring policy carried by the review event:
+- `score_policy_version: 2` -> progress 0..4, engineering quality 0..3, efficiency/focus while alive 0..2, start assessment/plan 0..1;
+- legacy `score_policy_version: 1` -> historical scoring remains valid and is not retroactively changed.
+
+If a new review lacks score_policy_version but `reporting_policy_version: 2` is present, treat that as a control-plane defect rather than silently guessing.
+
 CHEAT uses fixed -100 rating penalty.
 
 Classify project progress exactly:
