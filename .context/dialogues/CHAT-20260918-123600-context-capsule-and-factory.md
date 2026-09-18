@@ -139,3 +139,24 @@ All five physical tasks now use the same generic dispatcher prompt. They are clo
 - idle/no work -> no-op.
 
 Variant A is preserved for rollback.
+
+
+### Short-shift root cause fixed
+
+Owner asked for investigation without speculative timing limits. Shift #25 was the decisive case: 15:24:00–15:27:14 MSK. The worker made a valid minimal repair, started replacement CI, then treated running CI as the end of the work package.
+
+Diagnosis:
+- scheduler C-5 was functioning;
+- worker workflow still retained old `CI -> continuation(wait_for) -> handoff` choreography;
+- "cannot reasonably obtain evidence" was too vague;
+- OTK still rewarded that handoff with full efficiency.
+
+Implemented control-plane fix:
+- mandatory external verification is active work inside the same shift;
+- worker polls it to terminal while the current Chat/tools remain alive;
+- mandatory verification must be terminal and consumed before a bounded work package can be considered complete;
+- `wait_for` is emergency recovery only;
+- OTK assigns Efficiency/focus 0/2 and a non-APPROVED correction path for unjustified pending-CI handoff;
+- validator protects the new invariants.
+
+No scheduler timing changes were made.
