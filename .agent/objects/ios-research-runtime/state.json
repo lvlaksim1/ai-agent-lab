@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 13 safely extended the boot-state producer trace one page upstream at cbd8783 while preserving one-insn TCG and both SPTM proof windows. Exact Windows Build passed; exact E2E evidence for the new trace window is still required before concluding whether the producer is visible or changing address semantics.",
-  "last_scored_shift": 13,
+  "current_blocker_summary": "Shift 14 exact E2E evidence confirms the expanded 0x...0b1000 execution window still does not expose an earlier 0x12ed0000 carrier; first appearance remains immediately after 0x...0b3978. Further blind dfilter widening is low-value; next work must trace the boot-state slot write/source directly before any address-semantics fix.",
+  "last_scored_shift": 14,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
-  "last_event": "review-ios-runtime-release-20260918-015",
+  "last_event": "review-ios-runtime-release-20260918-016",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T06:16:33Z"
+  "updated_at": "2026-09-18T06:29:49Z"
 }
