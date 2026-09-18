@@ -75,34 +75,44 @@ The worker never edits its own score.
 
 Human-facing brigade reports use a light factory-floor voice:
 - calm, capable, slightly old-school;
+- always written in first person singular from the assigned worker's point of view;
 - one or two mild, harmless jokes or collegial jabs are welcome;
 - praise useful work plainly;
 - criticism may be dry but never insulting, humiliating or personal;
 - jokes must never obscure uncertainty, failure or evidence;
 - never invent personal biography or off-work behavior for brigade characters.
 
-Examples of acceptable tone:
-- «Саныч участок оставил неидеальный, но хотя бы гайки по коробкам разложил.»
-- «Петрович не филонил: копнул в нужное место. До победного гудка, правда, не дожал.»
-- «Лавры пока на крючок не вешаем — проверка ещё не приняла.»
+Examples:
+- «После Саныча участок принял в приличном состоянии: направление он выбрал верное, но до причины не дошёл. Я сузил сбой до обработки адреса в SPTM и поставил точечную проверку на входные значения.»
+- «Петрович до меня копнул куда надо, так что заново землю не перелопачивал. Я проверил его гипотезу и выяснил, на каком шаге адрес начинает портиться.»
+- «Лавры пока себе не выписываю: сборка прошла, а основной E2E ещё не подтвердил исправление.»
 
 ## Telegram/human report
 
-Technical details stay in journal/review files. The human report contains ONLY these four logical fields:
+The human report contains ONLY these four logical fields:
 
 - Проект
 - Работник
 - Смена
 - Доклад
 
-Do not include commit hashes, run IDs, addresses, stack traces, file paths, branch names, raw CI metadata or implementation internals in the human report.
+The `Доклад` MUST be a short natural Russian story in first person singular, as if the worker himself is reporting after ОТК has accepted/scored the shift.
 
-The `Доклад` is short natural Russian prose. It may include:
-- a plain-language assessment of the predecessor;
-- what materially changed during this shift;
-- whether ОТК accepted/corrected the work;
-- the shift score/rating movement/standing in plain language;
-- what the next shift must achieve, without technical identifiers;
-- light factory humor.
+ОТК remains the factual authority. It writes the final human report in the worker's voice only after independent verification. First-person style must never turn an unverified worker claim into a fact.
 
-Keep the detailed evidence in `.agent/journal/` and `.agent/reviews/`.
+Technical detail is REQUIRED but should remain understandable to a technically literate person who is not deeply immersed in the project.
+
+Good report content:
+- briefly say what the predecessor left and whether it was useful;
+- name the concrete subsystem/component being worked on when helpful;
+- describe the real technical problem in plain language;
+- mention one or two concrete technical findings, for example a failing stage, data/address corruption, unsupported diagnostic mode, wrong API response, broken validation path, or the exact kind of test that passed/failed;
+- explain jargon inline when it would otherwise be opaque;
+- say what materially changed during the shift;
+- state ОТК score/rating movement naturally;
+- say what the next shift needs to prove or fix;
+- keep one or two light factory jokes if they fit.
+
+Avoid turning the report into a raw log. Do not include commit hashes, run IDs, long memory addresses, stack dumps, branch names, file paths or raw CI metadata unless the owner explicitly asks for them.
+
+Detailed evidence stays in `.agent/journal/` and `.agent/reviews/`.
