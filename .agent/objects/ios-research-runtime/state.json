@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "The conflicting diagnostic patch hunk was minimally repaired; replacement qemu-sptm Windows Gate is still in progress, so E2E producer localization remains gated on its terminal result.",
+  "current_blocker_summary": "Replacement qemu-sptm Windows Gate passed on commit 3b530ed2946a6ee401fd17a0935999bdae1fbfbc; immediate patch-applicability blocker is cleared, and exact E2E producer/root-cause localization is next.",
   "last_scored_shift": 25,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-027",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T12:38:00Z"
+  "updated_at": "2026-09-18T12:46:26Z"
 }
