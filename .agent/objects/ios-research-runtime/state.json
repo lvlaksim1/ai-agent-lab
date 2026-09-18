@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Recovered E2E proves X22=0x12ed0000 is already present at first captured predecessor PC 0xfffffff0070d77d0 and unchanged through 0x...0d7828; producer lies earlier than current trace window.",
-  "last_scored_shift": 6,
-  "last_otk_verdict": "CORRECTED",
-  "last_progress_class": "none",
-  "last_event": "review-ios-runtime-release-20260918-008",
+  "current_blocker_summary": "X22=0x12ed0000 predates the previously captured predecessor window; commit 20317e6 expands the first SPTM trace backward and Windows Build passes, but the new E2E trace must still identify the producer before root logic changes.",
+  "last_scored_shift": 7,
+  "last_otk_verdict": "APPROVED",
+  "last_progress_class": "incremental",
+  "last_event": "review-ios-runtime-release-20260918-009",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T04:17:00Z"
+  "updated_at": "2026-09-18T04:35:00Z"
 }
