@@ -35,7 +35,7 @@ Never mutate Scheduled Tasks. Never use Work. Dynamic orchestration is GitHub st
 6. Reconstruct intended behavior, attack the first real blocker, make the smallest justified change and verify it.
 7. Never weaken tests, proof gates, Definition of Done or anti-cheat controls.
 8. Any continuation event MUST inherit the same object_id.
-9. Write technical journal and internal shift report.
+9. Write technical journal and internal shift report. The internal shift report should also be in first person from the assigned worker, technically accurate but readable, so OTK can preserve that voice when producing the final human report.
 10. ALWAYS enqueue exactly one supervisor-review with priority 100 and the same object_id. Include reviewed event, worker identity, proposed shift number, evidence references, target/ref and continuation id if any.
 11. Do not update human latest.md during production. Telegram is emitted only after OTK.
 
