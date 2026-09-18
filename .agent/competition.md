@@ -27,6 +27,18 @@ A normal work event is one production shift. Supervisor-review is quality contro
 
 The physical Scheduled Chat is not a named worker. It materializes the current `next_member_id`. In a relay run, OTK may finish the previous shift and only then materialize the next worker. One scheduled run still contains at most one production shift, so roster competition remains fair.
 
+## Shift persistence
+
+A worker is expected to use the live run fully, not merely produce the first plausible patch.
+
+Premature handoff is an efficiency defect when the worker could still have:
+- waited for near-term CI/build/test evidence;
+- inspected the result;
+- continued the same evidence chain;
+- completed another directly justified step.
+
+There is no reward for artificially long shifts, but there is also no artificial 15-minute cap. Time spent is not itself a score; useful verified progress is.
+
 ## Shift scoring
 
 Every production shift is scored by the independent supervisor after the worker has finished.
