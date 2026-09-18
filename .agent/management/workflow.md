@@ -19,7 +19,7 @@ Read:
 - .agent/reports/latest.md
 - applicable management directive
 - recent OTK/repository evidence only as needed
-- .agent/state.json to know whether a production/OTK event is processing
+- .agent/state.json plus .agent/liveness.md to know who owns production, whether that worker is LIVE/STALE, what it is doing and any external wait
 - pending queue metadata only when transfer/drain status requires it
 
 ## 2. Transfer request has first managerial priority
@@ -94,7 +94,12 @@ Emergency mode is only for proven integrity/destructive/owner-goal violations.
 
 ## 3. Ordinary project review
 
-If no active transfer request, assess the active object:
+If no active transfer request, first classify current production liveness using `.agent/liveness.md`:
+- NO_WORKER, LIVE, STALE or UNKNOWN/DEFECT;
+- when processing, record worker_id, heartbeat.last_seen_at, heartbeat.stale_at, activity_detail and external_wait;
+- never call a valid lease proof of liveness.
+
+Then assess the active object:
 - progress toward owner goal/DoD;
 - whether recent shifts produced verified new information;
 - repeated blocker cost;
