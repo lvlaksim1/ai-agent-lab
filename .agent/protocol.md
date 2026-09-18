@@ -141,6 +141,12 @@ During transfer_state=requested, draining or switching:
 
 Persistent result state wins over notification delivery.
 
+Reporting policy v2 separates authorship:
+- the production worker publishes one immutable start report before substantive work with `ОЦЕНКА ПРЕДШЕСТВЕННИКА` and `МОЙ ПЛАН`;
+- the worker does not depend on surviving to write an end-of-shift narrative;
+- OTK later publishes an independent result report from repository/heartbeat/CI evidence;
+- Telegram delivery is secondary to those immutable repository records.
+
 ## Scheduler invariants
 
 After the explicit owner-approved topology configuration, runtime code must not mutate scheduler tasks.
