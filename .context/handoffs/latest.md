@@ -34,3 +34,5 @@ The default `main` branch now contains discovery shims:
 - `.context/ENTRYPOINT.md`
 
 They redirect a fresh Chat into the authoritative `work-webhook-test` Capsule. No external repository is required.
+
+- Idle scheduler notifications are suppressed via condition-watch semantics; the clocks still run on the same cadence.
