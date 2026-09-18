@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-029",
+  "type": "task",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "mikhalych",
+  "result": "terminal_evidence_consumed_next_blocker_localized",
+  "shift_started_at_utc": "2026-09-18T18:24:18Z",
+  "shift_completed_at_utc": "2026-09-18T18:24:48Z",
+  "journal": ".agent/journal/ios-runtime-release-20260918-029.md",
+  "continuation_id": "ios-runtime-release-20260918-030",
+  "supervisor_review_id": "review-ios-runtime-release-20260918-029"
+}
