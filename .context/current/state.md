@@ -164,3 +164,21 @@ Observed first response correctly reported:
 - ready-to-send recommended response to authorize the diagnostic APFS evidence channel and resume production.
 
 This closes the fresh-chat manager bootstrap proof. The manager continuity/discovery path is empirically validated end-to-end.
+
+
+## APFS evidence authorization — 2026-09-18
+
+The owner authorized adding a diagnostic APFS evidence channel to the iOS-Research-Runtime Windows E2E and resuming production.
+
+Runtime consequence:
+- management decision DEC-011 recorded;
+- directive DIR-011 applies from NEXT_SHIFT;
+- owner_decision_required cleared;
+- event ios-runtime-release-20260918-031 queued;
+- production wake generation advanced to 41;
+- object health moved from BLOCKED to YELLOW;
+- Scheduled Tasks were not mutated.
+
+The next worker must first obtain compact source-vs-rebuilt NX/APFS/checkpoint structural evidence, identify the first causally incompatible field, and only then make an evidence-supported writer correction.
+
+This independently bootstrapped manager Chat also completed the remaining dynamic write-back proof for Project Context Capsule continuity.
