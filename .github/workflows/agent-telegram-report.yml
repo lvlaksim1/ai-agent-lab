@@ -1,0 +1,100 @@
+name: Agent Telegram Report
+
+on:
+  push:
+    branches:
+      - work-webhook-test
+    paths:
+      - '.agent/reports/latest.md'
+      - '.github/workflows/agent-telegram-report.yml'
+
+concurrency:
+  group: agent-telegram-report
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout report
+        uses: actions/checkout@v4
+        with:
+          ref: work-webhook-test
+          fetch-depth: 1
+
+      - name: Build Telegram message
+        shell: python
+        run: |
+          from pathlib import Path
+          import os
+
+          report_path = Path(".agent/reports/latest.md")
+          if not report_path.exists():
+              raise SystemExit("Missing .agent/reports/latest.md")
+
+          body = report_path.read_text(encoding="utf-8").strip()
+          header = "👷 Бригада сменщиков\n\n"
+          footer = (
+              "\n\n"
+              f"Репозиторий: {os.environ.get('GITHUB_REPOSITORY')}\n"
+              f"Ветка: {os.environ.get('GITHUB_REF_NAME')}\n"
+              f"Коммит: {os.environ.get('GITHUB_SHA', '')[:12]}"
+          )
+
+          max_total = 3900
+          available = max_total - len(header) - len(footer)
+          if len(body) > available:
+              body = body[:max(0, available - 2)].rstrip() + "…"
+
+          Path("telegram-message.txt").write_text(
+              header + body + footer,
+              encoding="utf-8"
+          )
+
+      - name: Send report to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -z "${TELEGRAM_BOT_TOKEN:-}" ]; then
+            echo "::error::TELEGRAM_BOT_TOKEN secret is not configured"
+            exit 1
+          fi
+          if [ -z "${TELEGRAM_CHAT_ID:-}" ]; then
+            echo "::error::TELEGRAM_CHAT_ID secret is not configured"
+            exit 1
+          fi
+
+          API="https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage"
+          SUCCESS=false
+
+          for ATTEMPT in 1 2 3; do
+            RESPONSE_FILE="$RUNNER_TEMP/telegram-response.json"
+            HTTP_CODE=$(curl               --silent               --show-error               --output "$RESPONSE_FILE"               --write-out "%{http_code}"               -X POST "$API"               --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}"               --data-urlencode "text@telegram-message.txt" || true)
+
+            if [ "$HTTP_CODE" = "200" ] && jq -e '.ok == true' "$RESPONSE_FILE" >/dev/null 2>&1; then
+              SUCCESS=true
+              break
+            fi
+
+            echo "::warning::Telegram attempt $ATTEMPT failed (HTTP $HTTP_CODE)"
+            cat "$RESPONSE_FILE" || true
+
+            if [ "$ATTEMPT" -lt 3 ]; then
+              sleep $((ATTEMPT * 5))
+            fi
+          done
+
+          if [ "$SUCCESS" != "true" ]; then
+            echo "::error::Telegram delivery failed after 3 attempts"
+            exit 1
+          fi
+
+          echo "Telegram report sent successfully."
