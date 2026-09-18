@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-023",
+  "type": "production",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "ivanych",
+  "shift": 21,
+  "target_commit": "d57d803331e5bea685f9221b9b400b0230d1c818",
+  "result": "minimal proven patch-structure repair committed; fresh CI pending",
+  "completed_at": "2026-09-18T08:18:19Z"
+}
