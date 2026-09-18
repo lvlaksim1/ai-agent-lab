@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-004",
+  "status": "done",
+  "completed_at": "2026-09-18T02:29:00Z",
+  "worker_id": "sanych",
+  "summary": "Decoded the hidden SPTM block and proved it constructs the malformed X0 from two globals plus X22; committed a tightly scoped one-instruction-per-TB diagnostic to expose the hidden loaded values before any root-cause fix.",
+  "journal": ".agent/journal/ios-runtime-release-20260918-004.md",
+  "result": {
+    "target_commit": "8d7dc0c21c850a94e4899ddd1c6e95f57bcecb55",
+    "continuation_event": "ios-runtime-release-20260918-005",
+    "supervisor_event": "review-ios-runtime-release-20260918-004"
+  }
+}
