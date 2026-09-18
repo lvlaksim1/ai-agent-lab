@@ -287,6 +287,24 @@ async function main() {
     }
     shiftNumber = brigadeFile.json.shift_counter + 1;
   }
+  let startReportPath = currentState.shift_start_report_path ?? null;
+  let startReportCommit = currentState.shift_start_report_commit ?? null;
+  if (role === "production" && currentState.reporting_policy_version === 2 && Number.isInteger(shiftNumber)) {
+    const expectedStartReportPath = `.agent/reports/starts/shift-${shiftNumber}-${currentState.worker_id}-${eventId}.md`;
+    if (!startReportPath) {
+      const recoveredStartReport = await getFile(expectedStartReportPath);
+      if (recoveredStartReport) startReportPath = expectedStartReportPath;
+    }
+    if (startReportPath && !startReportCommit) {
+      const rows = await api(
+        `/repos/${repo}/commits?sha=${encodeURIComponent(ref)}&path=${encodeURIComponent(startReportPath)}&per_page=1`
+      );
+      if (Array.isArray(rows) && rows.length && /^[0-9a-f]{40}$/.test(rows[0].sha || "")) {
+        startReportCommit = rows[0].sha;
+      }
+    }
+  }
+
   const nextFence = currentState.fence_generation + 1;
   const changes = {};
 
@@ -321,8 +339,8 @@ async function main() {
     shift_number: Number.isInteger(shiftNumber) ? shiftNumber : null,
     reporting_policy_version: currentState.reporting_policy_version ?? null,
     score_policy_version: currentState.score_policy_version ?? null,
-    start_report_path: currentState.shift_start_report_path ?? null,
-    start_report_commit: currentState.shift_start_report_commit ?? null
+    start_report_path: startReportPath,
+    start_report_commit: startReportCommit
   };
 
   const nextState = {
@@ -404,15 +422,15 @@ async function main() {
         journal_path: `.agent/journal/${eventId}.md`,
         heartbeat_anchor_commit: hb.time_anchor_commit,
         recovery_anchor_commit: pulseSha,
-        ...(currentState.shift_start_report_path
-          ? { start_report_path: currentState.shift_start_report_path }
+        ...(startReportPath
+          ? { start_report_path: startReportPath }
           : {})
       },
-      ...(currentState.shift_start_report_path
-        ? { start_report_path: currentState.shift_start_report_path }
+      ...(startReportPath
+        ? { start_report_path: startReportPath }
         : {}),
-      ...(currentState.shift_start_report_commit
-        ? { start_report_commit: currentState.shift_start_report_commit }
+      ...(startReportCommit
+        ? { start_report_commit: startReportCommit }
         : {}),
       stop: {
         kind: "runtime_loss",
