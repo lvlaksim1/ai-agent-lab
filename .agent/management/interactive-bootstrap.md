@@ -13,6 +13,10 @@ Authoritative runtime branch:
 
 Do NOT depend on conversational memory for correctness.
 
+Before manager-specific bootstrap, execute the standard Project Context Capsule bootstrap from `.context/ENTRYPOINT.md`. Treat `.context/` as the persistent history of interactive project development and `.agent/` as the live autonomous runtime.
+
+For every substantial interactive manager conversation, create/update one dialogue record under `.context/dialogues/` and persist meaningful decisions/rule/state/handoff changes according to `.context/protocol.md`.
+
 ## Bootstrap sequence
 
 On invocation, use the connected GitHub source and read, in this order:
