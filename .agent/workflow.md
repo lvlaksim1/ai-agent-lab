@@ -1,67 +1,120 @@
-# Worker Workflow
+# Worker Workflow — Relay Cycle
 
-This workflow is used only after .agent/wake.json says production/OTK work is pending.
+This workflow is used only after `.agent/wake.json` says production/OTK work is pending.
 
-## 0. Immutable scheduler rule
+## 0. Scheduler and concurrency rules
 
-Never mutate Scheduled Tasks. Never use Work. Dynamic orchestration is GitHub state only.
+Never mutate Scheduled Tasks from runtime. Never use Work. Dynamic orchestration is GitHub state only.
+
+Hard concurrency invariant:
+- at most ONE production worker at a time;
+- OTK and production share the same global lease `.agent/state.json`;
+- the dedicated manager may run concurrently because it uses separate management state;
+- one scheduled production run may contain at most ONE production shift.
+
+Read `.agent/production-topology.md` for the topology.
 
 ## 1. Resolve eligible work
 
-1. Read .agent/config.json, .agent/state.json, .agent/assignment.json, .agent/objects/index.json and list JSON files in .agent/queue/pending/.
-2. Ignore .gitkeep and non-JSON files.
+1. Read `.agent/config.json`, `.agent/state.json`, `.agent/assignment.json`, `.agent/objects/index.json` and list JSON files in `.agent/queue/pending/`.
+2. Ignore `.gitkeep` and non-JSON files.
 3. Resolve each event's object:
-   - use event.object_id when present;
-   - legacy fallback is allowed only when target.repository matches exactly one registered object.
+   - use `event.object_id` when present;
+   - legacy fallback only when target.repository matches exactly one registered object.
 4. Eligible events:
    - supervisor-review whose object is assignment.active_object;
    - ordinary production event whose object is assignment.active_object AND assignment.transfer_state=working.
-5. If there is no eligible event, reconcile .agent/wake.json using .agent/protocol.md and stop.
-6. Select exactly one eligible event: highest priority, then oldest created_at, then lexical id.
-7. For a normal production event, read .agent/management/state.json.
-   - If stop_production=true, do not claim it. Leave the event durable and stop with PRODUCTION_STOPPED_BY_MANAGER.
-   - If active_directive is non-null, read it and apply it only if its object_id matches assignment.active_object and its effective boundary includes this new shift.
-8. Claim by SHA/CAS update of .agent/state.json from idle to processing.
-9. If state has an unexpired processing lease, stop. Expired lease recovery must be journaled.
+5. If there is no eligible event, reconcile wake using `.agent/protocol.md` and stop.
+6. If `.agent/state.json` has an unexpired processing lease, stop immediately. Never start a second worker.
+7. Event selection for the FIRST phase:
+   - supervisor-review has precedence;
+   - otherwise higher numeric priority;
+   - then older created_at;
+   - then lexical id.
 
-## 2A. Normal production shift
+## 2. Relay cycle
 
-1. Confirm the selected event belongs to assignment.active_object.
-2. Read the active object's mission/state/handoff as needed:
-   .agent/objects/<object-id>/
-3. Read .agent/brigade.json and .agent/competition.md.
-4. Assign the shift to next_member_id. Proposed shift number is shift_counter + 1. Worker does not score itself.
-5. Read event, profile, applicable manager directive and only required target evidence.
-6. Reconstruct intended behavior, attack the first real blocker, make the smallest justified change and verify it.
-7. Never weaken tests, proof gates, Definition of Done or anti-cheat controls.
-8. Any continuation event MUST inherit the same object_id.
-9. Write technical journal and internal shift report. The internal shift report should also be in first person from the assigned worker, technically accurate but readable, so OTK can preserve that voice when producing the final human report.
-10. ALWAYS enqueue exactly one supervisor-review with priority 100 and the same object_id. Include reviewed event, worker identity, proposed shift number, evidence references, target/ref and continuation id if any.
-11. Do not update human latest.md during production. Telegram is emitted only after OTK.
+A scheduled production run may process at most two events, but only in one legal pattern:
 
-## 2B. Supervisor review / OTK
+`supervisor-review -> one production event`
 
-For type=supervisor-review follow .agent/supervision.md and .agent/competition.md.
+OR:
 
-OTK remains eligible while a NORMAL transfer is draining so the last shift can be accepted cleanly.
+`one production event`
 
-## 3. Persist result
+No other two-event combination is allowed.
 
-Create .agent/queue/done/<event-id>.json with durable result metadata including object_id.
-Delete only the corresponding pending event.
-Return .agent/state.json to idle.
+### 2A. If the first event is normal production
 
-## 4. Reconcile production wake
+1. Read `.agent/management/state.json`.
+2. If `stop_production=true`, leave the event queued and stop with `PRODUCTION_STOPPED_BY_MANAGER`.
+3. If an active directive applies to this object and NEXT_SHIFT, read and follow it.
+4. Claim the global lease with SHA/CAS.
+5. Read active object mission/state/handoff as needed.
+6. Read `.agent/brigade.json` and `.agent/competition.md`.
+7. Materialize exactly `next_member_id`. Proposed shift number is `shift_counter + 1`.
+8. Execute one production shift: reconstruct evidence, attack the first real blocker, make the smallest justified change and verify it.
+9. Never weaken tests, proof gates, Definition of Done or anti-cheat controls.
+10. Any continuation MUST inherit the same object_id.
+11. Write technical journal and internal first-person shift report.
+12. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id.
+13. Persist done/state/wake.
+14. STOP. The run MUST NOT review the shift it just performed.
 
-Use .agent/protocol.md object-aware eligibility rules.
+### 2B. If the first event is supervisor-review
 
-Do not keep wake pending merely because paused-object backlog exists.
-Do not erase a newer generation written concurrently.
+1. Claim the global lease as OTK.
+2. Follow `.agent/supervision.md` and `.agent/competition.md`.
+3. Independently inspect and score the PREVIOUS production shift.
+4. Fully persist verdict, rating, brigade rotation, object/management signals, human report, done record and lease release.
+5. The OTK phase is now closed and immutable for this run.
 
-## 5. Source reply
+Then a second phase MAY begin:
 
-Reply to GitHub issue/PR sources only after persistent state is safe.
+6. Re-read `.agent/wake.json`, `.agent/state.json`, `.agent/assignment.json`, `.agent/management/state.json` and pending queue.
+7. Continue only if:
+   - state is idle;
+   - transfer_state=working;
+   - stop_production=false;
+   - a normal production event for the active object exists.
+8. Select one normal production event using normal priority/age ordering.
+9. Claim the global lease again.
+10. Materialize the now-current `next_member_id` (which OTK has already advanced).
+11. Execute exactly one production shift using steps 2A.5–2A.13.
+12. STOP.
+
+The second phase may not be another supervisor-review.
+
+## 3. OTK independence
+
+The Chat that performs relay OTK did NOT perform the reviewed production shift; that shift came from an earlier scheduled run.
+
+The same Chat may become the NEXT worker only after OTK has been fully persisted and the brigade rotation has advanced.
+
+Never:
+- review a production shift created in the same scheduled run;
+- alter the previous shift score after starting the next production phase;
+- merge evidence between the reviewed shift and the new shift.
+
+## 4. Transfer behavior
+
+While NORMAL transfer is draining:
+- no new production phase starts;
+- OTK may still finish the last shift;
+- after OTK, do not enter the second production phase.
+
+## 5. Wake reconciliation
+
+After each phase, use `.agent/protocol.md`.
+
+If the first phase was OTK, do not clear wake before deciding whether the legal second production phase exists.
+
+Paused-object backlog alone must not keep production awake.
 
 ## 6. Stop
 
-Process only one eligible event in one scheduled run.
+Absolute limits per scheduled production run:
+- supervisor reviews: max 1;
+- production shifts: max 1;
+- total queue events: max 2;
+- simultaneous production workers: max 1.
