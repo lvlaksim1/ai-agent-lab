@@ -17,6 +17,6 @@ When the production station is idle, manager attention has priority over startin
 
 Production relay keeps the existing independent OTK -> next-worker sequence. Self-review remains forbidden.
 
-All clock tasks remain exact-schedule. No-op checks are silent. Worker reports use the immutable Telegram publication path.
+All clock tasks remain exact-schedule. No-op checks are silent. Worker start reports and independent OTK result reports use separate immutable Telegram publication paths.
 
 Rollback to the previous :02/:17/:32/:47 production + :59 manager topology is documented in `.agent/scheduler-rollback-variant-a.md`.
