@@ -36,3 +36,12 @@ The default `main` branch now contains discovery shims:
 They redirect a fresh Chat into the authoritative `work-webhook-test` Capsule. No external repository is required.
 
 - Idle scheduler notifications are suppressed via condition-watch semantics; the clocks still run on the same cadence.
+
+
+## Production continuity incident
+
+The shop was found idle after shift 21 because OTK completed before asynchronous CI and cleared the queue. The later gate success/E2E failure did not create a new central event. Event 024 now resumes from the fresh failure evidence.
+
+New invariant: if required external evidence is still pending, OTK must leave a same-object continuation; waiting preflight must not consume a worker turn.
+
+The condition-watch scheduler experiment was reverted. Production and manager clocks are back on exact schedules; do not trade clock reliability for UI-notification silence.
