@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-002",
+  "created_at": "2026-09-18T01:10:30Z",
+  "type": "project-mission-continuation",
+  "priority": 95,
+  "status": "pending",
+  "source": {
+    "kind": "agent-continuation",
+    "previous_event": "ios-runtime-release-20260918-001"
+  },
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "goal": "Continue the autonomous v0.1.0 mission. Verified progress: inspected E2E artifact 10515742786 from failed run 35263107244. Provisioning succeeds. The first real failure is an EL2 Data Abort with ESR 0x96000045 at ELR 0xfffffff0070a3bc4 and FAR 0x00003ef012ed0000; only after that does execution fall into the repeated Prefetch Abort loop at 0xfffffef000000000/0200. The previous diagnostic filter started at 0xfffffff0070b0000 and therefore missed the faulting translation block. Commit a36d2b00fa538bd713594bb68bbf9fb94abc46bc narrows the trace to 0xfffffff0070a3000+0x2000 so the exact faulting instruction and source registers can be captured without another 3.4 GB irrelevant exception-loop trace. Windows Build run 35294190796 and Windows End-to-End Boot run 35294190788 were queued when this continuation was created. Exact next action: inspect those runs when complete, download the new E2E evidence, identify the instruction at/around ELR 0xfffffff0070a3bc4 and prove how FAR 0x3ef012ed0000 is formed; then make the smallest root-cause Win64 fix and continue through genuine root-shell proof, package, VERSION 0.1.0 and GitHub Release v0.1.0. Do not weaken gates. If not finished in this run, enqueue exactly one continuation event using the same mission rules."
+}
