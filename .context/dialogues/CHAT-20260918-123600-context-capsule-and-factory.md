@@ -123,3 +123,19 @@ Decision:
 - lease is renewable and only protects against stale/dead workers;
 - near-term CI/test results should be awaited and consumed in the same run;
 - premature handoff with actionable work remaining is scored as an efficiency defect.
+
+
+### Generic dispatcher Variant C-5
+
+Owner chose to experimentally implement the more frequent-clock idea while keeping the same number of active Scheduled Tasks and preserving single-worker production.
+
+Platform constraint: one physical task cannot recur more frequently than hourly. Therefore five existing tasks are staggered evenly at :00/:12/:24/:36/:48, giving nominal 12-minute polling latency.
+
+All five physical tasks now use the same generic dispatcher prompt. They are clocks, not characters. Runtime role is selected from GitHub state:
+- active worker + manager attention -> manager may run concurrently;
+- active worker + no manager attention -> no-op;
+- idle + manager attention -> manager;
+- idle + production pending -> production relay;
+- idle/no work -> no-op.
+
+Variant A is preserved for rollback.
