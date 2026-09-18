@@ -141,7 +141,11 @@ if (fs.existsSync(pendingDir)) {
     check(event.status === "pending", file + ": status must be pending");
     check(typeof event.id === "string" && event.id.length > 0, file + ": id is required");
     check(Number.isInteger(event.priority) && event.priority >= 0 && event.priority <= 100, file + ": priority must be 0..100");
-    check(typeof event.goal === "string" && event.goal.trim().length > 0, file + ": goal is required");
+    if (event.type === "supervisor-review") {
+      check(event.source && typeof event.source.production_event === "string" && event.source.production_event.length > 0, file + ": supervisor-review requires source.production_event");
+    } else {
+      check(typeof event.goal === "string" && event.goal.trim().length > 0, file + ": goal is required");
+    }
     check(typeof event.object_id === "string" && ids.has(event.object_id), file + ": registered object_id is required");
 
     const eligible =
