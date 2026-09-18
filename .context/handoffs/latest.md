@@ -166,6 +166,7 @@ This is now fixed:
 - recovery guard uses the same unique scheme;
 - current Кузьмич shift 31 pending review was migrated to `review-shift-31-ios-runtime-release-20260918-032` and explicitly grandfathered to report/score policy v1;
 - new continuations must carry exact predecessor review/OTK-report paths for the next worker's start assessment;
-- validator enforces reporting/scoring policy v2, unique review ids, new Telegram paths and report schemas.
+- validator enforces reporting/scoring policy v2, unique review ids, new Telegram paths and report schemas;
+- stale recovery can deterministically rediscover the immutable start report and its creation commit if the worker dies in the narrow gap between publishing that file and linking it into state.
 
-Final runtime checks after the policy migration are green.
+Final Runtime Check and stale-worker recovery workflow after the policy migration are green.
