@@ -73,6 +73,8 @@ No other two-event combination is allowed.
 6. Read `.agent/brigade.json` and `.agent/competition.md`.
 7. Materialize exactly `next_member_id`. Proposed shift number is `shift_counter + 1`.
 8. Immediately publish the immutable worker start report per `.agent/reporting.md`, BEFORE any substantive target-repository work:
+   - first resolve the immediately preceding scored shift's exact OTK evidence from `predecessor_review_path` / `predecessor_otk_report_path` carried by the production event; if absent, use the shift-unique done metadata procedure from `.agent/supervision.md`; never guess a legacy review filename;
+   - base `ОЦЕНКА ПРЕДШЕСТВЕННИКА` on that OTK evidence plus inherited journal/checkpoint/project state;
    - set `reporting_policy_version: 2` and `shift_number` in runtime state;
    - create exactly one `.agent/reports/starts/shift-<shift-number>-<worker-id>-<production-event>.md`;
    - include only the factual first-person sections `ОЦЕНКА ПРЕДШЕСТВЕННИКА` and `МОЙ ПЛАН`; the plan must include a concrete success criterion;
