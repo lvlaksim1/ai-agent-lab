@@ -8,18 +8,18 @@
   "definition_of_done": ["Windows Build PASS","qemu-sptm Windows Gate PASS","Provisioning PASS","Darwin/XNU boot PASS","launchd PASS","root shell proof PASS","Windows Full Package PASS","VERSION 0.1.0","GitHub Release v0.1.0 published with verified package and SHA-256"],
   "current_phase": "boot-debugging",
   "health": "YELLOW",
-  "current_blocker_summary": "X2 already carries 0x12ed0000 on callee entry; LR=0xfffffff0070b3a58 moves the investigation to caller-side X2 preparation before the BL. Exact E2E evidence for 24c3206 is the next proof gate before any root logic fix.",
-  "shifts_since_manager_review": 0,
+  "current_blocker_summary": "Caller-side preparation of X2 before the BL returning near 0x...0b3a58 is now the proof target; exact E2E evidence for 24c3206 must identify the instruction/source producing X2=0x12ed0000 before any root logic fix.",
+  "shifts_since_manager_review": 1,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
-  "last_scored_shift": 8,
+  "last_scored_shift": 9,
   "manager_review_count": 2,
   "last_manager_review_at": "2026-09-18T04:57:08Z",
   "last_manager_decision": "DEC-002: KEEP_COURSE",
   "active_directive": null,
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-18T04:57:08Z"
+  "updated_at": "2026-09-18T05:02:00Z"
 }
