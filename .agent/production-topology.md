@@ -6,7 +6,7 @@ Each clock is generic. It first checks production state, production wake and man
 
 The nominal maximum polling latency is 12 minutes. This is NOT a shift-duration limit.
 
-A production worker continues across later clock ticks until the natural stop condition in `.agent/workflow.md`. The lease is renewable and protects only against stale/dead workers.
+A production worker continues across later clock ticks until the natural stop condition in `.agent/workflow.md`. The lease is renewable and protects ownership/concurrency. Worker liveness is separately represented by the mandatory heartbeat in `.agent/state.json`.
 
 Allowed concurrency: one worker + one manager.
 Forbidden: worker + worker.
