@@ -8,18 +8,18 @@
   "definition_of_done": ["Windows Build PASS","qemu-sptm Windows Gate PASS","Provisioning PASS","Darwin/XNU boot PASS","launchd PASS","root shell proof PASS","Windows Full Package PASS","VERSION 0.1.0","GitHub Release v0.1.0 published with verified package and SHA-256"],
   "current_phase": "boot-debugging",
   "health": "YELLOW",
-  "current_blocker_summary": "Shift 12 extended the exact producer trace one page earlier at target b1295ce; the first producer/initialization of boot-state slot 0x...090b80 is still unproven. Next gate is independent OTK plus exact b1295ce E2E evidence before any offset-vs-absolute-PA fix.",
-  "shifts_since_manager_review": 0,
+  "current_blocker_summary": "Shift 12 exact b1295ce E2E rules out the newly added upstream producer page: 0x12ed0000 still first appears only after the boot-state slot load near 0x...0b3978. The slot producer remains earlier or outside the executed traced range; address semantics remain unproven.",
+  "shifts_since_manager_review": 1,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
-  "last_scored_shift": 11,
+  "last_scored_shift": 12,
   "manager_review_count": 3,
   "last_manager_review_at": "2026-09-18T05:58:12Z",
   "last_manager_decision": "DEC-003: KEEP_COURSE",
   "active_directive": null,
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-18T05:58:12Z"
+  "updated_at": "2026-09-18T06:08:00Z"
 }
