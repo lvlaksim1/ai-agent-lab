@@ -32,12 +32,14 @@ The physical Scheduled Chat is not a named worker. It materializes the current `
 A worker is expected to use the live run fully, not merely produce the first plausible patch.
 
 Premature handoff is an efficiency defect when the worker could still have:
-- waited for near-term CI/build/test evidence;
-- inspected the result;
+- waited for CI/build/test evidence that the current Chat could observe;
+- inspected the terminal result;
 - continued the same evidence chain;
 - completed another directly justified step.
 
-There is no reward for artificially long shifts, but there is also no artificial 15-minute cap. Time spent is not itself a score; useful verified progress is.
+Pending CI is not a normal shift boundary. If the worker ends while mandatory CI is still running and there is no documented forced runtime/tooling stop, OTK assigns Efficiency/focus = 0/2 and cannot return APPROVED solely on that handoff.
+
+There is no reward for artificially long shifts, but there is also no artificial 15-minute, 45-minute or one-hour cap. Time spent is not itself a score; useful verified progress is.
 
 ## Shift scoring
 

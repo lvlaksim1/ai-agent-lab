@@ -26,10 +26,11 @@ Read `.agent/production-topology.md` for the topology.
    - ordinary production event whose object is assignment.active_object AND assignment.transfer_state=working.
 5. If there is no eligible event, reconcile wake using `.agent/protocol.md` and stop.
 6. If `.agent/state.json` has an unexpired processing lease, stop immediately. Never start a second worker.
-7. For a normal production event carrying a `wait_for` condition, perform a **wait_for preflight before claiming the lease or materializing a brigade member**:
-   - inspect only the referenced external evidence/status;
+7. For a normal production event carrying a `wait_for` condition, treat it as a **recovery/inherited wait**, not as the normal way a live worker handles CI:
+   - inspect only the referenced external evidence/status before claiming the lease or materializing a brigade member;
    - if it is still non-terminal, leave the event pending, keep wake pending, make no brigade/rating change, and stop quietly;
-   - if it is terminal, continue normally and let the worker act on the final evidence.
+   - if it is terminal, continue normally and let the worker consume the final evidence;
+   - a live worker MUST NOT create a routine `wait_for` handoff merely because CI/build/test is still running.
 8. Event selection for the FIRST phase:
    - supervisor-review has precedence;
    - otherwise higher numeric priority;
@@ -61,27 +62,32 @@ No other two-event combination is allowed.
 8. Before the substantive change, write down two things for the internal report: (a) a fair evidence-based assessment of the immediately preceding worker, and (b) the current worker's concrete plan/success criterion. Do not rewrite the plan with hindsight.
 9. Execute one production shift continuously until a **natural stop condition** is reached. The scheduled clock interval is NOT a shift-duration limit.
    - keep working through successive justified steps while the same worker still has actionable evidence;
-   - after starting CI/build/test, if its result can reasonably be observed within the same live Chat, wait for it, inspect it and continue;
-   - do not hand work to the next shift merely because one commit/push/test was produced;
-   - if the lease is approaching expiry while useful work is still progressing, renew the lease with SHA/CAS before continuing; the lease is a stale-worker safety lock, not a work-time budget;
+   - after starting CI/build/test, enter **active evidence wait**: keep ownership of the shift, poll/inspect the exact run until it becomes terminal while the current Chat and tools remain available, then consume that result and continue the same reasoning/action loop;
+   - pending CI/build/test is work-in-progress, not a handoff boundary, even when it takes many minutes;
+   - do not hand work to the next shift merely because one commit/push/test was produced or because an external run has started;
+   - if the lease is approaching expiry while useful work or active evidence wait is still progressing, renew the lease with SHA/CAS before continuing; the lease is a stale-worker safety lock, not a work-time budget;
    - persist intermediate journal/checkpoint state before long external waits so recovery is safe if the platform terminates the Chat.
 10. Never weaken tests, proof gates, Definition of Done or anti-cheat controls.
 11. Any continuation MUST inherit the same object_id.
 12. End the production shift only at a natural stop condition, then write the technical journal and internal first-person shift report using the four sections from `.agent/reporting.md`. The journal/handoff commit is the preferred authoritative end marker: capture its returned commit SHA, fetch the GitHub server timestamp and record it as `shift_completed_at_utc`.
 
 Natural stop conditions are limited to:
-- the event goal / current bounded work package is actually complete;
-- progress requires external evidence that is not yet available and cannot reasonably be obtained in the current live Chat;
-- a genuine blocker requires owner/manager/external action;
-- continuing would require speculation without evidence;
-- the platform/runtime is forcing termination, in which case persist a safe continuation first when possible.
+- the event goal / current bounded work package is actually complete **and every mandatory verification started by this shift has reached a terminal state and has been consumed by the worker**;
+- a genuine blocker requires owner/manager/external action that the worker cannot perform;
+- the required external evidence cannot be observed or polled from the current live Chat because the platform/tooling is forcing termination or has become unavailable;
+- continuing would require speculation without any obtainable evidence;
+- the platform/runtime is forcing termination, in which case persist a safe recovery continuation first when possible.
+
+Pending CI/build/test by itself is NEVER a natural stop condition.
 
 A worker MUST NOT stop merely because:
 - the next scheduled clock is approaching;
-- 15 minutes have elapsed;
+- 15, 30, 45 or 60 minutes have elapsed;
 - one patch/commit/push has been made;
-- CI has merely started;
-- a convenient handoff point exists while the worker can still make evidence-driven progress.
+- CI has started or is still running;
+- a convenient handoff point exists while the worker can still wait for, inspect, or act on evidence.
+
+If a worker is forced to terminate while external evidence is still running, a `wait_for` continuation is an emergency recovery checkpoint. Record the exact external run and the forced-stop reason. Do not use this path as normal shift choreography.
 13. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id. Include `shift_started_at_utc`, `shift_completed_at_utc`, predecessor identity when known, the original plan, evidence references, target/ref and continuation id if any.
 14. Persist done/state/wake. The production done record SHOULD also contain `shift_started_at_utc` and `shift_completed_at_utc`.
 14. STOP. The run MUST NOT review the shift it just performed.

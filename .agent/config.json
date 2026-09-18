@@ -29,5 +29,9 @@
   "physical_clock_count": 5,
   "nominal_max_dispatch_latency_minutes": 12,
   "manager_priority_when_idle": true,
-  "manager_concurrent_with_worker": true
+  "manager_concurrent_with_worker": true,
+  "external_evidence_wait_policy": "active-until-terminal-or-forced-stop",
+  "wait_for_continuation_policy": "emergency-recovery-only",
+  "verification_closes_work_package": true,
+  "premature_pending_ci_efficiency_score": 0
 }

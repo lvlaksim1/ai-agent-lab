@@ -61,6 +61,10 @@ check(config.physical_clock_count === 5, "physical clock count must remain 5");
 check(config.nominal_max_dispatch_latency_minutes === 12, "nominal dispatcher latency must remain 12 minutes");
 check(config.manager_priority_when_idle === true, "manager must retain idle-station priority");
 check(config.manager_concurrent_with_worker === true, "manager+worker concurrency must remain enabled");
+check(config.external_evidence_wait_policy === "active-until-terminal-or-forced-stop", "external evidence must remain active-wait by default");
+check(config.wait_for_continuation_policy === "emergency-recovery-only", "wait_for continuation must remain recovery-only");
+check(config.verification_closes_work_package === true, "mandatory verification must close the work package before handoff");
+check(config.premature_pending_ci_efficiency_score === 0, "premature pending-CI handoff efficiency score must remain zero");
 check(config.queue_scope_policy === "active-object", "queue must remain active-object scoped");
 
 check(assignment.schema_version === 1, "assignment schema_version must be 1");

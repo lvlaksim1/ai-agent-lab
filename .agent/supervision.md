@@ -35,6 +35,8 @@ Determine whether:
 - manager directive was followed;
 - proposed next action is highest-value;
 - claimed progress is actually validated;
+- the worker ended only at a valid natural stop boundary;
+- any pending external evidence handoff was caused by a documented forced runtime/tooling stop rather than ordinary CI latency;
 - anti-cheat was violated.
 
 Verdict:
@@ -62,17 +64,25 @@ CHEAT: repair compromised state/gates where possible and leave exactly one safe 
 
 ## Queue continuity guard
 
-If the project is not COMPLETE/BLOCKED and the next justified action depends on mandatory external evidence that is still running (for example a GitHub Actions gate), OTK MUST NOT leave the active-object production queue empty.
+Normal case: a live worker does **not** finish while mandatory external evidence is still running. The worker keeps the shift, waits for terminal evidence and continues.
 
-Before clearing wake:
+Recovery case: if a shift genuinely ended because the platform/runtime/tooling forced termination or could no longer observe the external run, OTK MUST NOT leave the active-object production queue empty.
+
+For that recovery case:
 - ensure exactly one same-object continuation exists;
-- describe the evidence/run that must be checked next;
-- if possible attach a `wait_for` object identifying the external run/check;
-- keep wake pending for that continuation.
+- describe the exact evidence/run that must be checked next;
+- attach a `wait_for` object when possible;
+- preserve the documented forced-stop reason;
+- keep wake pending.
 
-A continuation whose only purpose is to wait for external evidence must not consume a brigade turn while the evidence is still non-terminal. The production workflow performs that preflight before claiming a worker.
+A recovery continuation whose only purpose is to wait for external evidence must not consume a brigade turn while the evidence is still non-terminal.
 
-This guard exists to prevent a proven failure mode where OTK finished while CI was still running, cleared the queue, and the brigade then sat idle after CI later completed.
+If a worker voluntarily handed off ordinary pending CI while the live Chat/tools were still capable of waiting, treat that as premature handoff:
+- Efficiency/focus = 0/2;
+- verdict cannot be APPROVED on that handoff; use CORRECTED unless a stronger verdict applies;
+- preserve one safe continuation so production still proceeds.
+
+This guard remains as crash/recovery protection, not as normal shift choreography.
 
 ## Persistent rating
 

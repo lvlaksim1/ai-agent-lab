@@ -83,6 +83,18 @@ For the optional second phase after OTK:
 3. older created_at;
 4. lexical event id.
 
+## Active external evidence wait
+
+A production worker that starts mandatory CI/build/test retains ownership of the shift while that evidence is observable from the live Chat.
+
+Rules:
+- poll the exact external run until terminal while the current Chat/tools remain available;
+- renew the production lease as required;
+- consume terminal evidence in the same shift and continue the reasoning/action loop;
+- do not convert ordinary CI latency into a worker handoff.
+
+A `wait_for` continuation is recovery-only. It is appropriate when the live Chat/runtime/tooling is forced to terminate or becomes unable to observe the external run. The next worker performs preflight without consuming a brigade turn while that inherited evidence is still non-terminal.
+
 ## Wake reconciliation
 
 After a production-only run:
