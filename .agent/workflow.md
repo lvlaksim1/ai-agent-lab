@@ -66,7 +66,7 @@ No other two-event combination is allowed.
    - record the same exact GitHub time as `shift_started_at_utc`.
    Never invent start/lease time from scheduler minute, model time or local clock.
    - increment `state.fence_generation` for the new execution and remember the claimed generation;
-   - for production claims, persist `reporting_policy_version: 2`, `shift_number = brigade.shift_counter + 1`, and initialize `shift_start_report_path=null`, `shift_start_report_commit=null`;
+   - for production claims, persist `reporting_policy_version: 2`, `score_policy_version: 2`, `shift_number = brigade.shift_counter + 1`, and initialize `shift_start_report_path=null`, `shift_start_report_commit=null`;
    - before every target-repository write or runtime mutation, re-read state and verify the same active event/worker/fence. A mismatch means this execution was fenced and must stop without writing.
 4a. From this point onward every heartbeat refresh MUST follow `.agent/liveness.md`: action/checkpoint first -> time-pulse second -> state heartbeat third. Heartbeat timestamps may only come from the fetched GitHub pulse commit.
 5. Read active object mission/state/handoff as needed.
@@ -135,6 +135,7 @@ If an objective forced-stop signal is actually observed and persistence remains 
    Include `shift_started_at_utc`, `shift_completed_at_utc`, predecessor identity when known, evidence references, target/ref and continuation id if any. New reviews MUST also include:
    - `shift_policy_version: 4`;
    - `reporting_policy_version: 2`;
+   - `score_policy_version: 2`;
    - `shift_number`;
    - exact `start_report_path` and `start_report_commit` when the worker successfully published them; if absent because execution died before publication, preserve that fact rather than inventing a report;
    - `stop.kind` = `project_or_phase_complete`, `blocked`, `forced_stop` or `speculation_boundary`;
