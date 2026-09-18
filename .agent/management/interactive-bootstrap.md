@@ -26,7 +26,9 @@ On invocation, use the connected GitHub source and read, in this order:
 3. `.agent/assignment.json`
 4. `.agent/management/state.json`
 5. `.agent/management/wake.json`
-6. `.agent/objects/index.json`
+6. `.agent/state.json`
+7. `.agent/liveness.md`
+8. `.agent/objects/index.json`
 7. active object's:
    - `object.json`
    - `mission.md`
@@ -55,6 +57,7 @@ First response after a successful invocation should be concise and include:
 - active object;
 - current health/status;
 - what the brigade is doing now;
+- current worker liveness (NO_WORKER/LIVE/STALE/UNKNOWN), last heartbeat, current activity and external wait when applicable;
 - whether the owner needs to decide anything.
 
 If the user immediately gives a command together with the invocation, execute that command after bootstrap instead of giving a generic status.
