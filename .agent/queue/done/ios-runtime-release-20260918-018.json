@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-018",
+  "type": "production",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "palych",
+  "proposed_shift": 16,
+  "result": "Proved the mapping contract but not a numeric PA: pinned qemu-sptm maps SPTM VA with physlo + (VA - virtlo), and physlo is assigned at runtime load. Therefore the boot-state slot PA must be derived from the exact loaded SPTM before any hard-coded watchpoint. Located the future diagnostic layer in TCG qemu store/TLB handling. No target or proof-gate change.",
+  "completed_at": "2026-09-18T06:52:00Z",
+  "supervisor_review": "review-ios-runtime-release-20260918-018"
+}
