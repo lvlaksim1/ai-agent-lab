@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Decoded-layer APFS evidence is still required: capture source NXSB through disk.OpenWithOffset and rebuilt NXSB from the bare staging image, rerun exact Windows E2E, then identify the first causally relevant metadata incompatibility before changing writer semantics.",
+  "current_blocker_summary": "Shift 32 was recovered after runtime loss and requires independent OTK review; after review, resume decoded-layer APFS evidence capture at the persisted implementation boundary before any writer-semantic change.",
   "last_scored_shift": 31,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-18T23:01:22Z"
+  "updated_at": "2026-09-18T23:10:13Z"
 }
