@@ -167,6 +167,15 @@ if (fs.existsSync(doneDir)) {
   }
 }
 
+const telegramWorkflowPath = path.join(root, ".github/workflows/agent-telegram-report.yml");
+check(fs.existsSync(telegramWorkflowPath), "Telegram report workflow must exist");
+if (fs.existsSync(telegramWorkflowPath)) {
+  const telegramWorkflow = fs.readFileSync(telegramWorkflowPath, "utf8");
+  check(telegramWorkflow.includes("ref: ${{ github.sha }}"), "Telegram workflow must checkout the triggering commit SHA");
+  check(telegramWorkflow.includes(".agent/reports/redelivery/*.request"), "Telegram workflow must support explicit immutable redelivery requests");
+  check(telegramWorkflow.includes("git diff-tree --root"), "Telegram workflow must resolve newly added reports from the triggering commit");
+}
+
 const reportPath = path.join(root, ".agent/reports/latest.md");
 check(fs.existsSync(reportPath), "latest human report must exist");
 if (fs.existsSync(reportPath)) {
