@@ -25,6 +25,17 @@ Inspect as applicable:
 6. object mission / Definition of Done;
 7. applicable management directive.
 
+## Review-path resolution
+
+When prior OTK evidence is needed, NEVER construct or guess a review filename from an event id.
+Resolve it from the completed supervisor-review done record first:
+- read `.agent/queue/done/review-<production-event>.json` when available;
+- if it contains `review_path`, read exactly that path;
+- otherwise use an explicitly supplied `predecessor_review_path` from the pending review event;
+- only if neither exists, inspect existing review/report metadata instead of synthesizing a filename.
+
+A 404 on a guessed optional predecessor-review path is not a reason to mutate scheduler state or abandon an otherwise evidenced OTK review. Stop only if required evidence is genuinely unavailable after path resolution above.
+
 ## Review
 
 Determine whether:
