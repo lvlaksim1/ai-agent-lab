@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Pinned qemu-sptm gate disables plugins, and available MemoryRegion write trace events are not proven watchpoints for ordinary TCG guest-RAM stores. Next work must first prove the boot-state slot VA-to-PA mapping, then instrument the narrow TCG store path without changing guest semantics or proof gates.",
+  "current_blocker_summary": "Runtime SPTM mapping is the current evidence gate: the boot-state slot PA must be derived from actual physlo/virtlo before a narrow TCG-store probe; no speculative hard-coded PA or address-semantics change.",
   "last_scored_shift": 15,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
-  "last_event": "review-ios-runtime-release-20260918-017",
+  "last_event": "ios-runtime-release-20260918-018",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T06:48:00Z"
+  "updated_at": "2026-09-18T06:57:05Z"
 }
