@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "scoring_version": 1,
-  "shift_counter": 0,
-  "next_member_id": "petrovich",
+  "shift_counter": 1,
+  "next_member_id": "sanych",
   "rotation_order": [
     "petrovich",
     "sanych",
@@ -14,12 +14,12 @@
     {
       "id": "petrovich",
       "display_name": "Петрович",
-      "rating": 1000,
-      "shifts_scored": 0,
-      "total_score": 0,
-      "average_score": 0,
-      "best_score": null,
-      "last_score": null,
+      "rating": 1040,
+      "shifts_scored": 1,
+      "total_score": 9,
+      "average_score": 9,
+      "best_score": 9,
+      "last_score": 9,
       "cheat_strikes": 0
     },
     {
