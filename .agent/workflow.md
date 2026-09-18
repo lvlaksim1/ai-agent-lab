@@ -15,6 +15,7 @@ Hard concurrency invariant:
 Read `.agent/production-topology.md` for the topology.
 Read `.agent/evidence-acquisition.md` before production work; it is authoritative for actionable-next-step and BLOCKED closure.
 Read `.agent/liveness.md`; its heartbeat contract is mandatory for every processing production/OTK lease.
+Read `.agent/emergency-recovery.md`; verified stale workers may be externally fenced by the recovery guard even while an old lease timestamp remains in the future.
 
 ## 1. Resolve eligible work
 
@@ -27,7 +28,7 @@ Read `.agent/liveness.md`; its heartbeat contract is mandatory for every process
    - supervisor-review whose object is assignment.active_object;
    - ordinary production event whose object is assignment.active_object AND assignment.transfer_state=working.
 5. If there is no eligible event, reconcile wake using `.agent/protocol.md` and stop.
-6. If `.agent/state.json` has an unexpired processing lease, stop immediately. Never start a second worker.
+6. If `.agent/state.json` has an unexpired processing lease, stop immediately. Never start a second worker. A stale-worker lease is bypassed only by the separate recovery guard defined in `.agent/emergency-recovery.md`; a normal production clock never performs that preemption.
 7. For a normal production event carrying a `wait_for` condition, treat it as a **recovery/inherited wait**, not as the normal way a live worker handles CI:
    - inspect only the referenced external evidence/status before claiming the lease or materializing a brigade member;
    - if it is still non-terminal, leave the event pending, keep wake pending, make no brigade/rating change, and stop quietly;
@@ -64,6 +65,8 @@ No other two-event combination is allowed.
    - CAS state to processing with `started_at`, `started_at_anchor_commit`, `lease_until`, `lease_anchor_commit` and the initial heartbeat all derived from that pulse;
    - record the same exact GitHub time as `shift_started_at_utc`.
    Never invent start/lease time from scheduler minute, model time or local clock.
+   - increment `state.fence_generation` for the new execution and remember the claimed generation;
+   - before every target-repository write or runtime mutation, re-read state and verify the same active event/worker/fence. A mismatch means this execution was fenced and must stop without writing.
 4a. From this point onward every heartbeat refresh MUST follow `.agent/liveness.md`: action/checkpoint first -> time-pulse second -> state heartbeat third. Heartbeat timestamps may only come from the fetched GitHub pulse commit.
 5. Read active object mission/state/handoff as needed.
 6. Read `.agent/brigade.json` and `.agent/competition.md`.
@@ -207,3 +210,7 @@ Absolute limits per scheduled production run:
 - production shifts: max 1;
 - total queue events: max 2;
 - simultaneous production workers: max 1.
+
+## Runtime-loss note
+
+A production worker does not self-declare `runtime_loss`. Only the separate stale-worker recovery guard may create it after exact heartbeat verification. When that happens the old execution has been fenced; if it later resumes, it must stop on the mandatory fence check before any write.
