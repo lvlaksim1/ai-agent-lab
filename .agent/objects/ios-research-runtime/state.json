@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Exact E2E evidence now proves X2=0x12ed0000 is loaded from the boot-state structure at 0xfffffff007090b80 by the instruction at 0x...0b3978. Next proof target is the producer that initializes that slot and its offset-vs-absolute-PA semantics before any root address fix.",
-  "last_scored_shift": 10,
+  "current_blocker_summary": "Exact ffaa8cb E2E evidence confirms 0x12ed0000 still first appears at the boot-state load near 0x...0b3978; widening the caller trace back to 0x...0b3000 did not expose the slot producer. Next proof target is earlier initialization of boot-state slot 0x...090b80 before any address-semantics fix.",
+  "last_scored_shift": 11,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
-  "last_event": "ios-runtime-release-20260918-012",
+  "last_progress_class": "incremental",
+  "last_event": "ios-runtime-release-20260918-013",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T05:31:00Z"
+  "updated_at": "2026-09-18T05:52:00Z"
 }
