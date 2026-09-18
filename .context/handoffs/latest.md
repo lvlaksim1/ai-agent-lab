@@ -23,7 +23,7 @@ At installation production was idle and wake false; active object was iOS-Resear
 
 Do not reintroduce Work, mutable scheduler orchestration, worker+worker parallelism, Telegram-on-`latest.md`, or a second competing memory system.
 
-Next validation: start a truly empty Chat with this repo URL, bootstrap automatically, recover manager/runtime context, then persist one meaningful new decision back to Capsule.
+Fresh-chat bootstrap is now empirically proven: a truly empty Chat invoked only with the canonical manager phrase restored manager/runtime context correctly. Remaining validation: persist one meaningful decision back to Capsule from an independently bootstrapped manager Chat.
 
 
 ## Default-branch discovery
@@ -95,3 +95,8 @@ Still verify occupied-worker behavior on subsequent ticks and manager+worker con
 Shift #25 exposed that the old continuation model still ended workers immediately after starting CI. This is now corrected.
 
 A live worker must keep the shift during observable mandatory CI, renew lease if needed, wait for terminal evidence, consume it and continue. `wait_for` exists only as crash/forced-stop recovery. OTK penalizes voluntary pending-CI handoff with Efficiency/focus 0/2 and cannot approve that behavior.
+
+
+## Fresh-chat manager bootstrap validated
+
+The canonical invocation was tested in a truly empty Chat and worked end-to-end. The new Chat discovered the repository context, redirected to `work-webhook-test`, restored the persistent manager persona and current live state, and produced the correct owner escalation with a ready-to-send recommended answer. No prior-chat recap was requested.
