@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-009",
+  "created_at": "2026-09-18T04:03:35Z",
+  "type": "project-mission-continuation",
+  "priority": 95,
+  "status": "pending",
+  "source": {"kind":"agent-continuation","previous_event":"ios-runtime-release-20260918-008"},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
+  "goal": "Continue from diagnostic commit b8219b91f71f95a27ea2b071e62bfb03f6d65d2c. Obtain the exact predecessor+caller+callee one-insn Windows E2E artifact/log for this commit without guessing run IDs. Identify the instruction/source that materializes X22 before the call site around 0xfffffff0070d7828, establish whether X22 is contractually an offset or absolute PA, then make only the smallest evidence-backed root-cause fix. Preserve proof gates and continue toward genuine Darwin/launchd/root-shell proof and v0.1.0 release.",
+  "object_id": "ios-research-runtime"
+}
