@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-016",
+  "created_at": "2026-09-18T06:16:33Z",
+  "type": "production",
+  "priority": 90,
+  "status": "pending",
+  "source": {"kind":"otk-continuation","review":"review-ios-runtime-release-20260918-015"},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
+  "goal": "Obtain and inspect exact cbd8783869c11857a8042cac834461051daf8031 Windows E2E evidence for the newly extended 0xfffffff0070b1000 producer window. Determine whether the boot-state slot producer or an earlier carrier of 0x12ed0000 becomes visible. Preserve tcg one-insn mode and both SPTM proof windows. Do not apply any offset-vs-absolute-PA fix unless the producer chain proves the address semantics. If the producer remains outside the executed trace, make at most one minimal evidence-only diagnostic change that traces the slot write/source more directly rather than blindly extending pages.",
+  "object_id": "ios-research-runtime"
+}
