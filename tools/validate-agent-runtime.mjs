@@ -61,14 +61,18 @@ check(config.physical_clock_count === 5, "physical clock count must remain 5");
 check(config.nominal_max_dispatch_latency_minutes === 12, "nominal dispatcher latency must remain 12 minutes");
 check(config.manager_priority_when_idle === true, "manager must retain idle-station priority");
 check(config.manager_concurrent_with_worker === true, "manager+worker concurrency must remain enabled");
-check(config.external_evidence_wait_policy === "active-until-terminal-or-forced-stop", "external evidence must remain active-wait by default");
+check(config.external_evidence_wait_policy === "active-until-terminal-or-objective-forced-stop", "external evidence must remain active-wait until terminal or objective forced stop");
 check(config.wait_for_continuation_policy === "emergency-recovery-only", "wait_for continuation must remain recovery-only");
 check(config.verification_closes_work_package === true, "mandatory verification must close the work package before handoff");
 check(config.premature_pending_ci_efficiency_score === 0, "premature pending-CI handoff efficiency score must remain zero");
-check(config.shift_policy_version === 2, "shift policy version must remain 2");
+check(config.shift_policy_version === 3, "shift policy version must remain 3");
 check(config.work_package_policy === "causal-chain-until-natural-boundary", "work package must follow the causal chain");
 check(config.actionable_next_step_required === true, "actionable-next-step closure must remain required");
-check(config.continuation_policy === "natural-boundary-or-forced-stop-only", "continuation policy must remain natural-boundary-only");
+check(config.continuation_policy === "natural-boundary-or-objective-forced-stop-only", "continuation policy must remain objective-forced-stop-only");
+check(config.forced_stop_requires_objective_evidence === true, "forced_stop must require objective evidence");
+check(config.forced_stop_prediction_is_invalid === true, "predictive forced_stop must remain invalid");
+check(config.forced_stop_while_tools_operational_is_invalid === true, "forced_stop while tools remain operational must remain invalid");
+check(config.abrupt_runtime_termination_recovery === "checkpoint-plus-stale-lease", "abrupt runtime termination must recover through checkpoint plus stale lease");
 check(config.blocked_requires_exhaustion_evidence === true, "BLOCKED must require exhaustion evidence");
 check(config.evidence_acquisition_ladder_required === true, "evidence acquisition ladder must remain required");
 check(Number.isInteger(config.short_shift_review_threshold_seconds) && config.short_shift_review_threshold_seconds >= 60, "short shift review threshold must be a sane positive integer");
@@ -170,9 +174,9 @@ if (fs.existsSync(pendingDir)) {
     if (event.type === "supervisor-review") {
       check(event.source && typeof event.source.production_event === "string" && event.source.production_event.length > 0, file + ": supervisor-review requires source.production_event");
       if (event.shift_policy_version !== undefined) {
-        check(event.shift_policy_version === 2, file + ": shift_policy_version must be 2");
+        check([2, 3].includes(event.shift_policy_version), file + ": shift_policy_version must be legacy 2 or current 3");
         const stop = event.stop;
-        check(stop && typeof stop === "object", file + ": shift policy v2 requires stop record");
+        check(stop && typeof stop === "object", file + ": shift policy requires stop record");
         if (stop && typeof stop === "object") {
           check(["project_or_phase_complete", "blocked", "forced_stop", "speculation_boundary"].includes(stop.kind), file + ": invalid stop.kind");
           check(stop.actionable_next_step === false, file + ": shift may close only with actionable_next_step=false");
@@ -182,6 +186,19 @@ if (fs.existsSync(pendingDir)) {
           }
           if (stop.kind === "blocked") {
             check(typeof stop.external_action === "string" && stop.external_action.trim().length > 0, file + ": blocked stop requires external_action");
+          }
+          if (event.shift_policy_version === 3 && stop.kind === "forced_stop") {
+            check(Array.isArray(stop.forced_stop_evidence) && stop.forced_stop_evidence.length > 0, file + ": policy v3 forced_stop requires objective forced_stop_evidence");
+            if (Array.isArray(stop.forced_stop_evidence)) {
+              for (const [index, item] of stop.forced_stop_evidence.entries()) {
+                check(item && typeof item === "object", file + ": forced_stop_evidence[" + index + "] must be an object");
+                if (item && typeof item === "object") {
+                  check(["platform_signal", "tool_timeout", "tool_termination", "tool_unavailable"].includes(item.kind), file + ": invalid forced_stop_evidence kind");
+                  check(typeof item.observed_at_utc === "string" && Number.isFinite(Date.parse(item.observed_at_utc)), file + ": forced_stop_evidence requires valid observed_at_utc");
+                  check(typeof item.detail === "string" && item.detail.trim().length > 0, file + ": forced_stop_evidence requires detail");
+                }
+              }
+            }
           }
           if (typeof event.shift_started_at_utc === "string" && typeof event.shift_completed_at_utc === "string") {
             const start = Date.parse(event.shift_started_at_utc);
