@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-027",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "petrovich",
+  "proposed_shift": 25,
+  "result": "Durable gate artifact proved patch 0011 second-hunk conflict with existing 0006 diagnostics; removed only the redundant hunk and started replacement Windows/qemu-sptm CI without weakening gates.",
+  "target_commit": "3b530ed2946a6ee401fd17a0935999bdae1fbfbc",
+  "journal": ".agent/journal/ios-runtime-release-20260918-027.md",
+  "continuation_id": "ios-runtime-release-20260918-028",
+  "review_event": "review-ios-runtime-release-20260918-027",
+  "shift_started_at_utc": "2026-09-18T12:24:00Z",
+  "shift_completed_at_utc": "2026-09-18T12:27:14Z",
+  "completed_at": "2026-09-18T12:27:14Z"
+}
