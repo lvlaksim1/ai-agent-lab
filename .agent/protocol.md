@@ -45,9 +45,15 @@ Valid status:
 - idle
 - processing
 
-While processing it contains active_event, worker_id, started_at and lease_until.
+While processing it contains active_event, worker_id, started_at, lease_until and the mandatory heartbeat defined in `.agent/liveness.md`.
 
 Hard invariant: **two production workers never run concurrently.**
+
+Lease and heartbeat answer different questions:
+- lease: who owns the production station;
+- heartbeat: whether that owner has been observed alive recently and what it is doing.
+
+Never infer liveness from an unexpired lease.
 
 If another production clock sees an unexpired lease, it stops. An expired lease may be recovered and recovery must be documented.
 
@@ -88,7 +94,9 @@ For the optional second phase after OTK:
 A production worker that starts mandatory CI/build/test retains ownership of the shift while that evidence is observable from the live Chat.
 
 Rules:
+- publish the exact external wait target/status in heartbeat;
 - poll the exact external run until terminal while the current Chat/tools remain available;
+- refresh heartbeat after every poll;
 - renew the production lease as required;
 - consume terminal evidence in the same shift and continue the reasoning/action loop;
 - do not convert ordinary CI latency into a worker handoff.
