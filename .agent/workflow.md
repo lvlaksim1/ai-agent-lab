@@ -59,10 +59,29 @@ No other two-event combination is allowed.
 6. Read `.agent/brigade.json` and `.agent/competition.md`.
 7. Materialize exactly `next_member_id`. Proposed shift number is `shift_counter + 1`.
 8. Before the substantive change, write down two things for the internal report: (a) a fair evidence-based assessment of the immediately preceding worker, and (b) the current worker's concrete plan/success criterion. Do not rewrite the plan with hindsight.
-9. Execute one production shift: reconstruct evidence, attack the first real blocker, make the smallest justified change and verify it.
+9. Execute one production shift continuously until a **natural stop condition** is reached. The scheduled clock interval is NOT a shift-duration limit.
+   - keep working through successive justified steps while the same worker still has actionable evidence;
+   - after starting CI/build/test, if its result can reasonably be observed within the same live Chat, wait for it, inspect it and continue;
+   - do not hand work to the next shift merely because one commit/push/test was produced;
+   - if the lease is approaching expiry while useful work is still progressing, renew the lease with SHA/CAS before continuing; the lease is a stale-worker safety lock, not a work-time budget;
+   - persist intermediate journal/checkpoint state before long external waits so recovery is safe if the platform terminates the Chat.
 10. Never weaken tests, proof gates, Definition of Done or anti-cheat controls.
 11. Any continuation MUST inherit the same object_id.
-12. Write the technical journal and internal first-person shift report using the four sections from `.agent/reporting.md`. The journal/handoff commit is the preferred authoritative end marker: capture its returned commit SHA, fetch the GitHub server timestamp and record it as `shift_completed_at_utc`.
+12. End the production shift only at a natural stop condition, then write the technical journal and internal first-person shift report using the four sections from `.agent/reporting.md`. The journal/handoff commit is the preferred authoritative end marker: capture its returned commit SHA, fetch the GitHub server timestamp and record it as `shift_completed_at_utc`.
+
+Natural stop conditions are limited to:
+- the event goal / current bounded work package is actually complete;
+- progress requires external evidence that is not yet available and cannot reasonably be obtained in the current live Chat;
+- a genuine blocker requires owner/manager/external action;
+- continuing would require speculation without evidence;
+- the platform/runtime is forcing termination, in which case persist a safe continuation first when possible.
+
+A worker MUST NOT stop merely because:
+- the next scheduled clock is approaching;
+- 15 minutes have elapsed;
+- one patch/commit/push has been made;
+- CI has merely started;
+- a convenient handoff point exists while the worker can still make evidence-driven progress.
 13. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id. Include `shift_started_at_utc`, `shift_completed_at_utc`, predecessor identity when known, the original plan, evidence references, target/ref and continuation id if any.
 14. Persist done/state/wake. The production done record SHOULD also contain `shift_started_at_utc` and `shift_completed_at_utc`.
 14. STOP. The run MUST NOT review the shift it just performed.
@@ -90,6 +109,16 @@ Then a second phase MAY begin:
 12. STOP.
 
 The second phase may not be another supervisor-review.
+
+## 2C. Lease renewal and long shifts
+
+The production lease is renewable.
+
+- `config.lease_minutes` is the stale-lock horizon, not maximum shift duration.
+- While the same live worker is still making useful progress, renew `lease_until` with SHA/CAS before the remaining lease window falls below `config.lease_renew_before_minutes`.
+- Keep the same `active_event`, `worker_id` and `started_at`; only extend `lease_until` and record a heartbeat timestamp if present.
+- Another production clock that sees the renewed unexpired lease exits immediately.
+- Manager concurrency remains allowed.
 
 ## 3. OTK independence
 
