@@ -33,9 +33,9 @@ switching — manager is writing checkpoint and moving assignment.
 
 ## NORMAL transfer
 
-1. Owner or interactive manager writes an active transfer request and wakes management.
-2. Manager sets assignment to requested.
-3. If a production shift is processing or its OTK review is still pending, manager sets draining and waits.
+1. Owner/interactive manager records the active transfer request, immediately sets assignment.transfer_state=requested with the target/mode metadata, and raises management wake. These three writes are one logical request operation and should be committed atomically when possible.
+2. From that moment no NEW ordinary production shift is eligible on the old object.
+3. Manager validates the request. If a production shift is already processing or its OTK review is still pending, manager sets transfer_state=draining and waits.
 4. Current shift is allowed to finish. OTK scores it normally.
 5. No new production shift starts on the old object.
 6. Manager writes a fresh handoff/checkpoint for the old object.
