@@ -1,27 +1,44 @@
 # AI Agent Lab
 
-Изолированная лаборатория для разработки event-driven AI-агента на ChatGPT Plus без OpenAI API.
+Лаборатория и управляющий репозиторий автономного AI-цеха на ChatGPT Plus и GitHub.
 
-Текущая подтверждённая архитектура:
+Актуальный runtime и Project Context Capsule живут в ветке `work-webhook-test`.
 
-`GitHub event → Work dispatcher → re-arm ordinary Chat Scheduled Task → Chat worker → GitHub state/results`
+## Текущая архитектура
 
-Репозиторий используется только для безопасных инфраструктурных экспериментов и хранения состояния будущего агента.
+```text
+GitHub event
+→ GitHub Actions intake
+→ durable queue/wake/state in GitHub
+→ immutable native Scheduled Chat
+→ ordinary Chat reasoning
+→ GitHub code/state/journal
+```
+
+Work не используется как production reasoning path. Runtime не мутирует Scheduled Tasks.
+
+## Project Context Capsule
+
+Перед любой существенной работой новый Chat должен прочитать `AI_CONTEXT.md`.
+
+Полная стандартная Project Context Capsule v1.0 находится в этом же репозитории, в ветке `work-webhook-test`, под `.context/`.
+
+Обычная команда:
+
+`восстанови Project Context Capsule и продолжи проект https://github.com/lvlaksim1/ai-agent-lab`
 
 ## Вызов начальника участка
-
-В новом обычном Chat достаточно написать:
 
 ```text
 вызываю начальника участка https://github.com/lvlaksim1/ai-agent-lab
 ```
 
-Точка входа: `MANAGER_ENTRYPOINT.md`. Она переводит Chat на актуальный runtime в ветке `work-webhook-test` и восстанавливает постоянную личность, управленческое состояние, активный объект, бригаду и текущие директивы из GitHub.
+Точка входа: `MANAGER_ENTRYPOINT.md`. Она сначала восстанавливает Project Context Capsule, затем постоянную личность и live management/runtime state.
 
-## Project Context Capsule
+## Универсальный установщик Capsule
 
-Универсальная инструкция установки постоянной памяти проекта в любой GitHub-репозиторий: `CONTEXT_CAPSULE_INSTALL_PROMPT.md`.
+Универсальная инструкция для других репозиториев:
+- `CONTEXT_CAPSULE_INSTALL_PROMPT.md`
+- `docs/PROJECT_CONTEXT_CAPSULE_SPEC.md`
 
-Спецификация механизма: `docs/PROJECT_CONTEXT_CAPSULE_SPEC.md`.
-
-После установки в целевом репозитории новый Chat сможет начать с команды `восстанови Project Context Capsule и продолжи проект <URL>`.
+После установки каждый целевой репозиторий хранит свою Capsule локально и не зависит от AI Agent Lab как внешней памяти.
