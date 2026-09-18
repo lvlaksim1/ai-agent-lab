@@ -108,3 +108,18 @@ Scheduled Task не закреплена за конкретным персон�
 - worker + worker: ЗАПРЕЩЕНА.
 
 При concurrent GitHub update обе роли обязаны использовать SHA/CAS, перечитывать конфликтующий файл и сохранять более новое состояние.
+
+
+## Notification policy
+
+All five active Scheduled Tasks use condition-watch notification semantics.
+
+Normal clock ticks are silent:
+- production wake false;
+- manager attention false;
+- occupied production lease;
+- other no-op/skip outcomes.
+
+User-visible notification is reserved for meaningful production/OTK results, blockers/failures requiring attention, or substantive management outcomes/escalations.
+
+The clock still runs at the same cadence; notification suppression does not disable execution.
