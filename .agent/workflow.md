@@ -57,8 +57,14 @@ No other two-event combination is allowed.
 1. Read `.agent/management/state.json`.
 2. If `stop_production=true`, leave the event queued and stop with `PRODUCTION_STOPPED_BY_MANAGER`.
 3. If an active directive applies to this object and NEXT_SHIFT, read and follow it.
-4. Claim the global lease with SHA/CAS. Capture the returned GitHub commit SHA, fetch that commit, and record its GitHub server timestamp as `shift_started_at_utc`. Never invent start time from the scheduler minute.
-4a. Immediately initialize/refresh `.agent/state.json -> heartbeat` per `.agent/liveness.md`: identify worker, object, event, current activity and exact stale deadline. From this point onward refresh heartbeat at every mandatory refresh point and at least once per configured interval while the Chat remains alive.
+4. Claim the global lease using the exact-time protocol in `.agent/liveness.md`:
+   - first update `.agent/time-pulse.json` with purpose=`lease_claim` and the intended worker/event identity, but no generated current timestamp;
+   - capture the returned pulse commit SHA and fetch that exact GitHub commit;
+   - use ONLY its `commit.committer.date` as the authoritative start/lease time;
+   - CAS state to processing with `started_at`, `started_at_anchor_commit`, `lease_until`, `lease_anchor_commit` and the initial heartbeat all derived from that pulse;
+   - record the same exact GitHub time as `shift_started_at_utc`.
+   Never invent start/lease time from scheduler minute, model time or local clock.
+4a. From this point onward every heartbeat refresh MUST follow `.agent/liveness.md`: action/checkpoint first -> time-pulse second -> state heartbeat third. Heartbeat timestamps may only come from the fetched GitHub pulse commit.
 5. Read active object mission/state/handoff as needed.
 6. Read `.agent/brigade.json` and `.agent/competition.md`.
 7. Materialize exactly `next_member_id`. Proposed shift number is `shift_counter + 1`.
@@ -73,7 +79,8 @@ No other two-event combination is allowed.
    - pending CI/build/test is work-in-progress, not a handoff boundary, even when it takes many minutes;
    - do not hand work to the next shift merely because one commit/push/test was produced, one requested result was consumed, or a new blocker was discovered;
    - if the lease is approaching expiry while useful work or active evidence wait is still progressing, renew the lease with SHA/CAS before continuing; the lease is a stale-worker safety lock, not a work-time budget;
-   - persist intermediate journal/checkpoint state before long external waits so recovery is safe if the platform terminates the Chat.
+   - persist intermediate journal/checkpoint state before long external waits so recovery is safe if the platform terminates the Chat;
+   - immediately after each such checkpoint, create a new authoritative time-pulse and refresh heartbeat so last_seen_at is never earlier than the action/checkpoint it proves.
 10. Never weaken tests, proof gates, Definition of Done or anti-cheat controls.
 11. Any continuation MUST inherit the same object_id.
 12. End the production shift only at a natural stop condition, then write the technical journal and internal first-person shift report using the four sections from `.agent/reporting.md`. The journal/handoff commit is the preferred authoritative end marker: capture its returned commit SHA, fetch the GitHub server timestamp and record it as `shift_completed_at_utc`.
@@ -149,8 +156,9 @@ The second phase may not be another supervisor-review.
 The production lease is renewable.
 
 - `config.lease_minutes` is the stale-lock horizon, not maximum shift duration.
-- While the same live worker is still making useful progress, renew `lease_until` with SHA/CAS before the remaining lease window falls below `config.lease_renew_before_minutes`.
-- Keep the same `active_event`, `worker_id` and `started_at`; only extend `lease_until` when renewal is due. Heartbeat refresh is independent and must not silently renew the lease.
+- While the same live worker is still making useful progress, renew the lease before the remaining lease window falls below `config.lease_renew_before_minutes`.
+- Lease renewal MUST use the exact-time protocol: write purpose=`lease_renewal` to `.agent/time-pulse.json`, fetch the returned GitHub commit, then derive `lease_until = commit.committer.date + config.lease_minutes` and persist `lease_anchor_commit`.
+- Keep the same `active_event`, `worker_id` and `started_at`. Never calculate renewal from model/local time. Heartbeat may share the same pulse only when its activity description is accurate.
 - Another production clock that sees the renewed unexpired lease exits immediately.
 - Manager concurrency remains allowed.
 
@@ -176,7 +184,8 @@ While NORMAL transfer is draining:
 
 Heartbeat is operational state, not narrative logging.
 
-- Update it with minimal SHA/CAS writes.
+- Never write current timestamps directly into heartbeat state. First create/fetch the authoritative GitHub time-pulse, then project that exact time into state.
+- Update heartbeat state with minimal SHA/CAS writes after the pulse commit has been fetched.
 - Keep `activity_detail` concrete enough that the manager can answer "чем занят?" without opening the target repository.
 - During external wait, always expose the exact repository/run/job/artifact target and the last status actually observed by this worker.
 - Never mark a terminal status merely because the external system probably finished.
