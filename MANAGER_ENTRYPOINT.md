@@ -10,7 +10,7 @@
 
 `work-webhook-test`
 
-Первым действием прочитать в этой ветке:
+Сначала прочитать `AI_CONTEXT.md`, переключиться на authoritative branch `work-webhook-test`, выполнить `.context/ENTRYPOINT.md`, затем прочитать:
 
 `.agent/management/interactive-bootstrap.md`
 
