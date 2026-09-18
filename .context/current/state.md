@@ -85,3 +85,16 @@ Each clock first dispatches from GitHub state to MANAGER, PRODUCTION RELAY or ID
 Worker+worker remains forbidden. Worker+manager remains allowed.
 
 Variant A (:02/:17/:32/:47 production + :59 manager) is preserved as an explicit rollback plan.
+
+
+## First Variant C-5 empirical proof
+
+The first generic :24 clock successfully dispatched from GitHub state:
+- it claimed and completed OTK for shift #24;
+- published the immutable human report;
+- then, in the same production-relay run, claimed the next production event for Петрович;
+- no second worker was created.
+
+This proves the core `clock -> dispatcher -> OTK -> next worker` path is functioning.
+
+The remaining experiment is to observe later generic ticks while Петрович is still active and confirm they do not replace him; if management attention appears, a generic tick may instead run the manager concurrently.
