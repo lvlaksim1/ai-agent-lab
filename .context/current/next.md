@@ -11,4 +11,5 @@
 
 7. Observe the next production shift under active-evidence-wait semantics. Verify that a worker who starts mandatory CI remains owner of the same shift through terminal CI and continues from the result instead of creating a routine wait_for handoff.
 
-8. Validate dynamic write-back from an independently bootstrapped manager Chat after the owner gives the next meaningful manager decision.
+
+8. Observe event `ios-runtime-release-20260918-031`: verify the next worker adds the authorized Windows E2E APFS structural evidence channel, consumes exact evidence in the same causal chain, and does not change APFS writer semantics until a concrete incompatible field is proven.
