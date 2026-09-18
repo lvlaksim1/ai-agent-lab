@@ -5,7 +5,7 @@
   "worker_id": null,
   "started_at": null,
   "lease_until": null,
-  "last_event": "ios-runtime-release-20260918-021",
+  "last_event": "review-ios-runtime-release-20260918-021",
   "last_result": "done",
-  "last_completed_at": "2026-09-18T07:30:03Z"
+  "last_completed_at": "2026-09-18T07:48:22Z"
 }
