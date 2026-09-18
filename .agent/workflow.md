@@ -12,98 +12,68 @@ The scheduler is an immutable clock. Never create, update, re-arm, enable, disab
 2. Ignore `.gitkeep` and non-JSON files.
 3. If the queue is empty, reconcile `.agent/wake.json` according to `.agent/protocol.md` and stop.
 4. Select exactly one event: highest numeric `priority` first; for equal priority, oldest `created_at` first.
-5. Claim work by updating `.agent/state.json` from `idle` to `processing` with:
-   - `active_event`;
-   - `worker_id`;
-   - `started_at`;
-   - `lease_until`.
-6. The state update must use the current GitHub blob SHA. If it conflicts, another worker won the claim: stop without processing the event.
-7. If state is already `processing` and its lease has not expired, stop. If the lease expired, recovery is allowed and must be recorded in the journal.
+5. Claim work by updating `.agent/state.json` from `idle` to `processing` with `active_event`, `worker_id`, `started_at`, and `lease_until`.
+6. Use current GitHub blob SHA. On conflict, another worker won: stop.
+7. If state is already processing with an unexpired lease, stop. Expired lease recovery must be journaled.
 
 ## 2. Execute
 
-### 2A. Normal work event
+### 2A. Normal production shift
 
 For any event whose `type` is not `supervisor-review`:
 
-1. Read the selected event, `.agent/profile.md` and only the repository files required by the event.
-2. Reconstruct the intended behavior before changing anything.
-3. Identify the root cause or required change.
-4. Make the smallest justified modification.
-5. Verify against every supplied test/evidence relevant to the event.
-6. Do not weaken specifications, configuration or tests merely to make verification pass.
-7. For long-running/project missions, create at most one continuation event if more work is required. The continuation must summarize only verified progress, current blocker, relevant commit/run IDs and the exact next action.
-8. Before finishing, create a concise report at `.agent/reports/<event-id>.md` and update `.agent/reports/latest.md`.
-   Human-facing reports MUST be written in Russian, concise and readable without opening the technical journal.
-9. If the event changed code, changed mission state, queued a continuation, or made a non-trivial technical conclusion, also enqueue exactly one `supervisor-review` event with priority 100. The review event must reference:
-   - the completed event id;
-   - the report and journal paths;
+1. Read `.agent/brigade.json` and `.agent/competition.md`.
+2. Assign this shift to `next_member_id`. Proposed shift number is `shift_counter + 1`. Do NOT change brigade rating yet.
+3. Read the selected event, `.agent/profile.md` and only required target evidence.
+4. Reconstruct intended behavior, identify the real blocker, make the smallest justified change, verify against relevant evidence.
+5. Do not weaken tests/specifications/proof/release gates.
+6. For a long mission, create at most one continuation event if more work remains.
+7. Write technical journal `.agent/journal/<event-id>.md`.
+8. Write concise internal shift report `.agent/reports/<event-id>.md` containing the assigned brigade member and proposed shift number plus a non-technical Russian summary.
+9. ALWAYS enqueue exactly one `supervisor-review` event with priority 100 for every production shift. It must reference:
+   - reviewed event id;
+   - assigned brigade member id/name;
+   - proposed shift number;
+   - report/journal paths;
    - target repository/ref;
-   - commits made;
-   - CI/workflow run IDs inspected or started;
-   - the continuation event id, if any.
+   - commits and CI evidence;
+   - continuation event id, if any.
+10. Do NOT update `.agent/reports/latest.md` during the production shift. Telegram report is published only after independent ОТК scoring.
 
-The review event is a mandatory independent gate. Because it has priority 100, it must be processed before a normal continuation event with lower priority.
+### 2B. Supervisor review / ОТК
 
-### 2B. Supervisor review event
+For `type=supervisor-review`, follow `.agent/supervision.md` and `.agent/competition.md`.
 
-For `type=supervisor-review`, follow `.agent/supervision.md`.
+The supervisor independently checks evidence and scores the reviewed production shift. It must never accept the worker's self-assessment as proof.
 
-A supervisor review is a separate reasoning pass. Do not simply accept the previous worker's conclusion. Independently inspect the cited evidence, diffs and CI state.
+After verdict/scoring:
+1. update `.agent/brigade.json` using current blob SHA;
+2. increment `shift_counter` exactly once for the reviewed production shift;
+3. update that worker's rating/statistics;
+4. advance `next_member_id` exactly one position;
+5. write the private review to `.agent/reviews/<reviewed-event-id>.md`;
+6. update `.agent/reports/latest.md` in the strict four-field human format defined in `.agent/competition.md`.
 
-The supervisor may:
-- approve the work and leave the continuation unchanged;
-- correct the continuation goal/constraints if the next action is weak, premature or mis-scoped;
-- replace the continuation with a better one;
-- if a clearly harmful or unjustified change was introduced, make the smallest safe corrective/revert commit before allowing the mission to continue;
-- mark the mission blocked only when a genuine external blocker is proven.
-
-The supervisor must write a review record under `.agent/reviews/<reviewed-event-id>.md` and a concise supervisory report under `.agent/reports/<review-event-id>.md`.
-The human-facing supervisor report and `.agent/reports/latest.md` MUST be written in Russian.
+This `latest.md` update is the Telegram notification trigger.
 
 ## 3. Persist result
 
-Write `.agent/journal/<event-id>.md` containing:
-- event/source;
-- evidence inspected;
-- reasoning summary;
-- root cause;
-- changes;
-- verification;
-- blockers, if any.
-
-Create `.agent/queue/done/<event-id>.json` with:
-- `schema_version`;
-- `id`;
-- `status` = `done` or `blocked`;
-- `completed_at`;
-- `worker_id`;
-- short `summary`;
-- `journal` path;
-- optional `result` path/reference.
+Create `.agent/queue/done/<event-id>.json` with schema_version, id, status, completed_at, worker_id, summary, journal and optional result.
 
 Delete the corresponding pending JSON file.
-Return `.agent/state.json` to `idle`.
+Return `.agent/state.json` to idle.
 
 ## 4. Reconcile wake flag
 
-Use the generation/CAS rules in `.agent/protocol.md`.
+Use generation/CAS rules in `.agent/protocol.md`.
 
-- If another pending event exists, keep `pending=true`.
-- Set `pending=false` only when the pending queue is empty and no producer advanced `generation` while this run was working.
-- If a wake update conflicts, re-read it. Never overwrite a newer producer generation.
+Keep pending=true if pending events remain or generation advanced.
+Set pending=false only when queue is empty and generation did not advance.
+On SHA conflict, re-read and preserve newer state.
 
-## 5. Report to source
+## 5. Source reply
 
-After persistent state is safely written, report the outcome when the source supports a reply.
-
-For `source.kind=github_issue_comment`:
-- add one top-level comment to the same PR/issue;
-- first line: `[AGENT_RESULT] <event-id> <status>`;
-- second line: the same concise summary stored in the done record;
-- do not use the `[AGENT_TASK]` prefix.
-
-If reporting fails, do not roll back a successfully completed task. Record/reporting failure in the journal on the next recovery opportunity.
+For GitHub issue/PR comment sources, report completion only after persistent state is safe. Never use `[AGENT_TASK]` in result replies.
 
 ## 6. Stop
 
