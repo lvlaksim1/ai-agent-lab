@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "objects": [
+    {
+      "id": "ios-research-runtime",
+      "name": "iOS-Research-Runtime",
+      "repository": "lvlaksim1/iOS-Research-Runtime",
+      "target_ref": "main",
+      "status": "ACTIVE",
+      "object_path": ".agent/objects/ios-research-runtime/object.json",
+      "mission_path": ".agent/objects/ios-research-runtime/mission.md",
+      "state_path": ".agent/objects/ios-research-runtime/state.json",
+      "handoff_path": ".agent/objects/ios-research-runtime/handoff.md"
+    }
+  ]
+}
