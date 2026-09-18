@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "id": "ios-research-runtime",
+  "name": "iOS-Research-Runtime",
+  "repository": "lvlaksim1/iOS-Research-Runtime",
+  "target_ref": "main",
+  "status": "ACTIVE",
+  "queue_policy": "central-tagged",
+  "created_at": "2026-09-18T02:23:47.695Z",
+  "activated_at": "2026-09-18T02:23:47.695Z",
+  "paused_at": null,
+  "activation_count": 1
+}
