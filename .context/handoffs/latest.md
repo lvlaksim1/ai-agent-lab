@@ -81,3 +81,10 @@ The five existing tasks are now generic exact-schedule clocks at :00/:12/:24/:36
 They dispatch MANAGER / PRODUCTION RELAY / IDLE from GitHub state. A running worker remains in charge across later ticks; manager may run concurrently; a second worker may not.
 
 Rollback to Variant A is explicitly documented in .agent/scheduler-rollback-variant-a.md and does not require reverting queue, ratings or target-repository history.
+
+
+## Variant C-5 first live result
+
+The first :24 generic tick worked: it accepted shift #24 through OTK and then claimed the next event for Петрович in the same production relay. Core dispatcher routing is therefore empirically proven once.
+
+Still verify occupied-worker behavior on subsequent ticks and manager+worker concurrency before declaring the topology fully proven.
