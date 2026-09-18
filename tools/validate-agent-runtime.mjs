@@ -347,8 +347,8 @@ if (fs.existsSync(pendingDir)) {
             const end = Date.parse(event.shift_completed_at_utc);
             if (Number.isFinite(start) && Number.isFinite(end) && end >= start) {
               const durationSeconds = Math.floor((end - start) / 1000);
-              if (durationSeconds < config.short_shift_review_threshold_seconds && event.continuation_id) {
-                check(typeof stop.short_shift_justification === "string" && stop.short_shift_justification.trim().length > 0, file + ": short unresolved shift requires stop.short_shift_justification");
+              if (durationSeconds < config.short_shift_review_threshold_seconds && event.continuation_id && stop.kind !== "runtime_loss") {
+                check(typeof stop.short_shift_justification === "string" && stop.short_shift_justification.trim().length > 0, file + ": short unresolved voluntary shift requires stop.short_shift_justification");
               }
             }
           }
