@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 14,
+  "sequence": 15,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Waiting for Ramdisk Tool Windows run 35406547753 to verify repaired main.go; job 105797373329 in progress.",
+  "activity_kind": "working",
+  "activity_detail": "Checkpoint persisted; Ramdisk Tool Windows verification succeeded. Next action remains decoded-layer source/rebuilt NXSB instrumentation.",
   "fence_generation": 11
 }
