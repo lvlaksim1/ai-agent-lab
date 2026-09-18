@@ -77,5 +77,20 @@
   "runtime_loss_auto_efficiency_penalty": false,
   "fence_generation_required": true,
   "zombie_write_fencing_required": true,
-  "normal_live_worker_crosses_clock_boundary": true
+  "normal_live_worker_crosses_clock_boundary": true,
+  "reporting_policy_version": 2,
+  "worker_start_report_required": true,
+  "worker_end_report_required": false,
+  "worker_start_report_before_substantive_work": true,
+  "otk_result_report_required": true,
+  "otk_result_report_voice": "independent-supervisor",
+  "score_policy_version": 2,
+  "score_weights": {
+    "verified_useful_progress": 4,
+    "engineering_quality": 3,
+    "efficiency_focus_while_alive": 2,
+    "start_assessment_and_plan_quality": 1
+  },
+  "unique_review_event_per_shift": true,
+  "review_event_id_pattern": "review-shift-<shift-number>-<production-event>"
 }
