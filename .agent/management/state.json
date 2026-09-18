@@ -13,8 +13,8 @@
   "current_blocker_summary": "DIR-011 evidence channel is implemented. Exact Windows E2E run 35390159689 is terminal failure; production must consume the persisted source-vs-rebuilt APFS structural evidence before any writer semantic change.",
   "shifts_since_manager_review": 1,
   "consecutive_no_progress": 0,
-  "consecutive_corrected": 0,
-  "last_otk_verdict": "APPROVED",
+  "consecutive_corrected": 1,
+  "last_otk_verdict": "CORRECTED",
   "last_progress_class": "substantial",
   "last_scored_shift": 29,
   "manager_review_count": 10,
@@ -23,5 +23,5 @@
   "active_directive": "DIR-011",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-18T20:25:00Z"
+  "updated_at": "2026-09-18T20:26:00Z"
 }
