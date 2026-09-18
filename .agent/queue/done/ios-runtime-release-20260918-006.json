@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-006",
+  "object_id": "ios-research-runtime",
+  "status": "done",
+  "worker_id": "borisych",
+  "proposed_shift": 4,
+  "completed_at": "2026-09-18T03:34:20Z",
+  "result": "Proved SPTM callee is internally consistent phys-to-virt translation and narrowed blocker to offset-valued X22 provenance; expanded diagnostic only to immediate caller.",
+  "target_commit": "e94689404837b04402e5d7fd89cb9466fca1e0b0",
+  "journal": ".agent/journal/ios-runtime-release-20260918-006.md",
+  "continuation_id": "ios-runtime-release-20260918-007",
+  "supervisor_review_id": "review-ios-runtime-release-20260918-006"
+}
