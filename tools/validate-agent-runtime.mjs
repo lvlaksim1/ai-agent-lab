@@ -136,6 +136,19 @@ for (const field of ["shifts_since_manager_review", "consecutive_no_progress", "
 check(typeof managerState.owner_decision_required === "boolean", "owner_decision_required must be boolean");
 check(typeof managerState.stop_production === "boolean", "stop_production must be boolean");
 
+const managerReportPath = path.join(root, ".agent/management/reports/latest.md");
+check(fs.existsSync(managerReportPath), "latest manager report must exist");
+if (fs.existsSync(managerReportPath) && managerState.owner_decision_required === true) {
+  const managerReport = fs.readFileSync(managerReportPath, "utf8");
+  for (const marker of [
+    "## Что требуется от владельца",
+    "## Зачем это нужно",
+    "## Варианты ответа"
+  ]) {
+    check(managerReport.includes(marker), "owner-decision manager report missing marker: " + marker);
+  }
+}
+
 check(brigade.schema_version === 1, "brigade schema_version must be 1");
 check(Array.isArray(brigade.rotation_order) && brigade.rotation_order.length === 8, "brigade must contain eight workers");
 check(Array.isArray(brigade.members) && brigade.members.length === 8, "brigade members must contain eight workers");
