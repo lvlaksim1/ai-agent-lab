@@ -9,9 +9,9 @@ After timing-mode changes, enabled tasks did not visibly fire on the expected ti
 
 Cross-repository forwarding exists, but a complete real source-repository → central intake → worker → result cycle should still be explicitly proven before being called universally verified.
 
-## OPEN — fresh-chat Context Capsule proof
+## CLOSED — fresh-chat Context Capsule proof
 
-Use a completely new empty Chat to verify repository discovery, bootstrap, manager continuity and dynamic write-back.
+A truly empty Chat restored the manager from repository context and subsequently persisted the owner's APFS evidence-channel decision back into both live runtime and Project Context Capsule. Discovery, manager continuity and dynamic write-back are empirically proven.
 
 ## OPEN — first natural immutable report publication
 
