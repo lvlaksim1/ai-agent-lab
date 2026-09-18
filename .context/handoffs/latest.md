@@ -52,3 +52,14 @@ The condition-watch scheduler experiment was reverted. Production and manager cl
 A second continuity issue was observed: changing timing mode back to exact did not by itself produce the expected next tick. The five active tasks were explicitly re-anchored to future Moscow DTSTART values while preserving the factory cadence.
 
 At the repair point event 024 was still pending, wake=true, state idle. First expected production recovery tick: 14:32 MSK. Verify it before declaring the clock healthy.
+
+
+## Telegram publication race fixed
+
+Shift #22 proved that production and OTK were working after the schedule re-anchor, but the Telegram send step was skipped.
+
+Exact cause: the workflow triggered from the immutable-report commit but checked out the moving branch head. Later OTK commits advanced the branch before checkout, so `git diff-tree HEAD` inspected the wrong commit and found no newly added report.
+
+The workflow now checks out the triggering `github.sha`, resolves reports from that commit, and supports explicit redelivery requests. A redelivery of shift #22 completed successfully.
+
+Next proof required: one natural report must publish and deliver with no recovery request.
