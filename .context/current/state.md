@@ -114,3 +114,18 @@ Policy corrected:
 - unjustified pending-CI handoff gets Efficiency/focus 0/2 and cannot receive APPROVED solely on that handoff.
 
 Runtime validator passed on the control-plane commit.
+
+
+## Shift closure policy v2 — 2026-09-18
+
+Owner approved replacing micro-handoff behavior with a causal-chain natural-boundary policy.
+
+New invariant:
+- a queued event is an entry point, not an automatic shift boundary;
+- discovering the next directly actionable blocker keeps the SAME worker on shift;
+- before handoff the worker must prove `actionable_next_step=false`;
+- BLOCKED requires an evidence-acquisition ladder, exhaustion evidence and a precise external action;
+- short shifts are not forbidden, but short unresolved shifts trigger mandatory OTK closure review;
+- any premature handoff gets Efficiency/focus 0/2 and cannot be APPROVED.
+
+The policy is enforced by `.agent/evidence-acquisition.md`, workflow/supervision/competition rules, config invariants and runtime validation.
