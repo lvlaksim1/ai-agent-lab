@@ -34,6 +34,7 @@ For any event whose `type` is not `supervisor-review`:
 6. Do not weaken specifications, configuration or tests merely to make verification pass.
 7. For long-running/project missions, create at most one continuation event if more work is required. The continuation must summarize only verified progress, current blocker, relevant commit/run IDs and the exact next action.
 8. Before finishing, create a concise report at `.agent/reports/<event-id>.md` and update `.agent/reports/latest.md`.
+   Human-facing reports MUST be written in Russian, concise and readable without opening the technical journal.
 9. If the event changed code, changed mission state, queued a continuation, or made a non-trivial technical conclusion, also enqueue exactly one `supervisor-review` event with priority 100. The review event must reference:
    - the completed event id;
    - the report and journal paths;
@@ -58,6 +59,7 @@ The supervisor may:
 - mark the mission blocked only when a genuine external blocker is proven.
 
 The supervisor must write a review record under `.agent/reviews/<reviewed-event-id>.md` and a concise supervisory report under `.agent/reports/<review-event-id>.md`.
+The human-facing supervisor report and `.agent/reports/latest.md` MUST be written in Russian.
 
 ## 3. Persist result
 
