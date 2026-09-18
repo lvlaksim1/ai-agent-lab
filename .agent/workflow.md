@@ -22,12 +22,42 @@ The scheduler is an immutable clock. Never create, update, re-arm, enable, disab
 
 ## 2. Execute
 
+### 2A. Normal work event
+
+For any event whose `type` is not `supervisor-review`:
+
 1. Read the selected event, `.agent/profile.md` and only the repository files required by the event.
 2. Reconstruct the intended behavior before changing anything.
 3. Identify the root cause or required change.
 4. Make the smallest justified modification.
 5. Verify against every supplied test/evidence relevant to the event.
 6. Do not weaken specifications, configuration or tests merely to make verification pass.
+7. For long-running/project missions, create at most one continuation event if more work is required. The continuation must summarize only verified progress, current blocker, relevant commit/run IDs and the exact next action.
+8. Before finishing, create a concise report at `.agent/reports/<event-id>.md` and update `.agent/reports/latest.md`.
+9. If the event changed code, changed mission state, queued a continuation, or made a non-trivial technical conclusion, also enqueue exactly one `supervisor-review` event with priority 100. The review event must reference:
+   - the completed event id;
+   - the report and journal paths;
+   - target repository/ref;
+   - commits made;
+   - CI/workflow run IDs inspected or started;
+   - the continuation event id, if any.
+
+The review event is a mandatory independent gate. Because it has priority 100, it must be processed before a normal continuation event with lower priority.
+
+### 2B. Supervisor review event
+
+For `type=supervisor-review`, follow `.agent/supervision.md`.
+
+A supervisor review is a separate reasoning pass. Do not simply accept the previous worker's conclusion. Independently inspect the cited evidence, diffs and CI state.
+
+The supervisor may:
+- approve the work and leave the continuation unchanged;
+- correct the continuation goal/constraints if the next action is weak, premature or mis-scoped;
+- replace the continuation with a better one;
+- if a clearly harmful or unjustified change was introduced, make the smallest safe corrective/revert commit before allowing the mission to continue;
+- mark the mission blocked only when a genuine external blocker is proven.
+
+The supervisor must write a review record under `.agent/reviews/<reviewed-event-id>.md` and a concise supervisory report under `.agent/reports/<review-event-id>.md`.
 
 ## 3. Persist result
 
