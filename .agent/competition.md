@@ -53,14 +53,24 @@ There is no reward for artificially long shifts and no artificial minimum durati
 
 ## Shift scoring
 
-Every production shift is scored by the independent supervisor after the worker has finished.
+Every production shift is scored by the independent supervisor after the worker has finished or after a verified runtime-loss recovery.
 
 Maximum: 10 points.
 
 - Verified useful progress: 0..4
 - Engineering quality: 0..3
-- Efficiency/focus: 0..2
-- Handoff quality: 0..1
+- Efficiency/focus while alive: 0..2
+- Start assessment and plan quality: 0..1
+
+The former handoff-quality point is removed. A worker that disappears because the Scheduled Chat runtime ends cannot be expected to write an end-of-shift handoff.
+
+The 0..1 start-report category evaluates the immutable pre-work report:
+- fair evidence-based assessment of the predecessor;
+- plan aimed at the actual blocker/current objective;
+- useful verification/success criterion;
+- no hindsight rewrite.
+
+A missing required v2 start report scores 0/1 in this category. Runtime loss itself does not reduce Efficiency/focus.
 
 Normal rating delta:
 
@@ -118,38 +128,27 @@ Examples:
 - «Петрович до меня копнул куда надо, так что заново землю не перелопачивал. Я проверил его гипотезу и выяснил, на каком шаге адрес начинает портиться.»
 - «Лавры пока себе не выписываю: сборка прошла, а основной E2E ещё не подтвердил исправление.»
 
-## Telegram/human report
+## Human reporting
 
 Human-facing report format is authoritative in `.agent/reporting.md`.
 
-The report includes project/worker/shift, Moscow start/end time, a structured first-person `Доклад`, then separate ОТК score and rating lines.
+Reporting is now split by authorship and time:
 
-The `Доклад` MUST be a natural Russian first-person report with four explicit sections:
-- ОЦЕНКА ПРЕДЫДУЩЕГО
-- МОЙ ПЛАН
-- ЧТО ПОЛУЧИЛОСЬ
-- СЛЕДУЮЩЕМУ
+1. The **worker** writes one immutable first-person start report before substantive work:
+   - ОЦЕНКА ПРЕДШЕСТВЕННИКА
+   - МОЙ ПЛАН
 
-ОТК score and rating MUST NOT be embedded into the narrative.
+2. **OTK** later writes an independent result report from evidence:
+   - what was planned;
+   - what was actually done;
+   - what is verified;
+   - where the shift stopped;
+   - what goes next;
+   - component score, verdict and rating.
 
-ОТК remains the factual authority. It writes the final human report in the worker's voice only after independent verification. First-person style must never turn an unverified worker claim into a fact.
+OTK must never fabricate `ЧТО ПОЛУЧИЛОСЬ` or `СЛЕДУЮЩЕМУ` in the dead worker's voice.
 
-Technical detail is REQUIRED but should remain understandable to a technically literate person who is not deeply immersed in the project.
-
-Good report content:
-- briefly say what the predecessor left and whether it was useful;
-- name the concrete subsystem/component being worked on when helpful;
-- describe the real technical problem in plain language;
-- mention one or two concrete technical findings, for example a failing stage, data/address corruption, unsupported diagnostic mode, wrong API response, broken validation path, or the exact kind of test that passed/failed;
-- explain jargon inline when it would otherwise be opaque;
-- say what materially changed during the shift;
-- state ОТК score/rating movement naturally;
-- say what the next shift needs to prove or fix;
-- keep one or two light factory jokes if they fit.
-
-Avoid turning the report into a raw log. Do not include commit hashes, run IDs, long memory addresses, stack dumps, branch names, file paths or raw CI metadata unless the owner explicitly asks for them.
-
-Detailed evidence stays in `.agent/journal/` and `.agent/reviews/`.
+Technical detail is required but should remain understandable to a technically literate owner. Detailed raw evidence stays in `.agent/journal/` and `.agent/reviews/`.
 
 ## Runtime loss
 
