@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "X22=0x12ed0000 predates the previously captured predecessor window; commit 20317e6 expands the first SPTM trace backward and Windows Build passes, but the new E2E trace must still identify the producer before root logic changes.",
-  "last_scored_shift": 7,
+  "current_blocker_summary": "Exact trace proves X22 inherits 0x12ed0000 from X2 via mov x22,x2; diagnostic commit bca9846 expands the predecessor window to identify where X2 first acquires that value before any root logic change.",
+  "last_scored_shift": 8,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
-  "last_event": "review-ios-runtime-release-20260918-009",
+  "last_event": "review-ios-runtime-release-20260918-010",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T04:35:00Z"
+  "updated_at": "2026-09-18T04:48:00Z"
 }
