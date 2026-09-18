@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "object_id": "ios-research-runtime",
+  "status": "ACTIVE",
+  "health": "YELLOW",
+  "current_phase": "boot-debugging",
+  "current_blocker_summary": "Boot investigation is in progress; recent shifts are narrowing the first real failure path.",
+  "last_scored_shift": 1,
+  "last_otk_verdict": "CORRECTED",
+  "last_progress_class": "incremental",
+  "last_event": "review-ios-runtime-release-20260918-003",
+  "checkpoint_generation": 0,
+  "last_checkpoint_at": null,
+  "updated_at": "2026-09-18T02:23:47.695Z"
+}
