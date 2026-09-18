@@ -8,18 +8,18 @@
   "definition_of_done": ["Use the authoritative object mission Definition of Done"],
   "current_phase": "boot-debugging",
   "health": "YELLOW",
-  "current_blocker_summary": "Decoded-layer APFS evidence is still required: capture source NXSB through disk.OpenWithOffset and rebuilt NXSB from the bare staging image, rerun exact Windows E2E, then identify the first causally relevant metadata incompatibility before changing writer semantics.",
+  "current_blocker_summary": "Shift 32 was recovered after runtime loss and requires independent OTK review; after review, resume decoded-layer APFS evidence capture at the persisted implementation boundary before any writer-semantic change.",
   "shifts_since_manager_review": 0,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
   "last_scored_shift": 31,
-  "manager_review_count": 11,
-  "last_manager_review_at": "2026-09-18T23:01:22Z",
-  "last_manager_decision": "DEC-012: KEEP_DECODED_APFS_EVIDENCE_COURSE",
+  "manager_review_count": 12,
+  "last_manager_review_at": "2026-09-18T23:10:13Z",
+  "last_manager_decision": "DEC-013: KEEP_DECODED_APFS_EVIDENCE_COURSE_AFTER_RUNTIME_LOSS",
   "active_directive": "DIR-011",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-18T23:01:22Z"
+  "updated_at": "2026-09-18T23:10:13Z"
 }
