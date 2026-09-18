@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Exact trace proves X22 inherits 0x12ed0000 from X2 via mov x22,x2; diagnostic commit bca9846 expands the predecessor window to identify where X2 first acquires that value before any root logic change.",
+  "current_blocker_summary": "X2 already carries 0x12ed0000 on callee entry; LR=0xfffffff0070b3a58 moves the investigation to caller-side X2 preparation before the BL. Exact E2E evidence for 24c3206 is the next proof gate before any root logic fix.",
   "last_scored_shift": 8,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
-  "last_event": "review-ios-runtime-release-20260918-010",
+  "last_event": "ios-runtime-release-20260918-011",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T04:48:00Z"
+  "updated_at": "2026-09-18T04:57:08Z"
 }
