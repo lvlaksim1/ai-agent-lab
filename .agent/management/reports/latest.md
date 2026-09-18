@@ -1,21 +1,19 @@
-# Начальник участка — обзор 8
+# Начальник участка — обзор 9
 
 **Объект:** `ios-research-runtime`  
-**Решение:** `EVIDENCE_ACCESS_ESCALATION`  
+**Решение:** `HOLD_EVIDENCE_BLOCK`  
 **Здоровье:** `BLOCKED`
 
 ## Обстановка
 
-Подтверждённый технический прогресс сохраняется: после исправления Win64 address corruption exact Windows E2E проходит SPTM/XNU и доходит до BSD root `md0`. Первый устойчивый blocker теперь — rebuilt recovery APFS, который mountroot отвергает с error 79.
+Производство сейчас корректно простаивает: production state `idle`, production wake не pending. Подтверждённая граница прежняя — exact Windows E2E дошёл до BSD root `md0`, rebuilt recovery APFS падает на `mountroot error 79`.
 
-ОТК подтвердил, что последняя смена правильно не меняла APFS writer без причинного свидетельства. Текущий runtime видит метаданные workflow и исходники, но не получает бинарное содержимое exact E2E artifact/full job log, необходимое для доказательства первого несовместимого NX/APFS/checkpoint поля. Повтор той же производственной смены без нового evidence channel не даст новой информации.
+Причинное свидетельство для следующей writer-правки по-прежнему недоступно: нужен exact E2E artifact/full job log либо эквивалентный компактный structural dump source-vs-rebuilt NX/APFS/checkpoint metadata. Без него новая смена повторит уже выполненную диагностику или будет вынуждена гадать.
 
 ## Управленческое решение
 
-Объект переведён в управленческое состояние `BLOCKED`. Proof gates и APFS writer сохраняются без ослабления и без догадок. Новая производственная смена по прежнему действию не запускается.
+Сохраняю `BLOCKED` и не будю производство. APFS writer и proof gates не трогаем. Перевод и emergency STOP не нужны.
 
-Для продолжения требуется решение владельца: предоставить или разрешить доступный для production runtime exact E2E artifact/full job log либо эквивалентный компактный structural dump original-vs-rebuilt NX/APFS/checkpoint metadata.
+Решение владельца остаётся необходимым: дать production доступ к exact E2E artifact/full log или передать эквивалентный structural dump, после чего можно возобновить доказательную локализацию первого несовместимого metadata field.
 
-Перевод объекта не запрошен; emergency STOP не требуется.
-
-**Decision:** `DEC-008`.
+**Decision:** `DEC-009`.
