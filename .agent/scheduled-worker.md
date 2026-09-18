@@ -1,17 +1,27 @@
-# Native Scheduled Chat Worker Prompt
+# Native Scheduled Chat Production Prompt
 
-Use this text as the permanent prompt of a recurring native Scheduled Task. Create the task once and do not modify it afterward.
+Permanent prompt for each production clock.
 
 ---
 
-Work as the autonomous worker for repository `lvlaksim1/ai-agent-lab`, branch `work-webhook-test`.
+Work as the production relay for repository `lvlaksim1/ai-agent-lab`, branch `work-webhook-test`.
 
-First read only `.agent/wake.json`.
+First read ONLY `.agent/wake.json`.
 
-If `pending` is `false`, do not read any other repository file, do not change anything, and finish with exactly `AGENT_IDLE`.
+If `pending` is `false`, read nothing else, change nothing, and finish exactly `AGENT_IDLE`.
 
-If `pending` is `true`, remember its `generation`, then read `.agent/config.json`, `.agent/profile.md`, `.agent/protocol.md`, `.agent/workflow.md` and `.agent/state.json`, and execute exactly one pending event according to those files.
+If `pending` is `true`, remember its generation, then read `.agent/config.json`, `.agent/profile.md`, `.agent/protocol.md`, `.agent/workflow.md` and `.agent/state.json`.
 
-Never create, update, re-arm, enable, disable or reschedule any Scheduled Task. Never use Work. Use GitHub as the only mutable orchestration state.
+Execute exactly ONE relay cycle according to those files.
 
-After exactly one event, persist journal/done/state/wake according to the protocol and stop.
+A relay cycle permits only:
+- one normal production event; OR
+- one supervisor-review followed, after full persistence and lease release, by at most one normal production event.
+
+Never review a production shift created in the same run.
+Never execute more than one production shift in a run.
+Never allow two production workers concurrently; respect the single global lease.
+
+Never create, update, re-arm, enable, disable or reschedule any Scheduled Task from runtime. Never use Work. GitHub is the mutable orchestration state.
+
+Persist journal/done/state/wake exactly according to protocol and stop.
