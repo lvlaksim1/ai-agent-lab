@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "active_object": "ios-research-runtime",
   "project": "lvlaksim1/iOS-Research-Runtime",
   "project_name": "iOS-Research-Runtime",
   "target_ref": "main",
@@ -30,5 +31,5 @@
   "active_directive": null,
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-18T02:10:03.179Z"
+  "updated_at": "2026-09-18T02:25:36.292Z"
 }
