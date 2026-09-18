@@ -60,6 +60,20 @@ COMPLETE: remove stale continuation.
 BLOCKED: remove normal continuation and persist blocker.
 CHEAT: repair compromised state/gates where possible and leave exactly one safe continuation unless externally blocked.
 
+## Queue continuity guard
+
+If the project is not COMPLETE/BLOCKED and the next justified action depends on mandatory external evidence that is still running (for example a GitHub Actions gate), OTK MUST NOT leave the active-object production queue empty.
+
+Before clearing wake:
+- ensure exactly one same-object continuation exists;
+- describe the evidence/run that must be checked next;
+- if possible attach a `wait_for` object identifying the external run/check;
+- keep wake pending for that continuation.
+
+A continuation whose only purpose is to wait for external evidence must not consume a brigade turn while the evidence is still non-terminal. The production workflow performs that preflight before claiming a worker.
+
+This guard exists to prevent a proven failure mode where OTK finished while CI was still running, cleared the queue, and the brigade then sat idle after CI later completed.
+
 ## Persistent rating
 
 OTK alone updates .agent/brigade.json.
