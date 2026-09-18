@@ -88,3 +88,10 @@ Rollback to Variant A is explicitly documented in .agent/scheduler-rollback-vari
 The first :24 generic tick worked: it accepted shift #24 through OTK and then claimed the next event for Петрович in the same production relay. Core dispatcher routing is therefore empirically proven once.
 
 Still verify occupied-worker behavior on subsequent ticks and manager+worker concurrency before declaring the topology fully proven.
+
+
+## Pending CI is no longer a shift boundary
+
+Shift #25 exposed that the old continuation model still ended workers immediately after starting CI. This is now corrected.
+
+A live worker must keep the shift during observable mandatory CI, renew lease if needed, wait for terminal evidence, consume it and continue. `wait_for` exists only as crash/forced-stop recovery. OTK penalizes voluntary pending-CI handoff with Efficiency/focus 0/2 and cannot approve that behavior.
