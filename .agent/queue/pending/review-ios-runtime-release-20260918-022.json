@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-022",
+  "created_at": "2026-09-18T08:03:03Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "source": {"kind":"production-shift","production_event":"ios-runtime-release-20260918-022","worker_id":"borisych","shift":20},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main","commit":"0b2e12834fa595294a5d727e82dd1766b76dc139"},
+  "goal": "Independently review shift 20: verify durable patch-application evidence was added without weakening git apply --check, inspect fresh gate status/evidence if available, score Борисыч, persist verdict/rotation, and determine the next continuation from proven evidence.",
+  "object_id": "ios-research-runtime"
+}
