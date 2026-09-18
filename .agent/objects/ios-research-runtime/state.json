@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Exact E2E falsified the earlier topOfKernelData-minus-physBase hypothesis. The next evidence boundary is the producer/ABI contract of blob_head and boot_args.topOfKernelData; no semantic repair is authorized before that contract is proven.",
-  "last_scored_shift": 22,
+  "current_blocker_summary": "Exact E2E proves topOfKernelData itself carries 0x12ed0000 while physBase is 0x10000000000; the earlier subtraction hypothesis is false. The next evidence boundary is the producer/ABI contract of blob_head and boot_args.topOfKernelData; no semantic repair is authorized before that contract is proven.",
+  "last_scored_shift": 23,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-025",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T12:00:41Z"
+  "updated_at": "2026-09-18T12:04:30Z"
 }
