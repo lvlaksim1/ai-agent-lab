@@ -7,11 +7,12 @@
   "status": "pending",
   "source": {
     "kind": "agent-continuation",
-    "previous_event": "ios-runtime-release-20260918-002"
+    "previous_event": "ios-runtime-release-20260918-002",
+    "supervisor_review": "review-ios-runtime-release-20260918-002"
   },
   "target": {
     "repository": "lvlaksim1/iOS-Research-Runtime",
     "ref": "main"
   },
-  "goal": "Continue v0.1.0 mission from target commit 311187181363ed039df28b2e9d99d9d9eda2c38d. Verified from E2E artifact 10527486163/run 35294190788: the successful earlier invocation of block 0xfffffff0070a3ba0 entered with valid high VA X0=0xfffffff006f60000 and LR=0xfffffff0070b282c; the failing invocation entered the same block with X0=X3=0x00003ef012ed0000, X8=0x00003f0012ed0000, X22=0x00800000 and LR=0xfffffff0070d7d04, then STNP Q0,Q0,[X0] at 0xfffffff0070a3bc4 raised Data Abort with FAR exactly equal to X0. The prior 0x0a3000 trace cannot show how the bad argument was formed because caller 0x0d7d04 is outside its dfilter. Commit 3111871 changes only diagnostic dfilter to 0xfffffff0070d7000+0x2000 to capture the caller construction/pass of X0 without weakening any gate. Exact next action: inspect Windows Build/E2E triggered by 3111871, download the new E2E evidence, reconstruct the instructions/register flow around 0xfffffff0070d7d04, prove where 0x3ef012ed0000 comes from and why it is invalid, then make the smallest root-cause fix. Continue through genuine launchd/root-shell proof, Full Package, VERSION 0.1.0 and Release v0.1.0. Do not stop at diagnostics and do not weaken gates."
+  "goal": "Continue v0.1.0 mission from target commit 311187181363ed039df28b2e9d99d9d9eda2c38d. Supervisor independently verified that the diagnostic-only dfilter move is justified and gates are intact. Windows Build 35295897094 is PASS. Windows E2E 35295897176 is FAIL and produced artifact 10528396915, which already contains the caller trace; do NOT spend the next shift merely waiting for or rerunning that evidence. In qemu-debug.log, the caller window shows at PC 0xfffffff0070d7c1c X0=0xfffffef012ed0000 and X8=0xffffff0012ed0000, while by PC 0xfffffff0070d7cf4 X0=0x00003ef012ed0000 and X8=0x00003f0012ed0000; the subsequent callee store faults with FAR=X0. Exact next action: decode/reconstruct the instruction and register flow in the captured 0xfffffff0070d7c1c..0xfffffff0070d7cf4 path, identify the exact operation that strips/transforms the high address bits and establish whether this is guest SPTM logic reacting to an emulated platform value or a QEMU/platform-model defect. Compare with the successful invocation/call path where useful. Only after that proof, make the smallest root-cause fix, then rerun Build/E2E. Continue through genuine launchd/root-shell proof, Full Package, VERSION 0.1.0 and Release v0.1.0. Do not weaken gates or claim success from diagnostics alone."
 }
