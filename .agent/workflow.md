@@ -85,7 +85,7 @@ Before ending the shift, execute the **closure gate**:
 Natural stop conditions are limited to:
 - **project_or_phase_complete**: the current causal work package/phase is genuinely closed, all mandatory verification started by the shift is terminal and consumed, and no directly actionable same-object next step remains;
 - **blocked**: owner/manager/external action is genuinely required, the applicable evidence-acquisition ladder is exhausted, no actionable next step remains, and the exact external action is identified;
-- **forced_stop**: platform/runtime/tooling is forcing termination or can no longer observe required evidence; persist safe recovery state first when possible;
+- **forced_stop**: an objective platform/runtime/tool signal has already made continued execution impossible or is explicitly terminating it now; the claim must satisfy the forced-stop standard in `.agent/evidence-acquisition.md` and be independently reviewable;
 - **speculation_boundary**: continuing would require speculation AND all obtainable evidence routes that could discriminate the remaining hypotheses have been exhausted.
 
 Pending CI/build/test by itself is NEVER a natural stop condition.
@@ -97,17 +97,22 @@ A worker MUST NOT stop merely because:
 - CI has started or is still running;
 - the event's originally worded goal has been consumed but it exposed another directly related actionable blocker;
 - one evidence-access route returned unavailable/404/unsupported while alternatives remain;
-- a convenient handoff point exists while the worker can still wait for, inspect, diagnose, instrument or act on evidence.
+- a convenient handoff point exists while the worker can still wait for, inspect, diagnose, instrument or act on evidence;
+- the worker merely predicts that the scheduled/non-interactive turn may end soon;
+- the worker still has functioning GitHub/tool calls and can continue polling or acting.
 
-If a worker is forced to terminate while external evidence is still running, a `wait_for` continuation is an emergency recovery checkpoint. Record the exact external run and the forced-stop reason. Do not use this path as normal shift choreography.
+A worker MUST NOT proactively convert a live shift into `forced_stop` just to guarantee a clean handoff. Before long waits, persist an intermediate checkpoint while keeping the lease and shift active. If the platform kills the turn abruptly, the next relay recovers from that checkpoint after stale-lease detection.
+
+If an objective forced-stop signal is actually observed and persistence remains possible, a `wait_for` continuation is an emergency recovery checkpoint. Record the exact external run AND the objective `forced_stop_evidence`. Do not use this path as normal shift choreography.
 
 13. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id. Include `shift_started_at_utc`, `shift_completed_at_utc`, predecessor identity when known, the original plan, evidence references, target/ref and continuation id if any. New reviews MUST also include:
-   - `shift_policy_version: 2`;
+   - `shift_policy_version: 3`;
    - `stop.kind` = `project_or_phase_complete`, `blocked`, `forced_stop` or `speculation_boundary`;
    - `stop.actionable_next_step: false`;
    - a concrete `stop.reason`;
    - for `blocked` or `speculation_boundary`, non-empty `stop.exhaustion_evidence`;
    - for `blocked`, exact `stop.external_action`;
+   - for `forced_stop`, non-empty objective `stop.forced_stop_evidence` with kind, observed_at_utc and detail;
    - when duration is below `config.short_shift_review_threshold_seconds` and unresolved work/continuation remains, `stop.short_shift_justification`.
 14. Persist done/state/wake. The production done record SHOULD also contain `shift_started_at_utc` and `shift_completed_at_utc`.
 14. STOP. The run MUST NOT review the shift it just performed.
