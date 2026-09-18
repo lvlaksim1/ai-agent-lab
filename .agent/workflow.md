@@ -12,9 +12,12 @@ The scheduler is an immutable clock. Never create, update, re-arm, enable, disab
 2. Ignore `.gitkeep` and non-JSON files.
 3. If the queue is empty, reconcile `.agent/wake.json` according to `.agent/protocol.md` and stop.
 4. Select exactly one event: highest numeric `priority` first; for equal priority, oldest `created_at` first.
-5. Claim work by updating `.agent/state.json` from `idle` to `processing` with `active_event`, `worker_id`, `started_at`, and `lease_until`.
-6. Use current GitHub blob SHA. On conflict, another worker won: stop.
-7. If state is already processing with an unexpired lease, stop. Expired lease recovery must be journaled.
+5. If selected event is NOT `supervisor-review`, read `.agent/management/state.json`.
+   - If `stop_production=true`, do not claim the production event; leave queue/wake intact and stop with `PRODUCTION_STOPPED_BY_MANAGER`.
+   - If `active_directive` is non-null, read that directive and apply it if its effective boundary includes this new shift.
+6. Claim work by updating `.agent/state.json` from `idle` to `processing` with `active_event`, `worker_id`, `started_at`, and `lease_until`.
+7. Use current GitHub blob SHA. On conflict, another worker won: stop.
+8. If state is already processing with an unexpired lease, stop. Expired lease recovery must be journaled.
 
 ## 2. Execute
 
@@ -24,7 +27,7 @@ For any event whose `type` is not `supervisor-review`:
 
 1. Read `.agent/brigade.json` and `.agent/competition.md`.
 2. Assign this shift to `next_member_id`. Proposed shift number is `shift_counter + 1`. Do NOT change brigade rating yet.
-3. Read the selected event, `.agent/profile.md` and only required target evidence.
+3. Read the selected event, `.agent/profile.md`, applicable manager directive, and only required target evidence.
 4. Reconstruct intended behavior, identify the real blocker, make the smallest justified change, verify against relevant evidence.
 5. Do not weaken tests/specifications/proof/release gates.
 6. For a long mission, create at most one continuation event if more work remains.
@@ -52,7 +55,8 @@ After verdict/scoring:
 3. update that worker's rating/statistics;
 4. advance `next_member_id` exactly one position;
 5. write the private review to `.agent/reviews/<reviewed-event-id>.md`;
-6. update `.agent/reports/latest.md` in the strict four-field human format defined in `.agent/competition.md`.
+6. update `.agent/reports/latest.md` in the strict four-field human format defined in `.agent/competition.md`;
+7. update management counters and manager wake exactly as defined in `.agent/supervision.md`.
 
 This `latest.md` update is the Telegram notification trigger.
 
