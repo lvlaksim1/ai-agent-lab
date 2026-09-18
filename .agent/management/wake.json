@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "attention": false,
-  "generation": 9,
-  "reasons": [],
-  "updated_at": "2026-09-18T12:46:26Z"
+  "attention": true,
+  "generation": 10,
+  "reasons": ["three_shifts_since_manager_review","blocked_otk","evidence_access_blocker"],
+  "updated_at": "2026-09-18T19:26:39Z"
 }
