@@ -121,3 +121,26 @@ Relay behavior:
 4. In the same relay run, if production remains allowed, the next brigade worker may claim the pending continuation and work normally.
 
 Thus a dead worker costs at most the remainder of the current 12-minute clock interval, not a 45-minute lease wait.
+
+
+## OTK runtime loss
+
+The same guard also protects the global lease while OTK is active.
+
+If a verified stale heartbeat belongs to role=`otk`:
+- fence and close the stale OTK execution;
+- return global state to idle;
+- keep the existing pending supervisor-review event unchanged;
+- do NOT create a review-of-a-review;
+- set `last_result="OTK_RUNTIME_LOSS_RETRY"`;
+- keep production wake pending.
+
+At the next normal production clock, OTK retries that same pending review. Only after OTK completes may the relay start the next brigade worker.
+
+## Physical scheduler budget
+
+This recovery guard does not consume a ChatGPT Scheduled Task slot.
+
+The five existing Scheduled Chat production clocks remain the only five active planner tasks. Recovery is implemented by the repository's GitHub Actions schedule at :10/:22/:34/:46/:58 and operates only on durable GitHub control-plane state.
+
+Therefore no sixth ChatGPT Scheduled Task is required.
