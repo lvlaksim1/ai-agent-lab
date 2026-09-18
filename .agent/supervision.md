@@ -25,6 +25,28 @@ Inspect as applicable:
 6. object mission / Definition of Done;
 7. applicable management directive.
 
+## Shift-closure audit
+
+OTK must reconstruct the worker's situation at the exact shift end, not merely check whether the event's original sentence was satisfied.
+
+For shift policy v2, require and inspect `shift_policy_version: 2` and the `stop` record from the pending supervisor-review event.
+
+Mandatory questions:
+- Did consuming the requested evidence expose another directly related actionable same-object step?
+- Could the worker have inspected, diagnosed, instrumented, repaired or verified that next step with the live tools?
+- If BLOCKED/speculation-boundary was claimed, was the applicable evidence-acquisition ladder actually exhausted?
+- Is the claimed external action precise and truly outside the worker's current capability?
+
+If any actionable next step existed at shift end, the handoff was premature:
+- Efficiency/focus = 0/2;
+- APPROVED is forbidden;
+- use CORRECTED unless a stronger verdict applies;
+- preserve or repair exactly one safe continuation.
+
+A shift shorter than `config.short_shift_review_threshold_seconds` is NOT automatically bad. But if unresolved work or a continuation remains, it triggers a mandatory special closure review. OTK must explicitly justify why no actionable next step remained. Missing justification is a closure defect.
+
+BLOCKED is valid only when the required evidence/capability, exhausted routes and exact external action are all demonstrated. One unavailable artifact/log call is insufficient.
+
 ## Review-path resolution
 
 When prior OTK evidence is needed, NEVER construct or guess a review filename from an event id.
@@ -46,7 +68,9 @@ Determine whether:
 - manager directive was followed;
 - proposed next action is highest-value;
 - claimed progress is actually validated;
-- the worker ended only at a valid natural stop boundary;
+- the worker ended only at a valid natural stop boundary after the actionable-next-step test;
+- the worker did not treat discovery of the next actionable blocker as a handoff boundary;
+- any BLOCKED/speculation claim contains adequate exhaustion evidence from the acquisition ladder;
 - any pending external evidence handoff was caused by a documented forced runtime/tooling stop rather than ordinary CI latency;
 - anti-cheat was violated.
 
@@ -88,9 +112,10 @@ For that recovery case:
 
 A recovery continuation whose only purpose is to wait for external evidence must not consume a brigade turn while the evidence is still non-terminal.
 
-If a worker voluntarily handed off ordinary pending CI while the live Chat/tools were still capable of waiting, treat that as premature handoff:
+Treat ANY voluntary handoff as premature when the live Chat/tools still had an evidence-backed actionable next step. This includes pending CI, consuming one terminal result and stopping at the next blocker, or declaring BLOCKED after only one failed evidence-access route:
 - Efficiency/focus = 0/2;
 - verdict cannot be APPROVED on that handoff; use CORRECTED unless a stronger verdict applies;
+- BLOCKED cannot be awarded without exhaustion evidence and a precise external action;
 - preserve one safe continuation so production still proceeds.
 
 This guard remains as crash/recovery protection, not as normal shift choreography.
