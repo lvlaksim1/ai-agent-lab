@@ -1,17 +1,10 @@
 # Manager Workflow
 
-This workflow is executed only by the dedicated manager Scheduled Chat.
+This workflow is executed when the generic clock dispatcher selects the MANAGER role.
 
-## 0. Idle path
+## 0. Dispatcher entry
 
-First read ONLY .agent/management/wake.json.
-
-If attention=false:
-- read nothing else;
-- change nothing;
-- finish exactly MANAGER_IDLE.
-
-If attention=true, remember its generation and continue.
+The generic clock dispatcher has already read `.agent/management/wake.json` and selected MANAGER because attention=true. Remember that generation and continue. If this workflow is invoked directly while attention=false, stop without changes.
 
 ## 1. Load management context
 
@@ -170,8 +163,8 @@ Never use Work.
 
 ## Notification semantics
 
-The manager clock is a condition-watch.
+Manager execution is selected by the generic exact-schedule dispatcher.
 
-If `.agent/management/wake.json` has `attention=false`, perform no further reads/writes and do not notify the owner.
+If manager attention is false, the dispatcher should not materialize this role.
 
 After a real management review, notify the owner only when there is a meaningful management result: escalation, blocker, course change, transfer step, owner decision, or other substantive outcome. Routine no-op checks remain silent.
