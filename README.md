@@ -83,3 +83,21 @@ GitHub PR comment [AGENT_TASK]
 
 Подробный протокол: `.agent/protocol.md`.
 Постоянный prompt worker: `.agent/scheduled-worker.md`.
+
+
+## Project Context Capsule
+
+Интерактивная история разработки и существенных Chat-сессий хранится в стандартной **Project Context Capsule v1.0**:
+
+- discovery: `AI_CONTEXT.md`;
+- bootstrap: `.context/ENTRYPOINT.md`;
+- current state/rules/handoff: `.context/current/`, `.context/rules/`, `.context/handoffs/`;
+- history: `.context/dialogues/`, `.context/decisions/`.
+
+`.context/` не заменяет живой runtime `.agent/`: Capsule хранит долговременную семантическую историю разговоров и решений, а `.agent/` остаётся authoritative для очереди, leases, работников, ОТК, manager-state и object-state.
+
+Новый Chat может начать с:
+`восстанови Project Context Capsule и продолжи проект https://github.com/lvlaksim1/ai-agent-lab`
+
+или вызвать постоянного менеджера:
+`вызываю начальника участка https://github.com/lvlaksim1/ai-agent-lab`.
