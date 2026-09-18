@@ -314,6 +314,7 @@ if (fs.existsSync(managerReportPath) && managerState.owner_decision_required ===
 }
 
 check(brigade.schema_version === 1, "brigade schema_version must be 1");
+check(brigade.scoring_version === 2, "brigade scoring_version must remain 2 for new shifts");
 check(Array.isArray(brigade.rotation_order) && brigade.rotation_order.length === 8, "brigade must contain eight workers");
 check(Array.isArray(brigade.members) && brigade.members.length === 8, "brigade members must contain eight workers");
 check(new Set(brigade.rotation_order).size === 8, "brigade rotation ids must be unique");
