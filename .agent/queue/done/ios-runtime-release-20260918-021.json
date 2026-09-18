@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-021",
+  "type": "production",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "mikhalych",
+  "proposed_shift": 19,
+  "result": "evidence_narrowed_no_target_change",
+  "target_commit": "f99202345d6268727416c839d416cc70cff8ed2a",
+  "completed_at": "2026-09-18T07:30:03Z",
+  "continuation": "ios-runtime-release-20260918-022",
+  "supervisor_review": "review-ios-runtime-release-20260918-021"
+}
