@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "sequence": 0,
+  "purpose": "template",
+  "role": null,
+  "worker_id": null,
+  "object_id": null,
+  "active_event": null,
+  "activity_kind": "idle",
+  "activity_detail": "Authoritative GitHub commit-time anchor. Runtime updates this file before writing any live timestamp."
+}
