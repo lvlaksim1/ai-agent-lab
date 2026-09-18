@@ -258,3 +258,30 @@ Live proof during deployment:
 - final runtime validator after policy correction completed SUCCESS.
 
 The first deployment recovery happened after the intended :22 guard because the watchdog itself was armed after that guard had already passed. Future workers arm the watchdog from their state/heartbeat pushes, so it is already waiting before the next guard boundary.
+
+## Reporting policy v2 — worker report at shift start
+
+Owner changed brigade reporting because Scheduled Chat workers often disappear before natural shift closure.
+
+New reporting contract:
+- worker no longer depends on surviving to write an end-of-shift narrative;
+- immediately after claim/materialization and before substantive target work, worker creates one immutable start report under `.agent/reports/starts/`;
+- worker start report contains exactly the core narrative sections `ОЦЕНКА ПРЕДШЕСТВЕННИКА` and `МОЙ ПЛАН`; plan includes the success criterion;
+- start report is first-person worker voice and is never rewritten with hindsight;
+- OTK later reconstructs the actual shift independently from start report + journal/checkpoints + heartbeat + target diff + CI/artifacts;
+- OTK result is supervisor voice, not worker impersonation, and is published immutably under `.agent/reports/otk/`;
+- Telegram now delivers both immutable worker-start and OTK-result reports; legacy `.agent/reports/published/` remains supported;
+- scoring v2 is 4 progress + 3 engineering quality + 2 efficiency/focus while alive + 1 start assessment/plan quality;
+- runtime loss itself is not an efficiency penalty; missing a required v2 start report scores 0/1 in the planning category;
+- legacy score/report policy v1 remains grandfathered for already-started shifts.
+
+Repeated runtime-loss attempts exposed an independent review-id collision: production event 032 was reused by Федорыч then Кузьмич, so legacy `review-<production-event>` collided with an immutable completed OTK record. OTK detected it and rolled back its partial score mutations.
+
+This is now fixed:
+- every new review id is shift-unique: `review-shift-<shift-number>-<production-event>`;
+- recovery guard uses the same unique scheme;
+- current Кузьмич shift 31 pending review was migrated to `review-shift-31-ios-runtime-release-20260918-032` and explicitly grandfathered to report/score policy v1;
+- new continuations must carry exact predecessor review/OTK-report paths for the next worker's start assessment;
+- validator enforces reporting/scoring policy v2, unique review ids, new Telegram paths and report schemas.
+
+Final runtime checks after the policy migration are green.
