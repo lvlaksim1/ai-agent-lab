@@ -1,70 +1,14 @@
 {
   "schema_version": 1,
   "scoring_version": 1,
-  "shift_counter": 1,
-  "next_member_id": "sanych",
-  "rotation_order": [
-    "petrovich",
-    "sanych",
-    "mikhalych",
-    "borisych",
-    "ivanych"
-  ],
+  "shift_counter": 2,
+  "next_member_id": "mikhalych",
+  "rotation_order": ["petrovich", "sanych", "mikhalych", "borisych", "ivanych"],
   "members": [
-    {
-      "id": "petrovich",
-      "display_name": "Петрович",
-      "rating": 1040,
-      "shifts_scored": 1,
-      "total_score": 9,
-      "average_score": 9,
-      "best_score": 9,
-      "last_score": 9,
-      "cheat_strikes": 0
-    },
-    {
-      "id": "sanych",
-      "display_name": "Саныч",
-      "rating": 1000,
-      "shifts_scored": 0,
-      "total_score": 0,
-      "average_score": 0,
-      "best_score": null,
-      "last_score": null,
-      "cheat_strikes": 0
-    },
-    {
-      "id": "mikhalych",
-      "display_name": "Михалыч",
-      "rating": 1000,
-      "shifts_scored": 0,
-      "total_score": 0,
-      "average_score": 0,
-      "best_score": null,
-      "last_score": null,
-      "cheat_strikes": 0
-    },
-    {
-      "id": "borisych",
-      "display_name": "Борисыч",
-      "rating": 1000,
-      "shifts_scored": 0,
-      "total_score": 0,
-      "average_score": 0,
-      "best_score": null,
-      "last_score": null,
-      "cheat_strikes": 0
-    },
-    {
-      "id": "ivanych",
-      "display_name": "Иваныч",
-      "rating": 1000,
-      "shifts_scored": 0,
-      "total_score": 0,
-      "average_score": 0,
-      "best_score": null,
-      "last_score": null,
-      "cheat_strikes": 0
-    }
+    {"id":"petrovich","display_name":"Петрович","rating":1040,"shifts_scored":1,"total_score":9,"average_score":9,"best_score":9,"last_score":9,"cheat_strikes":0},
+    {"id":"sanych","display_name":"Саныч","rating":1030,"shifts_scored":1,"total_score":8,"average_score":8,"best_score":8,"last_score":8,"cheat_strikes":0},
+    {"id":"mikhalych","display_name":"Михалыч","rating":1000,"shifts_scored":0,"total_score":0,"average_score":0,"best_score":null,"last_score":null,"cheat_strikes":0},
+    {"id":"borisych","display_name":"Борисыч","rating":1000,"shifts_scored":0,"total_score":0,"average_score":0,"best_score":null,"last_score":null,"cheat_strikes":0},
+    {"id":"ivanych","display_name":"Иваныч","rating":1000,"shifts_scored":0,"total_score":0,"average_score":0,"best_score":null,"last_score":null,"cheat_strikes":0}
   ]
 }
