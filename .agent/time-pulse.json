@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 7,
+  "sequence": 8,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "palych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-31-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Reviewing recovered runtime-loss shift 31 using shift-unique review event.",
-  "fence_generation": 7
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "working",
+  "activity_detail": "Starting decoded-layer APFS structural evidence implementation after shift 31 OTK.",
+  "fence_generation": 8
 }
