@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "qemu-sptm Windows Gate now blocks runtime mapping evidence: the diagnostic patch stack fails during Apply Windows portability patch before build. Repair patch applicability first; then obtain SPTM_MAP and only afterward add any runtime-derived TCG-store probe.",
-  "last_scored_shift": 17,
+  "current_blocker_summary": "qemu-sptm Windows Gate still fails during Apply Windows portability patch after the 0009 hunk-count correction. Determine the exact remaining git apply --check failure and repair patch applicability before exact E2E or TCG-store instrumentation.",
+  "last_scored_shift": 18,
   "last_otk_verdict": "CORRECTED",
-  "last_progress_class": "none",
-  "last_event": "ios-runtime-release-20260918-019",
+  "last_progress_class": "incremental",
+  "last_event": "ios-runtime-release-20260918-020",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T07:16:14Z"
+  "updated_at": "2026-09-18T07:30:03Z"
 }
