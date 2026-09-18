@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-027",
+  "type": "supervisor-review",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "production_event": "ios-runtime-release-20260918-027",
+  "worker_id": "petrovich",
+  "shift": 25,
+  "verdict": "APPROVED",
+  "score": 9,
+  "rating_delta": 40,
+  "progress_class": "incremental",
+  "continuation_id": "ios-runtime-release-20260918-028",
+  "completed_at": "2026-09-18T12:38:00Z"
+}
