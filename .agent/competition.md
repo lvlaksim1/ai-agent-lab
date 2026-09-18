@@ -47,6 +47,8 @@ For any premature handoff, Efficiency/focus = 0/2 and APPROVED is forbidden. Thi
 
 A shift under the configured short-shift threshold is only a review trigger, never an automatic penalty. If unresolved work remains, OTK must prove that no actionable next step remained; otherwise the handoff is premature.
 
+Calling a handoff `forced_stop` does not exempt it from this rule. A forced stop needs objective, independently reviewable platform/tool evidence. Predicting that a scheduled turn may end soon while tools still work is premature handoff and receives Efficiency/focus = 0/2; APPROVED is forbidden.
+
 There is no reward for artificially long shifts and no artificial minimum duration. Time is evidence for review, not a quota. Useful verified progress and justified closure are what count.
 
 ## Shift scoring
