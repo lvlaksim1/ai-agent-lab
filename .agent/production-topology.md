@@ -1,140 +1,22 @@
-# Production Topology v2 — Эстафетный цех
+# Production Topology v3 — Generic Clock Dispatcher
 
-## Цель
+Five active exact-schedule clock tasks are evenly staggered at Moscow minutes :00, :12, :24, :36 and :48.
 
-Максимально использовать ограниченное число активных Scheduled Tasks без параллельной работы двух производственных сменщиков.
+Each clock is generic. It first checks production state, production wake and manager wake, then selects exactly one top-level role: MANAGER, PRODUCTION RELAY or IDLE. Detailed selection rules are in `.agent/dispatcher.md`.
 
-Ограничения владельца:
-- одновременно работает не более ОДНОГО производственного работника;
-- независимый Начальник участка может работать параллельно с производственным работником;
-- количество активных Scheduled Tasks не увеличиваем;
-- Work не используем;
-- GitHub остаётся единственным mutable orchestration state.
+The nominal maximum polling latency is 12 minutes. This is NOT a shift-duration limit.
 
-## Логическая бригада
+A production worker continues across later clock ticks until the natural stop condition in `.agent/workflow.md`. The lease is renewable and protects only against stale/dead workers.
 
-В ротации восемь работников:
+Allowed concurrency: one worker + one manager.
+Forbidden: worker + worker.
 
-1. Петрович
-2. Саныч
-3. Михалыч
-4. Борисыч
-5. Иваныч
-6. Федорыч
-7. Кузьмич
-8. Палыч
+When a worker lease is valid, later ticks never start another worker. If manager attention is pending, a tick may run one manager review concurrently.
 
-Scheduled Task не закреплена за конкретным персонажем. Каждый производственный запуск материализует следующего работника из `.agent/brigade.json`.
+When the production station is idle, manager attention has priority over starting a new worker. Otherwise pending production work starts the production relay.
 
-## Часы
+Production relay keeps the existing independent OTK -> next-worker sequence. Self-review remains forbidden.
 
-Четыре производственных clock slot распределены равномерно:
+All clock tasks remain exact-schedule. No-op checks are silent. Worker reports use the immutable Telegram publication path.
 
-- :02
-- :17
-- :32
-- :47
-
-Максимальный штатный интервал между производственными пробуждениями — 15 минут плюс фактический scheduler lag.
-
-**Важно:** 15 минут — это частота возможности начать новую работу, а не длина смены. Смена не режется по clock slot. Если работник уже работает, следующий clock видит занятый lease и уходит. Текущий работник продолжает столько, сколько способен делать доказательную полезную работу.
-
-Отдельный управленческий clock:
-- :59 — Начальник участка.
-
-Начальник использует отдельный management state и может работать одновременно с одной производственной сменой. Два производственных работника одновременно запрещены глобальным lease `.agent/state.json`.
-
-## Длина смены
-
-Фиксированной длины смены нет.
-
-Работник продолжает текущий event до естественной границы:
-- задача/пакет работы завершён;
-- нужен внешний результат, который нельзя разумно дождаться в текущем Chat;
-- возник настоящий blocker;
-- дальнейшее действие без новых evidence будет гаданием;
-- платформа принудительно завершает run.
-
-Lease обновляется и не является таймером окончания смены.
-
-## Эстафетный цикл
-
-Производственный Scheduled Chat выполняет не "до двух любых событий", а строго один из двух вариантов:
-
-### Вариант A — обычная смена
-
-Если первым выбран обычный production event:
-1. выполнить ровно одну производственную смену;
-2. создать supervisor-review;
-3. завершить run.
-
-Самопроверка своей же смены в этом run запрещена.
-
-### Вариант B — ОТК + следующая смена
-
-Если первым выбран supervisor-review:
-1. независимо принять/скорректировать предыдущую смену;
-2. полностью сохранить verdict/rating/state/report;
-3. заново прочитать очередь и state;
-4. если есть допустимый production event, transfer_state=working и нет STOP — выполнить ровно одну следующую производственную смену;
-5. создать для неё новый supervisor-review;
-6. завершить run.
-
-Таким образом один scheduled tick может последовательно закрыть ОТК предыдущей смены и сразу передать участок следующему работнику.
-
-## Независимость ОТК
-
-ОТК не является работником ротации и не получает рейтинг.
-
-Эстафетный run допустим только потому, что ОТК проверяет ПРЕДЫДУЩУЮ смену, выполненную другим run. После завершения ОТК этот же Chat может материализовать следующего по ротации работника.
-
-Никогда:
-- не проверять смену, выполненную этим же run;
-- не менять score после начала следующей production-фазы;
-- не смешивать evidence двух смен.
-
-## Один работник одновременно
-
-`.agent/state.json` остаётся единым глобальным production/OTK lease.
-
-Если он `processing` и lease не истёк, любой другой production clock немедленно завершается.
-
-Даже если фактическая смена длится больше 15, 30 или 45 минут, второй сменщик не стартует. При полезной продолжающейся работе текущий сменщик продлевает lease; следующий scheduled clock только видит занятый станок и завершается.
-
-## Почему это быстрее
-
-Старый контур обычно требовал:
-- один tick на production;
-- следующий tick на ОТК;
-- следующий tick на новую production смену.
-
-Новый контур:
-- production создаёт ОТК;
-- следующий tick делает ОТК и сразу запускает следующую смену.
-
-При устойчивой очереди новая производственная смена может начинаться примерно каждые 15 минут, а не через отдельный дополнительный интервал после ОТК.
-
-## Manager concurrency
-
-Начальник участка не использует `.agent/state.json` как свой lease. Его mutable state находится в `.agent/management/`.
-
-Параллель:
-- worker + manager: ДОПУСТИМА;
-- worker + worker: ЗАПРЕЩЕНА.
-
-При concurrent GitHub update обе роли обязаны использовать SHA/CAS, перечитывать конфликтующий файл и сохранять более новое состояние.
-
-
-## Notification policy
-
-All five active Scheduled Tasks use condition-watch notification semantics.
-
-Normal clock ticks are silent:
-- production wake false;
-- manager attention false;
-- occupied production lease;
-- other no-op/skip outcomes.
-
-User-visible notification is reserved for meaningful production/OTK results, blockers/failures requiring attention, or substantive management outcomes/escalations.
-
-The clock still runs at the same cadence; notification suppression does not disable execution.
+Rollback to the previous :02/:17/:32/:47 production + :59 manager topology is documented in `.agent/scheduler-rollback-variant-a.md`.
