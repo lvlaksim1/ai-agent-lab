@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "X22=0x12ed0000 is already present at the failing function entry; LR/X30 narrows provenance to the immediate predecessor/call-site window. The new targeted trace must identify the producer before changing root logic.",
-  "last_scored_shift": 5,
-  "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
-  "last_event": "review-ios-runtime-release-20260918-007",
+  "current_blocker_summary": "Recovered E2E proves X22=0x12ed0000 is already present at first captured predecessor PC 0xfffffff0070d77d0 and unchanged through 0x...0d7828; producer lies earlier than current trace window.",
+  "last_scored_shift": 6,
+  "last_otk_verdict": "CORRECTED",
+  "last_progress_class": "none",
+  "last_event": "review-ios-runtime-release-20260918-008",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T04:02:20Z"
+  "updated_at": "2026-09-18T04:17:00Z"
 }
