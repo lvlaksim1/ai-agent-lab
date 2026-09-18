@@ -8,18 +8,18 @@
   "definition_of_done": ["Windows Build PASS","qemu-sptm Windows Gate PASS","Provisioning PASS","Darwin/XNU boot PASS","launchd PASS","root shell proof PASS","Windows Full Package PASS","VERSION 0.1.0","GitHub Release v0.1.0 published with verified package and SHA-256"],
   "current_phase": "boot-debugging",
   "health": "YELLOW",
-  "current_blocker_summary": "Exact E2E falsified the earlier topOfKernelData-minus-physBase hypothesis: topOfKernelData itself carries the suspicious value. The remaining blocker is to prove the blob_head/topOfKernelData producer and ABI contract before any semantic repair.",
-  "shifts_since_manager_review": 0,
+  "current_blocker_summary": "Exact E2E proves topOfKernelData itself carries the suspicious value; the remaining blocker is to prove the blob_head/topOfKernelData producer and ABI contract before any semantic repair.",
+  "shifts_since_manager_review": 1,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
-  "last_scored_shift": 22,
+  "last_scored_shift": 23,
   "manager_review_count": 6,
   "last_manager_review_at": "2026-09-18T12:00:41Z",
   "last_manager_decision": "DEC-006: KEEP_COURSE",
   "active_directive": null,
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-18T12:00:41Z"
+  "updated_at": "2026-09-18T12:04:30Z"
 }
