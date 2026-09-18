@@ -38,3 +38,23 @@ The temporary condition-watch scheduler experiment was reverted; all five shop c
 After reverting timing mode, production still did not fire: event 024 remained pending and the expected :17 tick was not reflected in Scheduled Task `last_run_time`.
 
 All five active tasks were therefore re-anchored with explicit future DTSTART values while preserving :02/:17/:32/:47 production and :59 manager cadence. First expected recovery production tick: 14:32 MSK. This remains OPEN until empirically observed.
+
+
+## Telegram delivery incident — 2026-09-18 14:42 MSK
+
+The production clock was recovered successfully: shift #22 ran after the scheduler re-anchor, and OTK completed it. The apparent absence of reports had a second, independent cause in the Telegram workflow.
+
+Root cause:
+- an immutable report was correctly created;
+- the Actions workflow triggered on that commit;
+- but checkout used the moving branch `work-webhook-test` instead of the triggering commit SHA;
+- OTK made later commits before the Actions runner checked out the branch;
+- the job therefore inspected a newer commit, concluded that no report had been added, and skipped the Telegram send step.
+
+Fix:
+- Telegram workflow now checks out `${{ github.sha }}`;
+- report discovery is bound to that exact event commit;
+- explicit immutable redelivery requests are supported;
+- runtime validator now checks this invariant.
+
+Shift #22 was redelivered after the fix and GitHub Actions confirmed successful Telegram delivery.
