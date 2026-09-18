@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-027",
+  "created_at": "2026-09-18T12:27:14Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {"kind":"production-review","production_event":"ios-runtime-release-20260918-027"},
+  "worker_id": "petrovich",
+  "proposed_shift": 25,
+  "shift_started_at_utc": "2026-09-18T12:24:00Z",
+  "shift_completed_at_utc": "2026-09-18T12:27:14Z",
+  "predecessor_identity": "palych",
+  "original_plan": "Inspect the durable patch-application evidence from the failed qemu-sptm Windows Gate; repair only the proven diagnostic patch/build defect, preserve all gates, and wait for replacement CI when reasonably observable. Do not proceed to E2E before the diagnostic gate is green.",
+  "evidence": [".agent/journal/ios-runtime-release-20260918-027.md","lvlaksim1/iOS-Research-Runtime@3b530ed2946a6ee401fd17a0935999bdae1fbfbc","qemu-sptm patch-application artifact from run 35343938235","qemu-sptm replacement run 35344637665"],
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main","commit":"3b530ed2946a6ee401fd17a0935999bdae1fbfbc"},
+  "continuation_id": "ios-runtime-release-20260918-028"
+}
