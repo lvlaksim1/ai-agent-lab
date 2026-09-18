@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-008",
+  "type": "project-mission-continuation",
+  "object_id": "ios-research-runtime",
+  "status": "done",
+  "worker_id": "fedorych",
+  "proposed_shift": 6,
+  "result": "blocked-on-evidence-access",
+  "journal": ".agent/journal/ios-runtime-release-20260918-008.md",
+  "review_event": "review-ios-runtime-release-20260918-008",
+  "continuation_id": "ios-runtime-release-20260918-009",
+  "completed_at": "2026-09-18T04:03:50Z"
+}
