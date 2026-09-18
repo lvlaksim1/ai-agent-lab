@@ -2,14 +2,14 @@
   "schema_version": 1,
   "object_id": "ios-research-runtime",
   "status": "ACTIVE",
-  "health": "BLOCKED",
+  "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Exact Windows E2E reaches BSD root md0 and rebuilt recovery APFS fails mountroot error 79. The runtime still lacks the exact E2E binary artifact/full job log or equivalent source-vs-rebuilt NX/APFS/checkpoint structural dump needed to prove the first incompatible metadata field; production remains intentionally idle to avoid speculative writer changes.",
+  "current_blocker_summary": "Owner authorized a diagnostic APFS evidence channel. Next shift must instrument Windows E2E, capture source-vs-rebuilt NX/APFS/checkpoint structural evidence, identify the first causally incompatible metadata field, then continue from evidence before changing writer semantics.",
   "last_scored_shift": 28,
   "last_otk_verdict": "BLOCKED",
   "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-030",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T20:00:37Z"
+  "updated_at": "2026-09-18T20:03:00Z"
 }
