@@ -97,6 +97,8 @@ Emergency mode is only for proven integrity/destructive/owner-goal violations.
 If no active transfer request, first classify current production liveness using `.agent/liveness.md`:
 - NO_WORKER, LIVE, STALE or UNKNOWN/DEFECT;
 - when processing, record worker_id, heartbeat.last_seen_at, heartbeat.stale_at, activity_detail and external_wait;
+- verify heartbeat.time_source and time_anchor_commit against the exact GitHub commit timestamp before calling it LIVE;
+- if the anchor cannot be verified, report UNKNOWN/DEFECT rather than guessing;
 - never call a valid lease proof of liveness.
 
 Then assess the active object:
