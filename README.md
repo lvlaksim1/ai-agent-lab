@@ -5,27 +5,51 @@
 ## Текущая архитектура
 
 ```text
-external event
-→ GitHub intake
+external GitHub event
+→ deterministic GitHub Actions intake
 → .agent/queue/pending + .agent/wake.json
-→ native recurring Scheduled Chat
-→ ordinary Chat worker
+→ immutable native recurring Scheduled Chat workers
+→ ordinary Chat reasoning
 → GitHub state / code / journal / done
 ```
 
-Ключевой принцип: scheduler после создания не изменяется. Никаких re-arm/update для пробуждения worker.
+GitHub является внешним persistent state, очередью, state machine, журналом и event bus. Scheduled Tasks — только неизменяемые облачные часы. Ordinary Chat выполняет reasoning.
 
-GitHub является внешним persistent state агента. Ordinary Chat выполняет reasoning. Scheduled Task используется только как неизменяемые облачные часы.
+## Idle path
 
-## Быстрый путь
-
-Worker на каждом штатном тике сначала читает только:
+Каждый worker сначала читает только:
 
 ```text
 .agent/wake.json
 ```
 
 Если `pending=false`, run немедленно завершается. Полный профиль, workflow и очередь читаются только при наличии работы.
+
+## Worker pool
+
+Production topology рассчитана на пять неизменяемых hourly Scheduled Chat workers, сдвинутых примерно на 12 минут:
+
+```text
+:11
+:23
+:35
+:47
+:59
+```
+
+Каждый worker имеет тот же prompt и использует SHA-guarded lease в `.agent/state.json`. Поэтому одновременно обработать одно событие два worker не должны.
+
+Максимальная ожидаемая задержка до следующего штатного tick после заполнения очереди — примерно 12 минут плюс фактический scheduler lag.
+
+## Cross-repository intake
+
+Другие GitHub repositories могут отправлять нормализованные события через reusable workflow:
+
+```text
+lvlaksim1/ai-agent-lab/.github/workflows/forward-to-agent.yml@main
+```
+
+Транспорт использует GitHub `repository_dispatch`. Подробности и готовые примеры: `docs/CROSS_REPO_INTAKE.md`.
 
 ## Первый автономный end-to-end
 
