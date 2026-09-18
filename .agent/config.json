@@ -46,5 +46,13 @@
   "forced_stop_requires_objective_evidence": true,
   "forced_stop_prediction_is_invalid": true,
   "forced_stop_while_tools_operational_is_invalid": true,
-  "abrupt_runtime_termination_recovery": "checkpoint-plus-stale-lease"
+  "abrupt_runtime_termination_recovery": "checkpoint-plus-stale-lease",
+  "heartbeat_policy_version": 1,
+  "heartbeat_required_while_processing": true,
+  "heartbeat_interval_seconds": 60,
+  "heartbeat_stale_after_seconds": 180,
+  "heartbeat_activity_required": true,
+  "heartbeat_external_wait_visibility_required": true,
+  "lease_is_liveness_signal": false,
+  "heartbeat_stale_does_not_bypass_valid_lease": true
 }
