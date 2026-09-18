@@ -67,11 +67,15 @@ This protects against an execution that appears dead, gets recovered, and later 
 
 ## Recovery review event
 
-For active production event `<event>`, ensure exactly one pending supervisor-review event:
+For an interrupted production shift, ensure exactly one pending supervisor-review event with a **shift-unique** id:
 
-`.agent/queue/pending/review-<event>.json`
+`.agent/queue/pending/review-shift-<shift-number>-<event>.json`
 
-The emergency review uses `shift_policy_version: 4` and:
+Never reuse `review-<event>` across multiple worker attempts of the same continuation. The production event id may remain the same across runtime-loss recoveries, but the brigade shift number is unique.
+
+The emergency review uses `shift_policy_version: 4`, carries `shift_number`, and for reporting policy v2 also carries the exact immutable worker `start_report_path` / `start_report_commit` when they exist. If the worker died before publishing the required start report, preserve that absence; OTK must not fabricate it.
+
+The review contains:
 
 ```json
 {
