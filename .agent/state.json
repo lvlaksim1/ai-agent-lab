@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "status": "processing",
-  "active_event": "review-ios-runtime-release-20260918-031",
-  "worker_id": "otk",
-  "started_at": "2026-09-18T20:23:01Z",
-  "lease_until": "2026-09-18T21:08:01Z",
-  "last_event": "ios-runtime-release-20260918-031",
-  "last_result": "FORCED_STOP_external_evidence_pending",
-  "last_completed_at": "2026-09-18T20:12:46Z"
+  "status": "idle",
+  "active_event": null,
+  "worker_id": null,
+  "started_at": null,
+  "lease_until": null,
+  "last_event": "review-ios-runtime-release-20260918-031",
+  "last_result": "CORRECTED",
+  "last_completed_at": "2026-09-18T20:26:00Z"
 }
