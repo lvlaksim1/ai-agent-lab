@@ -32,7 +32,7 @@ jobs:
         with:
           ref: ${{ env.AGENT_BRANCH }}
 
-      - name: Build and enqueue event atomically
+      - name: Build and enqueue object-scoped event atomically
         uses: actions/github-script@v7
         env:
           EVENT_NAME: ${{ github.event_name }}
@@ -58,19 +58,19 @@ jobs:
               }
 
               rawEvent = {
-                id: `comment-${process.env.COMMENT_ID}`,
+                id: 'comment-' + process.env.COMMENT_ID,
                 type: 'github-comment-task',
                 priority: 50,
                 goal,
                 source: {
                   kind: 'github_issue_comment',
-                  repository: `${context.repo.owner}/${context.repo.repo}`,
+                  repository: context.repo.owner + '/' + context.repo.repo,
                   issue_number: Number(process.env.ISSUE_NUMBER),
                   comment_id: Number(process.env.COMMENT_ID),
                   url: process.env.COMMENT_URL || null
                 },
                 target: {
-                  repository: `${context.repo.owner}/${context.repo.repo}`,
+                  repository: context.repo.owner + '/' + context.repo.repo,
                   ref: process.env.AGENT_BRANCH
                 }
               };
@@ -78,7 +78,8 @@ jobs:
               const payload = JSON.parse(process.env.DISPATCH_PAYLOAD || '{}');
 
               rawEvent = {
-                id: payload.id || `dispatch-${context.runId}-${context.runAttempt}`,
+                id: payload.id || ('dispatch-' + context.runId + '-' + context.runAttempt),
+                object_id: payload.object_id || null,
                 type: payload.type || 'repository-dispatch-task',
                 priority: Number.isInteger(payload.priority) ? payload.priority : 50,
                 goal: payload.goal,
@@ -88,7 +89,7 @@ jobs:
                   kind: payload.source_kind || 'repository_dispatch',
                   repository:
                     payload.source_repository ||
-                    `${context.repo.owner}/${context.repo.repo}`,
+                    context.repo.owner + '/' + context.repo.repo,
                   event: payload.source_event || null,
                   action: payload.source_action || null,
                   ref: payload.source_ref || null,
@@ -101,7 +102,7 @@ jobs:
                   repository:
                     payload.target_repository ||
                     payload.source_repository ||
-                    `${context.repo.owner}/${context.repo.repo}`,
+                    context.repo.owner + '/' + context.repo.repo,
                   ref: payload.target_ref || process.env.AGENT_BRANCH
                 }
               };
