@@ -63,3 +63,12 @@ Exact cause: the workflow triggered from the immutable-report commit but checked
 The workflow now checks out the triggering `github.sha`, resolves reports from that commit, and supports explicit redelivery requests. A redelivery of shift #22 completed successfully.
 
 Next proof required: one natural report must publish and deliver with no recovery request.
+
+
+## Worker shift duration policy
+
+Do not cap production shifts at 10, 12 or 15 minutes.
+
+The four production clock slots are wake/start opportunities only. Once a worker owns the production lease, he continues until a natural stop condition. The lease is renewable and is not a shift timer. Another clock must not start a second worker while the lease remains active.
+
+A worker should wait for and consume near-term CI/test evidence in the same live Chat instead of handing off immediately after one push.
