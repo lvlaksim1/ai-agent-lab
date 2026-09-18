@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 11,
+  "sequence": 12,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-32-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Reviewing recovered Palych shift 32 from exact heartbeat and checkpoint evidence.",
-  "fence_generation": 9
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "working",
+  "activity_detail": "Resuming decoded-layer APFS evidence work after approved shift 32 runtime-loss review.",
+  "fence_generation": 11
 }
