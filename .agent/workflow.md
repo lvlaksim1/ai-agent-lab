@@ -71,7 +71,14 @@ No other two-event combination is allowed.
 5. Read active object mission/state/handoff as needed.
 6. Read `.agent/brigade.json` and `.agent/competition.md`.
 7. Materialize exactly `next_member_id`. Proposed shift number is `shift_counter + 1`.
-8. Before the substantive change, write down two things for the internal report: (a) a fair evidence-based assessment of the immediately preceding worker, and (b) the current worker's concrete plan/success criterion. Do not rewrite the plan with hindsight.
+8. Immediately publish the immutable worker start report per `.agent/reporting.md`, BEFORE any substantive target-repository work:
+   - set `reporting_policy_version: 2` and `shift_number` in runtime state;
+   - create exactly one `.agent/reports/starts/shift-<shift-number>-<worker-id>-<production-event>.md`;
+   - include only the factual first-person sections `ОЦЕНКА ПРЕДШЕСТВЕННИКА` and `МОЙ ПЛАН`; the plan must include a concrete success criterion;
+   - persist `shift_start_report_path` and `shift_start_report_commit` in state;
+   - never edit that report later and never rewrite the plan with hindsight;
+   - reading inherited evidence is allowed before this report, but no target-repository mutation, CI launch or evidence-changing engineering action may precede it.
+   If the execution dies before the report is created, OTK records it as missing; nobody fabricates it afterward.
 9. Execute one production shift continuously until a **proven natural stop condition** is reached. The scheduled clock interval is NOT a shift-duration limit and the queued event goal is NOT a micro-task boundary.
    - treat the event as the entry point into the current causal engineering chain;
    - keep working through successive justified steps while the same worker still has an actionable next step;
@@ -86,7 +93,7 @@ No other two-event combination is allowed.
    - immediately after each such checkpoint, create a new authoritative time-pulse and refresh heartbeat so last_seen_at is never earlier than the action/checkpoint it proves.
 10. Never weaken tests, proof gates, Definition of Done or anti-cheat controls.
 11. Any continuation MUST inherit the same object_id.
-12. End the production shift only at a natural stop condition, then write the technical journal and internal first-person shift report using the four sections from `.agent/reporting.md`. The journal/handoff commit is the preferred authoritative end marker: capture its returned commit SHA, fetch the GitHub server timestamp and record it as `shift_completed_at_utc`.
+12. End the production shift only at a natural stop condition, then write/update the technical journal/checkpoint evidence. Do NOT write an end-of-shift worker narrative. The immutable start report already records the worker's own assessment and plan; OTK will independently reconstruct the result after closure. The journal/handoff commit is the preferred authoritative end marker: capture its returned commit SHA, fetch the GitHub server timestamp and record it as `shift_completed_at_utc`.
 
 Before ending the shift, execute the **closure gate**:
 1. apply the actionable-next-step test from `.agent/evidence-acquisition.md`;
@@ -117,8 +124,11 @@ A worker MUST NOT proactively convert a live shift into `forced_stop` just to gu
 
 If an objective forced-stop signal is actually observed and persistence remains possible, a `wait_for` continuation is an emergency recovery checkpoint. Record the exact external run AND the objective `forced_stop_evidence`. Do not use this path as normal shift choreography.
 
-13. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id. Include `shift_started_at_utc`, `shift_completed_at_utc`, predecessor identity when known, the original plan, evidence references, target/ref and continuation id if any. New reviews MUST also include:
-   - `shift_policy_version: 3`;
+13. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id. Include `shift_started_at_utc`, `shift_completed_at_utc`, predecessor identity when known, evidence references, target/ref and continuation id if any. New reviews MUST also include:
+   - `shift_policy_version: 4`;
+   - `reporting_policy_version: 2`;
+   - `shift_number`;
+   - exact `start_report_path` and `start_report_commit` when the worker successfully published them; if absent because execution died before publication, preserve that fact rather than inventing a report;
    - `stop.kind` = `project_or_phase_complete`, `blocked`, `forced_stop` or `speculation_boundary`;
    - `stop.actionable_next_step: false`;
    - a concrete `stop.reason`;
@@ -135,7 +145,7 @@ If an objective forced-stop signal is actually observed and persistence remains 
 1a. Initialize `.agent/state.json -> heartbeat` with role=`otk`, worker_id=`otk`, reviewed event/object, activity_kind=`otk_review`, and refresh it throughout review according to `.agent/liveness.md`.
 2. Follow `.agent/supervision.md` and `.agent/competition.md`.
 3. Independently inspect and score the PREVIOUS production shift.
-4. Fully persist verdict, rating, brigade rotation, object/management signals, human report, done record and lease release.
+4. Fully persist verdict, rating, brigade rotation, object/management signals, independent OTK result report, done record and lease release.
 5. The OTK phase is now closed and immutable for this run.
 
 Then a second phase MAY begin:
