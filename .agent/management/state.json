@@ -8,18 +8,18 @@
   "definition_of_done": ["Use the authoritative object mission Definition of Done"],
   "current_phase": "boot-debugging",
   "health": "YELLOW",
-  "current_blocker_summary": "Recovered shift 30 proved the structural diagnostic reads the raw DMG at the wrong layer and fails before rebuild. Next step is decoded-layer source/rebuilt NXSB snapshotting inside ios-ramdisk-tool, then exact E2E before any writer semantic change.",
-  "shifts_since_manager_review": 2,
+  "current_blocker_summary": "Structural APFS evidence must be captured at the decoded disk.OpenWithOffset layer inside ios-ramdisk-tool; source/rebuilt NXSB snapshots and exact E2E comparison are required before any writer semantic change.",
+  "shifts_since_manager_review": 3,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
-  "last_scored_shift": 30,
+  "last_progress_class": "incremental",
+  "last_scored_shift": 31,
   "manager_review_count": 10,
   "last_manager_review_at": "2026-09-18T20:00:37Z",
   "last_manager_decision": "DEC-011: AUTHORIZE_APFS_EVIDENCE_AND_RESUME",
   "active_directive": "DIR-011",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-18T22:15:08Z"
+  "updated_at": "2026-09-18T22:27:28Z"
 }
