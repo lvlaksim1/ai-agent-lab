@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-001",
+  "status": "done",
+  "completed_at": "2026-09-18T01:10:35Z",
+  "worker_id": "native-scheduled-chat",
+  "summary": "Provisioning was proven healthy; isolated the first causal EL2 Data Abort, committed a narrow trace for its missing faulting TB, and continued the mission while new CI runs execute.",
+  "journal": ".agent/journal/ios-runtime-release-20260918-001.md",
+  "result": {
+    "target_commit": "a36d2b00fa538bd713594bb68bbf9fb94abc46bc",
+    "windows_build_run": 35294190796,
+    "windows_e2e_run": 35294190788,
+    "continuation_event": "ios-runtime-release-20260918-002"
+  }
+}
