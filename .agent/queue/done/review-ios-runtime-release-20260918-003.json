@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-003",
+  "status": "done",
+  "completed_at": "2026-09-18T02:13:30Z",
+  "worker_id": "supervisor",
+  "summary": "APPROVED shift 1 for Петрович at 9/10; +40 rating. Fresh CI independently validates the narrowed diagnostic path; root cause remains for continuation 004.",
+  "journal": ".agent/journal/review-ios-runtime-release-20260918-003.md",
+  "result": {
+    "verdict": "APPROVED",
+    "score": 9,
+    "rating_delta": 40,
+    "continuation": "ios-runtime-release-20260918-004"
+  }
+}
