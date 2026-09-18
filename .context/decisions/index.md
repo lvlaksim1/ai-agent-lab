@@ -9,3 +9,5 @@
 | DEC-20260918-reporting | 2026-09-18 | ACTIVE | Structured reports + immutable publication | DEC-20260918-reporting.md |
 | DEC-20260918-context-capsule | 2026-09-18 | ACTIVE | PCC is standard project-chat memory | DEC-20260918-context-capsule.md |
 | DEC-20260918-silent-scheduler-notifications | 2026-09-18 | ACTIVE | Idle Scheduled Task checks are silent; meaningful outcomes notify | DEC-20260918-silent-scheduler-notifications.md |
+
+| DEC-20260918-generic-dispatcher | 2026-09-18 | ACTIVE | Five generic clock tasks at :00/:12/:24/:36/:48 with Variant A rollback | DEC-20260918-generic-dispatcher.md |
