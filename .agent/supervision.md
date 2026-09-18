@@ -14,7 +14,8 @@ Inspect as applicable:
 3. target repository diff/commits;
 4. actual CI/workflow results and available logs/artifacts;
 5. queued continuation;
-6. mission Definition of Done.
+6. mission Definition of Done;
+7. applicable management directive.
 
 Do not rely on the worker's summary where underlying evidence is available.
 
@@ -25,6 +26,7 @@ Determine:
 - whether conclusions are evidenced;
 - whether the change is minimal and architecturally sound;
 - whether tests/proof/release gates were preserved;
+- whether the manager directive, if any, was followed;
 - whether the next action is the highest-value action;
 - whether claimed progress is actually validated;
 - whether any anti-cheat rule was violated.
@@ -34,6 +36,12 @@ Verdict is one of:
 
 Score the production shift 0..10 using `.agent/competition.md`.
 CHEAT uses the fixed -100 rating penalty and increments cheat_strikes.
+
+Also classify verified project progress for management as exactly one:
+- `none` — no meaningful new evidence or useful state change;
+- `incremental` — useful narrowing/evidence but same milestone/blocker remains;
+- `substantial` — major blocker removed or material capability gained;
+- `milestone` — a Definition-of-Done milestone is genuinely reached.
 
 ## Continuation control
 
@@ -57,6 +65,36 @@ For a normal scored shift:
 - advance next_member_id one roster position.
 
 Never reward quantity metrics.
+
+## Management signal
+
+After scoring, read and SHA/CAS-update `.agent/management/state.json`:
+
+- `last_scored_shift` = reviewed shift number;
+- `shifts_since_manager_review += 1`;
+- `last_otk_verdict` = verdict;
+- `last_progress_class` = progress class;
+- if progress class is `none`, increment `consecutive_no_progress`, otherwise set it to 0;
+- if verdict is `CORRECTED`, increment `consecutive_corrected`, otherwise set it to 0;
+- update `current_blocker_summary` in concise plain language when evidence changed the blocker.
+
+Then evaluate manager-attention triggers:
+- `shifts_since_manager_review >= 3`;
+- `consecutive_no_progress >= 2`;
+- `consecutive_corrected >= 2`;
+- verdict is `REMEDIATED`, `BLOCKED`, or `CHEAT`;
+- progress class is `milestone`;
+- a release candidate is claimed;
+- a material architecture/scope change is proposed;
+- an owner decision is required.
+
+If any trigger fires, SHA/CAS-update `.agent/management/wake.json`:
+- set `attention=true`;
+- increment `generation` exactly once for this OTK review;
+- append concise trigger reasons;
+- update timestamp.
+
+If manager wake already contains newer reasons, preserve them. Never lower its generation.
 
 ## Human report
 
