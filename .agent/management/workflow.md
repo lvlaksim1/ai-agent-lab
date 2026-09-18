@@ -166,3 +166,12 @@ One manager tick performs at most one management review/transfer step.
 Never process a production queue event as a worker.
 Never mutate Scheduled Tasks.
 Never use Work.
+
+
+## Notification semantics
+
+The manager clock is a condition-watch.
+
+If `.agent/management/wake.json` has `attention=false`, perform no further reads/writes and do not notify the owner.
+
+After a real management review, notify the owner only when there is a meaningful management result: escalation, blocker, course change, transfer step, owner decision, or other substantive outcome. Routine no-op checks remain silent.
