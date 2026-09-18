@@ -117,3 +117,28 @@ Live runtime now has:
 Next production work must instrument Windows E2E to persist compact original-vs-rebuilt NX/APFS/checkpoint structural evidence, identify the first causally incompatible metadata field, and only then make a minimal evidence-supported writer change. Do not weaken proof gates or guess APFS semantics.
 
 The fresh-chat Context Capsule validation is now complete end-to-end, including dynamic write-back from the independently bootstrapped manager Chat.
+
+## Stale-worker emergency recovery v4 — 2026-09-19
+
+Owner changed recovery policy after repeated 2–3 minute worker disappearances made the 45-minute lease waste most production time.
+
+New invariant:
+- a healthy worker is NEVER ended merely because the next production clock is approaching;
+- live workers continue across :00/:12/:24/:36/:48 clocks exactly as before;
+- a verified STALE heartbeat may now bypass an otherwise valid lease through the dedicated recovery guard;
+- recovery guard boundaries are :10/:22/:34/:46/:58, two minutes before the next normal production clock;
+- the guard is a GitHub Actions watchdog triggered by authoritative state pushes, not a sixth ChatGPT Scheduled Task;
+- the five ChatGPT production clocks remain the only five active planner tasks;
+- runtime loss is a new v4 stop kind distinct from worker-declared forced_stop and carries no automatic efficiency penalty;
+- the factual worker end time is the last exact heartbeat; the later administrative recovery time is stored separately;
+- stale recovery increments state.fence_generation so any late zombie execution must stop before further writes;
+- OTK is reviewed/retried separately; production runtime loss enqueues exactly one OTK review and leaves the continuation pending.
+
+Live proof during deployment:
+- Кузьмич shift 31 heartbeat last_seen = 22:18:04Z, stale_at = 22:21:04Z;
+- the newly armed watchdog detected that stale execution, created exact recovery pulse c75428de4070feca9465d82e551038b2e718cc3c at 22:24:57Z and fenced/released it in commit 58f8da770311e72efeb0e9ace29487430629d89c;
+- state moved to idle with RUNTIME_LOSS_PENDING_REVIEW and fence_generation=5;
+- the recovery workflow completed SUCCESS;
+- final runtime validator after policy correction completed SUCCESS.
+
+The first deployment recovery happened after the intended :22 guard because the watchdog itself was armed after that guard had already passed. Future workers arm the watchdog from their state/heartbeat pushes, so it is already waiting before the next guard boundary.
