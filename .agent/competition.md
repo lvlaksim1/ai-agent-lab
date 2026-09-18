@@ -150,3 +150,11 @@ Good report content:
 Avoid turning the report into a raw log. Do not include commit hashes, run IDs, long memory addresses, stack dumps, branch names, file paths or raw CI metadata unless the owner explicitly asks for them.
 
 Detailed evidence stays in `.agent/journal/` and `.agent/reviews/`.
+
+## Runtime loss
+
+A shift externally closed by the stale-worker recovery guard uses `stop.kind=runtime_loss`.
+
+This is not a voluntary handoff and carries no automatic Efficiency/focus penalty. OTK scores the verified work completed before the last exact heartbeat and then advances the normal roster. The next worker receives the continuation at the following production clock.
+
+A worker that later resumes after being fenced is a zombie execution and must stop before any write.
