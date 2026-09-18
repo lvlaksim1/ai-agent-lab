@@ -100,3 +100,20 @@ A live worker must keep the shift during observable mandatory CI, renew lease if
 ## Fresh-chat manager bootstrap validated
 
 The canonical invocation was tested in a truly empty Chat and worked end-to-end. The new Chat discovered the repository context, redirected to `work-webhook-test`, restored the persistent manager persona and current live state, and produced the correct owner escalation with a ready-to-send recommended answer. No prior-chat recap was requested.
+
+
+## Owner authorized APFS evidence channel
+
+The previous owner-decision block is resolved. The owner explicitly authorized a diagnostic APFS evidence channel and production resume.
+
+Live runtime now has:
+- DEC-011 AUTHORIZE_APFS_EVIDENCE_AND_RESUME;
+- DIR-011 APFS EVIDENCE FIRST;
+- pending event `ios-runtime-release-20260918-031`;
+- production wake=true, generation 41;
+- management owner_decision_required=false;
+- object health YELLOW.
+
+Next production work must instrument Windows E2E to persist compact original-vs-rebuilt NX/APFS/checkpoint structural evidence, identify the first causally incompatible metadata field, and only then make a minimal evidence-supported writer change. Do not weaken proof gates or guess APFS semantics.
+
+The fresh-chat Context Capsule validation is now complete end-to-end, including dynamic write-back from the independently bootstrapped manager Chat.
