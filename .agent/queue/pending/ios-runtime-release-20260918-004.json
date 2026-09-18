@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "id": "ios-runtime-release-20260918-004",
+  "object_id": "ios-research-runtime",
   "created_at": "2026-09-18T02:00:30Z",
   "type": "project-mission-continuation",
   "priority": 95,
