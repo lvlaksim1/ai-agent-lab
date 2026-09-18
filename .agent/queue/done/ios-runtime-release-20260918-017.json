@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-017",
+  "type": "production",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "kuzmich",
+  "proposed_shift": 15,
+  "result": "Direct tracing path researched: current pinned qemu-sptm gate disables plugins, and MemoryRegion write trace events are not proven ordinary TCG RAM watchpoints. No target change. Safest next step is narrow QEMU TCG-store instrumentation after proving the boot-state slot VA-to-PA mapping.",
+  "completed_at": "2026-09-18T06:34:00Z",
+  "supervisor_review": "review-ios-runtime-release-20260918-017"
+}
