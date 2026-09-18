@@ -45,3 +45,10 @@ The shop was found idle after shift 21 because OTK completed before asynchronous
 New invariant: if required external evidence is still pending, OTK must leave a same-object continuation; waiting preflight must not consume a worker turn.
 
 The condition-watch scheduler experiment was reverted. Production and manager clocks are back on exact schedules; do not trade clock reliability for UI-notification silence.
+
+
+## Scheduler re-anchor
+
+A second continuity issue was observed: changing timing mode back to exact did not by itself produce the expected next tick. The five active tasks were explicitly re-anchored to future Moscow DTSTART values while preserving the factory cadence.
+
+At the repair point event 024 was still pending, wake=true, state idle. First expected production recovery tick: 14:32 MSK. Verify it before declaring the clock healthy.
