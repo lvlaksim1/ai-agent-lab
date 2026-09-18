@@ -85,13 +85,22 @@ jobs:
                 files: Array.isArray(payload.files) ? payload.files : [],
                 constraints: Array.isArray(payload.constraints) ? payload.constraints : [],
                 source: {
-                  kind: 'repository_dispatch',
-                  repository: `${context.repo.owner}/${context.repo.repo}`,
-                  sender: context.actor
+                  kind: payload.source_kind || 'repository_dispatch',
+                  repository:
+                    payload.source_repository ||
+                    `${context.repo.owner}/${context.repo.repo}`,
+                  event: payload.source_event || null,
+                  action: payload.source_action || null,
+                  ref: payload.source_ref || null,
+                  sha: payload.source_sha || null,
+                  run_id: payload.source_run_id || null,
+                  run_url: payload.source_run_url || null,
+                  actor: payload.source_actor || context.actor
                 },
                 target: {
                   repository:
                     payload.target_repository ||
+                    payload.source_repository ||
                     `${context.repo.owner}/${context.repo.repo}`,
                   ref: payload.target_ref || process.env.AGENT_BRANCH
                 }
