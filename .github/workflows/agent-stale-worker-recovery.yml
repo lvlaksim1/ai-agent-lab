@@ -1,0 +1,26 @@
+name: Agent Stale Worker Recovery
+
+on:
+  schedule:
+    - cron: "10,22,34,46,58 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: agent-stale-worker-recovery
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: work-webhook-test
+          fetch-depth: 0
+      - name: Recover verified stale worker before next production clock
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RUNTIME_REF: work-webhook-test
+        run: node .github/scripts/stale-worker-recovery.cjs
