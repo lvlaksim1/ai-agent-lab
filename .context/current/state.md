@@ -58,3 +58,17 @@ Fix:
 - runtime validator now checks this invariant.
 
 Shift #22 was redelivered after the fix and GitHub Actions confirmed successful Telegram delivery.
+
+
+## Natural-boundary shift policy — 2026-09-18
+
+Owner rejected artificial shift budgets shorter than the 15-minute clock interval.
+
+New rule:
+- Scheduled clock cadence is only an opportunity to start work;
+- it is not a shift-duration limit;
+- a worker continues as long as useful evidence-driven work is possible;
+- CI/build/test should be awaited and consumed in the same live Chat when reasonably possible;
+- production lease is renewable and acts only as a stale-worker lock;
+- the next clock exits if a worker is still active;
+- premature handoff while actionable work remains is an efficiency defect.
