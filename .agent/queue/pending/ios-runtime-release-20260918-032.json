@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-032",
+  "created_at": "2026-09-18T20:12:46Z",
+  "type": "task",
+  "priority": 90,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "continuation",
+    "from_event": "ios-runtime-release-20260918-031",
+    "directive": "DIR-011"
+  },
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "goal": "Consume terminal exact Windows E2E evidence for commit 3645cc63e25f524097b29ea784ddf90fe412f827, inspect apfs-structural-evidence.json, identify the first causally incompatible APFS metadata field, and continue DIR-011 with the smallest justified writer correction only if evidence supports it.",
+  "wait_for": {
+    "kind": "github_actions_run",
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "run_id": 35390159689,
+    "required_terminal": true
+  },
+  "constraints": [
+    "Do not weaken proof gates or Definition of Done.",
+    "Do not make speculative APFS writer changes.",
+    "Use the evidence-acquisition ladder before declaring BLOCKED."
+  ]
+}
