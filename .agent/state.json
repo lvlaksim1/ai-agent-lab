@@ -1,15 +1,6 @@
 {
-  "schema_version": 1,
-  "status": "processing",
-  "active_event": "ios-runtime-release-20260918-032",
-  "worker_id": "palych",
-  "started_at": "2026-09-18T22:50:42Z",
-  "lease_until": "2026-09-18T23:35:42Z",
-  "last_event": "review-shift-31-ios-runtime-release-20260918-032",
-  "last_result": "APPROVED_8",
-  "last_completed_at": "2026-09-18T22:49:19Z",
-  "heartbeat": {"schema_version":2,"active":true,"role":"production","worker_id":"palych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","sequence":5,"time_source":"github_commit_committer_date","time_anchor_commit":"e0c8b80a88203fdaf7f7612c74ddfb36cdecee57","time_anchor_path":".agent/time-pulse.json","last_seen_at":"2026-09-18T22:50:42Z","stale_at":"2026-09-18T22:53:42Z","activity_kind":"working","activity_detail":"Starting decoded-layer APFS structural evidence implementation after shift 31 OTK.","external_wait":null},
-  "time_authority":"github_commit_committer_date","started_at_anchor_commit":"e0c8b80a88203fdaf7f7612c74ddfb36cdecee57","lease_anchor_commit":"e0c8b80a88203fdaf7f7612c74ddfb36cdecee57","fence_generation":8,
-  "reporting_policy_version":2,"score_policy_version":2,"shift_number":32,"shift_start_report_path":".agent/reports/starts/shift-32-palych-ios-runtime-release-20260918-032.md","shift_start_report_commit":"7e5b3de6cc3aa6d33e2158169438c48745939aec",
+  "schema_version":1,"status":"processing","active_event":"ios-runtime-release-20260918-032","worker_id":"palych","started_at":"2026-09-18T22:50:42Z","lease_until":"2026-09-18T23:35:42Z","last_event":"review-shift-31-ios-runtime-release-20260918-032","last_result":"APPROVED_8","last_completed_at":"2026-09-18T22:49:19Z",
+  "heartbeat":{"schema_version":2,"active":true,"role":"production","worker_id":"palych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","sequence":6,"time_source":"github_commit_committer_date","time_anchor_commit":"47553290d2a6d8bc172cf373badbdd9971c0f3a7","time_anchor_path":".agent/time-pulse.json","last_seen_at":"2026-09-18T22:52:02Z","stale_at":"2026-09-18T22:55:02Z","activity_kind":"working","activity_detail":"Checkpointed exact decoded-layer APFS evidence implementation boundary; next action is read-only tool instrumentation, then gates/E2E.","external_wait":null},
+  "time_authority":"github_commit_committer_date","started_at_anchor_commit":"e0c8b80a88203fdaf7f7612c74ddfb36cdecee57","lease_anchor_commit":"e0c8b80a88203fdaf7f7612c74ddfb36cdecee57","fence_generation":8,"reporting_policy_version":2,"score_policy_version":2,"shift_number":32,"shift_start_report_path":".agent/reports/starts/shift-32-palych-ios-runtime-release-20260918-032.md","shift_start_report_commit":"7e5b3de6cc3aa6d33e2158169438c48745939aec",
   "last_runtime_loss":{"role":"production","event":"ios-runtime-release-20260918-032","worker_id":"kuzmich","worker_last_seen_at_utc":"2026-09-18T22:18:04Z","heartbeat_stale_at_utc":"2026-09-18T22:21:04Z","heartbeat_anchor_commit":"83367430c8f4a912400dad42e070762b1a5644cc","recovery_closed_at_utc":"2026-09-18T22:24:57Z","recovery_anchor_commit":"c75428de4070feca9465d82e551038b2e718cc3c","fenced_generation":5,"activity_kind":"working","activity_detail":"Checkpointed decoded-layer APFS evidence design; target writer remains unchanged."}
 }
