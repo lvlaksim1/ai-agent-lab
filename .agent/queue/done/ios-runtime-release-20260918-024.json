@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-024",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "fedorych",
+  "proposed_shift": 22,
+  "result": "progressed",
+  "target_commit": "20ef7d96ec4546d2d6ff678f37223bf1173f386e",
+  "shift_started_at_utc": "2026-09-18T11:19:36Z",
+  "shift_completed_at_utc": "2026-09-18T11:22:42Z",
+  "journal": ".agent/journal/ios-runtime-release-20260918-024.md",
+  "review_event": "review-ios-runtime-release-20260918-024",
+  "continuation_id": "ios-runtime-release-20260918-025",
+  "summary": "Exact E2E isolated the first post-map failure to an EL2 Data Abort after a DRAM-relative-looking 0x12ed0000 value is processed as an absolute address. Added diagnostic-only boot_args correlation evidence; mandatory CI is running and no PASS is claimed."
+}
