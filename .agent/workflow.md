@@ -66,6 +66,7 @@ No other two-event combination is allowed.
    - record the same exact GitHub time as `shift_started_at_utc`.
    Never invent start/lease time from scheduler minute, model time or local clock.
    - increment `state.fence_generation` for the new execution and remember the claimed generation;
+   - for production claims, persist `reporting_policy_version: 2`, `shift_number = brigade.shift_counter + 1`, and initialize `shift_start_report_path=null`, `shift_start_report_commit=null`;
    - before every target-repository write or runtime mutation, re-read state and verify the same active event/worker/fence. A mismatch means this execution was fenced and must stop without writing.
 4a. From this point onward every heartbeat refresh MUST follow `.agent/liveness.md`: action/checkpoint first -> time-pulse second -> state heartbeat third. Heartbeat timestamps may only come from the fetched GitHub pulse commit.
 5. Read active object mission/state/handoff as needed.
@@ -124,7 +125,14 @@ A worker MUST NOT proactively convert a live shift into `forced_stop` just to gu
 
 If an objective forced-stop signal is actually observed and persistence remains possible, a `wait_for` continuation is an emergency recovery checkpoint. Record the exact external run AND the objective `forced_stop_evidence`. Do not use this path as normal shift choreography.
 
-13. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id. Include `shift_started_at_utc`, `shift_completed_at_utc`, predecessor identity when known, evidence references, target/ref and continuation id if any. New reviews MUST also include:
+13. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id. Its id/path MUST be shift-unique even when the production event is a continuation reused across several workers:
+
+   `review-shift-<shift-number>-<production-event>`
+   `.agent/queue/pending/review-shift-<shift-number>-<production-event>.json`
+
+   Never reuse legacy `review-<production-event>` for a new shift.
+
+   Include `shift_started_at_utc`, `shift_completed_at_utc`, predecessor identity when known, evidence references, target/ref and continuation id if any. New reviews MUST also include:
    - `shift_policy_version: 4`;
    - `reporting_policy_version: 2`;
    - `shift_number`;
