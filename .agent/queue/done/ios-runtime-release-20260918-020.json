@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-020",
+  "type": "production",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "sanych",
+  "proposed_shift": 18,
+  "result": "Identified malformed unified-diff metadata in patch 0009: hunk declared +12 added lines but body adds 16. Changed only new-file hunk count from 18 to 22; C code and proof gates unchanged. New Windows Build and qemu-sptm gate are queued, so PASS is not yet claimed.",
+  "target_commit": "f99202345d6268727416c839d416cc70cff8ed2a",
+  "completed_at": "2026-09-18T07:21:00Z",
+  "supervisor_review": "review-ios-runtime-release-20260918-020"
+}
