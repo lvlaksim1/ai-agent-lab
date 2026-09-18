@@ -122,27 +122,45 @@ If transfer is draining, STOP after OTK and do not start another production shif
 
 ## Human report
 
-After rating, write .agent/reports/latest.md with ONLY:
+After rating, follow `.agent/reporting.md` exactly.
 
+OTK must publish `.agent/reports/latest.md` in this order:
+
+```text
 Проект: <human project name>
 Работник: <brigade display name>
 Смена: №<global brigade shift number>
-Доклад: <short Russian first-person story>
+Начало смены: <DD.MM.YYYY HH:MM:SS МСК>
+Конец смены: <DD.MM.YYYY HH:MM:SS МСК>
 
-The `Доклад` is written in first person singular from the reviewed worker's point of view: «я проверил», «я нашёл», «мне ОТК поставил 8/10».
+Доклад:
 
-OTK authors this final text only after checking evidence, so the first-person narrative must reflect the independently verified result, not the worker's unverified self-assessment.
+ОЦЕНКА ПРЕДЫДУЩЕГО:
+<verified first-person paragraph>
 
-Include enough technical substance to understand what happened:
-- name the relevant component/subsystem when useful;
-- explain the defect/hypothesis in plain Russian;
-- include one or two concrete technical findings;
-- say what passed/failed and why that matters;
-- avoid raw IDs, hashes, long addresses, log dumps and internal metadata;
-- explain specialized jargon inline if a non-specialist could miss the meaning.
+МОЙ ПЛАН:
+<verified first-person paragraph>
 
-Keep it as one coherent story, not a checklist or a set of technical bullet points.
+ЧТО ПОЛУЧИЛОСЬ:
+<verified first-person paragraph>
 
-Factory-floor tone remains: competent, concise, with at most one or two harmless collegial jokes. Never exaggerate success.
+СЛЕДУЮЩЕМУ:
+<verified first-person paragraph>
+
+Оценка ОТК: <score>/10 — <verdict>
+Рейтинг: <new rating> (<signed delta>)
+```
+
+Time rules:
+- use authoritative production timestamps carried in the review event;
+- if absent in a legacy event, recover from GitHub server timestamps of the production lease claim/end commits;
+- convert to Europe/Moscow (UTC+03:00);
+- never substitute the OTK review time for the worker's shift end.
+
+The narrative is written from the worker's point of view, but every material statement must be independently supported by evidence.
+
+The four sections are mandatory. Keep real technical detail understandable to a non-specialist owner. Humor/irony is encouraged and should be more visible than before, but it must not blur status, uncertainty or evidence.
+
+OTK score and rating are separate metadata after the report and must never be hidden inside the prose.
 
 Private evidence remains in reviews/journals.
