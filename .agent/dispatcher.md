@@ -4,7 +4,7 @@
 
 All five active Scheduled Tasks are generic **clock ticks**, not named workers and not a dedicated manager clock.
 
-Each physical task runs at most once per hour. Five tasks are staggered evenly:
+Each physical task runs once per hour. The five tasks are staggered evenly at Moscow minutes:
 
 - :00
 - :12
@@ -12,80 +12,48 @@ Each physical task runs at most once per hour. Five tasks are staggered evenly:
 - :36
 - :48
 
-This gives a nominal maximum dispatcher polling latency of 12 minutes without adding active Scheduled Tasks.
+Nominal maximum dispatcher polling latency is therefore 12 minutes without adding active Scheduled Tasks.
 
 The clock does not define shift duration. A production worker may remain active across any number of later ticks.
 
 ## First read
 
 Every clock tick initially reads only:
-
 - `.agent/state.json`
 - `.agent/wake.json`
 - `.agent/management/wake.json`
 
-Do not load the full project before role selection.
-
 ## State machine
 
-### 1. Active production worker
+### Active worker
 
-If `.agent/state.json.status == processing` and the lease is still valid:
+If production state is `processing` and lease is valid:
+- manager attention=true -> materialize one manager review; active worker continues concurrently;
+- manager attention=false -> quiet no-op.
 
-- if `.agent/management/wake.json.attention == true`:
-  - materialize **Начальник участка**;
-  - run exactly one management review;
-  - the production worker continues concurrently;
-  - never become a second production worker.
+### Idle station
 
-- otherwise:
-  - quiet no-op;
-  - do not load production queue/project files;
-  - do not notify the owner.
+If production state is `idle`:
+1. manager attention=true -> one manager review, then stop;
+2. else production wake pending=true -> run the production relay;
+3. else quiet no-op.
 
-### 2. Expired production lease
+### Expired lease
 
-If state says `processing` but `lease_until` is already expired:
-
-- treat the production station as needing recovery;
-- if manager attention is true, manager has priority for one review;
-- otherwise enter the production workflow, which must recover the expired lease safely before claiming work.
-
-### 3. Production station idle
-
-If state is `idle`:
-
-1. If manager attention is true:
-   - materialize **Начальник участка** first;
-   - run exactly one management review;
-   - stop after that role;
-   - production can start at the next clock tick.
-
-2. Else if production wake `pending == true`:
-   - materialize the production relay;
-   - follow `.agent/workflow.md`;
-   - the relay may perform OTK of the previous shift and then at most one next production shift, as already defined.
-
-3. Else:
-   - quiet no-op.
-
-## Why manager has priority when the station is idle
-
-Management attention may contain STOP, transfer, blocker or course-change decisions. Starting a worker before resolving that control-plane state can waste a shift.
-
-When a worker is already active, manager may run concurrently because worker + manager is explicitly allowed.
+If state says `processing` but lease has expired:
+- manager attention has priority for one management review;
+- otherwise enter production workflow and perform its safe stale-lease recovery before taking work.
 
 ## Role isolation
 
-A single clock-run materializes at most one top-level logical role:
+One clock run materializes exactly one top-level role:
+- manager;
+- production relay;
+- idle.
 
-- MANAGER; or
-- PRODUCTION RELAY; or
-- IDLE.
+Manager never becomes worker or OTK in the same run.
 
-The production relay may still do its existing sequential `OTK -> next worker` cycle.
-
-A manager run never becomes a production worker in the same Chat.
+Production relay may retain its existing sequential `OTK -> next worker` behavior.
 
 ## Concurrency
 
@@ -94,27 +62,19 @@ Allowed:
 
 Forbidden:
 - worker + worker;
-- two OTK/production leases;
+- two production/OTK leases;
 - manager acting as OTK.
+
+## Shift duration
+
+Clock cadence is not a work budget.
+
+An active worker continues until the natural stop condition in `.agent/workflow.md` and may renew the production lease. Later clock ticks see the occupied station and do not replace that worker.
 
 ## Notifications
 
-Normal clock checks are silent:
-- no work;
-- valid occupied production lease with no manager attention;
-- wait-for preflight still non-terminal;
-- other no-op conditions.
+Normal no-op ticks stay silent. Human reports continue through the immutable Telegram publication path.
 
-Human-visible reporting remains the responsibility of the immutable Telegram publication path and meaningful manager escalation.
+## Fallback
 
-## Rollback
-
-Variant A is preserved in `.agent/scheduler-rollback-variant-a.md`.
-
-Rollback requires only:
-- restoring the four production clocks :02/:17/:32/:47;
-- restoring dedicated manager :59;
-- restoring their role-specific prompts;
-- restoring Variant A config/topology fields.
-
-No queue, rating, object, journal or project state needs to be rolled back.
+Variant A rollback is documented in `.agent/scheduler-rollback-variant-a.md`.
