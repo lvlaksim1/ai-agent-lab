@@ -155,12 +155,40 @@ if (fs.existsSync(doneDir)) {
     const done = readJson(path.join(".agent/queue/done", file));
     if (done.schema_version === undefined) continue;
     check(done.schema_version === 1, file + ": schema_version must be 1");
-    check(["done", "blocked"].includes(done.status), file + ": status must be done or blocked");
+    if ("status" in done) {
+      check(["done", "blocked"].includes(done.status), file + ": status must be done or blocked");
+    } else {
+      check(done.type === "supervisor-review" && typeof done.verdict === "string" && typeof done.completed_at === "string", file + ": legacy done record without status must be a completed supervisor-review");
+    }
     check(typeof done.id === "string" && done.id.length > 0, file + ": id is required");
     if ("summary" in done) {
       check(typeof done.summary === "string" && done.summary.trim().length > 0, file + ": summary must be non-empty when present");
     }
   }
+}
+
+const reportPath = path.join(root, ".agent/reports/latest.md");
+check(fs.existsSync(reportPath), "latest human report must exist");
+if (fs.existsSync(reportPath)) {
+  const humanReport = fs.readFileSync(reportPath, "utf8");
+  for (const marker of [
+    "Проект:",
+    "Работник:",
+    "Смена:",
+    "Начало смены:",
+    "Конец смены:",
+    "Доклад:",
+    "ОЦЕНКА ПРЕДЫДУЩЕГО:",
+    "МОЙ ПЛАН:",
+    "ЧТО ПОЛУЧИЛОСЬ:",
+    "СЛЕДУЮЩЕМУ:",
+    "Оценка ОТК:",
+    "Рейтинг:"
+  ]) {
+    check(humanReport.includes(marker), "latest human report missing marker: " + marker);
+  }
+  check(/Начало смены: \d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2} МСК/.test(humanReport), "latest human report start time must be Moscow timestamp");
+  check(/Конец смены: \d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2} МСК/.test(humanReport), "latest human report end time must be Moscow timestamp");
 }
 
 if (!process.exitCode) {
