@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-003",
+  "status": "done",
+  "completed_at": "2026-09-18T02:01:30Z",
+  "worker_id": "scheduled-chat-worker",
+  "summary": "Localized the missing SPTM address transformation to an untraced branch at 0xfffffff0070dad6c and moved the narrow diagnostic filter there; root cause remains pending new CI evidence.",
+  "journal": ".agent/journal/ios-runtime-release-20260918-003.md",
+  "result": "lvlaksim1/iOS-Research-Runtime@e724be378cd4c398d64b7b386c24461c1730e94c"
+}
