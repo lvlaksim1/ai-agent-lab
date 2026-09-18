@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "qemu-sptm Windows Gate still fails during Apply Windows portability patch after the 0009 hunk-count correction. Determine the exact remaining git apply --check failure and repair patch applicability before exact E2E or TCG-store instrumentation.",
-  "last_scored_shift": 18,
-  "last_otk_verdict": "CORRECTED",
+  "current_blocker_summary": "qemu-sptm Windows Gate fails in the aggregate Apply Windows portability patch step; exact failing patch name and git apply --check stderr are not durable evidence yet. Capture them without weakening the gate, repair only the proven applicability defect, then require full gate PASS before exact E2E.",
+  "last_scored_shift": 19,
+  "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
-  "last_event": "ios-runtime-release-20260918-020",
+  "last_event": "ios-runtime-release-20260918-021",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T07:30:03Z"
+  "updated_at": "2026-09-18T07:48:22Z"
 }
