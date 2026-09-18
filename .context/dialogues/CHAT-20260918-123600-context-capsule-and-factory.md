@@ -29,3 +29,16 @@
 - dynamic write-back from that Chat;
 - first natural immutable report delivery;
 - eventual cross-repo forwarding E2E.
+
+
+### Quiet Scheduled Task notifications
+
+Owner reported browser notifications from normal idle Scheduled Task runs such as `MANAGER_IDLE`.
+
+Decision implemented:
+- all five active shop tasks switched from exact-schedule notification behavior to condition-watch semantics while keeping the same recurring schedules;
+- manager idle (`attention=false`) is silent;
+- worker idle (`pending=false`), occupied-lease skips and other no-op runs are silent;
+- notifications are reserved for meaningful worker/OTK results, blockers/failures requiring attention, or substantive manager outcomes/escalations.
+
+This changes notification behavior only, not production cadence or scheduler execution.
