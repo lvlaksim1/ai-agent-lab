@@ -159,3 +159,20 @@ Rules:
 Telegram delivery is triggered only by creation of a new immutable file under `.agent/reports/published/`.
 
 This prevents an old shift from being resent merely because its formatting, documentation or `latest.md` was edited later.
+
+
+## Telegram delivery integrity
+
+External delivery must be bound to the **triggering commit**, not to the moving branch head.
+
+Required behavior:
+- GitHub Actions checks out `${{ github.sha }}` for the publication event;
+- newly added immutable reports are resolved from that exact commit;
+- never hard-code checkout of the moving `work-webhook-test` branch when deciding which report triggered the workflow;
+- otherwise later OTK commits may advance the branch before checkout, causing the workflow to inspect the wrong commit and silently skip the report.
+
+Explicit recovery is allowed through an immutable request file under:
+
+`.agent/reports/redelivery/*.request`
+
+The request contains exactly one path to an existing immutable published report. Redelivery never edits or duplicates the published report itself.
