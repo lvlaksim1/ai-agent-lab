@@ -49,16 +49,17 @@ No other two-event combination is allowed.
 1. Read `.agent/management/state.json`.
 2. If `stop_production=true`, leave the event queued and stop with `PRODUCTION_STOPPED_BY_MANAGER`.
 3. If an active directive applies to this object and NEXT_SHIFT, read and follow it.
-4. Claim the global lease with SHA/CAS.
+4. Claim the global lease with SHA/CAS. Capture the returned GitHub commit SHA, fetch that commit, and record its GitHub server timestamp as `shift_started_at_utc`. Never invent start time from the scheduler minute.
 5. Read active object mission/state/handoff as needed.
 6. Read `.agent/brigade.json` and `.agent/competition.md`.
 7. Materialize exactly `next_member_id`. Proposed shift number is `shift_counter + 1`.
-8. Execute one production shift: reconstruct evidence, attack the first real blocker, make the smallest justified change and verify it.
-9. Never weaken tests, proof gates, Definition of Done or anti-cheat controls.
-10. Any continuation MUST inherit the same object_id.
-11. Write technical journal and internal first-person shift report.
-12. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id.
-13. Persist done/state/wake.
+8. Before the substantive change, write down two things for the internal report: (a) a fair evidence-based assessment of the immediately preceding worker, and (b) the current worker's concrete plan/success criterion. Do not rewrite the plan with hindsight.
+9. Execute one production shift: reconstruct evidence, attack the first real blocker, make the smallest justified change and verify it.
+10. Never weaken tests, proof gates, Definition of Done or anti-cheat controls.
+11. Any continuation MUST inherit the same object_id.
+12. Write the technical journal and internal first-person shift report using the four sections from `.agent/reporting.md`. The journal/handoff commit is the preferred authoritative end marker: capture its returned commit SHA, fetch the GitHub server timestamp and record it as `shift_completed_at_utc`.
+13. ALWAYS enqueue exactly one supervisor-review for this shift with priority 100 and the same object_id. Include `shift_started_at_utc`, `shift_completed_at_utc`, predecessor identity when known, the original plan, evidence references, target/ref and continuation id if any.
+14. Persist done/state/wake. The production done record SHOULD also contain `shift_started_at_utc` and `shift_completed_at_utc`.
 14. STOP. The run MUST NOT review the shift it just performed.
 
 ### 2B. If the first event is supervisor-review
@@ -80,7 +81,7 @@ Then a second phase MAY begin:
 8. Select one normal production event using normal priority/age ordering.
 9. Claim the global lease again.
 10. Materialize the now-current `next_member_id` (which OTK has already advanced).
-11. Execute exactly one production shift using steps 2A.5–2A.13.
+11. Execute exactly one production shift using steps 2A.5–2A.14.
 12. STOP.
 
 The second phase may not be another supervisor-review.
