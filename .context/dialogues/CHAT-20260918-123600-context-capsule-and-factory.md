@@ -2,7 +2,8 @@
 
 - **Date:** 2026-09-18
 - **Topic:** manager continuity, universal project memory, shop optimization and reporting.
-- **Status:** current installation session.
+- **Type:** bootstrap/import
+- **Status:** completed installation session.
 - **Source quality:** semantic record, not raw transcript.
 
 ## User goals and outcomes
@@ -18,7 +19,9 @@
 - OTK score/rating moved outside report prose.
 - Historical report replay diagnosed: old `latest.md` edit triggered Telegram.
 - Fix: immutable published reports; `latest.md` no longer a publication trigger.
-- Standard PCC is now being installed into AI Agent Lab itself.
+- Standard PCC was installed into AI Agent Lab itself.
+- Default branch `main` now contains `AI_CONTEXT.md`, `AGENTS.md` and a `.context/ENTRYPOINT.md` redirect so a blank Chat given only the repository URL can discover the authoritative Capsule in `work-webhook-test`.
+- Manager bootstrap was integrated with PCC so substantial manager conversations must also update `.context/dialogues/` and related semantic state.
 
 ## Open validation
 
