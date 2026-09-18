@@ -1,3 +1,4 @@
+1. Validate the first production shift under shift-policy v2: confirm the worker continues through directly actionable next blockers, uses the evidence-acquisition ladder before BLOCKED, and emits a valid stop record for OTK.
 1. Continue Variant C-5 proof: :24 already successfully performed OTK -> next worker. Verify later generic ticks do not replace an active worker, and verify manager+worker concurrency when management attention exists.
 2. If the generic dispatcher proves unreliable, roll back to documented Variant A without reverting project state.
 
