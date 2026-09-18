@@ -70,6 +70,14 @@ Selection order:
 2. older `created_at`;
 3. lexical event id as deterministic tie-breaker.
 
+## Result reporting
+
+Persistent result state always wins over notification delivery.
+
+For events originating from a GitHub issue/PR comment, the worker SHOULD post a completion comment only after the target change, journal, done record, state reset and wake reconciliation have succeeded.
+
+Completion comments start with `[AGENT_RESULT]`, never `[AGENT_TASK]`, so the intake workflow will not enqueue them as new work.
+
 ## Scheduler invariants
 
 The scheduler is immutable after initial setup.
