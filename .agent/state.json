@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "status": "idle",
-  "active_event": null,
-  "worker_id": null,
-  "started_at": null,
-  "lease_until": null,
+  "status": "processing",
+  "active_event": "ios-runtime-release-20260918-031",
+  "worker_id": "ivanych",
+  "started_at": "2026-09-18T20:09:43Z",
+  "lease_until": "2026-09-18T20:54:43Z",
   "last_event": "review-ios-runtime-release-20260918-030",
   "last_result": "BLOCKED_evidence_access",
   "last_completed_at": "2026-09-18T19:26:39Z"
