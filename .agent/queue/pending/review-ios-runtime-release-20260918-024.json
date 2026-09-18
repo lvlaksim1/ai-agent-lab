@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-024",
+  "created_at": "2026-09-18T11:22:42Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "worker_id": "fedorych",
+  "proposed_shift": 22,
+  "predecessor_worker_id": "ivanych",
+  "production_event": "ios-runtime-release-20260918-024",
+  "journal": ".agent/journal/ios-runtime-release-20260918-024.md",
+  "internal_report": ".agent/reports/ios-runtime-release-20260918-024.md",
+  "shift_started_at_utc": "2026-09-18T11:19:36Z",
+  "shift_completed_at_utc": "2026-09-18T11:22:42Z",
+  "original_plan": "Use exact E2E run 35325375683 to identify the first real post-SPTM_MAP blocker and make either a directly proven fix or one minimal diagnostic discriminator without weakening any gate.",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main",
+    "commit": "20ef7d96ec4546d2d6ff678f37223bf1173f386e"
+  },
+  "evidence": [
+    "GitHub Actions run 35325375683 artifact 10538674440",
+    ".agent/journal/ios-runtime-release-20260918-024.md",
+    "runtime/qemu/patches/0010-sptm-boot-args-address-diagnostics.patch",
+    "Windows Build run 35339282917 (in progress at handoff)",
+    "qemu-sptm Windows Gate run 35339282982 (in progress at handoff)"
+  ],
+  "continuation_id": "ios-runtime-release-20260918-025"
+}
