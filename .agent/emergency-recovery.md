@@ -141,6 +141,8 @@ At the next normal production clock, OTK retries that same pending review. Only 
 
 This recovery guard does not consume a ChatGPT Scheduled Task slot.
 
-The five existing Scheduled Chat production clocks remain the only five active planner tasks. Recovery is implemented by the repository's GitHub Actions schedule at :10/:22/:34/:46/:58 and operates only on durable GitHub control-plane state.
+The five existing Scheduled Chat production clocks remain the only five active planner tasks. No sixth ChatGPT Scheduled Task is created.
 
-Therefore no sixth ChatGPT Scheduled Task is required.
+Recovery is implemented by a GitHub Actions watchdog triggered by authoritative `.agent/state.json` pushes. While a worker/OTK is processing, that watchdog remains armed and sleeps until :10/:22/:34/:46/:58 — exactly two minutes before the next normal production clock. A newer heartbeat state push cancels/replaces the older watchdog run. If no newer heartbeat arrives, the last watchdog reaches the guard boundary and performs the exact stale-heartbeat check.
+
+If a watchdog starts and finds the heartbeat already stale (for example during deployment/recovery), it performs recovery immediately instead of waiting for another clock boundary.
