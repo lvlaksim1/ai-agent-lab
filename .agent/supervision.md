@@ -108,6 +108,18 @@ Wake the manager when any trigger fires:
 
 Manager wake generation is monotonic and reasons are preserved on conflict.
 
+## Relay handoff
+
+After OTK has fully persisted verdict, rating, brigade rotation, object state, management signal and human report, the same scheduled Chat MAY continue into the next production phase only under `.agent/workflow.md`.
+
+This does not permit self-review:
+- the reviewed shift must come from an earlier run;
+- OTK must be complete before the next worker is materialized;
+- the next worker is the newly advanced `next_member_id`;
+- OTK evidence and new-shift evidence remain separate.
+
+If transfer is draining, STOP after OTK and do not start another production shift.
+
 ## Human report
 
 After rating, write .agent/reports/latest.md with ONLY:
