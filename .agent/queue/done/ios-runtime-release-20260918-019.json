@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-019",
+  "type": "production",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "petrovich",
+  "proposed_shift": 17,
+  "result": "Added a diagnostic-only qemu-sptm patch that emits actual runtime SPTM virtlo/physlo and derives the boot-state slot PA with vtop immediately after macho_load. Did not add the TCG-store filter before that mapping is observed. Windows Build and qemu-sptm Windows Gate were queued at handoff; no success claimed yet.",
+  "target_commit": "ebd101ae8261daf51331af30f4c8ec0e26b86962",
+  "completed_at": "2026-09-18T07:07:00Z",
+  "supervisor_review": "review-ios-runtime-release-20260918-019"
+}
