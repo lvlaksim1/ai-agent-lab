@@ -24,3 +24,13 @@ At installation production was idle and wake false; active object was iOS-Resear
 Do not reintroduce Work, mutable scheduler orchestration, worker+worker parallelism, Telegram-on-`latest.md`, or a second competing memory system.
 
 Next validation: start a truly empty Chat with this repo URL, bootstrap automatically, recover manager/runtime context, then persist one meaningful new decision back to Capsule.
+
+
+## Default-branch discovery
+
+The default `main` branch now contains discovery shims:
+- `AI_CONTEXT.md`
+- `AGENTS.md`
+- `.context/ENTRYPOINT.md`
+
+They redirect a fresh Chat into the authoritative `work-webhook-test` Capsule. No external repository is required.
