@@ -10,7 +10,7 @@
 
 `work-webhook-test`
 
-Первым делом прочитать:
+Первым делом прочитать `AI_CONTEXT.md`, затем выполнить `.context/ENTRYPOINT.md`, после чего прочитать:
 
 `.agent/management/interactive-bootstrap.md`
 
