@@ -198,3 +198,20 @@ New invariant:
 - OTK gives Efficiency/focus 0/2 and forbids APPROVED for an unproven predictive forced-stop handoff.
 
 Shift 29 / event 031 remains historical evidence of the old v2 behavior; its pending OTK review is explicitly marked for audit under the new forced-stop standard.
+
+
+## Worker liveness heartbeat — 2026-09-18
+
+Manager requested a first-class liveness contract after shift 30 (Федорыч) disappeared abruptly while the production lease remained valid.
+
+Implemented:
+- `.agent/state.json -> heartbeat` is now the authoritative worker/OTK liveness snapshot;
+- it exposes worker/role/object/event, last_seen_at, exact stale_at, current activity, and any external wait with exact target/status/last poll;
+- heartbeat target interval = 60s, stale threshold = 180s;
+- lease and heartbeat are explicitly separate: lease is ownership/concurrency, heartbeat is liveness;
+- manager must classify NO_WORKER / LIVE / STALE / UNKNOWN and must not call a worker alive merely because its lease is valid;
+- workers/OTK refresh heartbeat on claim, substantive action batches, before/after external waits, every external poll, and at least once per interval while alive;
+- abrupt runtime disappearance leaves the last real heartbeat to age into STALE; no retroactive forced_stop is invented;
+- current Федорыч state was migrated from his last real checkpoint at 20:28:23Z, with stale_at 20:31:23Z, so the programmer change does not falsely resurrect him.
+
+This is observability only: STALE heartbeat by itself does not bypass an otherwise valid production lease; safe lease recovery remains a separate control-plane decision.
