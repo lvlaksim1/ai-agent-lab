@@ -6,21 +6,8 @@
   "priority": 90,
   "status": "pending",
   "object_id": "ios-research-runtime",
-  "source": {
-    "kind": "production-continuation",
-    "parent_event": "ios-runtime-release-20260918-026"
-  },
-  "target": {
-    "repository": "lvlaksim1/iOS-Research-Runtime",
-    "ref": "main",
-    "commit": "93ed5429484fdc1b266488b3c1c9130d5067e450"
-  },
-  "goal": "Validate the blob-head producer diagnostic and obtain exact E2E evidence. The ABI is now directly proven: Apple/XNU defines topOfKernelData as the highest physical address used in kernel data, and canonical qemu-sptm starts blob_head at dram_base and publishes it directly. Inspect SPTM_BLOB_INIT and SPTM_BLOB_POST_SKIP to identify the exact point where Windows loses the high DRAM bits. Make the minimal semantic/type fix only at the proven corruption boundary, then preserve all proof gates.",
-  "constraints": [
-    "Do not weaken the 5-minute XNU/launchd/root-shell progress gate.",
-    "Do not change Definition of Done.",
-    "Do not claim CI PASS without terminal successful evidence.",
-    "Preserve qemu-sptm patch application gate and Windows Build gate.",
-    "Do not paper over the producer defect by blindly adding physBase at boot-args publication."
-  ]
+  "source": {"kind":"production-continuation","parent_event":"ios-runtime-release-20260918-026"},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main","commit":"93ed5429484fdc1b266488b3c1c9130d5067e450"},
+  "goal": "First inspect the terminal failing qemu-sptm Windows Gate on diagnostic commit 93ed5429484fdc1b266488b3c1c9130d5067e450 and repair only the proven diagnostic patch/build defect. Re-run/preserve the mandatory qemu-sptm gate. Once the diagnostic build is green, obtain exact E2E SPTM_BLOB_INIT and SPTM_BLOB_POST_SKIP values to locate where blob_head loses the high DRAM bits. The ABI is already proven absolute-physical; make a semantic/type fix only at the observed corruption boundary.",
+  "constraints": ["Do not weaken the 5-minute XNU/launchd/root-shell progress gate.","Do not change Definition of Done.","Do not claim CI PASS without terminal successful evidence.","Preserve qemu-sptm patch application gate and Windows Build gate.","Do not paper over the producer defect by blindly adding physBase at boot-args publication.","Do not proceed to E2E until the diagnostic qemu-sptm gate is terminal-successful."]
 }
