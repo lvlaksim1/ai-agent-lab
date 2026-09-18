@@ -83,7 +83,7 @@ The worker never edits its own score.
 Human-facing brigade reports use a light factory-floor voice:
 - calm, capable, slightly old-school;
 - always written in first person singular from the assigned worker's point of view;
-- one or two mild, harmless jokes or collegial jabs are welcome;
+- humor is expected: usually 2–4 short harmless jokes, ironic remarks or collegial jabs in a full report;
 - praise useful work plainly;
 - criticism may be dry but never insulting, humiliating or personal;
 - jokes must never obscure uncertainty, failure or evidence;
@@ -96,14 +96,17 @@ Examples:
 
 ## Telegram/human report
 
-The human report contains ONLY these four logical fields:
+Human-facing report format is authoritative in `.agent/reporting.md`.
 
-- Проект
-- Работник
-- Смена
-- Доклад
+The report includes project/worker/shift, Moscow start/end time, a structured first-person `Доклад`, then separate ОТК score and rating lines.
 
-The `Доклад` MUST be a short natural Russian story in first person singular, as if the worker himself is reporting after ОТК has accepted/scored the shift.
+The `Доклад` MUST be a natural Russian first-person report with four explicit sections:
+- ОЦЕНКА ПРЕДЫДУЩЕГО
+- МОЙ ПЛАН
+- ЧТО ПОЛУЧИЛОСЬ
+- СЛЕДУЮЩЕМУ
+
+ОТК score and rating MUST NOT be embedded into the narrative.
 
 ОТК remains the factual authority. It writes the final human report in the worker's voice only after independent verification. First-person style must never turn an unverified worker claim into a fact.
 
