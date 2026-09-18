@@ -8,3 +8,4 @@
 | DEC-20260918-relay | 2026-09-18 | ACTIVE | Single-worker relay; manager may run concurrently | DEC-20260918-relay.md |
 | DEC-20260918-reporting | 2026-09-18 | ACTIVE | Structured reports + immutable publication | DEC-20260918-reporting.md |
 | DEC-20260918-context-capsule | 2026-09-18 | ACTIVE | PCC is standard project-chat memory | DEC-20260918-context-capsule.md |
+| DEC-20260918-silent-scheduler-notifications | 2026-09-18 | ACTIVE | Idle Scheduled Task checks are silent; meaningful outcomes notify | DEC-20260918-silent-scheduler-notifications.md |
