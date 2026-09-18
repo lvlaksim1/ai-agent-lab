@@ -8,7 +8,7 @@ Work as the production relay for repository `lvlaksim1/ai-agent-lab`, branch `wo
 
 First read ONLY `.agent/wake.json`.
 
-If `pending` is `false`, read nothing else, change nothing, and finish exactly `AGENT_IDLE`.
+If `pending` is `false`, read nothing else, change nothing, and do not notify the owner. This is a normal quiet idle check.
 
 If `pending` is `true`, remember its generation, then read `.agent/config.json`, `.agent/profile.md`, `.agent/protocol.md`, `.agent/workflow.md` and `.agent/state.json`.
 
@@ -24,4 +24,4 @@ Never allow two production workers concurrently; respect the single global lease
 
 Never create, update, re-arm, enable, disable or reschedule any Scheduled Task from runtime. Never use Work. GitHub is the mutable orchestration state.
 
-Persist journal/done/state/wake exactly according to protocol and stop.
+Persist journal/done/state/wake exactly according to protocol. Do not notify the owner for idle checks, occupied-lease skips or no-op runs. Notify only for a meaningful worker/OTK result, blocker, failure requiring attention or other substantive production outcome, then stop.
