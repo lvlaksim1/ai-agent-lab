@@ -137,3 +137,25 @@ Examples:
 First-person prose is presentation only. ОТК verifies every material statement against journal/review/CI/repository evidence.
 
 If the worker claimed something that ОТК cannot verify, the final human report must correct or qualify it.
+
+
+## Publication semantics
+
+Human report publication is append-only.
+
+For every completed OTK review, create one immutable report file:
+
+`.agent/reports/published/<review-event-id>.md`
+
+The file contains exactly the final human report that is intended for Telegram.
+
+Rules:
+- create it once;
+- never edit or overwrite an existing published report;
+- if the same review is retried and the published file already exists, verify that it matches and do NOT republish it;
+- after creating the immutable report, update `.agent/reports/latest.md` as a convenience mirror of the newest report;
+- changing `latest.md` later is NOT a publication event.
+
+Telegram delivery is triggered only by creation of a new immutable file under `.agent/reports/published/`.
+
+This prevents an old shift from being resent merely because its formatting, documentation or `latest.md` was edited later.
