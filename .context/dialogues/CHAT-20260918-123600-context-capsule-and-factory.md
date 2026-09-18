@@ -80,3 +80,32 @@ Corrective action:
 - event 024 remains pending with wake=true, so the 14:32 tick should be the first recovery production start.
 
 Do not claim the scheduler repair is proven until a post-reanchor `last_run_time` and corresponding GitHub production state change are observed.
+
+
+### Telegram delivery race — root cause confirmed
+
+Owner still saw no reports after scheduler recovery.
+
+Deep inspection showed that workers were in fact running again:
+- shift #22 executed;
+- OTK independently accepted it;
+- immutable report `.agent/reports/published/review-ios-runtime-release-20260918-024.md` was created.
+
+The Telegram workflow itself ran and returned overall SUCCESS, but the actual send step was SKIPPED.
+
+Exact race:
+- publication commit triggered the workflow;
+- checkout used `ref: work-webhook-test`;
+- subsequent OTK commits advanced that branch before runner checkout;
+- checkout landed on a later `latest.md` commit;
+- `git diff-tree HEAD` found no newly added immutable report;
+- workflow set `publish=false` and skipped Telegram.
+
+Correction:
+- checkout is now bound to `${{ github.sha }}`;
+- report selection uses the exact triggering commit;
+- explicit `.agent/reports/redelivery/*.request` recovery path added;
+- shift #22 redelivery completed and Telegram API success was confirmed in Actions logs;
+- validator protects the trigger-SHA invariant.
+
+This incident is separate from the earlier scheduler timing problem, although both appeared after the request to silence technical notifications.
