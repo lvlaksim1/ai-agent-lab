@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "comment-5723147539",
+  "created_at": "2026-09-18T00:29:22.345Z",
+  "type": "github-comment-task",
+  "priority": 50,
+  "status": "pending",
+  "source": {
+    "kind": "github_issue_comment",
+    "repository": "lvlaksim1/ai-agent-lab",
+    "issue_number": 1,
+    "comment_id": 5723147539,
+    "url": "https://github.com/lvlaksim1/ai-agent-lab/pull/1#issuecomment-5723147539"
+  },
+  "target": {
+    "repository": "lvlaksim1/ai-agent-lab",
+    "ref": "work-webhook-test"
+  },
+  "goal": "Create a new file `.agent/e2e/first-autonomous-run.json` in branch `work-webhook-test` with exactly this JSON content:\n{\"status\":\"ok\",\"executor\":\"native-scheduled-chat\"}\nDo not modify any unrelated project files. The normal agent state/journal/done/wake updates required by the runtime protocol are allowed.",
+  "files": [],
+  "constraints": []
+}
