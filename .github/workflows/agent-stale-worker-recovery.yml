@@ -1,15 +1,21 @@
 name: Agent Stale Worker Recovery
 
 on:
-  schedule:
-    - cron: "10,22,34,46,58 * * * *"
+  push:
+    branches:
+      - work-webhook-test
+    paths:
+      - ".agent/state.json"
+      - ".github/scripts/stale-worker-recovery.cjs"
+      - ".github/scripts/stale-worker-watchdog.cjs"
+      - ".github/workflows/agent-stale-worker-recovery.yml"
 
 permissions:
   contents: write
 
 concurrency:
-  group: agent-stale-worker-recovery
-  cancel-in-progress: false
+  group: agent-stale-worker-watchdog
+  cancel-in-progress: true
 
 jobs:
   recover:
@@ -19,8 +25,8 @@ jobs:
         with:
           ref: work-webhook-test
           fetch-depth: 0
-      - name: Recover verified stale worker before next production clock
+      - name: Guard stale workers before the next production clock
         env:
           GITHUB_TOKEN: ${{ github.token }}
           RUNTIME_REF: work-webhook-test
-        run: node .github/scripts/stale-worker-recovery.cjs
+        run: node .github/scripts/stale-worker-watchdog.cjs
