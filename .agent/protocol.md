@@ -157,3 +157,15 @@ Forbidden from runtime:
 Never falsify success. Persist blockers and restore lease safely.
 
 If persistence fails after target code changed, repair durable agent state before taking new work.
+
+## Emergency stale-worker recovery
+
+Read `.agent/emergency-recovery.md`.
+
+Healthy workers are never ended because a production clock is approaching. They may continue across any number of :00/:12/:24/:36/:48 clocks while heartbeat remains LIVE and normal lease rules are respected.
+
+A separate recovery guard runs at :10/:22/:34/:46/:58, exactly two minutes before the next normal production clock. It acts only when a processing worker has a verified GitHub-anchored STALE heartbeat.
+
+Verified stale recovery may bypass an otherwise valid 45-minute lease. The guard fences the lost execution, records `runtime_loss`, releases state to idle, enqueues OTK review and leaves the production continuation pending. The following normal production clock runs OTK first and may then start the next brigade worker.
+
+`runtime_loss` is not `forced_stop` and is not a voluntary handoff.
