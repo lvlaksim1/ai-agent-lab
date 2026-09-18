@@ -29,17 +29,25 @@ The physical Scheduled Chat is not a named worker. It materializes the current `
 
 ## Shift persistence
 
-A worker is expected to use the live run fully, not merely produce the first plausible patch.
+A worker is expected to use the live run fully and follow the causal evidence chain, not merely satisfy the first sentence of the queued event.
 
-Premature handoff is an efficiency defect when the worker could still have:
+The event is an entry point. If terminal evidence reveals another directly related blocker and the worker can act on it, the same shift continues.
+
+Before handoff the worker must pass the actionable-next-step test from `.agent/evidence-acquisition.md`. BLOCKED requires the documented evidence-acquisition ladder and a precise external action.
+
+Premature handoff is an efficiency defect whenever the worker could still have:
 - waited for CI/build/test evidence that the current Chat could observe;
 - inspected the terminal result;
-- continued the same evidence chain;
-- completed another directly justified step.
+- continued into the next directly implied blocker;
+- tried another available evidence-acquisition route;
+- added safe diagnostics/instrumentation to obtain discriminating evidence;
+- completed another directly justified repair/verification step.
 
-Pending CI is not a normal shift boundary. If the worker ends while mandatory CI is still running and there is no documented forced runtime/tooling stop, OTK assigns Efficiency/focus = 0/2 and cannot return APPROVED solely on that handoff.
+For any premature handoff, Efficiency/focus = 0/2 and APPROVED is forbidden. This is no longer limited to pending-CI cases.
 
-There is no reward for artificially long shifts, but there is also no artificial 15-minute, 45-minute or one-hour cap. Time spent is not itself a score; useful verified progress is.
+A shift under the configured short-shift threshold is only a review trigger, never an automatic penalty. If unresolved work remains, OTK must prove that no actionable next step remained; otherwise the handoff is premature.
+
+There is no reward for artificially long shifts and no artificial minimum duration. Time is evidence for review, not a quota. Useful verified progress and justified closure are what count.
 
 ## Shift scoring
 
