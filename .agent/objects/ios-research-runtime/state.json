@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "qemu-sptm Windows Gate fails in the aggregate Apply Windows portability patch step; exact failing patch name and git apply --check stderr are not durable evidence yet. Capture them without weakening the gate, repair only the proven applicability defect, then require full gate PASS before exact E2E.",
-  "last_scored_shift": 19,
+  "current_blocker_summary": "Durable qemu-sptm Windows evidence identifies patch 0009-sptm-runtime-mapping-diagnostics.patch as corrupt at line 26 during mandatory git apply --check; repair only that proven patch defect, then require full gate PASS before exact E2E.",
+  "last_scored_shift": 20,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
-  "last_event": "ios-runtime-release-20260918-021",
+  "last_progress_class": "substantial",
+  "last_event": "review-ios-runtime-release-20260918-022",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T08:01:26Z"
+  "updated_at": "2026-09-18T08:18:19Z"
 }
