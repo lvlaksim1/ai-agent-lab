@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "status": "processing",
-  "active_event": "ios-runtime-release-20260918-007",
-  "worker_id": "ivanych",
-  "started_at": "2026-09-18T03:48:00Z",
-  "lease_until": "2026-09-18T04:33:00Z",
-  "last_event": "review-ios-runtime-release-20260918-006",
+  "status": "idle",
+  "active_event": null,
+  "worker_id": null,
+  "started_at": null,
+  "lease_until": null,
+  "last_event": "ios-runtime-release-20260918-007",
   "last_result": "done",
-  "last_completed_at": "2026-09-18T03:47:00Z"
+  "last_completed_at": "2026-09-18T03:50:20Z"
 }
