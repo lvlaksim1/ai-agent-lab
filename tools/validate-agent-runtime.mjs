@@ -55,8 +55,12 @@ check(config.run_policy === "review-then-production", "run_policy must remain re
 check(config.shift_duration_policy === "natural-boundary", "shift duration policy must remain natural-boundary");
 check(config.clock_is_shift_limit === false, "scheduled clock must not be a shift-duration limit");
 check(Number.isInteger(config.lease_renew_before_minutes) && config.lease_renew_before_minutes > 0 && config.lease_renew_before_minutes < config.lease_minutes, "lease renewal threshold must be inside lease horizon");
-check(Array.isArray(config.production_clock_minutes) && config.production_clock_minutes.join(",") === "2,17,32,47", "production clocks must remain evenly spaced at :02/:17/:32/:47");
-check(config.manager_clock_minute === 59, "manager clock must remain at :59");
+check(config.clock_architecture === "generic-dispatcher", "clock architecture must remain generic-dispatcher");
+check(Array.isArray(config.dispatcher_clock_minutes) && config.dispatcher_clock_minutes.join(",") === "0,12,24,36,48", "dispatcher clocks must remain at :00/:12/:24/:36/:48");
+check(config.physical_clock_count === 5, "physical clock count must remain 5");
+check(config.nominal_max_dispatch_latency_minutes === 12, "nominal dispatcher latency must remain 12 minutes");
+check(config.manager_priority_when_idle === true, "manager must retain idle-station priority");
+check(config.manager_concurrent_with_worker === true, "manager+worker concurrency must remain enabled");
 check(config.queue_scope_policy === "active-object", "queue must remain active-object scoped");
 
 check(assignment.schema_version === 1, "assignment schema_version must be 1");
