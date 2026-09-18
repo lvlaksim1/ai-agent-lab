@@ -1,5 +1,10 @@
 # Current Blockers and Open Risks
 
+## OPEN — scheduler re-anchor proof
+
+After timing-mode changes, enabled tasks did not visibly fire on the expected tick. All five recurring tasks were explicitly re-anchored with future Moscow DTSTART values. Require a post-reanchor Scheduled Task run plus GitHub production state transition before considering cadence restored.
+
+
 ## OPEN — cross-repository end-to-end proof
 
 Cross-repository forwarding exists, but a complete real source-repository → central intake → worker → result cycle should still be explicitly proven before being called universally verified.
