@@ -129,3 +129,17 @@ New invariant:
 - any premature handoff gets Efficiency/focus 0/2 and cannot be APPROVED.
 
 The policy is enforced by `.agent/evidence-acquisition.md`, workflow/supervision/competition rules, config invariants and runtime validation.
+
+
+## Manager owner-escalation UX — 2026-09-18
+
+Owner requires every future production blocker that needs owner input to be actionable.
+
+When `owner_decision_required=true`, the manager must explicitly state:
+- what stopped production;
+- exactly what the owner must do/allow/choose;
+- why it is needed and what it unlocks;
+- ready-to-send response options when alternatives exist;
+- a recommended safe option when appropriate.
+
+A bare «нужно решение владельца» is not acceptable. Runtime validation enforces the required sections in the latest manager report while an owner decision is pending.
