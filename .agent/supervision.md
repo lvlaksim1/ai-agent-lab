@@ -29,7 +29,7 @@ Inspect as applicable:
 
 OTK must reconstruct the worker's situation at the exact shift end, not merely check whether the event's original sentence was satisfied.
 
-For shift policy v3, require and inspect `shift_policy_version: 3` and the `stop` record from the pending supervisor-review event. Legacy v2 reviews already queued before this policy are still reviewable, but OTK MUST apply the current forced-stop standard when judging them.
+For shift policy v4, require and inspect `shift_policy_version: 4` and the `stop` record from the pending supervisor-review event. Legacy v2/v3 reviews already queued remain reviewable. v4 adds externally verified `runtime_loss` for stale-heartbeat recovery; it is distinct from worker-declared `forced_stop`.
 
 Mandatory questions:
 - Did consuming the requested evidence expose another directly related actionable same-object step?
@@ -37,6 +37,7 @@ Mandatory questions:
 - If BLOCKED/speculation-boundary was claimed, was the applicable evidence-acquisition ladder actually exhausted?
 - Is the claimed external action precise and truly outside the worker's current capability?
 - If forced_stop was claimed, what objective platform/tool signal actually occurred?
+- If runtime_loss was recorded, does its heartbeat anchor verify exactly, was the recovery pulse later than stale_at, and did the recovery guard fence the old execution?
 - Can that forced-stop signal be independently verified?
 - Did ordinary GitHub/tool calls continue succeeding after the claimed stop signal, indicating that the worker could still have continued?
 
@@ -241,3 +242,16 @@ Publication protocol:
 4. External delivery must be tied to creation of the immutable published file, never to edits of `latest.md`.
 
 Private evidence remains in reviews/journals.
+
+## Runtime-loss review
+
+For `stop.kind=runtime_loss`:
+- independently verify the last heartbeat anchor and recovery anchor;
+- use `worker_last_seen_at_utc` as the factual worker end time, not the later administrative recovery time;
+- do not classify runtime loss itself as voluntary premature handoff;
+- do not apply an automatic Efficiency/focus penalty merely because the platform execution disappeared;
+- score only evidenced engineering progress/quality/focus up to the last verified heartbeat;
+- repair/preserve exactly one actionable same-object continuation;
+- advance brigade rotation normally so the next worker can take over.
+
+If the evidence shows the worker was actually still LIVE or the stale condition was not valid, treat the recovery as a control-plane defect and do not attribute it to the worker.
