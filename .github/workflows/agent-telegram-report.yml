@@ -5,6 +5,8 @@ on:
     branches:
       - work-webhook-test
     paths:
+      - '.agent/reports/starts/*.md'
+      - '.agent/reports/otk/*.md'
       - '.agent/reports/published/*.md'
       - '.agent/reports/redelivery/*.request'
       - '.github/workflows/agent-telegram-report.yml'
@@ -34,7 +36,10 @@ jobs:
           set -euo pipefail
           : > reports-to-send.txt
 
-          git diff-tree --root --no-commit-id --name-only --diff-filter=A -r "$GITHUB_SHA" -- '.agent/reports/published/*.md' > direct-reports.txt
+          git diff-tree --root --no-commit-id --name-only --diff-filter=A -r "$GITHUB_SHA" -- \
+            '.agent/reports/starts/*.md' \
+            '.agent/reports/otk/*.md' \
+            '.agent/reports/published/*.md' > direct-reports.txt
           while IFS= read -r REPORT_FILE; do
             [ -n "$REPORT_FILE" ] || continue
             printf '%s\n' "$REPORT_FILE" >> reports-to-send.txt
@@ -45,7 +50,7 @@ jobs:
             [ -n "$REQUEST_FILE" ] || continue
             REPORT_FILE="$(tr -d '\r\n' < "$REQUEST_FILE")"
             case "$REPORT_FILE" in
-              .agent/reports/published/*.md) ;;
+              .agent/reports/starts/*.md|.agent/reports/otk/*.md|.agent/reports/published/*.md) ;;
               *)
                 echo "::error::Invalid redelivery target in $REQUEST_FILE: $REPORT_FILE"
                 exit 1
@@ -66,7 +71,7 @@ jobs:
             cat reports-to-send.txt
           else
             echo "publish=false" >> "$GITHUB_OUTPUT"
-            echo "No newly published report or explicit redelivery request in triggering commit."
+            echo "No newly published worker-start/OTK report or explicit redelivery request in triggering commit."
           fi
 
       - name: Send reports to Telegram
