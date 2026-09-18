@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-028",
+  "status": "done",
+  "result": "recovery_continuation",
+  "worker_id": "sanych",
+  "object_id": "ios-research-runtime",
+  "target_commit": "7e6ecb9a15b1a0252ad02b0f82d2e71b1fb1737f",
+  "continuation_id": "ios-runtime-release-20260918-029",
+  "supervisor_review_id": "review-ios-runtime-release-20260918-028",
+  "shift_started_at_utc": "2026-09-18T13:00:54Z",
+  "shift_completed_at_utc": "2026-09-18T13:08:47Z",
+  "summary": "Localized Win64 high-address truncation to ROUND_NEXT_PAGE mask width and added BIT_ULL page-unit repair; terminal verification remains in forced-runtime recovery continuation."
+}
