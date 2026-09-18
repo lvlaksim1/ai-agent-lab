@@ -145,13 +145,13 @@ These fields are the authoritative input for the next worker's start-of-shift pr
 
 Normal case: a live worker does **not** finish while mandatory external evidence is still running. The worker keeps the shift, waits for terminal evidence and continues.
 
-Recovery case: if a shift genuinely ended because the platform/runtime/tooling forced termination or could no longer observe the external run, OTK MUST NOT leave the active-object production queue empty.
+Recovery case: if a shift ended through verified `runtime_loss` or objective forced termination, OTK MUST NOT leave the active-object production queue empty.
 
 For that recovery case:
 - ensure exactly one same-object continuation exists;
 - describe the exact evidence/run that must be checked next;
 - attach a `wait_for` object when possible;
-- preserve the documented forced-stop reason;
+- preserve the documented runtime-loss / forced-stop evidence and factual last worker boundary;
 - keep wake pending.
 
 A recovery continuation whose only purpose is to wait for external evidence must not consume a brigade turn while the evidence is still non-terminal.
