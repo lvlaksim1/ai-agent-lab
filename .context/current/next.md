@@ -7,3 +7,6 @@
 4. Keep one-worker runtime stable; do not add worker+worker parallelism without explicit owner reversal.
 5. Validate fresh-chat Capsule bootstrap/dynamic write-back once production/reporting continuity is stable.
 6. Eventually complete a real cross-repository forwarding E2E proof.
+
+
+7. Observe the next production shift under active-evidence-wait semantics. Verify that a worker who starts mandatory CI remains owner of the same shift through terminal CI and continues from the result instead of creating a routine wait_for handoff.
