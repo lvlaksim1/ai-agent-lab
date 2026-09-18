@@ -8,11 +8,7 @@ The runtime uses an **эстафетный цикл**: a production tick may fir
 
 ## Idle path
 
-Every production scheduled run starts by reading exactly one file:
-
-`.agent/wake.json`
-
-If `pending=false`, stop immediately. Do not read profile, state, queue, journal, target files or repository history.
+Every physical clock run is a generic dispatcher tick. It first reads only `.agent/state.json`, `.agent/wake.json` and `.agent/management/wake.json`, then follows `.agent/dispatcher.md` to select MANAGER, PRODUCTION RELAY or IDLE. Full project/runtime context is loaded only after role selection.
 
 ## Object assignment
 
@@ -55,7 +51,7 @@ Hard invariant: **two production workers never run concurrently.**
 
 If another production clock sees an unexpired lease, it stops. An expired lease may be recovered and recovery must be documented.
 
-The dedicated manager uses `.agent/management/` state and may run concurrently with one production worker. Conflicting GitHub writes require SHA/CAS retry.
+The manager uses `.agent/management/` state and may run concurrently with one production worker. Conflicting GitHub writes require SHA/CAS retry. A valid production lease blocks only another production worker, not the manager.
 
 ## Relay run limits
 
