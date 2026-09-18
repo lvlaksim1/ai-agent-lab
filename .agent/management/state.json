@@ -8,18 +8,18 @@
   "definition_of_done": ["Windows Build PASS","qemu-sptm Windows Gate PASS","Provisioning PASS","Darwin/XNU boot PASS","launchd PASS","root shell proof PASS","Windows Full Package PASS","VERSION 0.1.0","GitHub Release v0.1.0 published with verified package and SHA-256"],
   "current_phase": "boot-debugging",
   "health": "YELLOW",
-  "current_blocker_summary": "Instruction-level SPTM tracing now works and exposes the address-construction registers; production must establish the semantic provenance of those values and the arithmetic leading toward the first Data Abort before changing root logic.",
-  "shifts_since_manager_review": 2,
+  "current_blocker_summary": "SPTM phys->virt arithmetic is internally consistent, but the caller supplies offset-valued X22; inspect the completed caller+callee E2E trace to establish its provenance/contract before changing root logic.",
+  "shifts_since_manager_review": 3,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
-  "last_scored_shift": 3,
+  "last_scored_shift": 4,
   "manager_review_count": 0,
   "last_manager_review_at": null,
   "last_manager_decision": null,
   "active_directive": null,
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-18T03:11:00Z"
+  "updated_at": "2026-09-18T03:46:30Z"
 }
