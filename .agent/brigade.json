@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "scoring_version": 1,
+  "shift_counter": 0,
+  "next_member_id": "petrovich",
+  "rotation_order": [
+    "petrovich",
+    "sanych",
+    "mikhalych",
+    "borisych",
+    "ivanych"
+  ],
+  "members": [
+    {
+      "id": "petrovich",
+      "display_name": "Петрович",
+      "rating": 1000,
+      "shifts_scored": 0,
+      "total_score": 0,
+      "average_score": 0,
+      "best_score": null,
+      "last_score": null,
+      "cheat_strikes": 0
+    },
+    {
+      "id": "sanych",
+      "display_name": "Саныч",
+      "rating": 1000,
+      "shifts_scored": 0,
+      "total_score": 0,
+      "average_score": 0,
+      "best_score": null,
+      "last_score": null,
+      "cheat_strikes": 0
+    },
+    {
+      "id": "mikhalych",
+      "display_name": "Михалыч",
+      "rating": 1000,
+      "shifts_scored": 0,
+      "total_score": 0,
+      "average_score": 0,
+      "best_score": null,
+      "last_score": null,
+      "cheat_strikes": 0
+    },
+    {
+      "id": "borisych",
+      "display_name": "Борисыч",
+      "rating": 1000,
+      "shifts_scored": 0,
+      "total_score": 0,
+      "average_score": 0,
+      "best_score": null,
+      "last_score": null,
+      "cheat_strikes": 0
+    },
+    {
+      "id": "ivanych",
+      "display_name": "Иваныч",
+      "rating": 1000,
+      "shifts_scored": 0,
+      "total_score": 0,
+      "average_score": 0,
+      "best_score": null,
+      "last_score": null,
+      "cheat_strikes": 0
+    }
+  ]
+}
