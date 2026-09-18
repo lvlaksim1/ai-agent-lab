@@ -1,20 +1,14 @@
-# Shift 30 — Федорыч — ios-runtime-release-20260918-032
+# ios-runtime-release-20260918-032
 
-## Оценка предыдущего
-Иваныч создал read-only source-vs-rebuilt APFS structural evidence channel и exact E2E artifact. ОТК признал технический прогресс существенным, но исправил оценку на CORRECTED из-за недоказанного forced-stop при ещё идущем CI.
+## Shift 30 — Федорыч
+Recovered evidence established that the original integration structural reader scans raw DMG bytes and fails before RamdiskProvisioningService with `No valid APFS NXSB superblock found`. Production `apfs.OpenImage` succeeds because it uses `disk.OpenWithOffset` and exposes decoded/partition-relative bytes. Writer semantics were not changed.
 
-## План
-Потребить terminal E2E evidence без спекулятивного изменения writer. Если artifact bytes недоступны через connector, пройти evidence-acquisition ladder и создать минимальный metadata-visible diagnostic channel, затем дождаться terminal evidence и продолжить причинную цепочку.
+## Shift 31 — Кузьмич
+Runtime-loss recovery shift. Confirmed the next safe diagnostic boundary: source/rebuilt NXSB snapshots must be captured at the decoded `ios-ramdisk-tool` / `disk.OpenWithOffset` layer. No target writer change was made before runtime loss. OTK later approved the recovered shift 8/10.
 
-## Промежуточный checkpoint
-- Exact Windows E2E run 35390159689 подтверждён terminal failure на commit 3645cc63e25f524097b29ea784ddf90fe412f827.
-- Artifact `ios-darwin-windows-e2e` существует, размер 1854 bytes, но connector не разрешает прямой binary artifact download endpoint.
-- Job metadata подтверждает failure на `Run provisioning and Darwin root-shell proof`, а сбор failure evidence и upload artifact успешны.
-- По evidence ladder выбран безопасный route 7/8: добавлен изолированный workflow `.github/workflows/apfs-evidence-marker.yml`, который скачивает exact artifact внутри GitHub Actions и публикует первые structural differences в имени нового artifact, доступном через metadata API.
-- Первый marker run 35391540537 доказал, что exact artifact внутри Actions скачивается успешно, но первоначальный parser упал на encode step.
-- Workflow сделан robust commit 3002545ae99f5e42b480c419f2518794d1f12ce4.
-- После abrupt runtime loss смена восстановлена по stale lease/checkpoint. Marker run 35391593053 уже terminal SUCCESS.
-- Его metadata-visible artifact дал точную причину отсутствия `apfs-structural-evidence.json`: integration diagnostic падает ДО `RamdiskProvisioningService` на `ApfsStructuralEvidence.Read(firmware/ramdisk.dmg)` с `No valid APFS NXSB superblock found`.
-- Это дефект диагностического reader, а не доказательство дефекта исходного ramdisk: production `ios-ramdisk-tool` успешно открывает тот же DMG через `apfs.OpenImage`, который использует `disk.OpenWithOffset` и тем самым декодирует/нормализует disk-image layer перед APFS parser.
-- Следующий evidence-backed шаг: не менять APFS writer. Перенести structural snapshot на уровень `ios-ramdisk-tool`/`disk.OpenWithOffset`, где доступен partition-relative decoded `io.ReaderAt`; снять source NXSB до rebuild и rebuilt NXSB после rebuild, записать compact JSON в уже существующий E2E artifact. После этого повторить exact E2E и сравнить первое отличающееся причинное поле.
-- Смена остаётся незавершённой; никаких writer semantic changes не сделано.
+## Shift 32 — Палыч — checkpoint
+- Inspected current `tools/ios-ramdisk-tool/main.go`: production opens source with `apfs.OpenImage`, then reconstructs a bare APFS staging image via `apfswrite.CreateContainer`, and only afterwards wraps it into DMG with `disk.WrapRawImageDMGFrom`.
+- Inspected upstream `go-apfs-v2/pkg/disk/open.go`: `disk.OpenWithOffset(filename)` returns an already decompressed partition-relative `io.ReaderAt` for UDIF DMG, or a reader plus APFS partition offset for raw/GPT/APM images. NXSB magic is at container-relative offset 32.
+- Inspected the current C# `ApfsStructuralEvidence`: its field offsets are usable, but its raw FileStream scan is at the wrong image layer and therefore cannot be the source of truth for the source DMG.
+- Minimal implementation direction is now concrete: capture source NXSB from `disk.OpenWithOffset(opts.input)` before rebuild; capture rebuilt NXSB directly from the bare staging `rawFile` after `CreateContainer`/Sync; serialize both snapshots from ios-ramdisk-tool into the existing E2E log/evidence channel. Then remove/bypass the pre-provision raw-DMG C# read, rerun exact Windows E2E, and compare the first causally relevant metadata mismatch.
+- No APFS writer semantic change has been made. The next action is implementation of this read-only evidence path, followed by gates and exact E2E.
