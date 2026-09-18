@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "The absolute-physical topOfKernelData ABI is now proven from XNU and canonical qemu-sptm. Diagnostic commit 93ed542 fails the mandatory qemu-sptm Windows Gate, so the immediate blocker is to repair that diagnostic patch/build failure before collecting blob_head E2E evidence.",
-  "last_scored_shift": 24,
-  "last_otk_verdict": "CORRECTED",
-  "last_progress_class": "substantial",
-  "last_event": "ios-runtime-release-20260918-026",
+  "current_blocker_summary": "The conflicting diagnostic patch hunk was minimally repaired; replacement qemu-sptm Windows Gate is still in progress, so E2E producer localization remains gated on its terminal result.",
+  "last_scored_shift": 25,
+  "last_otk_verdict": "APPROVED",
+  "last_progress_class": "incremental",
+  "last_event": "ios-runtime-release-20260918-027",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T12:23:13Z"
+  "updated_at": "2026-09-18T12:38:00Z"
 }
