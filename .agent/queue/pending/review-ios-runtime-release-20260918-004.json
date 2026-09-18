@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-004",
+  "created_at": "2026-09-18T02:28:30Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "source": {
+    "kind": "agent-supervision",
+    "reviewed_event": "ios-runtime-release-20260918-004"
+  },
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "goal": "Independently review production shift ios-runtime-release-20260918-004 performed by sanych / Саныч as proposed shift 2. Verify journal .agent/journal/ios-runtime-release-20260918-004.md, report .agent/reports/ios-runtime-release-20260918-004.md, target diagnostic commit 8d7dc0c21c850a94e4899ddd1c6e95f57bcecb55, its actual CI/evidence when available, and continuation ios-runtime-release-20260918-005. Confirm or correct the decoded 0x...0dad50 address-construction finding, ensure the new one-insn-per-TB diagnostic is justified and does not weaken proof gates, score the shift under competition.md, update brigade and management signals, and publish the four-field human report."
+}
