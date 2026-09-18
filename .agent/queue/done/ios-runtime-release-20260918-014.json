@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-014",
+  "type": "production",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "borisych",
+  "proposed_shift": 12,
+  "target_commit": "b1295ce50e6cad6ec371ef184f3d367593fbc1ef",
+  "result": "diagnostic-window-extended-upstream",
+  "completed_at": "2026-09-18T05:56:00Z",
+  "journal_path": ".agent/journal/ios-runtime-release-20260918-014.md",
+  "review_event": "review-ios-runtime-release-20260918-014"
+}
