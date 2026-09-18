@@ -6,8 +6,9 @@
 2. Continue event 025: its required qemu-sptm Windows Gate is already terminal and successful, so the next production tick may proceed with exact E2E evidence.
 3. Confirm subsequent :47/:02/:17/:32 exact-schedule cadence continues without manual scheduler mutation, and verify a production worker can remain active across clock slots under the renewable natural-boundary shift policy.
 4. Keep one-worker runtime stable; do not add worker+worker parallelism without explicit owner reversal.
-5. Validate fresh-chat Capsule bootstrap/dynamic write-back once production/reporting continuity is stable.
 6. Eventually complete a real cross-repository forwarding E2E proof.
 
 
 7. Observe the next production shift under active-evidence-wait semantics. Verify that a worker who starts mandatory CI remains owner of the same shift through terminal CI and continues from the result instead of creating a routine wait_for handoff.
+
+8. Validate dynamic write-back from an independently bootstrapped manager Chat after the owner gives the next meaningful manager decision.
