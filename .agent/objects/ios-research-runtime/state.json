@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 14 exact E2E evidence confirms the expanded 0x...0b1000 execution window still does not expose an earlier 0x12ed0000 carrier; first appearance remains immediately after 0x...0b3978. Further blind dfilter widening is low-value; next work must trace the boot-state slot write/source directly before any address-semantics fix.",
-  "last_scored_shift": 14,
+  "current_blocker_summary": "Pinned qemu-sptm gate disables plugins, and available MemoryRegion write trace events are not proven watchpoints for ordinary TCG guest-RAM stores. Next work must first prove the boot-state slot VA-to-PA mapping, then instrument the narrow TCG store path without changing guest semantics or proof gates.",
+  "last_scored_shift": 15,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
-  "last_event": "review-ios-runtime-release-20260918-016",
+  "last_event": "review-ios-runtime-release-20260918-017",
   "checkpoint_generation": 0,
   "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T06:29:49Z"
+  "updated_at": "2026-09-18T06:48:00Z"
 }
