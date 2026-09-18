@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-016",
+  "type": "production",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "worker_id": "fedorych",
+  "proposed_shift": 14,
+  "result": "Exact cbd8783 E2E inspected: extended 0x...0b1000 window executed but no earlier 0x12ed0000 carrier appeared; first appearance remains immediately after 0x...0b3978. No target change; direct slot-write/source tracing is now required.",
+  "completed_at": "2026-09-18T06:16:33Z",
+  "supervisor_review": "review-ios-runtime-release-20260918-016"
+}
