@@ -7,12 +7,13 @@
   "status": "pending",
   "source": {
     "kind": "agent-continuation",
-    "previous_event": "ios-runtime-release-20260918-004"
+    "previous_event": "ios-runtime-release-20260918-004",
+    "corrected_by": "review-ios-runtime-release-20260918-004"
   },
   "target": {
     "repository": "lvlaksim1/iOS-Research-Runtime",
     "ref": "main"
   },
-  "goal": "Continue v0.1.0 mission from diagnostic commit 8d7dc0c21c850a94e4899ddd1c6e95f57bcecb55. Prior E2E artifact from e724be378cd4c398d64b7b386c24461c1730e94c proves the malformed destination is constructed in the seven-instruction SPTM block at 0xfffffff0070dad50: ADRP/LDR X8 from virtual global 0xfffffff0070921f8; ADRP/LDR X9 from 0xfffffff007091040; SUB X8,X22,X8; ADD X0,X8,X9; then branch. At block entry X22=0x12ed0000 and X0=0x0000010006f64000; at block exit X0=0x0000400012ed0000, which later becomes FAR 0x00003ef012ed0000 after the caller's adjustment. The new commit adds one-insn-per-TB and a tight dfilter 0xfffffff0070dad50+0x20 specifically to expose the two loaded globals and each arithmetic intermediate. Inspect Windows Build/E2E for this commit and its artifact. If the option is unsupported or causes no useful evidence, correct the diagnostic minimally. From the resulting register sequence, determine the semantic role and provenance of the two globals and whether the 0x400000000000 contribution is intentional SPTM physical-address logic driven by a wrong platform value or a QEMU/platform defect. Only after proof make the smallest root-cause fix and rerun Build/E2E. Remove temporary diagnostics when no longer needed. Continue through genuine launchd/root-shell proof, Full Package, VERSION 0.1.0 and Release v0.1.0. Do not weaken gates or claim success from diagnostics alone.",
+  "goal": "Continue v0.1.0 mission from diagnostic commit 8d7dc0c21c850a94e4899ddd1c6e95f57bcecb55. OTK verified that Windows End-to-End run 35299361157 failed immediately at qemu-sptm with code 1 after provisioning, and artifact 10528749171 contains only a one-byte boot log, so -one-insn-per-tb produced no useful register evidence on the tested runtime. First establish the exact CLI/diagnostic failure from available workflow/job evidence if possible, then replace only the failed diagnostic with a mechanism supported by this qemu-sptm build that exposes the two LDR results and arithmetic intermediates in the 0xfffffff0070dad50 block. Preserve all genuine boot/root-shell proof gates and normal timeouts. The prior TB evidence supports that the high contribution appears across this block, but individual globals and their semantic provenance remain unproved; do not label the behavior intentional/defective and do not make a root-cause fix until those values are observed. Once evidenced, determine whether the contribution is intentional SPTM physical-address logic driven by a wrong platform value or a QEMU/platform defect, make the smallest justified root-cause fix, remove temporary diagnostics when no longer needed, and rerun Build/E2E. Continue through genuine launchd/root-shell proof, Full Package, VERSION 0.1.0 and Release v0.1.0.",
   "object_id": "ios-research-runtime"
 }
