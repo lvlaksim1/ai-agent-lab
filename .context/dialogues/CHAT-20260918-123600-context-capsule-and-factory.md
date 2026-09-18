@@ -42,3 +42,25 @@ Decision implemented:
 - notifications are reserved for meaningful worker/OTK results, blockers/failures requiring attention, or substantive manager outcomes/escalations.
 
 This changes notification behavior only, not production cadence or scheduler execution.
+
+
+### Production stall discovered and recovered
+
+Owner noticed worker reports had stopped. Live inspection showed the brigade was genuinely idle: the active-object queue was empty, wake=false, and the last accepted shift was #21.
+
+Root cause:
+- OTK accepted shift 21 while the mandatory qemu-sptm Windows Gate was still running;
+- OTK cleared the queue because no continuation remained;
+- the gate later PASSED and exact Windows End-to-End Boot then FAILED after emitting SPTM_MAP but showing no XNU/launchd/root-shell progress for 5 minutes;
+- no new central event was created from that asynchronous CI completion, so the shop sat idle.
+
+Recovery:
+- created production event `ios-runtime-release-20260918-024` using the completed E2E failure evidence;
+- wake generation advanced and production was re-armed;
+- added a queue-continuity guard: OTK must not leave the active queue empty while mandatory external evidence is still pending;
+- added a non-scored `wait_for` preflight so waiting for CI does not consume a brigade turn.
+
+Scheduler correction:
+- switching the five shop clocks to `condition_watch` made their execution timing approximate and unsuitable as the factory clock;
+- all five tasks were returned to `exact_schedule`;
+- production reliability takes precedence over suppressing idle UI notifications. Notification suppression must be solved separately from timing mode.
