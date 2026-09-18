@@ -72,6 +72,11 @@ The 0..1 start-report category evaluates the immutable pre-work report:
 
 A missing required v2 start report scores 0/1 in this category. Runtime loss itself does not reduce Efficiency/focus.
 
+Scoring policy compatibility:
+- `score_policy_version: 2` uses the four categories above;
+- legacy `score_policy_version: 1` uses the historical 4/3/2/1 scheme with handoff quality and is not retroactively rescored;
+- every new production shift must carry `score_policy_version: 2`.
+
 Normal rating delta:
 
 `(score - 5) * 10`
