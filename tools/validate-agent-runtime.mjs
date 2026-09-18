@@ -201,6 +201,17 @@ check(config.normal_live_worker_crosses_clock_boundary === true, "healthy worker
 check(config.queue_scope_policy === "active-object", "queue must remain active-object scoped");
 check(fs.existsSync(path.join(root, ".agent/emergency-recovery.md")), "emergency recovery contract must exist");
 
+const staleRecoveryScriptPath = path.join(root, ".github/scripts/stale-worker-recovery.cjs");
+const staleRecoveryWorkflowPath = path.join(root, ".github/workflows/agent-stale-recovery.yml");
+check(fs.existsSync(staleRecoveryScriptPath), "stale-worker recovery script must exist");
+check(fs.existsSync(staleRecoveryWorkflowPath), "stale-worker recovery workflow must exist");
+if (fs.existsSync(staleRecoveryWorkflowPath)) {
+  const staleRecoveryWorkflow = fs.readFileSync(staleRecoveryWorkflowPath, "utf8");
+  check(staleRecoveryWorkflow.includes('cron: "10,22,34,46,58 * * * *"'), "stale-worker recovery schedule must remain :10/:22/:34/:46/:58");
+  check(staleRecoveryWorkflow.includes("ref: work-webhook-test"), "stale-worker recovery must operate on authoritative runtime branch");
+  check(staleRecoveryWorkflow.includes("contents: write"), "stale-worker recovery requires contents write permission");
+}
+
 check(assignment.schema_version === 1, "assignment schema_version must be 1");
 check(typeof assignment.active_object === "string" && assignment.active_object.length > 0, "assignment.active_object is required");
 check(["working", "requested", "draining", "switching"].includes(assignment.transfer_state), "invalid assignment.transfer_state");
