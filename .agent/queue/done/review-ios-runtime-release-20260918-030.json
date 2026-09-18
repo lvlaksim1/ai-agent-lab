@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-030",
+  "type": "supervisor-review",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "source_event": "ios-runtime-release-20260918-030",
+  "worker_id": "borisych",
+  "verdict": "BLOCKED",
+  "score": 6,
+  "rating_delta": 10,
+  "new_rating": 1130,
+  "progress_class": "incremental",
+  "review_path": ".agent/reviews/review-ios-runtime-release-20260918-030.md",
+  "published_report": ".agent/reports/published/review-ios-runtime-release-20260918-030.md",
+  "continuation_id": null,
+  "completed_at": "2026-09-18T19:26:39Z"
+}
