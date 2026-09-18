@@ -106,6 +106,33 @@ if (fs.existsSync(pendingDir)) {
   }
 }
 
+const doneDir = path.join(root, ".agent/queue/done");
+if (fs.existsSync(doneDir)) {
+  const doneFiles = fs
+    .readdirSync(doneDir)
+    .filter((name) => name.endsWith(".json"));
+
+  for (const file of doneFiles) {
+    const done = readJson(path.join(".agent/queue/done", file));
+    if (done.schema_version === undefined) continue; // legacy lab records
+    check(done.schema_version === 1, `${file}: schema_version must be 1`);
+    check(
+      ["done", "blocked"].includes(done.status),
+      `${file}: status must be done or blocked`
+    );
+    check(
+      typeof done.id === "string" && done.id.length > 0,
+      `${file}: id is required`
+    );
+    if ("summary" in done) {
+      check(
+        typeof done.summary === "string" && done.summary.trim().length > 0,
+        `${file}: summary must be non-empty when present`
+      );
+    }
+  }
+}
+
 if (!process.exitCode) {
   console.log("Agent runtime invariants: OK");
 }
