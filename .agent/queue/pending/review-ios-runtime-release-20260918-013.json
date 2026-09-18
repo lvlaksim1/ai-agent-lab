@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "review-ios-runtime-release-20260918-013",
+  "created_at": "2026-09-18T05:33:30Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "source": {"kind":"worker-review-request","production_event":"ios-runtime-release-20260918-013"},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
+  "goal": "Independently review shift ios-runtime-release-20260918-013 by mikhalych and diagnostic commit ffaa8cb6593981c521123c5e4f15e7e3151ae9ff. Verify against the exact 9651ad5 artifact that 0x12ed0000 first appears at the boot-state load and that extending only the caller diagnostic window backward is justified and preserves all proof gates. Inspect exact CI/artifact evidence for ffaa8cb when available, score under supervision policy, and leave exactly one safe continuation if root semantics remain unproven.",
+  "object_id": "ios-research-runtime",
+  "reviewed_event": "ios-runtime-release-20260918-013",
+  "worker_id": "mikhalych",
+  "proposed_shift": 11,
+  "target_commit": "ffaa8cb6593981c521123c5e4f15e7e3151ae9ff"
+}
