@@ -277,6 +277,16 @@ async function main() {
 
   const role = hb.role;
   const eventId = currentState.active_event;
+  let shiftNumber = currentState.shift_number;
+  if (role === "production" && !Number.isInteger(shiftNumber)) {
+    const brigadeFile = await getJson(".agent/brigade.json");
+    if (!brigadeFile || !Number.isInteger(brigadeFile.json.shift_counter)) {
+      console.log("DEFECT: cannot resolve production shift number for stale recovery.");
+      await signalManagerDefect("cannot resolve production shift number for stale recovery", pulseSha, pulseTime);
+      return;
+    }
+    shiftNumber = brigadeFile.json.shift_counter + 1;
+  }
   const nextFence = currentState.fence_generation + 1;
   const changes = {};
 
@@ -307,7 +317,11 @@ async function main() {
     recovery_anchor_commit: pulseSha,
     fenced_generation: nextFence,
     activity_kind: hb.activity_kind,
-    activity_detail: hb.activity_detail
+    activity_detail: hb.activity_detail,
+    shift_number: Number.isInteger(shiftNumber) ? shiftNumber : null,
+    reporting_policy_version: currentState.reporting_policy_version ?? null,
+    start_report_path: currentState.shift_start_report_path ?? null,
+    start_report_commit: currentState.shift_start_report_commit ?? null
   };
 
   const nextState = {
@@ -323,6 +337,10 @@ async function main() {
     heartbeat: idleHeartbeat,
     started_at_anchor_commit: null,
     lease_anchor_commit: null,
+    shift_number: null,
+    reporting_policy_version: null,
+    shift_start_report_path: null,
+    shift_start_report_commit: null,
     fence_generation: nextFence,
     last_runtime_loss: lossEvidence
   };
@@ -350,7 +368,8 @@ async function main() {
       return;
     }
 
-    const reviewPath = `.agent/queue/pending/review-${eventId}.json`;
+    const reviewId = `review-shift-${shiftNumber}-${eventId}`;
+    const reviewPath = `.agent/queue/pending/${reviewId}.json`;
     const existingReview = await getFile(reviewPath);
     if (existingReview) {
       console.log("DEFECT: runtime-loss review already exists while production still processing.");
@@ -360,7 +379,7 @@ async function main() {
 
     const review = {
       schema_version: 1,
-      id: `review-${eventId}`,
+      id: reviewId,
       created_at: pulseTime,
       type: "supervisor-review",
       priority: 100,
@@ -372,6 +391,8 @@ async function main() {
       },
       worker_id: currentState.worker_id,
       shift_policy_version: 4,
+      reporting_policy_version: currentState.reporting_policy_version === 2 ? 2 : 1,
+      shift_number: shiftNumber,
       shift_started_at_utc: currentState.started_at,
       shift_completed_at_utc: hb.last_seen_at,
       target: productionEvent.json.target,
@@ -379,8 +400,17 @@ async function main() {
       evidence: {
         journal_path: `.agent/journal/${eventId}.md`,
         heartbeat_anchor_commit: hb.time_anchor_commit,
-        recovery_anchor_commit: pulseSha
+        recovery_anchor_commit: pulseSha,
+        ...(currentState.shift_start_report_path
+          ? { start_report_path: currentState.shift_start_report_path }
+          : {})
       },
+      ...(currentState.shift_start_report_path
+        ? { start_report_path: currentState.shift_start_report_path }
+        : {}),
+      ...(currentState.shift_start_report_commit
+        ? { start_report_commit: currentState.shift_start_report_commit }
+        : {}),
       stop: {
         kind: "runtime_loss",
         actionable_next_step: true,
