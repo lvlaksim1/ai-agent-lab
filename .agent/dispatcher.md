@@ -28,8 +28,11 @@ Every clock tick initially reads only:
 ### Active worker
 
 If production state is `processing` and lease is valid:
+- inspect the heartbeat fields already present in `.agent/state.json` for observability;
 - manager attention=true -> materialize one manager review; active worker continues concurrently;
 - manager attention=false -> quiet no-op.
+
+A stale heartbeat does NOT by itself authorize a second worker while the lease is still valid. It means worker liveness is suspect/lost and must be reported as such; lease recovery remains governed by the safe recovery policy.
 
 ### Idle station
 
