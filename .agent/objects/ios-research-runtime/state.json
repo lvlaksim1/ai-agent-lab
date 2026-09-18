@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Owner authorized a diagnostic APFS evidence channel. Next shift must instrument Windows E2E, capture source-vs-rebuilt NX/APFS/checkpoint structural evidence, identify the first causally incompatible metadata field, then continue from evidence before changing writer semantics.",
+  "current_blocker_summary": "Authorized compact source-vs-rebuilt NXSB structural evidence channel is implemented at target commit 3645cc63e25f524097b29ea784ddf90fe412f827. Exact Windows E2E run 35390159689 is pending; consume its apfs-structural-evidence.json before any APFS writer semantic change.",
   "last_scored_shift": 28,
   "last_otk_verdict": "BLOCKED",
   "last_progress_class": "incremental",
-  "last_event": "ios-runtime-release-20260918-030",
-  "checkpoint_generation": 0,
-  "last_checkpoint_at": null,
-  "updated_at": "2026-09-18T20:03:00Z"
+  "last_event": "ios-runtime-release-20260918-031",
+  "checkpoint_generation": 1,
+  "last_checkpoint_at": "2026-09-18T20:12:46Z",
+  "updated_at": "2026-09-18T20:12:46Z"
 }
