@@ -1,0 +1,8 @@
+# Shift 37 — Иваныч — checkpoint
+
+- Claimed shift 37 with fence generation 22 and published the immutable start report before target work.
+- Re-verified the pinned `go-apfs-v2 v0.3.0` `disk.OpenWithOffset` contract: UDIF returns a decompressed partition-relative reader at offset 0; bare APFS offset 0; GPT/APM raw images return the filesystem partition offset.
+- Added target commit `9fd950848e9377eab304e3cdc5cfc8caf62015dd`: `tools/ios-ramdisk-tool/apfs_evidence.go` implements a read-only NXSB snapshot parser and `readSourceNXSnapshot` through `disk.OpenWithOffset`. It captures block geometry, feature masks, UUID, OID/XID, next OID/XID, checkpoint descriptor/data geometry, spaceman/omap/reaper OIDs and flags. No APFS writer semantics changed.
+- Added target commit `5d261300c30c42a9c64a82299d145211c04778f7`: focused tests prove container-relative offsets and reject a wrong image layer without NXSB.
+- Ramdisk Tool Windows run `35413998505`, job `105818920109`, is the active mandatory gate. At the latest observation, module verification, overlay preparation and Go tests were SUCCESS; Windows x64 build was in progress. The worker must consume the terminal result before wiring this reader into the source/rebuilt E2E evidence channel.
+- Next actionable step after gate success: wire source snapshot before rebuild and rebuilt snapshot from the bare staging `rawFile` after `CreateContainer`/`Sync`, persist a stable comparison artifact, bypass the pre-provision raw-DMG C# scanner, then run exact Windows E2E. Writer correction remains forbidden until that evidence identifies a causal mismatch.
