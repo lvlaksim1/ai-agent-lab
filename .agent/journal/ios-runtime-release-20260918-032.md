@@ -1,59 +1,13 @@
 # ios-runtime-release-20260918-032
 
-## Shift 30 — Федорыч
-Recovered evidence established that the original integration structural reader scans raw DMG bytes and fails before RamdiskProvisioningService with `No valid APFS NXSB superblock found`. Production `apfs.OpenImage` succeeds because it uses `disk.OpenWithOffset` and exposes decoded/partition-relative bytes. Writer semantics were not changed.
-
-## Shift 31 — Кузьмич
-Runtime-loss recovery shift. Confirmed the next safe diagnostic boundary: source/rebuilt NXSB snapshots must be captured at the decoded `ios-ramdisk-tool` / `disk.OpenWithOffset` layer. No target writer change was made before runtime loss. OTK later approved the recovered shift 8/10.
-
-## Shift 32 — Палыч — checkpoint
-- Inspected current `tools/ios-ramdisk-tool/main.go`: production opens source with `apfs.OpenImage`, then reconstructs a bare APFS staging image via `apfswrite.CreateContainer`, and only afterwards wraps it into DMG with `disk.WrapRawImageDMGFrom`.
-- Inspected upstream `go-apfs-v2/pkg/disk/open.go`: `disk.OpenWithOffset(filename)` returns an already decompressed partition-relative `io.ReaderAt` for UDIF DMG, or a reader plus APFS partition offset for raw/GPT/APM images. NXSB magic is at container-relative offset 32.
-- Inspected the current C# `ApfsStructuralEvidence`: its field offsets are usable, but its raw FileStream scan is at the wrong image layer and therefore cannot be the source of truth for the source DMG.
-- Minimal implementation direction is now concrete: capture source NXSB from `disk.OpenWithOffset(opts.input)` before rebuild; capture rebuilt NXSB directly from the bare staging `rawFile` after `CreateContainer`/Sync; serialize both snapshots from ios-ramdisk-tool into the existing E2E log/evidence channel. Then remove/bypass the pre-provision raw-DMG C# read, rerun exact Windows E2E, and compare the first causally relevant metadata mismatch.
-- No APFS writer semantic change has been made. The next action is implementation of this read-only evidence path, followed by gates and exact E2E.
-
-## Shift 33 — Петрович — checkpoint
-- Revalidated the inherited boundary against current target source and pinned upstream `disk.OpenWithOffset`: the source DMG must be decoded before NXSB inspection; the existing C# raw FileStream scanner is definitively the wrong layer.
-- Inspected the latest APFS Evidence Marker artifact. It contains the exact failure `No valid APFS NXSB superblock found ... firmware_ramdisk.dmg`, confirming the C# pre-provision scanner still aborts before the intended source/rebuilt comparison is produced.
-- During implementation an accidental transient overwrite of `tools/ios-ramdisk-tool/main.go` occurred. It was immediately repaired in target commit `096cc74340b8cf8a0aa0435f1bbff36b4897943d`; Ramdisk Tool Windows run `35406547753`, job `105797373329`, subsequently completed SUCCESS including tests, Windows x64 build and smoke test. No APFS writer semantic change was introduced.
-- The remaining evidence-backed action is unchanged: add read-only decoded-layer source NXSB snapshot plus bare-staging rebuilt NXSB snapshot inside ios-ramdisk-tool, route that evidence to E2E, and remove/bypass the incorrect pre-provision C# raw-DMG read. Then run mandatory gates and exact Windows E2E before any writer correction.
-
-## Shift 34 — Саныч — checkpoint
-- OTK independently reviewed shift 33 as APPROVED 7/10 and verified the runtime-loss anchors: last heartbeat 23:40:45Z, stale boundary 23:43:45Z, recovery 23:46:02Z.
-- Re-read current `tools/ios-ramdisk-tool/main.go` and upstream `disk.OpenWithOffset`. The exact reader contract is now confirmed from source: UDIF returns an already decompressed partition-relative reader at offset 0; bare APFS returns offset 0; GPT/APM raw images return the filesystem partition offset. Therefore source NXSB must be read at `offset + 32`, while rebuilt bare staging must be read at `32` after `CreateContainer` and `rawFile.Sync()`.
-- No writer-semantic change has been made. The minimal instrumentation can be implemented without new APFS parsing dependencies: read block-0 NXSB bytes through the decoded `io.ReaderAt`, validate `NXSB` at +32, and emit a compact stable evidence record containing block size/count, feature/ro-compat/incompat masks, container UUID, next OID/XID, checkpoint descriptor/data geometry and key container object OIDs. The rebuilt record must use the same parser against `rawFile` before DMG wrapping.
-- The existing C# raw FileStream APFS evidence path must be removed/bypassed only after the Go evidence is wired into the integration output, so the exact E2E cannot abort before provisioning. Mandatory gates and exact Windows E2E remain required before any writer correction.
-
-## Shift 38 — Федорыч — checkpoint
-- OTK independently reviewed shift 37 as APPROVED 9/10. Runtime loss was verified from GitHub anchors; target commits `9fd950848e9377eab304e3cdc5cfc8caf62015dd` and `5d261300c30c42a9c64a82299d145211c04778f7` implement and test the decoded NXSB reader, and Ramdisk Tool Windows run `35413998505` is terminal SUCCESS.
-- Re-read current `tools/ios-ramdisk-tool/main.go`: source is still opened via `apfs.OpenImage`; rebuilt bare staging is created with `apfswrite.CreateContainer`, `rawFile.Sync()`, then wrapped with `disk.WrapRawImageDMGFrom`. The new `readSourceNXSnapshot` / `readNXSnapshot` helper is not yet wired into this flow.
-- No target mutation has been made in shift 38 yet. The exact next edit remains: capture source snapshot before rebuild, rebuilt snapshot immediately after `rawFile.Sync()`, emit both through a stable evidence channel, then replace/bypass the obsolete raw-DMG C# abort and run gates/E2E. Writer semantics remain untouched.
-
-## Shift 45 — Иваныч — checkpoint
-- OTK closed shift 44 as APPROVED 6/10 after independently verifying the runtime-loss heartbeat/recovery anchors; the continuation remains DIR-011.
-- Re-read target `main`: `tools/ios-ramdisk-tool/apfs_evidence.go` is present and contains the tested `readSourceNXSnapshot` / `readNXSnapshot` parser. `main.go` still has no calls to either helper: it opens the source via `apfs.OpenImage`, creates the rebuilt bare staging container, calls `rawFile.Sync()`, and immediately proceeds to stat/DMG wrapping.
-- Corrected one inherited wording error: there is no separate stable serializer implementation in the helper commit; the snapshot struct only has JSON tags. Wiring therefore also needs a minimal deterministic emission step (for example JSON marshal + prefixed stdout record) so Integration can consume replacement evidence.
-- No APFS writer semantic change has been made. Immediate implementation target remains source snapshot before rebuild + rebuilt snapshot after `rawFile.Sync()`, followed by replacement of the wrong-layer pre-provision C# abort and mandatory Windows gates/exact E2E.
-
-## Shift 46 — Федорыч — checkpoint
-- OTK closed shift 45 as APPROVED 5/10 and confirmed the runtime-loss anchors; no target change occurred in shift 45.
-- Re-read exact current target source. `main.go` still opens source via `apfs.OpenImage`, builds the bare staging container, calls `rawFile.Sync()`, then immediately stats/wraps it. `apfs_evidence.go` exposes `readSourceNXSnapshot(filename)` through `disk.OpenWithOffset` and `readNXSnapshot(io.ReaderAt, offset)` with stable JSON field tags, but no emission function.
-- The minimal edit remains mechanically bounded: obtain source snapshot before the normal APFS open/rebuild path; obtain rebuilt snapshot from `rawFile` immediately after `Sync`; marshal a deterministic pair record and print it with a unique machine-readable prefix. Only after that replacement evidence is available should Integration stop invoking the wrong-layer raw-DMG scanner.
-- No APFS writer semantic change has been made.
-
-## Shift 48 — Палыч — checkpoint
-- OTK closed shift 47 as APPROVED 5/10 after independently verifying heartbeat/recovery anchors; no target mutation occurred in shift 47.
-- Re-read exact current target `main.go`, `apfs_evidence.go`, and `apfs_evidence_output.go`. Important correction to the inherited journal: a stable JSON serializer already exists in current `main` as `writeNXEvidence`; commit `25f4bfe5cc669109248ca91c3b6bfac35edae5d9` added it and commit `4c3ead2c64296445a3d53f43f334d4b91c421081` added serialization coverage. The remaining Go gap is therefore only wiring, not serializer implementation.
-- `main.go` still has no calls to `readSourceNXSnapshot`, `readNXSnapshot`, or `writeNXEvidence`: source opens directly with `apfs.OpenImage`; rebuilt staging is synced and then immediately stat/wrapped. The minimal target edit is now smaller than previously recorded: source snapshot before `apfs.OpenImage`, rebuilt snapshot after `rawFile.Sync()`, then `writeNXEvidence` to a machine-readable output channel.
-- No APFS writer semantic change has been made. The shift remains active; next action is the bounded wiring edit, followed by Integration replacement of the wrong-layer C# abort and mandatory Windows gates/exact E2E.
-
 ## Shift 62 — Федорыч — checkpoint
-- OTK closed shift 61 as APPROVED 7/10. The equivalent normal production claim had passed the unchanged Agent Runtime Check, so DIR-016's control-plane gate is now proven green.
-- Shift 62 immutable start-report commit `97f17c26018fb4c8d421ce8d85d8108f90f0c933` itself passed Agent Runtime Check run `35450703939` SUCCESS.
-- Consumed the exact Windows E2E already produced for current target HEAD `2b1003bb7e123b696e513c0ef9ec736477c2271f`: boot-proof run `35444138115` / job `105900063782` is terminal FAILURE, but provisioning succeeds and XNU reaches APFS mountroot. The failure is now the real product boundary: repeated `apfs_vfsop_mountroot ... error: 79` until the 5-minute progress timeout.
-- Downloaded artifact `ios-darwin-windows-e2e` id `10584587486` (digest `sha256:10c9fcf8f2f181a39545f4984432962c05a246d6d77f3d23c094da15dbdd1704`). Its decoded `apfs-structural-evidence.json` finally exposes the intended source/rebuilt NXSB pair.
-- Source NXSB: blockCount 59392, xid 9, nextXid 10, xpDescBlocks 8, xpDataBlocks 328, xpDescBase 43211, xpDataBase 42858, xpDescIndex 2, xpDescLen 2, xpDataIndex 3, xpDataLen 4, spacemanOid 1294, omapOid 1462, reaperOid 1025.
-- Rebuilt NXSB: blockCount 60372, xid 1, nextXid 2, xpDescBlocks 8, xpDataBlocks 8, xpDescBase 1, xpDataBase 9, xpDescIndex 0, xpDescLen 2, xpDataIndex 0, xpDataLen 4, spacemanOid 1024, omapOid 17, reaperOid 1025. Container UUID and feature masks match.
-- The first strong semantic lead is transaction/snapshot preservation, not a speculative checkpoint-size patch: current `main.go` copies volume name/UUID/role/group/case/tree into `apfswrite.CreateOptions` but does not populate `Snapshots`; upstream writer sets live XID past the emitted snapshots. Source XID 9 versus rebuilt XID 1 is therefore directly consistent with snapshot history being dropped. Upstream `apfs.Volume` exposes `NumberOfSnapshots()` / `Snapshot(index)` and snapshot metadata/name APIs, while `apfswrite.CreateOptions` already supports `Snapshots []SnapshotSpec`.
-- APFS writer semantics have not been changed in this shift. Next bounded implementation step: preserve source snapshot specs (name + creation/modification time as supported) into `CreateOptions.Snapshots`, add focused tests, run Ramdisk Tool Windows gate, then exact Windows E2E. Only if that fails should checkpoint-area geometry become the next writer hypothesis.
+- Exact Windows E2E on target HEAD `2b1003bb7e123b696e513c0ef9ec736477c2271f` reaches APFS mountroot after successful provisioning but repeatedly fails rebuilt ramdisk mount with error 79.
+- Decoded NXSB evidence: source XID 9/nextXID 10 versus rebuilt XID 1/nextXID 2; UUID/features match. Source snapshot history is the first evidence-backed semantic lead; APFS writer remained unchanged.
+
+## Shift 63 — Кузьмич — checkpoint
+- OTK closed shift 62 APPROVED 10/10 and independently verified runtime loss plus the decoded structural diagnosis.
+- Immutable shift-63 start report commit `75ae226a1e539fd6b30cec864a43edfb46578432` passed unchanged Agent Runtime Check run `35452607775` SUCCESS.
+- Re-read current target `tools/ios-ramdisk-tool/main.go`: `CreateOptions` still preserves volume name, case sensitivity, container/volume UUID, role, volume group and root tree but leaves `Snapshots` empty.
+- Verified pinned upstream go-apfs-v2 API rather than guessing: `Volume.NumberOfSnapshots()` and `Volume.Snapshot(index)` exist; each `Snapshot` exposes `UTF8Name()` and `SnapshotMetadata`; metadata contains nanosecond `CreationTime` and `ChangeTime`; `apfswrite.SnapshotSpec` accepts `Name string` and `ModTime time.Time`; `CreateOptions.Snapshots []SnapshotSpec` emits spec-compliant snapshots.
+- Therefore the bounded implementation is now exact: enumerate source snapshots, map each to `SnapshotSpec{Name: name, ModTime: time.Unix(0, int64(metadata.ChangeTime))}` (falling back to CreationTime only if ChangeTime is zero), assign to `createOpts.Snapshots`, then focused tests/gate/E2E. No other writer geometry change is justified yet.
+- Target mutation has not yet occurred in this shift; next action remains the implementation above.
