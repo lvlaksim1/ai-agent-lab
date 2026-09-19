@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 28,
-  "purpose": "heartbeat",
+  "sequence": 29,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Start report persisted; target main.go inspected and decoded NXSB implementation boundary confirmed; wiring implementation is next.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 20
 }
