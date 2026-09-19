@@ -1,31 +1,31 @@
 Проект: iOS-Research-Runtime
-Работник: Федорыч
-Смена: №38
-Начало смены: 19.09.2026 05:04:20 МСК
-Конец смены: 19.09.2026 05:05:17 МСК
+Работник: Кузьмич
+Смена: №39
+Начало смены: 19.09.2026 05:24:29 МСК
+Конец смены: 19.09.2026 05:25:30 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Федорыч планировал подключить уже проверенный decoded NXSB reader к source DMG и rebuilt bare staging, вывести обе структуры в E2E evidence, затем убрать прежний wrong-layer C# abort и прогнать обязательные gates и exact Windows E2E. Writer разрешалось менять только после доказанного mismatch.
+Подключить проверенный decoded NXSB reader к source/rebuilt evidence path, дать стабильный вывод для E2E и не трогать APFS writer без причинного доказательства.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Успел повторно проверить текущую границу wiring в `ios-ramdisk-tool` и сохранить технический checkpoint. Целевой код в этой смене не изменялся; APFS writer не трогался.
+Кузьмич успел добавить стабильный сериализатор source/rebuilt NXSB evidence и отдельный тест сериализации. Изменение узкое и диагностическое; writer semantics не менялись.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Runtime loss подтверждён независимыми GitHub-якорями: последний heartbeat 02:05:17 UTC, stale boundary 02:08:17 UTC, recovery guard 02:10:01 UTC. Последний heartbeat фиксирует конкретный следующий шаг — target wiring edit.
+Два target build-check завершились SUCCESS. Boot-proof завершился FAILURE, поэтому весь причинный пакет ещё не закрыт. Runtime loss подтверждён независимыми GitHub time anchors: последний heartbeat был раньше stale boundary, recovery guard сработал позже и fenced старое исполнение.
 
 ГДЕ ОСТАНОВИЛСЯ:
-На точной границе перед подключением source/rebuilt NXSB snapshots в production flow. Нового кода или нового E2E evidence за смену получить не успел.
+На 05:25:30 МСК, ожидая push-triggered Windows verification. Сериализатор уже был в main, но wiring source/rebuilt snapshots в реальный rebuild/E2E flow ещё не выполнен.
 
 СЛЕДУЮЩЕМУ:
-Не повторять разведку. Подключить `readSourceNXSnapshot`/`readNXSnapshot` к source DMG и rebuilt bare staging после `rawFile.Sync()`, вывести стабильные snapshots, затем заменить/обойти raw-DMG C# pre-provision scan и прогнать обязательные gates плюс exact Windows E2E. Writer не менять без конкретного причинного mismatch.
+Подключить сериализатор к decoded source snapshot и rebuilt bare-staging snapshot, затем заменить/обойти старый raw-DMG C# abort только после появления replacement evidence. После этого пройти exact Windows E2E и менять writer только при доказанном causal mismatch.
 
 Оценка ОТК:
-Прогресс: 0/4
-Инженерное качество: 2/3
+Прогресс: 3/4
+Инженерное качество: 3/3
 Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
-Итого: 5/10 — APPROVED
-Рейтинг: 1100 (+0)
+Итого: 9/10 — APPROVED
+Рейтинг: 1170 (+40)
