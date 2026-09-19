@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 198,
-  "purpose": "heartbeat",
+  "sequence": 199,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "blocked_control_plane",
-  "activity_detail": "Immutable shift 76 start report fails Reporting v2 literal marker contract; target work remains forbidden.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 134
 }
