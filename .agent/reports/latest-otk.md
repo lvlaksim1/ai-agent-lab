@@ -1,26 +1,26 @@
 Проект: iOS-Research-Runtime
-Работник: Иваныч
-Смена: №45
-Начало смены: 19.09.2026 07:36:08 МСК
-Конец смены: 19.09.2026 07:37:18 МСК
+Работник: Федорыч
+Смена: №46
+Начало смены: 19.09.2026 08:24:58 МСК
+Конец смены: 19.09.2026 08:25:59 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Иваныч планировал сразу подключить decoded source/rebuilt NXSB snapshots, добавить детерминированный evidence output, после появления замещающего evidence убрать неверный raw-DMG pre-provision abort и прогнать обязательные Windows gates и exact E2E. APFS writer — только после доказанного causal mismatch.
+Подключить decoded source NXSB и rebuilt staging NXSB snapshots, добавить детерминированный evidence record, затем убрать неверный raw-DMG abort и пройти Windows gates/exact E2E; APFS writer менять только после доказанного structural mismatch.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-За подтверждённые 70 секунд живой смены он повторно проверил текущую границу реализации: NXSB helpers уже есть, но main.go их не вызывает. Также исправил унаследованное предположение: отдельного готового stable serializer нет, есть структура с JSON tags, поэтому emission ещё требуется. Target-код за эту смену не менялся.
+Федорыч повторно проверил точную границу main/helper wiring и зафиксировал минимальный вариант детерминированного NXSB evidence edit. До изменения целевого репозитория исполнение было потеряно.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Подтверждены точка wiring и отсутствие готового serializer/emission слоя. Нового APFS evidence, target commit или результата gates за смену нет. Runtime loss подтверждён независимыми GitHub time anchors.
+Последний heartbeat GitHub подтверждён в 08:25:59 МСК, stale boundary наступил в 08:28:59, recovery guard сработал в 08:34:02 и fenced старое исполнение. Target mutation, CI/E2E и изменение APFS writer в этой смене не подтверждены.
 
 ГДЕ ОСТАНОВИЛСЯ:
-На подготовке минимального source/rebuilt NXSB emission edit. Последний подтверждённый heartbeat — 19.09.2026 07:37:18 МСК; stale boundary наступил позже, recovery корректно fenced старое выполнение.
+На подготовке target mutation после проверки точной точки подключения source/rebuilt NXSB evidence.
 
 СЛЕДУЮЩЕМУ:
-Не повторять локализацию. Подключить source snapshot до rebuild и rebuilt snapshot после rawFile.Sync(), добавить детерминированный evidence record, затем заменить неверный raw-DMG abort и прогнать Windows gates + exact E2E. APFS writer без causal evidence не менять.
+Не повторять локализацию. Сразу внести минимальное source-before-rebuild + rebuilt-after-Sync wiring с детерминированной выдачей evidence, затем заменить wrong-layer C# abort и пройти обязательные Windows gates/exact E2E. Writer не менять без причинного structural evidence.
 
 Оценка ОТК:
 Прогресс: 0/4
@@ -28,4 +28,4 @@
 Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
 Итого: 5/10 — APPROVED
-Рейтинг: 1150 (+0)
+Рейтинг: 1100 (+0)
