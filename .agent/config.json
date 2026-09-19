@@ -92,5 +92,9 @@
     "start_assessment_and_plan_quality": 1
   },
   "unique_review_event_per_shift": true,
-  "review_event_id_pattern": "review-shift-<shift-number>-<production-event>"
+  "review_event_id_pattern": "review-shift-<shift-number>-<production-event>",
+  "transition_engine_version": 1,
+  "atomic_transition_commit_required": true,
+  "runtime_transition_replay_required": true,
+  "live_validation_scope": "current-state-and-new-artifacts"
 }

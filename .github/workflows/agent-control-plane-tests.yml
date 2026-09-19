@@ -1,0 +1,33 @@
+name: Agent Control Plane Tests
+
+on:
+  push:
+    paths:
+      - ".github/scripts/**"
+      - ".github/workflows/agent-control-plane-tests.yml"
+      - ".github/workflows/agent-intake.yml"
+      - ".github/workflows/agent-stale-worker-recovery.yml"
+      - "tests/**"
+      - "tools/agent-report-contract.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax check control-plane scripts
+        run: |
+          node --check .github/scripts/enqueue-agent-event.cjs
+          node --check .github/scripts/stale-worker-recovery.cjs
+          node --check .github/scripts/stale-worker-watchdog.cjs
+          node --check .github/scripts/lib/atomic-plan.cjs
+          node --check .github/scripts/lib/runtime-transition.cjs
+      - name: Replay deterministic transitions
+        run: |
+          node tests/atomic-plan.replay.test.cjs
+          node tests/runtime-transition.replay.test.cjs
+      - name: Test report contract
+        run: node tests/agent-report-contract.test.mjs

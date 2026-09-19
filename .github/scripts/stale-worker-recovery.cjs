@@ -1,3 +1,5 @@
+const { commitAtomicPlan } = require("./lib/atomic-plan.cjs");
+const { sameExecutionIdentity, planManagerDefectWake, planStaleRecovery, serializePlan } = require("./lib/runtime-transition.cjs");
 const apiBase = "https://api.github.com";
 const repo = process.env.GITHUB_REPOSITORY;
 const token = process.env.GITHUB_TOKEN;
@@ -63,66 +65,36 @@ async function getCommit(sha) {
   return api(`/repos/${repo}/commits/${sha}`);
 }
 
+const atomicStore = {
+  async getHead() { return getRefSha(); },
+  async getTreeSha(commitSha) {
+    const parent = await api(`/repos/${repo}/git/commits/${commitSha}`);
+    return parent.tree.sha;
+  },
+  async createBlob(content) {
+    const blob = await api(`/repos/${repo}/git/blobs`, { method: "POST", body: JSON.stringify({ content, encoding: "utf-8" }) });
+    return blob.sha;
+  },
+  async createTree(baseTreeSha, entries) {
+    const tree = await api(`/repos/${repo}/git/trees`, { method: "POST", body: JSON.stringify({ base_tree: baseTreeSha, tree: entries }) });
+    return tree.sha;
+  },
+  async createCommit(message, treeSha, parentSha) {
+    const commit = await api(`/repos/${repo}/git/commits`, { method: "POST", body: JSON.stringify({ message, tree: treeSha, parents: [parentSha] }) });
+    return commit.sha;
+  },
+  async updateHead(commitSha, force) {
+    await api(`/repos/${repo}/git/refs/heads/${encodeURIComponent(ref)}`, { method: "PATCH", body: JSON.stringify({ sha: commitSha, force }) });
+  }
+};
+
 async function atomicCommit(changes, message, expectedHead) {
-  const currentHead = await getRefSha();
-  if (currentHead !== expectedHead) return null;
-
-  const parent = await api(`/repos/${repo}/git/commits/${expectedHead}`);
-  const treeEntries = [];
-  for (const [path, content] of Object.entries(changes)) {
-    const blob = await api(`/repos/${repo}/git/blobs`, {
-      method: "POST",
-      body: JSON.stringify({ content, encoding: "utf-8" })
-    });
-    treeEntries.push({ path, mode: "100644", type: "blob", sha: blob.sha });
-  }
-
-  const tree = await api(`/repos/${repo}/git/trees`, {
-    method: "POST",
-    body: JSON.stringify({ base_tree: parent.tree.sha, tree: treeEntries })
-  });
-
-  const commit = await api(`/repos/${repo}/git/commits`, {
-    method: "POST",
-    body: JSON.stringify({
-      message,
-      tree: tree.sha,
-      parents: [expectedHead]
-    })
-  });
-
-  try {
-    await api(`/repos/${repo}/git/refs/heads/${encodeURIComponent(ref)}`, {
-      method: "PATCH",
-      body: JSON.stringify({ sha: commit.sha, force: false })
-    });
-  } catch (error) {
-    if (error.status === 409 || error.status === 422) return null;
-    throw error;
-  }
-
-  return commit.sha;
+  return commitAtomicPlan({ store: atomicStore, changes, message, expectedHead });
 }
 
 function isoMs(value) {
   const ms = Date.parse(value);
   return Number.isFinite(ms) ? ms : NaN;
-}
-
-function sameIdentity(a, b) {
-  return a &&
-    b &&
-    a.status === "processing" &&
-    b.status === "processing" &&
-    a.active_event === b.active_event &&
-    a.worker_id === b.worker_id &&
-    a.fence_generation === b.fence_generation &&
-    a.heartbeat &&
-    b.heartbeat &&
-    a.heartbeat.sequence === b.heartbeat.sequence &&
-    a.heartbeat.time_anchor_commit === b.heartbeat.time_anchor_commit &&
-    a.heartbeat.last_seen_at === b.heartbeat.last_seen_at &&
-    a.heartbeat.stale_at === b.heartbeat.stale_at;
 }
 
 async function validateHeartbeat(state, config) {
@@ -172,19 +144,9 @@ async function signalManagerDefect(reason, pulseSha, pulseTime) {
   }
   const wakeFile = await getJson(".agent/management/wake.json");
   if (!wakeFile) throw new Error("Missing .agent/management/wake.json");
-  const wake = wakeFile.json;
-  const marker = `STALE_RECOVERY_CONTROL_PLANE_DEFECT: ${reason}`;
-  const reasons = Array.isArray(wake.reasons) ? [...wake.reasons] : [];
-  if (!reasons.includes(marker)) reasons.push(marker);
-  const next = {
-    ...wake,
-    attention: true,
-    generation: Number.isInteger(wake.generation) ? wake.generation + 1 : 1,
-    reasons,
-    updated_at: pulseTime
-  };
+  const transition = planManagerDefectWake({ wake: wakeFile.json, reason, pulseTime });
   const commit = await atomicCommit(
-    { ".agent/management/wake.json": JSON.stringify(next, null, 2) + "\n" },
+    serializePlan(transition),
     "manager: flag stale-recovery control-plane defect",
     pulseSha
   );
@@ -244,7 +206,7 @@ async function main() {
   if (!currentStateFile) throw new Error("Runtime state disappeared after recovery pulse");
   const currentState = currentStateFile.json;
 
-  if (!sameIdentity(initialState, currentState)) {
+  if (!sameExecutionIdentity(initialState, currentState)) {
     console.log("RACE: worker/state changed during recovery probe; no preemption.");
     return;
   }
@@ -264,7 +226,7 @@ async function main() {
   }
 
   const stateBeforeCloseFile = await getJson(".agent/state.json");
-  if (!stateBeforeCloseFile || !sameIdentity(currentState, stateBeforeCloseFile.json)) {
+  if (!stateBeforeCloseFile || !sameExecutionIdentity(currentState, stateBeforeCloseFile.json)) {
     console.log("RACE: heartbeat refreshed before stale closure; no preemption.");
     return;
   }
@@ -305,81 +267,11 @@ async function main() {
     }
   }
 
-  const nextFence = currentState.fence_generation + 1;
-  const changes = {};
-
-  const idleHeartbeat = {
-    ...hb,
-    active: false,
-    role: null,
-    worker_id: null,
-    object_id: null,
-    active_event: null,
-    stale_at: null,
-    activity_kind: "idle",
-    activity_detail: role === "otk"
-      ? "Recovered stale OTK execution; pending review will be retried."
-      : "Recovered stale production execution; pending independent OTK review.",
-    external_wait: null,
-    source: "recovered_by_stale_guard"
-  };
-
-  const lossEvidence = {
-    role,
-    event: eventId,
-    worker_id: currentState.worker_id,
-    worker_last_seen_at_utc: hb.last_seen_at,
-    heartbeat_stale_at_utc: hb.stale_at,
-    heartbeat_anchor_commit: hb.time_anchor_commit,
-    recovery_closed_at_utc: pulseTime,
-    recovery_anchor_commit: pulseSha,
-    fenced_generation: nextFence,
-    activity_kind: hb.activity_kind,
-    activity_detail: hb.activity_detail,
-    shift_number: Number.isInteger(shiftNumber) ? shiftNumber : null,
-    reporting_policy_version: currentState.reporting_policy_version ?? null,
-    score_policy_version: currentState.score_policy_version ?? null,
-    start_report_path: startReportPath,
-    start_report_commit: startReportCommit
-  };
-
-  const nextState = {
-    ...currentState,
-    status: "idle",
-    active_event: null,
-    worker_id: null,
-    started_at: null,
-    lease_until: null,
-    last_event: eventId,
-    last_result: role === "otk" ? "OTK_RUNTIME_LOSS_RETRY" : "RUNTIME_LOSS_PENDING_REVIEW",
-    last_completed_at: hb.last_seen_at,
-    heartbeat: idleHeartbeat,
-    started_at_anchor_commit: null,
-    lease_anchor_commit: null,
-    shift_number: null,
-    reporting_policy_version: null,
-    score_policy_version: null,
-    shift_start_report_path: null,
-    shift_start_report_commit: null,
-    fence_generation: nextFence,
-    last_runtime_loss: lossEvidence
-  };
-
-  changes[".agent/state.json"] = JSON.stringify(nextState, null, 2) + "\n";
-
   const wakeFile = await getJson(".agent/wake.json");
   if (!wakeFile) throw new Error("Missing .agent/wake.json");
-  if (wakeFile.json.pending !== true) {
-    const nextWake = {
-      ...wakeFile.json,
-      pending: true,
-      generation: Number.isInteger(wakeFile.json.generation) ? wakeFile.json.generation + 1 : 1,
-      last_event: eventId,
-      updated_at: pulseTime
-    };
-    changes[".agent/wake.json"] = JSON.stringify(nextWake, null, 2) + "\n";
-  }
 
+  let productionEventJson = null;
+  let expectedReviewPath = null;
   if (role === "production") {
     const productionEvent = await getJson(`.agent/queue/pending/${eventId}.json`);
     if (!productionEvent) {
@@ -387,69 +279,30 @@ async function main() {
       await signalManagerDefect("active production event missing from pending queue", pulseSha, pulseTime);
       return;
     }
-
-    const reviewId = `review-shift-${shiftNumber}-${eventId}`;
-    const reviewPath = `.agent/queue/pending/${reviewId}.json`;
-    const existingReview = await getFile(reviewPath);
+    productionEventJson = productionEvent.json;
+    expectedReviewPath = `.agent/queue/pending/review-shift-${shiftNumber}-${eventId}.json`;
+    const existingReview = await getFile(expectedReviewPath);
     if (existingReview) {
       console.log("DEFECT: runtime-loss review already exists while production still processing.");
       await signalManagerDefect("runtime-loss review already exists for active production event", pulseSha, pulseTime);
       return;
     }
-
-    const review = {
-      schema_version: 1,
-      id: reviewId,
-      created_at: pulseTime,
-      type: "supervisor-review",
-      priority: 100,
-      status: "pending",
-      object_id: hb.object_id,
-      source: {
-        kind: "runtime_loss_recovery",
-        production_event: eventId
-      },
-      worker_id: currentState.worker_id,
-      shift_policy_version: 4,
-      reporting_policy_version: currentState.reporting_policy_version === 2 ? 2 : 1,
-      score_policy_version: currentState.score_policy_version === 2 ? 2 : 1,
-      shift_number: shiftNumber,
-      shift_started_at_utc: currentState.started_at,
-      shift_completed_at_utc: hb.last_seen_at,
-      target: productionEvent.json.target,
-      continuation_id: eventId,
-      evidence: {
-        journal_path: `.agent/journal/${eventId}.md`,
-        heartbeat_anchor_commit: hb.time_anchor_commit,
-        recovery_anchor_commit: pulseSha,
-        ...(startReportPath
-          ? { start_report_path: startReportPath }
-          : {})
-      },
-      ...(startReportPath
-        ? { start_report_path: startReportPath }
-        : {}),
-      ...(startReportCommit
-        ? { start_report_commit: startReportCommit }
-        : {}),
-      stop: {
-        kind: "runtime_loss",
-        actionable_next_step: true,
-        reason: "Verified GitHub-anchored heartbeat became stale before the next production clock.",
-        runtime_loss_evidence: {
-          worker_last_seen_at_utc: hb.last_seen_at,
-          heartbeat_stale_at_utc: hb.stale_at,
-          heartbeat_anchor_commit: hb.time_anchor_commit,
-          recovery_observed_at_utc: pulseTime,
-          recovery_anchor_commit: pulseSha,
-          fenced_generation: nextFence,
-          activity_kind: hb.activity_kind,
-          activity_detail: hb.activity_detail
-        }
-      }
-    };
-    changes[reviewPath] = JSON.stringify(review, null, 2) + "\n";
   }
+
+  const transition = planStaleRecovery({
+    currentState,
+    wake: wakeFile.json,
+    pulseTime,
+    pulseSha,
+    shiftNumber,
+    startReportPath,
+    startReportCommit,
+    productionEvent: productionEventJson
+  });
+  if (role === "production" && transition.meta.review_path !== expectedReviewPath) {
+    throw new Error("deterministic recovery review path mismatch");
+  }
+  const changes = serializePlan(transition);
 
   const closeCommit = await atomicCommit(
     changes,
@@ -465,7 +318,7 @@ async function main() {
   }
 
   console.log(
-    `RECOVERED: role=${role} event=${eventId} last_seen=${hb.last_seen_at} stale_at=${hb.stale_at} recovery=${pulseTime} fence=${nextFence}`
+    `RECOVERED: role=${role} event=${eventId} last_seen=${hb.last_seen_at} stale_at=${hb.stale_at} recovery=${pulseTime} fence=${transition.meta.next_fence}`
   );
 }
 
