@@ -1,1 +1,1 @@
-{"schema_version":1,"attention":false,"generation":15,"reasons":[],"updated_at":"2026-09-19T03:58:26Z"}
+{"schema_version":1,"attention":true,"generation":16,"reasons":["three_consecutive_no_progress_shifts"],"updated_at":"2026-09-19T04:14:29Z"}
