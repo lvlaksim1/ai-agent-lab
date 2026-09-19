@@ -1,29 +1,15 @@
-# Начальник участка — обзор DEC-034
+# Отчёт начальника участка
 
-**Объект:** `ios-research-runtime`  
-**Решение:** `KEEP_CONTROL_PLANE_STOP`  
-**Здоровье:** `RED`
+Объект: iOS-Research-Runtime
+Решение: DEC-035 — AUTHORIZE_CONTROL_PLANE_RECOVERY
+Директива: DIR-016
+Здоровье: RED
+Фаза: control-plane-recovery
 
-## Обстановка
+Владелец дал требуемое разрешение на ремонт control plane без ослабления инвариантов. Owner-decision blocker закрыт.
 
-Производство сейчас `idle`; нового работника материализовывать нельзя. После DEC-033 новых доказательств, позволяющих безопасно снять STOP, не появилось. Блокер остаётся в control plane: `Agent Runtime Check` не принимает нормальный production processing claim до начала target-работы. Продуктовый continuation сохранён: после восстановления orchestration gate работа должна вернуться к exact Windows E2E на уже подключённом decoded source/rebuilt NXSB evidence path.
+Следующая производственная смена допущена только к bounded ремонту `ai-agent-lab`: найти и исправить фактический дефект `Agent Runtime Check`, сохранив неизменными runtime/reporting/immutable-report/heartbeat/lease/fencing требования, затем доказать прохождение эквивалентного normal production claim.
 
-## Управленческое решение
+До этого доказательства `lvlaksim1/iOS-Research-Runtime` не изменять. После успешной проверки автоматически вернуться к сохранённому exact Windows E2E на decoded source/rebuilt NXSB evidence path. APFS writer остаётся заморожен до causal structural evidence.
 
-Сохраняю `DIR-015`, `stop_production=true` и запрет на ослабление runtime/report/heartbeat/lease/fencing invariants. Новую продуктовую смену не запускать до разрешения владельца и последующей успешной проверки неизменённого gate.
-
-## Что требуется от владельца
-
-Разрешить отдельное исправление control-plane `Agent Runtime Check` в `lvlaksim1/ai-agent-lab` без ослабления инвариантов и после успешной проверки автоматически возобновить производство.
-
-## Зачем это нужно
-
-Без этого разрешения начальник участка не должен самостоятельно менять управляющий контур. После разрешения можно локализовать и исправить regression, доказать прохождение обычного production claim через тот же gate и затем вернуть бригаду к сохранённому exact Windows E2E без повторного NXSB-исследования.
-
-## Варианты ответа
-
-1. **Рекомендуемый:** `Разрешаю исправить control-plane Agent Runtime Check в ai-agent-lab без ослабления инвариантов и после успешной проверки возобновить производство.` — разрешает ремонт управляющего контура; после успешной проверки производство сможет возобновиться автоматически.
-2. `Оставить производство остановленным. Control plane пока не менять.` — никаких изменений управляющего контура; объект остаётся остановлен на сохранённом continuation.
-
-**Decision:** `DEC-034`.  
-**Directive:** `DIR-015`.
+Решение владельца больше не требуется; production wake уже pending и следующий clock tick может запустить recovery shift.
