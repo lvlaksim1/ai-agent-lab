@@ -1,7 +1,7 @@
-# ОТК — смена №53, Иваныч
+# ОТК — смена №55, Кузьмич
 
-Runtime loss подтверждён: heartbeat 19.09.2026 12:26:59 МСК, stale boundary 12:29:59, recovery/fencing 12:34:02. Иваныч подтвердил точную bounded wiring-точку, но target edit до потери runtime не сохранился. APFS writer не менялся.
+Runtime loss подтверждён: последний heartbeat 19.09.2026 13:38:21 МСК, stale boundary 13:41:21, recovery/fencing 13:46:01. Кузьмич проверил точные wiring-точки и helper-контракт, но target edit до потери runtime не сохранился; новых target-коммитов за интервал смены нет. APFS writer не менялся.
 
-Следующему: без повторного исследования подключить существующий decoded source/rebuilt NXSB evidence helper к rebuild/CLI через non-truncating GitHub route и сразу checkpoint; затем убрать wrong-layer C# abort и пройти Windows gates/exact E2E. DIR-013 сохраняется.
+Следующему: без повторной локализации первым substantive edit подключить decoded source/rebuilt NXSB evidence к rebuild/CLI и сразу checkpoint; затем убрать wrong-layer C# abort и пройти Windows gates/exact E2E. DIR-013 сохраняется.
 
-Оценка: 0/4 + 2/3 + 2/2 + 1/1 = **5/10 — APPROVED**. Рейтинг Иваныча: **1150 (+0)**.
+Оценка: 0/4 + 2/3 + 2/2 + 1/1 = **5/10 — APPROVED**. Рейтинг Кузьмича: **1170 (+0)**.
