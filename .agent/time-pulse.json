@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 18,
-  "purpose": "lease_claim",
+  "sequence": 19,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Starting shift 34 on decoded-layer APFS NXSB evidence instrumentation.",
+  "activity_detail": "Verified current main.go and upstream OpenWithOffset contract; preparing minimal decoded-layer NXSB instrumentation without writer changes.",
   "fence_generation": 14
 }
