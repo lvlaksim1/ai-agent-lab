@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 153,
+  "sequence": 154,
   "purpose": "heartbeat_refresh",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Start-report Runtime Check 35454933528 passed; proceeding with bounded snapshot-preservation patch.",
+  "activity_detail": "Checkpointed shift-65 API revalidation and exact bounded insertion point; target mutation remains next.",
   "fence_generation": 103
 }
