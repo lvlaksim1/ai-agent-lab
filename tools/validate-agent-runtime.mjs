@@ -138,7 +138,7 @@ if (state.status === "idle") {
     check(state.heartbeat.active_event === state.active_event, "heartbeat.active_event must match state.active_event");
     check(typeof state.heartbeat.object_id === "string" && state.heartbeat.object_id.length > 0, "processing heartbeat.object_id is required");
     check(typeof state.heartbeat.stale_at === "string" && Number.isFinite(Date.parse(state.heartbeat.stale_at)), "processing heartbeat.stale_at must be valid timestamp");
-    check(["working", "external_wait", "persisting", "closing", "otk_review"].includes(state.heartbeat.activity_kind), "invalid heartbeat.activity_kind");
+    check(["starting", "working", "external_wait", "persisting", "closing", "otk_review", "blocked_control_plane"].includes(state.heartbeat.activity_kind), "invalid heartbeat.activity_kind");
     check(typeof state.heartbeat.activity_detail === "string" && state.heartbeat.activity_detail.trim().length > 0, "heartbeat.activity_detail is required");
     if (state.heartbeat.role === "production") {
       check(state.reporting_policy_version === 2, "active production state must use reporting policy v2");
