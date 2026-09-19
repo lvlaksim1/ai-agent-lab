@@ -17,7 +17,11 @@ async function commitAtomicPlan({ store, changes, message, expectedHead }) {
   const entries = [];
   for (const path of paths) {
     const content = changes[path];
-    if (typeof content !== "string") throw new Error("atomic change content must be string: " + path);
+    if (content === null) {
+      entries.push({ path, mode: "100644", type: "blob", sha: null });
+      continue;
+    }
+    if (typeof content !== "string") throw new Error("atomic change content must be string or null deletion: " + path);
     const blobSha = await store.createBlob(content);
     entries.push({ path, mode: "100644", type: "blob", sha: blobSha });
   }

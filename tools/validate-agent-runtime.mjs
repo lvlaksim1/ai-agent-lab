@@ -219,6 +219,8 @@ check(config.transition_engine_version === 1, "transition engine version must be
 check(config.atomic_transition_commit_required === true, "deterministic runtime transitions must remain atomic");
 check(config.runtime_transition_replay_required === true, "runtime transition replay tests must remain required");
 check(config.live_validation_scope === "current-state-and-new-artifacts", "live validation scope must remain current-state-and-new-artifacts");
+check(config.otk_finalize_policy_version === 1, "OTK finalize policy version must be 1");
+check(config.otk_atomic_finalize_required === true, "OTK finalization must remain atomic");
 check(config.work_package_policy === "causal-chain-until-natural-boundary", "work package must follow the causal chain");
 check(config.actionable_next_step_required === true, "actionable-next-step closure must remain required");
 check(config.continuation_policy === "natural-boundary-or-objective-forced-stop-only", "continuation policy must remain objective-forced-stop-only");
@@ -364,6 +366,7 @@ if (fs.existsSync(pendingDir)) {
       }
       if (event.reporting_policy_version === 2) {
         check(event.score_policy_version === 2, file + ": reporting policy v2 requires score policy v2");
+        check(event.otk_finalize_policy_version === 1, file + ": reporting policy v2 requires atomic OTK finalize policy v1");
         check(Number.isInteger(event.shift_number) && event.shift_number >= 1, file + ": reporting policy v2 requires shift_number");
         const startPath = event.start_report_path || (event.evidence && event.evidence.start_report_path);
         const mayBeMissingForRuntimeLoss = event.stop && event.stop.kind === "runtime_loss";
@@ -470,6 +473,44 @@ if (fs.existsSync(doneDir)) {
     check(typeof done.id === "string" && done.id.length > 0, file + ": id is required");
     if ("summary" in done) {
       check(typeof done.summary === "string" && done.summary.trim().length > 0, file + ": summary must be non-empty when present");
+    }
+    if (done.otk_finalize_policy_version === 1) {
+      check(done.type === "supervisor-review", file + ": atomic finalize is only valid for supervisor-review done records");
+      check(typeof done.otk_report_path === "string" && done.otk_report_path.startsWith(".agent/reports/otk/"), file + ": atomic finalize requires otk_report_path");
+      check(typeof done.review_path === "string" && done.review_path.startsWith(".agent/reviews/"), file + ": atomic finalize requires review_path");
+      let finalizeCommit = "";
+      if (typeof done.otk_report_path === "string") {
+        try {
+          finalizeCommit = git(["log", "--diff-filter=A", "--format=%H", "-n", "1", "--", done.otk_report_path]);
+        } catch {
+          fail(file + ": cannot resolve OTK report creation commit");
+        }
+      }
+      check(/^[0-9a-f]{40}$/.test(finalizeCommit), file + ": atomic finalize OTK report creation commit must exist");
+      if (/^[0-9a-f]{40}$/.test(finalizeCommit)) {
+        let changed = [];
+        try {
+          changed = git(["diff-tree", "--root", "--no-commit-id", "--name-only", "-r", finalizeCommit]).split("\n").filter(Boolean);
+        } catch {
+          fail(file + ": cannot inspect atomic finalize commit");
+        }
+        const objectRow = objectIndex.objects.find((object) => object.id === done.object_id);
+        const requiredAtomicPaths = [
+          done.otk_report_path,
+          done.review_path,
+          ".agent/reports/latest-otk.md",
+          ".agent/brigade.json",
+          objectRow && objectRow.state_path,
+          ".agent/management/state.json",
+          ".agent/state.json",
+          ".agent/queue/done/" + done.id + ".json",
+          ".agent/queue/pending/" + done.id + ".json"
+        ].filter(Boolean);
+        if (done.continuation_id) requiredAtomicPaths.push(".agent/queue/pending/" + done.continuation_id + ".json");
+        for (const requiredPath of requiredAtomicPaths) {
+          check(changed.includes(requiredPath), file + ": atomic finalize commit missing path " + requiredPath);
+        }
+      }
     }
   }
 }

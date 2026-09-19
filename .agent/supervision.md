@@ -212,6 +212,31 @@ Wake the manager when any trigger fires:
 
 Manager wake generation is monotonic and reasons are preserved on conflict.
 
+## Atomic OTK finalization v1
+
+Every new supervisor-review with `otk_finalize_policy_version: 1` is finalized from one immutable parent snapshot.
+
+After evidence review/scoring is complete, refresh the OTK heartbeat through the authoritative time-pulse protocol if needed, then build ONE deterministic transition containing all non-time-anchor bookkeeping:
+- private `.agent/reviews/shift-<n>-<review-id>.md`;
+- immutable `.agent/reports/otk/shift-<n>-<review-id>.md`;
+- `.agent/reports/latest-otk.md`;
+- `.agent/brigade.json`;
+- active object state;
+- management state and management wake when triggered;
+- continuation upsert/delete/preserve decision;
+- `.agent/queue/done/<review-id>.json`;
+- deletion of `.agent/queue/pending/<review-id>.json`;
+- wake reconciliation when its boolean changes;
+- release of `.agent/state.json` to idle.
+
+Use the semantics in `.github/scripts/lib/runtime-transition.cjs -> planOtkFinalize` and commit the whole transition as one non-force CAS Git tree commit.
+
+The immutable OTK report MUST NOT be created before the other finalization files. Its creation commit is the proof commit and Runtime Check verifies that the required paths were changed together.
+
+On any branch-head/CAS conflict, do not patch individual files. Re-read the complete current snapshot, rebuild the transition and retry.
+
+Legacy reviews without `otk_finalize_policy_version` remain historically valid and are not rewritten.
+
 ## Relay handoff
 
 After OTK has fully persisted verdict, rating, brigade rotation, object state, management signal and human report, the same scheduled Chat MAY continue into the next production phase only under `.agent/workflow.md`.
