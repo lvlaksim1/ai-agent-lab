@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-44-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-19T04:22:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "borisych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "shift_number": 44,
+  "shift_started_at_utc": "2026-09-19T04:16:02Z",
+  "shift_completed_at_utc": "2026-09-19T04:17:12Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "6624d23a21b80b1aea82aaefec18467d3d7bfa00",
+    "recovery_anchor_commit": "1372ec1cf82d7baf88ea563266dce5b64769c363",
+    "start_report_path": ".agent/reports/starts/shift-44-borisych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-44-borisych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "1334d8a1772573b1e896cdf735e992c8a79831b3",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-19T04:17:12Z",
+      "heartbeat_stale_at_utc": "2026-09-19T04:20:12Z",
+      "heartbeat_anchor_commit": "6624d23a21b80b1aea82aaefec18467d3d7bfa00",
+      "recovery_observed_at_utc": "2026-09-19T04:22:02Z",
+      "recovery_anchor_commit": "1372ec1cf82d7baf88ea563266dce5b64769c363",
+      "fenced_generation": 44,
+      "activity_kind": "working",
+      "activity_detail": "Verified target wiring points: Go helpers exist but are unused; Integration still aborts on raw-DMG ApfsStructuralEvidence before RamdiskProvisioning. Preparing minimal main/service/integration wiring edit."
+    }
+  }
+}
