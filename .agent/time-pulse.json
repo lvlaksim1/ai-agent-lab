@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 191,
-  "purpose": "stale_recovery_probe",
+  "sequence": 192,
+  "purpose": "lease_claim",
   "role": "production",
-  "worker_id": "sanych",
+  "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "recovery_probe",
-  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
-  "fence_generation": 129
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 75 under DIR-019 before canonical start report and target-first snapshot mutation.",
+  "fence_generation": 131
 }
