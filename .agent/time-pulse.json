@@ -1,12 +1,1 @@
-{
-  "schema_version": 1,
-  "sequence": 80,
-  "purpose": "stale_recovery_probe",
-  "role": "production",
-  "worker_id": "palych",
-  "object_id": "ios-research-runtime",
-  "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "recovery_probe",
-  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
-  "fence_generation": 54
-}
+{"schema_version":1,"sequence":81,"purpose":"lease_claim","role":"otk","worker_id":"otk","object_id":"ios-research-runtime","active_event":"review-shift-48-ios-runtime-release-20260918-032","activity_kind":"otk_review","activity_detail":"Reviewing recovered runtime-loss shift 48 from authoritative heartbeat and recovery anchors.","fence_generation":55}
