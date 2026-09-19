@@ -1,1 +1,7 @@
-{"schema_version":1,"attention":true,"generation":29,"reasons":["DEC-033 stopped new production: Agent Runtime Check fails on normal production claim before target work. Owner decision is required to authorize control-plane repair without weakening invariants."],"updated_at":"2026-09-19T13:24:47Z"}
+{
+  "schema_version": 1,
+  "attention": false,
+  "generation": 29,
+  "reasons": [],
+  "updated_at": "2026-09-19T13:47:10Z"
+}
