@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 185,
-  "purpose": "heartbeat",
+  "sequence": 186,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Shift 73 canonical start report gate SUCCESS; target main.go re-read and bounded snapshot mutation insertion point confirmed.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 126
 }
