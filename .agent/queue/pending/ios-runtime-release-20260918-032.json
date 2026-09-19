@@ -1,18 +1,1 @@
-{
-  "schema_version": 1,
-  "id": "ios-runtime-release-20260918-032",
-  "created_at": "2026-09-18T20:12:46Z",
-  "type": "task",
-  "priority": 90,
-  "status": "pending",
-  "object_id": "ios-research-runtime",
-  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-031","directive":"DIR-011"},
-  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Implement read-only source/rebuilt NXSB structural snapshots at the decoded ios-ramdisk-tool / disk.OpenWithOffset layer, rerun exact Windows E2E, identify the first causally incompatible APFS metadata field, and make the smallest writer correction only if evidence supports it.",
-  "constraints": ["Do not weaken proof gates or Definition of Done.","Do not make speculative APFS writer changes.","Use the evidence-acquisition ladder before declaring BLOCKED."],
-  "predecessor_review_event_id": "review-shift-36-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/review-shift-36-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-36-review-shift-36-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 36,
-  "predecessor_worker_id": "borisych"
-}
+{"schema_version":1,"id":"ios-runtime-release-20260918-032","created_at":"2026-09-18T20:12:46Z","type":"task","priority":90,"status":"pending","object_id":"ios-research-runtime","source":{"kind":"continuation","from_event":"ios-runtime-release-20260918-031","directive":"DIR-011"},"target":{"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},"goal":"Complete the read-only source/rebuilt NXSB evidence path: wire the verified decoded NXSB reader into source and rebuilt staging snapshots, replace/bypass the wrong-layer raw-DMG C# pre-provision scan after replacement evidence exists, rerun mandatory gates and exact Windows E2E, then make the smallest writer correction only if evidence proves a causal mismatch.","constraints":["Do not weaken proof gates or Definition of Done.","Do not make speculative APFS writer changes.","Use the evidence-acquisition ladder before declaring BLOCKED."],"predecessor_review_event_id":"review-shift-37-ios-runtime-release-20260918-032","predecessor_review_path":".agent/reviews/review-shift-37-ios-runtime-release-20260918-032.md","predecessor_otk_report_path":".agent/reports/otk/shift-37-review-shift-37-ios-runtime-release-20260918-032.md","predecessor_shift_number":37,"predecessor_worker_id":"ivanych"}
