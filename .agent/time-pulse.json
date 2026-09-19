@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 24,
-  "purpose": "heartbeat",
+  "sequence": 25,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Checkpoint persisted with verified source/rebuilt decoded evidence insertion points; implementation wiring is next.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 17
 }
