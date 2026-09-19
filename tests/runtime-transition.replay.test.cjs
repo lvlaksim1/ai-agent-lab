@@ -148,7 +148,7 @@ assert.equal(otkFinalize.changes[".agent/brigade.json"].members[0].rating,1150);
 assert.equal(otkFinalize.changes[".agent/state.json"].status,"idle");
 assert.equal(otkFinalize.changes[".agent/queue/done/review-shift-42-event-1.json"].otk_finalize_policy_version,1);
 assert.ok(otkFinalize.changes[".agent/reports/otk/shift-42-review-shift-42-event-1.md"]);
-assert.ok(otkFinalize.changes[".agent/queue/pending/event-1.json"]);
+assert.ok(otkFinalize.changes[".agent/queue/pending/incoming.json"]);
 assert.equal(Object.keys(otkFinalize.changes).length >= 10,true,"OTK finalize should collapse all bookkeeping into one transition plan");
 
 const immutable = planImmutableCreate({ path:".agent/reports/starts/x.md", content:"abc\n", existingContent:null });
