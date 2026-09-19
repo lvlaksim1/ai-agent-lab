@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-19T23:01:15Z",
     "stale_at": "2026-09-19T23:04:15Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed shift 75 under DIR-019; preparing canonical start report before target-first snapshot mutation.",
+    "activity_detail": "Canonical shift 75 start report published; waiting for exact report commit Runtime Check before target mutation.",
     "external_wait": null,
     "source": "live_worker"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 75,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-75-mikhalych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "889861fac1487f8eaa3439ebd29676dc426f2dcd",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
