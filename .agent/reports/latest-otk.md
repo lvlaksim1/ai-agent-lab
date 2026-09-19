@@ -1,31 +1,31 @@
 Проект: iOS-Research-Runtime
-Работник: Борисыч
-Смена: №36
-Начало смены: 19.09.2026 04:05:32 МСК
-Конец смены: 19.09.2026 04:06:15 МСК
+Работник: Иваныч
+Смена: №37
+Начало смены: 19.09.2026 04:50:45 МСК
+Конец смены: 19.09.2026 04:53:42 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Реализовать read-only NXSB snapshots на правильном decoded-слое: source через disk.OpenWithOffset, rebuilt из bare staging; затем провести gates и exact Windows E2E и менять writer только по доказанному различию.
+Реализовать минимальный read-only decoded source/rebuilt NXSB evidence channel, не меняя APFS writer до причинного mismatch.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Борисыч успел опубликовать корректный стартовый план, открыть целевой main.go и подтвердить границу реализации decoded NXSB. До изменения целевого кода runtime был потерян.
+Добавлен decoded-layer NXSB reader через disk.OpenWithOffset и точечные тесты container-relative offset/отбраковки неправильного слоя. Writer semantics не менялись.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Runtime loss подтверждён GitHub-якорями: последний heartbeat 01:06:15 UTC, stale boundary 01:09:15 UTC, recovery pulse 01:10:01 UTC. Нового target commit, CI/E2E результата или новой APFS structural evidence за смену нет.
+Ramdisk Tool Windows run 35413998505 завершился SUCCESS на commit 5d261300c30c42a9c64a82299d145211c04778f7. Runtime loss подтверждён GitHub-якорями: heartbeat 01:53:42Z, stale 01:56:42Z, recovery 01:58:01Z.
 
 ГДЕ ОСТАНОВИЛСЯ:
-На подтверждённой точке реализации: wiring read-only decoded NXSB evidence ещё не начат.
+Во время ожидания CI после реализации core reader; source/rebuilt snapshots ещё не протянуты в полный E2E evidence path.
 
 СЛЕДУЮЩЕМУ:
-Не повторять разведку. Реализовать source snapshot через decoded disk.OpenWithOffset и rebuilt snapshot из bare staging, подключить их к E2E evidence, затем пройти обязательные gates и exact Windows E2E. APFS writer не менять до причинного evidence.
+Протянуть reader в source и rebuilt snapshots, заменить/обойти старый C# raw-DMG scan после появления нового evidence path, затем выполнить обязательные gates и exact Windows E2E. Writer менять только по доказанному mismatch.
 
 Оценка ОТК:
-Прогресс: 0/4
-Инженерное качество: 2/3
+Прогресс: 3/4
+Инженерное качество: 3/3
 Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
-Итого: 5/10 — APPROVED
-Рейтинг: 1130 (+0)
+Итого: 9/10 — APPROVED
+Рейтинг: 1150 (+40)
