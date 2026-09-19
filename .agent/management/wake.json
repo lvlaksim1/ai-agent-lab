@@ -1,1 +1,1 @@
-{"schema_version":1,"attention":false,"generation":28,"reasons":[],"updated_at":"2026-09-19T12:14:08Z"}
+{"schema_version":1,"attention":true,"generation":29,"reasons":["Shift 59 immutable start report commit ef24e9b failed required Agent Runtime Check before any target work; control-plane/report-contract gate requires management recovery."],"updated_at":"2026-09-19T13:16:14Z"}
