@@ -1,31 +1,23 @@
 Проект: iOS-Research-Runtime
-Работник: Саныч
-Смена: №58
-Начало смены: 19.09.2026 15:49:21 МСК
-Конец смены: 19.09.2026 15:53:55 МСК
-Причина завершения: runtime_loss
-
-ЗАКЛЮЧЕНИЕ ОТК:
+Работник: Михалыч
+Смена: №59
+ОТК: независимая проверка
 
 ЧТО ПЛАНИРОВАЛ:
-Саныч принял уже локализованный DIR-014: сохранить decoded source/rebuilt NXSB evidence wiring, затем заменить ошибочный raw-DMG C# abort и пройти обязательные Windows-проверки без спекулятивного изменения APFS writer.
+Exact Windows E2E на уже подтверждённом decoded NXSB evidence path без повторного wiring.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Сохранён end-to-end путь структурного APFS evidence: ios-ramdisk-tool теперь пишет decoded NXSB evidence, RamdiskProvisioningService передаёт путь для evidence-файла, а Integration больше не пытается читать NXSB напрямую из raw DMG и требует результат decoded-пути. После этого Саныч запустил обязательную Windows Build и оставался на активном ожидании результата до потери runtime.
+Стартовый доклад опубликован, но обязательный Agent Runtime Check завершился FAILURE до target work. Target repository не изменялся.
 
 ЧТО ПОДТВЕРЖДЕНО:
-ОТК независимо проверил target-коммиты и отсутствие изменения семантики APFS writer. Точная Windows Build для итогового target-коммита завершилась SUCCESS уже после последнего heartbeat работника. Runtime loss также подтверждён GitHub-якорями.
+Heartbeat 16:16:36 МСК; stale 16:19:36; recovery/fencing 16:22:01. Runtime loss валиден.
 
 ГДЕ ОСТАНОВИЛСЯ:
-Фактическая граница смены — последний heartbeat 19.09.2026 15:53:55 МСК: Windows Build ещё наблюдалась как in_progress. Работник не передавал смену добровольно.
+На control-plane barrier.
 
 СЛЕДУЮЩЕМУ:
-Windows Build уже зелёная. Следующий шаг — exact Windows E2E на новом decoded evidence path. При сбое сначала сравнить source/rebuilt NXSB evidence и только по доказанному причинному mismatch делать минимальную коррекцию; APFS writer до этого не трогать.
+DIR-016: bounded repair Agent Runtime Check, затем exact Windows E2E; APFS writer заморожен до causal evidence.
 
-Оценка ОТК:
-Прогресс: 4/4
-Инженерное качество: 3/3
-Эффективность/фокус: 2/2
-Стартовая оценка и план: 1/1
-Итого: 10/10 — APPROVED
-Рейтинг: 1200 (+50)
+ОЦЕНКА: 0/4 + 2/3 + 2/2 + 1/1 = 5/10
+Вердикт: APPROVED
+Рейтинг: 1150 (+0)
