@@ -1,1 +1,12 @@
-{"schema_version":1,"sequence":73,"purpose":"heartbeat","role":"production","worker_id":"kuzmich","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"working","activity_detail":"Start report published; verified current main.go and apfs_evidence.go exact wiring points. Preparing minimal target edit without touching APFS writer semantics.","fence_generation":51}
+{
+  "schema_version": 1,
+  "sequence": 74,
+  "purpose": "stale_recovery_probe",
+  "role": "production",
+  "worker_id": "kuzmich",
+  "object_id": "ios-research-runtime",
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
+  "fence_generation": 51
+}
