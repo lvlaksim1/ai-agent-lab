@@ -1,21 +1,31 @@
 Проект: iOS-Research-Runtime
-ОТК: смена №41, Петрович
-Вердикт: APPROVED — 5/10
+Работник: Саныч
+Смена: №42
+Начало смены: 19.09.2026 06:25:40 МСК
+Конец смены: 19.09.2026 06:26:16 МСК
+Причина завершения: runtime_loss
+
+ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Подключить decoded source NXSB и rebuilt bare-staging NXSB, вывести обе записи через стабильный serializer, затем убрать ошибочный raw-DMG C# abort и выполнить Windows gates/E2E до любых writer-изменений.
+Сразу встроить decoded NXSB reader в source/rebuilt точки, заменить неверный raw-DMG pre-provision scan и пройти Windows gates/exact E2E до любых writer-изменений.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Перепроверены текущий rebuild flow и уже готовые reader/serializer-компоненты. Target-код и CI до потери runtime не изменялись.
+Проверены точные места встраивания source/rebuilt snapshots; worker дошёл до подготовки минимального target edit, после чего runtime был потерян.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Runtime loss подтверждён: последний heartbeat 19.09.2026 06:12:08 МСК, stale boundary 06:15:08, recovery 06:22:01. Нового причинного APFS evidence за смену нет.
+Runtime loss валиден и execution fenced. Нового подтверждённого проектного результата относительно уже известной evidence boundary смена создать не успела.
 
 ГДЕ ОСТАНОВИЛСЯ:
-Перед реализацией source/rebuilt NXSB wiring.
+На подготовке минимального wiring edit.
 
 СЛЕДУЮЩЕМУ:
-Реализовать wiring без повторного исследования image-layer boundary; затем заменить/обойти raw-DMG C# abort, выполнить обязательные Windows gates и exact E2E. Writer менять только по доказанному diff.
+Сразу реализовать source/rebuilt NXSB wiring, затем убрать старый raw-DMG C# abort и прогнать обязательные Windows gates и exact E2E. Writer semantics не менять без причинного diff.
 
-ОЦЕНКА:
-Прогресс 0/4; инженерное качество 2/3; эффективность/фокус 2/2; стартовая оценка и план 1/1. Итого 5/10. Рейтинг без изменения.
+Оценка ОТК:
+Прогресс: 0/4
+Инженерное качество: 3/3
+Эффективность/фокус: 2/2
+Стартовая оценка и план: 1/1
+Итого: 6/10 — APPROVED
+Рейтинг: 1150 (+10)
