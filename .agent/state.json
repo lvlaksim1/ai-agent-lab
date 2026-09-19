@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-19T18:36:31Z",
     "stale_at": "2026-09-19T18:39:31Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed shift 67 for DIR-017 mutation-first snapshot preservation.",
+    "activity_detail": "Immutable shift-67 start report published; awaiting mandatory report-contract gate before target mutation.",
     "external_wait": null
   },
   "time_authority": "github_commit_committer_date",
@@ -32,8 +32,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 67,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-67-mikhalych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "b264f3f9fecf1fe3590b69c82619eda672941a38",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
