@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 17,
+  "sequence": 18,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "sanych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-33-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of recovered shift 33 runtime loss.",
-  "fence_generation": 13
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "working",
+  "activity_detail": "Starting shift 34 on decoded-layer APFS NXSB evidence instrumentation.",
+  "fence_generation": 14
 }
