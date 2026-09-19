@@ -139,6 +139,20 @@ Deterministic classification:
 
 Manager reports the exact `last_seen_at`, `stale_at` and anchor commit.
 
+## Activity kinds
+
+Processing heartbeat uses one of:
+- `starting` — lease claimed; the worker/OTK is materializing context and production has not yet crossed the start-report barrier;
+- `working` — active reasoning/evidence/engineering work;
+- `external_wait` — exact external evidence target is being actively polled;
+- `persisting` — durable state/checkpoint transition is being written;
+- `closing` — a valid natural boundary is being persisted;
+- `otk_review` — independent OTK review is in progress.
+
+Idle state uses `idle`.
+
+`starting` is a first-class live state. A production worker in `starting` still may not mutate the target repository until the Reporting v2 start-report barrier passes.
+
 ## Mandatory refresh points
 
 A live production worker or OTK must create a new time-pulse and refresh state:
