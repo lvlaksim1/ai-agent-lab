@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 156,
+  "sequence": 157,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "sanych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-65-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of recovered shift 65 runtime loss.",
-  "fence_generation": 105
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 66 for mutation-first bounded snapshot preservation under DIR-017.",
+  "fence_generation": 106
 }
