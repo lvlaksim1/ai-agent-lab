@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 19,
+  "sequence": 20,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Verified current main.go and upstream OpenWithOffset contract; preparing minimal decoded-layer NXSB instrumentation without writer changes.",
+  "activity_detail": "Checkpoint persisted with exact decoded-reader NXSB offsets and compact evidence fields; implementation remains next.",
   "fence_generation": 14
 }
