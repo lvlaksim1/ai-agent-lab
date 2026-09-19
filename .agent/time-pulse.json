@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 137,
-  "purpose": "heartbeat_refresh",
-  "role": "otk",
-  "worker_id": "otk",
+  "sequence": 138,
+  "purpose": "lease_claim",
+  "role": "production",
+  "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-61-ios-runtime-release-20260918-032",
-  "activity_kind": "persisting",
-  "activity_detail": "OTK evidence review complete; preparing atomic finalization for shift 61.",
-  "fence_generation": 93
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 62 after OTK; DIR-016 gate proof is green and exact Windows E2E is next.",
+  "fence_generation": 94
 }
