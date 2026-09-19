@@ -1,1 +1,12 @@
-{"schema_version":1,"sequence":124,"purpose":"heartbeat","role":"production","worker_id":"sanych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"external_wait","activity_detail":"Polled Windows Build run 35444138118 for target 2b1003b: still in_progress. Continuing active evidence wait.","fence_generation":83}
+{
+  "schema_version": 1,
+  "sequence": 125,
+  "purpose": "stale_recovery_probe",
+  "role": "production",
+  "worker_id": "sanych",
+  "object_id": "ios-research-runtime",
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
+  "fence_generation": 83
+}
