@@ -1,31 +1,31 @@
 Проект: iOS-Research-Runtime
-Работник: Борисыч
-Смена: №44
-Начало смены: 19.09.2026 07:16:02 МСК
-Конец смены: 19.09.2026 07:17:12 МСК
+Работник: Иваныч
+Смена: №45
+Начало смены: 19.09.2026 07:36:08 МСК
+Конец смены: 19.09.2026 07:37:18 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Борисыч планировал сразу подключить готовые decoded NXSB readers к source и rebuilt staging точкам, вывести стабильные структурные records в E2E evidence channel, затем убрать неверный raw-DMG pre-provision abort и прогнать обязательные Windows gates и exact E2E. Writer semantics — только после причинного evidence.
+Иваныч планировал сразу подключить decoded source/rebuilt NXSB snapshots, добавить детерминированный evidence output, после появления замещающего evidence убрать неверный raw-DMG pre-provision abort и прогнать обязательные Windows gates и exact E2E. APFS writer — только после доказанного causal mismatch.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-До потери runtime Борисыч проверил точные точки подключения: Go helpers уже существуют, но ещё не используются; Integration по-прежнему обрывается на raw-DMG ApfsStructuralEvidence до RamdiskProvisioning. Он дошёл до подготовки минимального wiring edit, но target-код изменить не успел.
+За подтверждённые 70 секунд живой смены он повторно проверил текущую границу реализации: NXSB helpers уже есть, но main.go их не вызывает. Также исправил унаследованное предположение: отдельного готового stable serializer нет, есть структура с JSON tags, поэтому emission ещё требуется. Target-код за эту смену не менялся.
 
 ЧТО ПОДТВЕРЖДЕНО:
-OTK независимо подтвердил корректность runtime-loss: последний heartbeat — 04:17:12Z, stale boundary — 04:20:12Z, recovery guard — 04:22:02Z. Старое выполнение fenced. Нового подтверждённого target-прогресса или terminal CI evidence за смену нет.
+Подтверждены точка wiring и отсутствие готового serializer/emission слоя. Нового APFS evidence, target commit или результата gates за смену нет. Runtime loss подтверждён независимыми GitHub time anchors.
 
 ГДЕ ОСТАНОВИЛСЯ:
-На полностью локализованной границе перед минимальным wiring edit: source snapshot до rebuild, rebuilt snapshot после rawFile.Sync(), затем замена wrong-layer C# abort и обязательная проверка.
+На подготовке минимального source/rebuilt NXSB emission edit. Последний подтверждённый heartbeat — 19.09.2026 07:37:18 МСК; stale boundary наступил позже, recovery корректно fenced старое выполнение.
 
 СЛЕДУЮЩЕМУ:
-Продолжить DIR-011 без повторного исследования уже доказанной границы: выполнить минимальный wiring decoded source/rebuilt NXSB evidence, после replacement evidence убрать неверный raw-DMG pre-provision abort, прогнать Windows gates и exact E2E. APFS writer не менять без причинного structural diff.
+Не повторять локализацию. Подключить source snapshot до rebuild и rebuilt snapshot после rawFile.Sync(), добавить детерминированный evidence record, затем заменить неверный raw-DMG abort и прогнать Windows gates + exact E2E. APFS writer без causal evidence не менять.
 
 Оценка ОТК:
-Прогресс: 1/4
-Инженерное качество: 3/3
-Эффективность/фокус: 1/2
+Прогресс: 0/4
+Инженерное качество: 2/3
+Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
-Итого: 6/10 — APPROVED
-Рейтинг: 1140 (+10)
+Итого: 5/10 — APPROVED
+Рейтинг: 1150 (+0)
