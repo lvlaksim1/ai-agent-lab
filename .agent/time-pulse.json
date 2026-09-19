@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 190,
-  "purpose": "heartbeat",
+  "sequence": 191,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Shift 74 report gate SUCCESS; checkpointed exact snapshot-preservation API and non-truncating mutation boundary.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 129
 }
