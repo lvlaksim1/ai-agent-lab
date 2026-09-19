@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 175,
+  "sequence": 176,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-70-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of shift 70 report-contract gate failure.",
-  "fence_generation": 119
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Shift 71 claim; constructing canonical v2 start report under DIR-018 before target mutation.",
+  "fence_generation": 120
 }
