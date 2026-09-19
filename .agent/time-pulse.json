@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 23,
-  "purpose": "lease_claim",
+  "sequence": 24,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Claiming shift 35 to implement decoded-layer NXSB evidence and continue exact E2E causal chain.",
+  "activity_detail": "Checkpoint persisted with verified source/rebuilt decoded evidence insertion points; implementation wiring is next.",
   "fence_generation": 17
 }
