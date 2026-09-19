@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "YELLOW",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Decoded-layer APFS evidence boundary remains localized: implement read-only source/rebuilt NXSB snapshots in ios-ramdisk-tool, run gates and exact Windows E2E, then identify the first causally incompatible metadata field before any writer-semantic change.",
-  "last_scored_shift": 33,
+  "current_blocker_summary": "Decoded-layer APFS evidence implementation remains next: add read-only source/rebuilt NXSB snapshots in ios-ramdisk-tool, route them to E2E, then run mandatory gates and exact Windows E2E before any writer-semantic change.",
+  "last_scored_shift": 34,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-18T23:59:54Z"
+  "updated_at": "2026-09-19T00:04:15Z"
 }
