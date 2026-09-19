@@ -1,1 +1,27 @@
-{"schema_version":1,"active_object":"ios-research-runtime","project":"lvlaksim1/iOS-Research-Runtime","project_name":"iOS-Research-Runtime","target_ref":"main","owner_goal":"Deliver the verified Windows-native v0.1.0 release defined by the object mission.","definition_of_done":["Use the authoritative object mission Definition of Done"],"current_phase":"boot-debugging","health":"RED","current_blocker_summary":"Control-plane blocker: Agent Runtime Check fails on a normal production processing claim before target work. Production remains stopped pending explicit owner authorization to repair the invariant regression without weakening gates; product continuation remains exact Windows E2E on the decoded NXSB evidence path.","shifts_since_manager_review":0,"consecutive_no_progress":0,"consecutive_corrected":0,"last_otk_verdict":"APPROVED","last_progress_class":"substantial","last_scored_shift":58,"manager_review_count":33,"last_manager_review_at":"2026-09-19T13:37:03Z","last_manager_decision":"DEC-034: KEEP_CONTROL_PLANE_STOP; owner authorization still required before control-plane repair","active_directive":"DIR-015","owner_decision_required":true,"stop_production":true,"updated_at":"2026-09-19T13:37:03Z"}
+{
+  "schema_version": 1,
+  "active_object": "ios-research-runtime",
+  "project": "lvlaksim1/iOS-Research-Runtime",
+  "project_name": "iOS-Research-Runtime",
+  "target_ref": "main",
+  "owner_goal": "Deliver the verified Windows-native v0.1.0 release defined by the object mission.",
+  "definition_of_done": [
+    "Use the authoritative object mission Definition of Done"
+  ],
+  "current_phase": "control-plane-recovery",
+  "health": "RED",
+  "current_blocker_summary": "Owner authorized bounded repair of ai-agent-lab Agent Runtime Check without weakening invariants. Next shift may repair/verify control plane only; iOS-Research-Runtime target mutation remains forbidden until an equivalent normal production claim passes the unchanged gate.",
+  "shifts_since_manager_review": 0,
+  "consecutive_no_progress": 0,
+  "consecutive_corrected": 0,
+  "last_otk_verdict": "APPROVED",
+  "last_progress_class": "substantial",
+  "last_scored_shift": 58,
+  "manager_review_count": 34,
+  "last_manager_review_at": "2026-09-19T13:47:10Z",
+  "last_manager_decision": "DEC-035: AUTHORIZE_CONTROL_PLANE_RECOVERY; execute bounded repair under DIR-016",
+  "active_directive": "DIR-016",
+  "owner_decision_required": false,
+  "stop_production": false,
+  "updated_at": "2026-09-19T13:47:10Z"
+}
