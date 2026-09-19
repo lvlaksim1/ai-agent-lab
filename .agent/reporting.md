@@ -85,7 +85,7 @@ Only these two narrative sections are required.
 
 The literal field labels above are protocol, not presentation suggestions. Markdown headings such as `# Смена ...` or `## МОЙ ПЛАН` do not substitute for the required labels.
 
-The canonical machine contract lives in `tools/agent-report-contract.mjs` and is covered by `tests/agent-report-contract.test.mjs`.
+The canonical marker-validation contract lives in `.github/scripts/lib/report-contract.cjs`; `tools/agent-report-contract.mjs` is the ESM/rendering wrapper. Both worker/OTK transition gates and `tests/agent-report-contract.test.mjs` use the same marker contract.
 
 After creating the immutable start-report commit, the worker MUST re-read the exact file, verify it against the v2 contract, and wait for the exact report commit's `Agent Runtime Check` to finish successfully before any substantive target-repository mutation. If the contract check fails, do not rewrite the immutable report and do not touch the target repository; surface a control-plane defect for recovery/manager attention.
 
@@ -174,6 +174,12 @@ Update convenience mirrors:
 ```
 
 OTK may add one short explanatory paragraph when a verdict needs context, but must not turn the result into a raw log.
+
+### OTK machine-contract gate
+
+For `otk_finalize_policy_version: 1`, the deterministic transition planner MUST validate the complete OTK result body against the shared v2 marker contract before producing any finalization plan. A malformed OTK body is a control-plane error: no immutable OTK report, rating, done record, continuation mutation or lease release may be committed from that plan.
+
+The report must also contain the exact reviewed shift number. This gate exists before the atomic CAS commit; Runtime Check remains the independent post-commit proof.
 
 ## Scoring relationship
 

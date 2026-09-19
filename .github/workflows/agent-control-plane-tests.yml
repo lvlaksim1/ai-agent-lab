@@ -25,6 +25,7 @@ jobs:
           node --check .github/scripts/stale-worker-watchdog.cjs
           node --check .github/scripts/lib/atomic-plan.cjs
           node --check .github/scripts/lib/runtime-transition.cjs
+          node --check .github/scripts/lib/report-contract.cjs
       - name: Replay deterministic transitions
         run: |
           node tests/atomic-plan.replay.test.cjs
