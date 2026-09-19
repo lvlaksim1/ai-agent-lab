@@ -1,31 +1,31 @@
 Проект: iOS-Research-Runtime
-Работник: Саныч
-Смена: №42
-Начало смены: 19.09.2026 06:25:40 МСК
-Конец смены: 19.09.2026 06:26:16 МСК
+Работник: Михалыч
+Смена: №43
+Начало смены: 19.09.2026 06:37:49 МСК
+Конец смены: 19.09.2026 06:37:49 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Сразу встроить decoded NXSB reader в source/rebuilt точки, заменить неверный raw-DMG pre-provision scan и пройти Windows gates/exact E2E до любых writer-изменений.
+Михалыч собирался сразу подключить уже подготовленные decoded source/rebuilt NXSB snapshots и стабильный serializer, затем убрать только доказанно неверный raw-DMG pre-provision abort и прогнать обязательные Windows gates и exact E2E. Writer semantics без причинного diff менять не планировал.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Проверены точные места встраивания source/rebuilt snapshots; worker дошёл до подготовки минимального target edit, после чего runtime был потерян.
+Опубликован корректный стартовый доклад и зафиксирован точный план. До следующего подтверждённого инженерного действия runtime не дожил: durable target edit, новый diagnostic result или CI запуск от этой смены отсутствуют.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Runtime loss валиден и execution fenced. Нового подтверждённого проектного результата относительно уже известной evidence boundary смена создать не успела.
+Runtime loss подтверждён независимыми GitHub-якорями: последний heartbeat 03:37:49Z, stale boundary 03:40:49Z, recovery 03:46:01Z. Recovery guard оградил потерянное исполнение. Нового технического результата проекта за смену не подтверждено.
 
 ГДЕ ОСТАНОВИЛСЯ:
-На подготовке минимального wiring edit.
+На границе сразу после публикации стартового доклада, перед реализацией уже локализованного source/rebuilt NXSB wiring.
 
 СЛЕДУЮЩЕМУ:
-Сразу реализовать source/rebuilt NXSB wiring, затем убрать старый raw-DMG C# abort и прогнать обязательные Windows gates и exact E2E. Writer semantics не менять без причинного diff.
+Не повторять исследование image-layer boundary. Реализовать read-only source snapshot через decoded reader и rebuilt snapshot на bare staging после Sync, провести evidence в E2E, затем выполнить обязательные Windows gates и exact E2E. APFS writer менять только при доказанном causal mismatch.
 
 Оценка ОТК:
 Прогресс: 0/4
-Инженерное качество: 3/3
+Инженерное качество: 2/3
 Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
-Итого: 6/10 — APPROVED
-Рейтинг: 1150 (+10)
+Итого: 5/10 — APPROVED
+Рейтинг: 1150 (+0)
