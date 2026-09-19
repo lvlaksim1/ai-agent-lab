@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-59-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-19T13:22:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "mikhalych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 59,
+  "shift_started_at_utc": "2026-09-19T13:15:31Z",
+  "shift_completed_at_utc": "2026-09-19T13:16:36Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "ea2b9653721dad2b26f19d291b2f9bd0d7340e5b",
+    "recovery_anchor_commit": "ead0989342560dfd322f4ae6872bad705bc59087",
+    "start_report_path": ".agent/reports/starts/shift-59-mikhalych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-59-mikhalych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "ef24e9bda8b72a8a0243746c497d218b5092cf86",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-19T13:16:36Z",
+      "heartbeat_stale_at_utc": "2026-09-19T13:19:36Z",
+      "heartbeat_anchor_commit": "ea2b9653721dad2b26f19d291b2f9bd0d7340e5b",
+      "recovery_observed_at_utc": "2026-09-19T13:22:01Z",
+      "recovery_anchor_commit": "ead0989342560dfd322f4ae6872bad705bc59087",
+      "fenced_generation": 87,
+      "activity_kind": "blocked_control_plane",
+      "activity_detail": "Required Agent Runtime Check for immutable shift 59 start report failed; target repository remains untouched and manager attention is raised."
+    }
+  }
+}
