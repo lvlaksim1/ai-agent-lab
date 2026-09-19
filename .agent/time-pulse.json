@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 143,
-  "purpose": "lease_claim",
+  "sequence": 144,
+  "purpose": "heartbeat_refresh",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 63 to preserve source snapshot history, test it, and rerun exact Windows evidence chain.",
+  "activity_kind": "working",
+  "activity_detail": "Verified exact snapshot APIs and checkpointed bounded snapshot-preservation implementation; preparing target edit without other writer changes.",
   "fence_generation": 97
 }
