@@ -1,17 +1,1 @@
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Agent Done Record",
-  "type": "object",
-  "additionalProperties": true,
-  "required": ["schema_version", "id", "status", "completed_at", "worker_id", "summary", "journal"],
-  "properties": {
-    "schema_version": { "const": 1 },
-    "id": { "type": "string", "minLength": 1 },
-    "status": { "enum": ["done", "blocked"] },
-    "completed_at": { "type": "string", "format": "date-time" },
-    "worker_id": { "type": "string", "minLength": 1 },
-    "summary": { "type": "string", "minLength": 1 },
-    "journal": { "type": "string", "minLength": 1 },
-    "result": {}
-  }
-}
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Agent Done Record v1 (current and legacy-compatible)","type":"object","additionalProperties":true,"required":["schema_version","id"],"properties":{"schema_version":{"const":1},"id":{"type":"string","minLength":1},"type":{"type":"string"},"status":{"enum":["done","blocked"]},"worker_id":{"type":["string","null"]},"completed_at":{"type":["string","null"],"format":"date-time"},"summary":{"type":"string"},"journal":{"type":"string"},"verdict":{"type":"string"},"score":{"type":"integer","minimum":0,"maximum":10},"review_path":{"type":"string"},"otk_report_path":{"type":"string"},"start_report_path":{"type":"string"},"result":{}}}

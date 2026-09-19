@@ -81,6 +81,14 @@ If the worker dies before creating the report, OTK records that fact. OTK must n
 
 Only these two narrative sections are required.
 
+### Machine contract gate
+
+The literal field labels above are protocol, not presentation suggestions. Markdown headings such as `# Смена ...` or `## МОЙ ПЛАН` do not substitute for the required labels.
+
+The canonical machine contract lives in `tools/agent-report-contract.mjs` and is covered by `tests/agent-report-contract.test.mjs`.
+
+After creating the immutable start-report commit, the worker MUST re-read the exact file, verify it against the v2 contract, and wait for the exact report commit's `Agent Runtime Check` to finish successfully before any substantive target-repository mutation. If the contract check fails, do not rewrite the immutable report and do not touch the target repository; surface a control-plane defect for recovery/manager attention.
+
 ### ОЦЕНКА ПРЕДШЕСТВЕННИКА
 
 The new worker evaluates the immediately preceding scored production shift using OTK evidence, journal/checkpoint and inherited project state.

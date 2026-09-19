@@ -10,6 +10,8 @@ on:
       - ".github/workflows/agent-stale-worker-recovery.yml"
       - ".github/workflows/agent-intake.yml"
       - "tools/validate-agent-runtime.mjs"
+      - "tools/agent-report-contract.mjs"
+      - "tests/agent-report-contract.test.mjs"
 
 permissions:
   contents: read
@@ -25,5 +27,7 @@ jobs:
         run: |
           node --check .github/scripts/stale-worker-recovery.cjs
           node --check .github/scripts/stale-worker-watchdog.cjs
+      - name: Test report contract
+        run: node tests/agent-report-contract.test.mjs
       - name: Validate agent runtime invariants
         run: node tools/validate-agent-runtime.mjs

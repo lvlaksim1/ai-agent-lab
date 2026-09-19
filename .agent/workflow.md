@@ -82,6 +82,12 @@ No other two-event combination is allowed.
    - never edit that report later and never rewrite the plan with hindsight;
    - reading inherited evidence is allowed before this report, but no target-repository mutation, CI launch or evidence-changing engineering action may precede it.
    If the execution dies before the report is created, OTK records it as missing; nobody fabricates it afterward.
+8a. **Mandatory report-contract barrier before target work:**
+   - re-fetch the exact immutable start-report file just created;
+   - verify the literal v2 contract from `.agent/reporting.md` / `tools/agent-report-contract.mjs`;
+   - wait for the exact report commit's `Agent Runtime Check` to reach terminal SUCCESS;
+   - only after that gate passes may target-repository mutation, CI launch or evidence-changing engineering action occur;
+   - if the gate fails, do not rewrite the immutable report and do not touch the target repository; surface a control-plane defect for recovery/manager attention.
 9. Execute one production shift continuously until a **proven natural stop condition** is reached. The scheduled clock interval is NOT a shift-duration limit and the queued event goal is NOT a micro-task boundary.
    - treat the event as the entry point into the current causal engineering chain;
    - keep working through successive justified steps while the same worker still has an actionable next step;
