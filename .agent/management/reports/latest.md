@@ -1,15 +1,15 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-047 — CHANGE_COURSE
-Директива: DIR-019
+Решение: DEC-048 — CHANGE_COURSE
+Директива: DIR-020
 Здоровье: RED
 Фаза: boot-debugging
 
-После восстановления смены №74 производство idle. Persistent state фиксирует уже три подряд no-progress/runtime-loss смены: инженерное направление не опровергнуто, но прежний способ исполнения систематически не успевает превратить уже локализованную Name/ModTime snapshot-preservation mutation в durable target commit.
+После ОТК смены №75 производство idle; management state фиксирует четыре подряд no-progress смены. DIR-019 уже устранил повторную техническую разведку, но смена №75 остановилась перед target commit из-за опасения, что доступный GitHub Contents write заменяет весь файл.
 
-Курс исполнения изменён без изменения продуктовой цели. DIR-019 запрещает очередную локализацию: после успешного обязательного start-report gate первая target-операция — bounded CAS mutation в `iOS-Research-Runtime/main`; сразу после неё должен быть сохранён checkpoint с точным target SHA. Только затем разрешены focused tests, Windows gate и exact Windows E2E.
+Новый курс устраняет именно этот execution blocker без изменения продуктовой цели: после успешного обязательного start-report gate worker обязан получить полный текущий `tools/ios-ramdisk-tool/main.go` и его blob SHA, выполнить ровно одну заранее локализованную Name/ModTime snapshot-preservation замену с проверкой единственного совпадения и отправить полный результат через `update_file` с исходным blob SHA как CAS guard. Сразу после успешного target commit — checkpoint с точным target SHA.
 
-Если точный bounded edit невозможно восстановить из уже сохранённого authoritative evidence без новой разведки, следующая смена должна зафиксировать конкретно недостающий patch/evidence и остановиться; это позволит менеджеру чинить handoff contract вместо повторения одинаковой работы.
+Если полный файл недоступен/усечён, ожидаемый фрагмент не совпадает ровно один раз или CAS отклонён, target не меняется и фиксируется конкретный blocker. Поиск альтернативного write-механизма запрещён.
 
-APFS writer вне bounded mutation остаётся заморожен. STOP, transfer и решение владельца не требуются; производство может продолжить автоматически по DIR-019.
+APFS writer вне bounded mutation остаётся заморожен. STOP, transfer и решение владельца не требуются; производство может продолжить автоматически по DIR-020.
