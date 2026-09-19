@@ -1,1 +1,12 @@
-{"schema_version":1,"sequence":66,"purpose":"heartbeat","role":"production","worker_id":"ivanych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"working","activity_detail":"Verified helper/main wiring gap and corrected inherited serializer assumption; preparing minimal source/rebuilt NXSB emission edit.","fence_generation":46}
+{
+  "schema_version": 1,
+  "sequence": 67,
+  "purpose": "stale_recovery_probe",
+  "role": "production",
+  "worker_id": "ivanych",
+  "object_id": "ios-research-runtime",
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
+  "fence_generation": 46
+}
