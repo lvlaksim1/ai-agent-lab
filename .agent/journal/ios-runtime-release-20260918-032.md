@@ -25,3 +25,10 @@
 - Mandatory Agent Runtime Check run `35466573056` failed before any target work. Exact validator errors: missing required v2 literal markers `Проект:`, `Работник:`, `Смена:`, `Начало смены:`, `СТАРТОВЫЙ ДОКЛАД:`, `ОЦЕНКА ПРЕДШЕСТВЕННИКА:`, `МОЙ ПЛАН:`.
 - Workflow forbids rewriting the immutable start report after this failure. Therefore DIR-017 target mutation was not attempted; target remains untouched.
 - Manager/control-plane attention is required to define a legal remediation path for the invalid immutable shift-70 report without weakening the report-contract gate.
+
+## Shift 71 — Кузьмич — checkpoint
+- OTK finalized shift 70 BLOCKED 4/10 and preserved exactly one DIR-018 continuation; Федорыч lost 10 rating points because the malformed immutable start report caused an avoidable control-plane-only shift, while target safety remained intact.
+- Shift-71 immutable start report commit `28360f02da5a46c4e3c3441b9ddda1e41701f054` contains every canonical v2 literal marker and exact Agent Runtime Check run `35467954824` completed SUCCESS. DIR-018 control-plane remediation is therefore proven.
+- Re-read target `tools/ios-ramdisk-tool/main.go`: `CreateOptions` still leaves `Snapshots` empty. No target mutation has yet occurred in shift 71.
+- Re-verified pinned upstream go-apfs-v2 API at commit `36ec4f53a3fecc5692eb6bf85f399a48729a77f1`: `Volume.NumberOfSnapshots()`, `Volume.Snapshot(index)`, `Snapshot.UTF8Name()`, `Snapshot.SnapshotMetadata.ChangeTime/CreationTime`, and `apfswrite.SnapshotSpec{Name string, ModTime time.Time}` are exact available APIs.
+- Immediate next action remains the bounded edit only: enumerate source snapshots, derive ModTime from ChangeTime with CreationTime fallback, assign `createOpts.Snapshots`, commit target, then checkpoint exact target SHA before tests/gate/E2E.
