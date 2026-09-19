@@ -1,1 +1,15 @@
-{"schema_version":1,"object_id":"ios-research-runtime","status":"ACTIVE","health":"RED","current_phase":"boot-debugging","current_blocker_summary":"Control-plane blocker: Agent Runtime Check fails on a normal production processing claim before target work. Production remains stopped pending explicit owner authorization to repair the invariant regression without weakening gates. Product-side continuation remains exact Windows E2E on the already-wired decoded source/rebuilt NXSB evidence path; APFS writer remains frozen until causal structural evidence.","last_scored_shift":58,"last_otk_verdict":"APPROVED","last_progress_class":"substantial","last_event":"ios-runtime-release-20260918-032","checkpoint_generation":1,"last_checkpoint_at":"2026-09-18T21:26:03Z","updated_at":"2026-09-19T13:37:03Z"}
+{
+  "schema_version": 1,
+  "object_id": "ios-research-runtime",
+  "status": "ACTIVE",
+  "health": "RED",
+  "current_phase": "control-plane-recovery",
+  "current_blocker_summary": "Owner authorized control-plane repair. Product target remains frozen until Agent Runtime Check passes an equivalent normal production claim unchanged; then resume exact Windows E2E.",
+  "last_scored_shift": 58,
+  "last_otk_verdict": "APPROVED",
+  "last_progress_class": "substantial",
+  "last_event": "ios-runtime-release-20260918-032",
+  "checkpoint_generation": 1,
+  "last_checkpoint_at": "2026-09-18T21:26:03Z",
+  "updated_at": "2026-09-19T13:47:10Z"
+}
