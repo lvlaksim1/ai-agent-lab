@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-42-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-19T03:34:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "sanych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "shift_number": 42,
+  "shift_started_at_utc": "2026-09-19T03:25:40Z",
+  "shift_completed_at_utc": "2026-09-19T03:26:16Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "57d270fdc9d4b37f133e0870c614b6de7b63907f",
+    "recovery_anchor_commit": "7704366972695db297331d8a6e2abc2c551f6e69",
+    "start_report_path": ".agent/reports/starts/shift-42-sanych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-42-sanych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "65148202548292ce6fafea8b6480d8f7280246be",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-19T03:26:16Z",
+      "heartbeat_stale_at_utc": "2026-09-19T03:29:16Z",
+      "heartbeat_anchor_commit": "57d270fdc9d4b37f133e0870c614b6de7b63907f",
+      "recovery_observed_at_utc": "2026-09-19T03:34:02Z",
+      "recovery_anchor_commit": "7704366972695db297331d8a6e2abc2c551f6e69",
+      "fenced_generation": 38,
+      "activity_kind": "working",
+      "activity_detail": "Shift 42 verified exact insertion points: source snapshot immediately before apfs.OpenImage; rebuilt snapshot after rawFile.Sync and before DMG wrapping. Preparing minimal target edit."
+    }
+  }
+}
