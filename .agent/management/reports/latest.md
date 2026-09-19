@@ -1,15 +1,13 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-044 — CONTROL_PLANE_REMEDIATION
+Решение: DEC-045 — KEEP_COURSE
 Директива: DIR-018
-Здоровье: RED
+Здоровье: ORANGE
 Фаза: boot-debugging
 
-Смена №70 остановлена штатным обязательным барьером до любых изменений целевого репозитория: immutable start report был опубликован без обязательных literal v2 полей и секций, поэтому его точный Agent Runtime Check завершился FAILURE на проверке runtime invariants. Сам отчёт неизменяем и исправляться задним числом не будет.
+Контрольный дефект смены №70 устранён: в смене №71 новый immutable v2 start report прошёл обязательный Agent Runtime Check успешно. Последний авторитетный heartbeat Кузьмича фиксирует, что после успешного gate он повторно подтвердил точный snapshot-preservation API и переходил непосредственно к bounded target mutation.
 
-Причина локализована как дефект формирования control-plane отчёта, а не как новое техническое свидетельство против snapshot-preservation гипотезы. DIR-018 сохраняет mutation-first курс, но требует перед публикацией следующего start report детерминированно проверить все canonical markers из общего report contract. Только после SUCCESS точного Runtime Check разрешается target mutation.
+До сохранения самой Name/ModTime mutation runtime был потерян. Production сейчас idle, а независимый supervisor-review смены №71 уже находится в pending queue. Поэтому менять технический курс повторно не требуется: сначала ОТК принимает смену №71, затем следующая производственная смена продолжает DIR-018 с первого инженерного milestone — сохранить bounded mutation и немедленно checkpoint exact target SHA; после этого focused tests, Windows gate и exact Windows E2E.
 
-После успешного report gate следующий сменщик должен без повторной архитектурной разведки выполнить уже локализованную bounded snapshot Name/ModTime mutation, немедленно checkpoint exact target SHA и продолжить focused tests, Windows gate и exact Windows E2E. APFS writer вне bounded mutation остаётся заморожен без causal structural evidence.
-
-STOP, transfer и решение владельца не требуются. После независимого ОТК смены №70 производство может продолжить автоматически по pending production wake и DIR-018.
+APFS writer вне bounded mutation остаётся заморожен до causal structural evidence. STOP, transfer и решение владельца не требуются.
