@@ -22,9 +22,9 @@
     "last_seen_at": "2026-09-19T22:21:27Z",
     "stale_at": "2026-09-19T22:24:27Z",
     "activity_kind": "starting",
-    "activity_detail": "Production shift 74 claimed under DIR-018; preparing immutable start report.",
-    "external_wait": null,
-    "source": "lease_claim"
+    "activity_detail": "Immutable shift 74 start report published; awaiting exact report commit Agent Runtime Check.",
+    "external_wait": {"kind":"github_actions","commit":"2a63ab68916788acdf30891b4256f14b6d03bd8e","check":"Agent Runtime Check"},
+    "source": "start_report"
   },
   "time_authority": "github_commit_committer_date",
   "started_at_anchor_commit": "41b7ecea9f0fb66e7a309330b66ab222efd0b147",
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 74,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-74-sanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "2a63ab68916788acdf30891b4256f14b6d03bd8e",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
