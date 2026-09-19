@@ -22,5 +22,10 @@ Runtime loss подтверждён GitHub-якорями: последний he
 СЛЕДУЮЩЕМУ:
 Не повторять API/архитектурную разведку. Сразу реализовать DIR-018 snapshot preservation, checkpoint exact target SHA, затем focused tests, Windows gate и exact Windows E2E.
 
-Оценка: 5/10 — APPROVED
+Оценка:
+- Подтверждённый прогресс: 0/4
+- Инженерное качество: 2/3
+- Эффективность/фокус: 2/2
+- Стартовая оценка и план: 1/1
+Итого: 5/10 — APPROVED
 Рейтинг Саныча: 1200 (+0)
