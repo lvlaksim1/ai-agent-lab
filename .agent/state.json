@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-19T15:41:15Z",
     "stale_at": "2026-09-19T15:44:15Z",
     "activity_kind": "starting",
-    "activity_detail": "Claiming shift 63 to preserve source snapshot history, test it, and rerun exact Windows evidence chain.",
+    "activity_detail": "Immutable shift 63 start report published; waiting for its mandatory Agent Runtime Check before target work.",
     "external_wait": null
   },
   "time_authority": "github_commit_committer_date",
@@ -32,8 +32,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 63,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-63-kuzmich-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "75ae226a1e539fd6b30cec864a43edfb46578432",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
