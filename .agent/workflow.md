@@ -145,6 +145,7 @@ If an objective forced-stop signal is actually observed and persistence remains 
    - `shift_policy_version: 4`;
    - `reporting_policy_version: 2`;
    - `score_policy_version: 2`;
+   - `otk_finalize_policy_version: 1`;
    - `shift_number`;
    - exact `start_report_path` and `start_report_commit` when the worker successfully published them; if absent because execution died before publication, preserve that fact rather than inventing a report;
    - `stop.kind` = `project_or_phase_complete`, `blocked`, `forced_stop` or `speculation_boundary`;
@@ -163,7 +164,11 @@ If an objective forced-stop signal is actually observed and persistence remains 
 1a. Initialize `.agent/state.json -> heartbeat` with role=`otk`, worker_id=`otk`, reviewed event/object, activity_kind=`otk_review`, and refresh it throughout review according to `.agent/liveness.md`.
 2. Follow `.agent/supervision.md` and `.agent/competition.md`.
 3. Independently inspect and score the PREVIOUS production shift.
-4. Fully persist verdict, rating, brigade rotation, object/management signals, independent OTK result report, done record and lease release.
+4. For reviews carrying `otk_finalize_policy_version: 1`, fully persist verdict, private review, immutable OTK report, latest-OTK mirror, rating/brigade rotation, object state, management state/wake, continuation reconciliation, done record, pending-review deletion and OTK lease release as ONE non-force CAS Git tree commit following `.agent/runtime-transitions.md`. The only intentionally separate write is the authoritative OTK time-pulse/claim needed for GitHub time.
+   - re-read one immutable parent snapshot before planning;
+   - if HEAD changes, discard the plan, re-read and rebuild it;
+   - never publish the OTK report in an earlier partial commit;
+   - the immutable OTK-report creation commit is the atomic-finalize evidence commit.
 5. The OTK phase is now closed and immutable for this run.
 
 Then a second phase MAY begin:

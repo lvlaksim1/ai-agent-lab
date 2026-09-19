@@ -32,6 +32,7 @@ Current deterministic classes:
 - external event enqueue + wake update;
 - stale production/OTK recovery state release;
 - runtime-loss review creation;
+- atomic OTK finalization (review/report/rating/object/management/continuation/done/queue close/state release);
 - manager defect wake;
 - immutable append-only create planning;
 - fence/identity checks.

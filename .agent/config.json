@@ -96,5 +96,7 @@
   "transition_engine_version": 1,
   "atomic_transition_commit_required": true,
   "runtime_transition_replay_required": true,
-  "live_validation_scope": "current-state-and-new-artifacts"
+  "live_validation_scope": "current-state-and-new-artifacts",
+  "otk_finalize_policy_version": 1,
+  "otk_atomic_finalize_required": true
 }
