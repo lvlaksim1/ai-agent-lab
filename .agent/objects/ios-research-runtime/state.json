@@ -2,14 +2,14 @@
   "schema_version": 1,
   "object_id": "ios-research-runtime",
   "status": "ACTIVE",
-  "health": "YELLOW",
+  "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Decoded-layer APFS evidence implementation remains next: add read-only source/rebuilt NXSB snapshots in ios-ramdisk-tool, route them to E2E, then run mandatory gates and exact Windows E2E before any writer-semantic change.",
+  "current_blocker_summary": "Decoded-layer APFS evidence implementation remains next; repeated runtime loss is now an execution risk. Persist the smallest useful source/rebuilt NXSB evidence increment early, then run mandatory gates and exact Windows E2E before any writer-semantic change.",
   "last_scored_shift": 36,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-19T01:10:01Z"
+  "updated_at": "2026-09-19T01:35:47Z"
 }
