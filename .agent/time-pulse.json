@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 138,
-  "purpose": "lease_claim",
+  "sequence": 139,
+  "purpose": "heartbeat_refresh",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 62 after OTK; DIR-016 gate proof is green and exact Windows E2E is next.",
+  "activity_kind": "working",
+  "activity_detail": "Consumed exact Windows E2E failure and decoded NXSB artifact: provisioning passes, XNU reaches APFS mountroot, rebuilt ramdisk fails mount with error 79; comparing structural mismatch before writer changes.",
   "fence_generation": 94
 }
