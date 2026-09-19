@@ -32,7 +32,7 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 34,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-34-sanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "f86545cb0ba200bd5ee6027090992a9a51bdc8e9",
   "last_runtime_loss": null
 }
