@@ -8,5 +8,6 @@
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "recovery_probe",
   "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
-  "fence_generation": 83
+  "fence_generation": 83,
+  "p1_ci_noise_proof": "pulse_only_commit_should_not_start_heavy_ci"
 }
