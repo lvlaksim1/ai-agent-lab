@@ -1,1 +1,12 @@
-{"schema_version":1,"sequence":112,"purpose":"heartbeat","role":"production","worker_id":"palych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"working","activity_detail":"Checkpointed exact target wiring boundary and full-file truncation risk; seeking a non-truncating repository write route before touching main.go.","fence_generation":77}
+{
+  "schema_version": 1,
+  "sequence": 113,
+  "purpose": "stale_recovery_probe",
+  "role": "production",
+  "worker_id": "palych",
+  "object_id": "ios-research-runtime",
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
+  "fence_generation": 77
+}
