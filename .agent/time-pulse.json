@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 30,
-  "purpose": "lease_claim",
+  "sequence": 31,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Claiming shift 37 to implement decoded-layer source/rebuilt NXSB evidence before any writer change.",
+  "activity_detail": "Verified exact OpenWithOffset contract and NXSB field offsets; selecting minimal wiring path without writer changes.",
   "fence_generation": 22
 }
