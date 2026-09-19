@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-40-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-19T02:58:11Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "palych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "shift_number": 40,
+  "shift_started_at_utc": "2026-09-19T02:52:52Z",
+  "shift_completed_at_utc": "2026-09-19T02:53:23Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "04b4bd872487b36feeeb9a70e13702f747f952cf",
+    "recovery_anchor_commit": "ff7b6b591ee8e9caae0a5bbb0fbfc6a87cb1cb92",
+    "start_report_path": ".agent/reports/starts/shift-40-palych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-40-palych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "412dba3f7f059f6b1d8113727bb3f7e92908146e",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-19T02:53:23Z",
+      "heartbeat_stale_at_utc": "2026-09-19T02:56:23Z",
+      "heartbeat_anchor_commit": "04b4bd872487b36feeeb9a70e13702f747f952cf",
+      "recovery_observed_at_utc": "2026-09-19T02:58:11Z",
+      "recovery_anchor_commit": "ff7b6b591ee8e9caae0a5bbb0fbfc6a87cb1cb92",
+      "fenced_generation": 32,
+      "activity_kind": "working",
+      "activity_detail": "Shift 40 confirmed exact wiring sites in main.go and serializer API; preparing minimal source/rebuilt snapshot integration without writer changes."
+    }
+  }
+}
