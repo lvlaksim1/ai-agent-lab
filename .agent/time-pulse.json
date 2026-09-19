@@ -1,1 +1,12 @@
-{"schema_version":1,"sequence":118,"purpose":"heartbeat","role":"production","worker_id":"petrovich","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"working","activity_detail":"DIR-014 route reconciled successfully: authoritative target path is tools/ios-ramdisk-tool/main.go, full 19,847-byte blob retrieved by SHA 2aa440e1; preparing full-file CAS wiring edit without truncation.","fence_generation":80}
+{
+  "schema_version": 1,
+  "sequence": 119,
+  "purpose": "stale_recovery_probe",
+  "role": "production",
+  "worker_id": "petrovich",
+  "object_id": "ios-research-runtime",
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
+  "fence_generation": 80
+}
