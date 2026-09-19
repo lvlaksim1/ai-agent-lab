@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 142,
+  "sequence": 143,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-62-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Reviewing recovered shift 62 runtime-loss evidence and exact E2E structural diagnosis.",
-  "fence_generation": 96
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 63 to preserve source snapshot history, test it, and rerun exact Windows evidence chain.",
+  "fence_generation": 97
 }
