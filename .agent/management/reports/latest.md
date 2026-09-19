@@ -1,15 +1,15 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-035 — AUTHORIZE_CONTROL_PLANE_RECOVERY
+Решение: DEC-037 — KEEP_COURSE
 Директива: DIR-016
 Здоровье: RED
 Фаза: control-plane-recovery
 
-Владелец дал требуемое разрешение на ремонт control plane без ослабления инвариантов. Owner-decision blocker закрыт.
+ОТК смены №60 завершён: APPROVED, 6/10, подтверждён runtime loss до substantive engineering action. Целевой репозиторий iOS-Research-Runtime смена не изменяла.
 
-Следующая производственная смена допущена только к bounded ремонту `ai-agent-lab`: найти и исправить фактический дефект `Agent Runtime Check`, сохранив неизменными runtime/reporting/immutable-report/heartbeat/lease/fencing требования, затем доказать прохождение эквивалентного normal production claim.
+Две подряд смены без прогресса не меняют технический курс: owner-authorized ремонт Agent Runtime Check остаётся правильным следующим действием. Следующая производственная смена должна выполнить bounded repair в ai-agent-lab/work-webhook-test и доказать прохождение эквивалентного normal production claim через неизменённый gate.
 
-До этого доказательства `lvlaksim1/iOS-Research-Runtime` не изменять. После успешной проверки автоматически вернуться к сохранённому exact Windows E2E на decoded source/rebuilt NXSB evidence path. APFS writer остаётся заморожен до causal structural evidence.
+До этого доказательства iOS-Research-Runtime не изменять. После PASS автоматически вернуться к exact Windows E2E; APFS writer остаётся заморожен до causal structural evidence.
 
-Решение владельца больше не требуется; production wake уже pending и следующий clock tick может запустить recovery shift.
+Дополнительное решение владельца не требуется.
