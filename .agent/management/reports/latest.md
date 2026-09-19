@@ -1,13 +1,13 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-039 — CHANGE_COURSE
+Решение: DEC-040 — KEEP_COURSE
 Директива: DIR-017
 Здоровье: RED
 Фаза: boot-debugging
 
-Производство idle. ОТК независимо подтвердил для смен №64 и №65 одинаковый результат: APPROVED 5/10, progress_class=none, runtime loss до target mutation. Обе смены уже прошли неизменённый Agent Runtime Check и дошли до ранее подтверждённой bounded точки сохранения source snapshot Name/ModTime; target main оставался `2b1003bb7e123b696e513c0ef9ec736477c2271f`.
+Производство idle. После предыдущего изменения курса смена №66 снова завершилась APPROVED с progress_class=none: runtime был потерян до первого mutation milestone. Это подтверждает, что объект продолжает буксовать, но нового технического противоречия курсу DIR-017 не появилось.
 
-Поэтому прежний control-plane recovery курс исчерпан. DIR-017 меняет именно порядок исполнения: следующая смена не повторяет локализацию и архитектурную разведку, а первым техническим действием выполняет минимальную snapshot-preservation mutation и сразу сохраняет checkpoint с точным target SHA. Затем — focused tests, Windows gate и exact Windows E2E в той же причинной цепочке.
+DIR-017 уже адресует именно этот паттерн: следующая смена обязана первым техническим действием выполнить ранее локализованную bounded snapshot-preservation mutation, сразу сохранить checkpoint с точным target SHA и только затем запускать focused tests, Windows gate и exact Windows E2E. Повторная локализация, архитектурная разведка и расширение APFS writer до этого запрещены.
 
-APFS writer вне bounded mutation остаётся замороженным до causal structural evidence. STOP, transfer и решение владельца не требуются.
+Новой директивы не требуется. STOP и transfer не требуются. Решение владельца не требуется; производство может продолжать автоматически по существующему production wake.
