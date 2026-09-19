@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 139,
-  "purpose": "heartbeat_refresh",
+  "sequence": 140,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Consumed exact Windows E2E failure and decoded NXSB artifact: provisioning passes, XNU reaches APFS mountroot, rebuilt ramdisk fails mount with error 79; comparing structural mismatch before writer changes.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 94
 }
