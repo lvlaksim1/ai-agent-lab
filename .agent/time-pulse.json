@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 162,
-  "purpose": "otk_finalize",
-  "role": "otk",
-  "worker_id": "otk",
+  "sequence": 163,
+  "purpose": "lease_claim",
+  "role": "production",
+  "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-66-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Evidence review complete: verified runtime loss, no target mutation, score 5/10 APPROVED; preparing atomic finalize.",
-  "fence_generation": 108
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 67 for DIR-017 mutation-first snapshot preservation.",
+  "fence_generation": 109
 }
