@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 184,
-  "purpose": "lease_claim",
+  "sequence": 185,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Shift 73 claim; execute DIR-018 bounded snapshot-preservation mutation-first path.",
+  "activity_kind": "working",
+  "activity_detail": "Shift 73 canonical start report gate SUCCESS; target main.go re-read and bounded snapshot mutation insertion point confirmed.",
   "fence_generation": 126
 }
