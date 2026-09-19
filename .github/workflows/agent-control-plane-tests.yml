@@ -29,5 +29,6 @@ jobs:
         run: |
           node tests/atomic-plan.replay.test.cjs
           node tests/runtime-transition.replay.test.cjs
+          node tests/enqueue-snapshot.replay.test.cjs
       - name: Test report contract
         run: node tests/agent-report-contract.test.mjs
