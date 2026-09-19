@@ -130,7 +130,7 @@ const reviewEvent = {
   shift_started_at_utc:"2026-09-19T10:00:00Z",shift_completed_at_utc:"2026-09-19T10:05:00Z",
   target:{repository:"x/y",ref:"main"},continuation_id:"event-1",start_report_path:processing.shift_start_report_path
 };
-const continuation = {...event,goal:"Continue from OTK evidence.",predecessor_review_event_id:reviewEvent.id};
+const continuation = {...event,id:"event-1",goal:"Continue from OTK evidence.",predecessor_review_event_id:reviewEvent.id};
 const otkFinalize = planOtkFinalize({
   currentState:otkProcessing,
   reviewEvent,
