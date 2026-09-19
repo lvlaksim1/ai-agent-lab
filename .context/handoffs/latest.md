@@ -170,3 +170,12 @@ This is now fixed:
 - stale recovery can deterministically rediscover the immutable start report and its creation commit if the worker dies in the narrow gap between publishing that file and linking it into state.
 
 Final Runtime Check and stale-worker recovery workflow after the policy migration are green.
+
+
+## P0 control-plane stabilization — 2026-09-19
+
+The audit-driven P0 is complete and live in `work-webhook-test` at commit `3acdc72905d024d525ff63bdc1fbe0f09d425217`.
+
+Key consequence: do not weaken or bypass Runtime Check. It is now split correctly: new/live artifacts are strict, immutable historical report drift is audited separately. New worker start reports must pass the literal Reporting v2 contract and the exact report commit's Runtime Check before any substantive target-repository mutation.
+
+Next engineering priority is P1 transition/replay hardening, not new factory features.

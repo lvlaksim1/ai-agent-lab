@@ -8,3 +8,4 @@
 | CHAT-20260918-200300-manager-apfs-resume | 2026-09-18 | Fresh manager bootstrap + iOS APFS blocker | Owner authorized evidence channel; runtime resumed and dynamic write-back proven | CHAT-20260918-200300-manager-apfs-resume.md |
 
 Semantic reconstructions from available project/chat context; not guaranteed verbatim transcripts.
+| CHAT-20260919-project-audit-p0-stabilization | 2026-09-19 | Expert project audit + P0 stabilization | Report contract, live/history validation split and schema synchronization shipped green | CHAT-20260919-project-audit-p0-stabilization.md |

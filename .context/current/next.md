@@ -1,3 +1,8 @@
+1. P1: extract repeated runtime bookkeeping into deterministic atomic transition helpers/reducer so related state/wake/report/object mutations can be committed as one CAS-protected transition where time-anchor separation is not required.
+2. P1: build replay tests for CAS conflicts, heartbeat refresh during recovery, zombie fencing, duplicate intake, interrupted OTK, duplicate report publication and manager+worker concurrent writes.
+3. P1: reduce write/CI amplification by keeping per-runtime-commit validation focused on current state/new artifacts and reserving full historical audits for contract/schema changes.
+4. After P1 is stable, plan the code/state branch split and private-repository security boundary without changing the one-worker production invariant.
+
 1. Validate the first production shift under shift-policy v2: confirm the worker continues through directly actionable next blockers, uses the evidence-acquisition ladder before BLOCKED, and emits a valid stop record for OTK.
 1. Continue Variant C-5 proof: :24 already successfully performed OTK -> next worker. Verify later generic ticks do not replace an active worker, and verify manager+worker concurrency when management attention exists.
 2. If the generic dispatcher proves unreliable, roll back to documented Variant A without reverting project state.

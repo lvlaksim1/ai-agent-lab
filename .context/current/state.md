@@ -286,3 +286,19 @@ This is now fixed:
 - stale recovery can deterministically rediscover the immutable start report and its creation commit if the worker dies in the narrow gap between publishing that file and linking it into state.
 
 Final Runtime Check and stale-worker recovery workflow after the policy migration are green.
+
+
+## P0 control-plane stabilization — 2026-09-19
+
+An architectural audit found that Agent Runtime Check mixed current policy enforcement with retroactive validation of immutable historical reports. It also exposed a real current defect: shifts 57 and 58 used Markdown heading-style start reports instead of the literal Reporting v2 field contract.
+
+P0 stabilization was implemented in authoritative runtime commit `3acdc72905d024d525ff63bdc1fbe0f09d425217`:
+- new machine report contract and deterministic render helpers in `tools/agent-report-contract.mjs`;
+- contract tests in `tests/agent-report-contract.test.mjs`;
+- live validator now checks newly added reports and the active production start report, not the entire immutable archive on every heartbeat;
+- separate non-retroactive `Agent History Audit` reports historical shape drift without rewriting history;
+- current state/event/done JSON schemas were synchronized with the actual runtime shape;
+- worker workflow now has a mandatory start-report contract/CI barrier before substantive target-repository work;
+- immutable legacy reports remain unchanged.
+
+Both `Agent Runtime Check` and `Agent History Audit` passed on the authoritative P0 commit.
