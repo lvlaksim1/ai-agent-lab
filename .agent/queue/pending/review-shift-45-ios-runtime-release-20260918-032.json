@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-45-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-19T04:46:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "ivanych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "shift_number": 45,
+  "shift_started_at_utc": "2026-09-19T04:36:08Z",
+  "shift_completed_at_utc": "2026-09-19T04:37:18Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "a8cbcee8fc1c5590dc7f3fa5d951bc91a2867012",
+    "recovery_anchor_commit": "cb5a12b6ff645a768bce7aa767d06bd25a7028f2",
+    "start_report_path": ".agent/reports/starts/shift-45-ivanych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-45-ivanych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "4c4865919efe29db206b4f7c351b75484b587826",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-19T04:37:18Z",
+      "heartbeat_stale_at_utc": "2026-09-19T04:40:18Z",
+      "heartbeat_anchor_commit": "a8cbcee8fc1c5590dc7f3fa5d951bc91a2867012",
+      "recovery_observed_at_utc": "2026-09-19T04:46:01Z",
+      "recovery_anchor_commit": "cb5a12b6ff645a768bce7aa767d06bd25a7028f2",
+      "fenced_generation": 47,
+      "activity_kind": "working",
+      "activity_detail": "Verified helper/main wiring gap and corrected inherited serializer assumption; preparing minimal source/rebuilt NXSB emission edit."
+    }
+  }
+}
