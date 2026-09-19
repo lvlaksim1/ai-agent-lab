@@ -1,31 +1,31 @@
 Проект: iOS-Research-Runtime
-Работник: Саныч
-Смена: №34
-Начало смены: 19.09.2026 03:01:55 МСК
-Конец смены: 19.09.2026 03:04:15 МСК
+Работник: Михалыч
+Смена: №35
+Начало смены: 19.09.2026 03:47:30 МСК
+Конец смены: 19.09.2026 03:49:00 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Саныч планировал перенести source/rebuilt NXSB-телеметрию на правильный decoded APFS layer внутри ios-ramdisk-tool, затем провести обязательные gates и exact Windows E2E и только по доказанному metadata-различию рассматривать минимальную правку writer.
+Михалыч планировал реализовать read-only source/rebuilt NXSB snapshots в decoded ios-ramdisk-tool слое, вывести их в E2E evidence и получить причинный structural diff до любых изменений APFS writer.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Он повторно проверил контракт disk.OpenWithOffset и зафиксировал точные точки чтения: source NXSB через decoded reader по offset + 32, rebuilt bare staging по 32 после CreateContainer и rawFile.Sync(). Также определён компактный стабильный набор NXSB/checkpoint полей для будущей пары evidence records. Writer semantics не менялись.
+До потери runtime он зафиксировал и перепроверил точки чтения: source NXSB через decoded disk.OpenWithOffset по offset+32, rebuilt bare staging — по 32 после CreateContainer/Sync. Реализация evidence channel и новый E2E в этой смене не подтверждены.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Последний heartbeat подтверждён GitHub commit time 00:04:15Z. Recovery guard сработал в 00:10:01Z, то есть после stale boundary 00:07:15Z, и fenced старое выполнение. Техническая граница измерения подтверждена; сама реализация evidence channel и exact E2E ещё не выполнены.
+Runtime loss подтверждён независимыми GitHub time anchors. Последний heartbeat работника — 00:49:00Z, stale boundary — 00:52:00Z, recovery guard сработал позже, в 00:58:01Z. Спекулятивных изменений writer не сделано.
 
 ГДЕ ОСТАНОВИЛСЯ:
-Runtime исчез после сохранения checkpoint с точными decoded-reader offsets и перечнем evidence fields, непосредственно перед реализацией инструментации.
+На подготовленной границе реализации decoded source/rebuilt NXSB evidence; следующий технический шаг уже был определён, но до изменения target-кода runtime не дожил.
 
 СЛЕДУЮЩЕМУ:
-Реализовать read-only source/rebuilt NXSB snapshots внутри ios-ramdisk-tool, подключить их к E2E evidence, затем убрать/bypass старый raw-DMG C# pre-provision read и пройти mandatory gates + exact Windows E2E. До доказанного причинного metadata mismatch APFS writer не менять.
+Реализовать минимальный read-only NXSB evidence channel в ios-ramdisk-tool, провести обязательные gates и exact Windows E2E, затем сравнить первое причинно значимое несовместимое поле. Writer менять только после доказательства.
 
 Оценка ОТК:
-Прогресс: 1/4
-Инженерное качество: 3/3
+Прогресс: 0/4
+Инженерное качество: 2/3
 Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
-Итого: 7/10 — APPROVED
-Рейтинг: 1140 (+20)
+Итого: 5/10 — APPROVED
+Рейтинг: 1150 (+0)
