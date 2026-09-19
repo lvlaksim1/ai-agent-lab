@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-36-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-19T01:10:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "borisych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "shift_number": 36,
+  "shift_started_at_utc": "2026-09-19T01:05:32Z",
+  "shift_completed_at_utc": "2026-09-19T01:06:15Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "724ca6464353abebd080873c492f3197d1e7ea38",
+    "recovery_anchor_commit": "f71077cfef82428a35ee4f24390e8e103a7871f4",
+    "start_report_path": ".agent/reports/starts/shift-36-borisych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-36-borisych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "10f831b1efbaa613c0d3ed8bc85de3e5993caf36",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-19T01:06:15Z",
+      "heartbeat_stale_at_utc": "2026-09-19T01:09:15Z",
+      "heartbeat_anchor_commit": "724ca6464353abebd080873c492f3197d1e7ea38",
+      "recovery_observed_at_utc": "2026-09-19T01:10:01Z",
+      "recovery_anchor_commit": "f71077cfef82428a35ee4f24390e8e103a7871f4",
+      "fenced_generation": 21,
+      "activity_kind": "working",
+      "activity_detail": "Start report persisted; target main.go inspected and decoded NXSB implementation boundary confirmed; wiring implementation is next."
+    }
+  }
+}
