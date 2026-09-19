@@ -1,12 +1,1 @@
-{
-  "schema_version": 1,
-  "sequence": 110,
-  "purpose": "heartbeat",
-  "role": "otk",
-  "worker_id": "otk",
-  "object_id": "ios-research-runtime",
-  "active_event": "review-shift-55-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Verified runtime-loss anchors, published shift 55 OTK verdict/report, and advanced brigade rotation; persisting object and management signals.",
-  "fence_generation": 76
-}
+{"schema_version":1,"sequence":111,"purpose":"lease_claim","role":"production","worker_id":"palych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"starting","activity_detail":"Claiming production shift 56 to persist the already-localized decoded source/rebuilt NXSB wiring per DIR-013.","fence_generation":77}
