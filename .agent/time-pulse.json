@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 179,
+  "sequence": 180,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "palych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-71-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of recovered shift 71.",
-  "fence_generation": 121
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Shift 72 claim; continuing DIR-018 mutation-first path after OTK shift 71.",
+  "fence_generation": 122
 }
