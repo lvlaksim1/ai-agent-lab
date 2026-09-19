@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 192,
-  "purpose": "lease_claim",
+  "sequence": 193,
+  "purpose": "heartbeat_refresh",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 75 under DIR-019 before canonical start report and target-first snapshot mutation.",
+  "activity_kind": "working",
+  "activity_detail": "Shift 75 report gate SUCCESS; executing DIR-019 bounded target-first snapshot preservation write.",
   "fence_generation": 131
 }
