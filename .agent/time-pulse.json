@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 196,
+  "sequence": 197,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "borisych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-75-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of shift 75 runtime-loss recovery.",
-  "fence_generation": 133
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 76 for DIR-020 deterministic whole-file CAS snapshot mutation.",
+  "fence_generation": 134
 }
