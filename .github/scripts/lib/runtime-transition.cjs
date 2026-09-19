@@ -1,5 +1,7 @@
 "use strict";
 
+const { validateOtkReportV2 } = require("./report-contract.cjs");
+
 function makePlan(kind, changes, meta = {}) {
   const ordered = {};
   for (const path of Object.keys(changes).sort()) ordered[path] = changes[path];
@@ -250,6 +252,11 @@ function planOtkFinalize({
   if (!["none","incremental","substantial","milestone"].includes(decision.progressClass)) throw new Error("invalid progress class");
   if (typeof decision.reviewContent !== "string" || !decision.reviewContent.trim()) throw new Error("reviewContent is required");
   if (typeof decision.otkReportContent !== "string" || !decision.otkReportContent.trim()) throw new Error("otkReportContent is required");
+  const reportErrors = validateOtkReportV2(decision.otkReportContent, "OTK finalize report");
+  if (reportErrors.length) throw new Error("invalid OTK report contract: " + reportErrors.join("; "));
+  if (!decision.otkReportContent.includes("Смена: №" + reviewEvent.shift_number)) {
+    throw new Error("invalid OTK report contract: shift number does not match review event");
+  }
   if (brigade.shift_counter + 1 !== reviewEvent.shift_number) throw new Error("OTK review must advance exactly the next brigade shift");
 
   const workerIndex = brigade.members.findIndex((member) => member.id === reviewEvent.worker_id);

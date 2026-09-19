@@ -150,6 +150,26 @@ assert.equal(otkFinalize.changes[".agent/queue/done/review-shift-42-event-1.json
 assert.ok(otkFinalize.changes[".agent/reports/otk/shift-42-review-shift-42-event-1.md"]);
 assert.ok(otkFinalize.changes[".agent/queue/pending/event-1.json"]);
 assert.equal(Object.keys(otkFinalize.changes).length >= 10,true,"OTK finalize should collapse all bookkeeping into one transition plan");
+assert.throws(
+  () => planOtkFinalize({
+    currentState: otkProcessing,
+    reviewEvent,
+    wake:{...wake,pending:true},
+    brigade:brigadeBefore,
+    objectState:{},
+    managementState:{},
+    managementWake:{},
+    decision:{
+      verdict:"APPROVED",
+      score:10,
+      progressClass:"substantial",
+      reviewContent:"# review\n",
+      otkReportContent:"Проект: X\nРаботник: Петрович\nСмена: №42\n"
+    }
+  }),
+  /invalid OTK report contract/,
+  "atomic OTK finalize must reject malformed immutable report before CAS planning"
+);
 
 const immutable = planImmutableCreate({ path:".agent/reports/starts/x.md", content:"abc\n", existingContent:null });
 assert.equal(immutable.duplicate, false);
