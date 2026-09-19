@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-37-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-19T01:58:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "ivanych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "shift_number": 37,
+  "shift_started_at_utc": "2026-09-19T01:50:45Z",
+  "shift_completed_at_utc": "2026-09-19T01:53:42Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "670202e44c99b96e607cb25367b3838aba1c02b1",
+    "recovery_anchor_commit": "883fe526910376f297ffd3e6dadaaec434a81fb5",
+    "start_report_path": ".agent/reports/starts/shift-37-ivanych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-37-ivanych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "cf36222c7f3292afdd75b8b3af5435ea2b2d5f25",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-19T01:53:42Z",
+      "heartbeat_stale_at_utc": "2026-09-19T01:56:42Z",
+      "heartbeat_anchor_commit": "670202e44c99b96e607cb25367b3838aba1c02b1",
+      "recovery_observed_at_utc": "2026-09-19T01:58:01Z",
+      "recovery_anchor_commit": "883fe526910376f297ffd3e6dadaaec434a81fb5",
+      "fenced_generation": 23,
+      "activity_kind": "external_wait",
+      "activity_detail": "Checkpoint persisted after NXSB reader/tests; Ramdisk Tool Windows run 35413998505 remains active with build in progress."
+    }
+  }
+}
