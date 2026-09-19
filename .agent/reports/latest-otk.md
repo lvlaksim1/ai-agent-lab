@@ -1,23 +1,7 @@
 Проект: iOS-Research-Runtime
-Работник: Михалыч
-Смена: №59
-ОТК: независимая проверка
+Работник: Борисыч
+Смена: №60
+ОТК: APPROVED — 6/10
+Прогресс: none
 
-ЧТО ПЛАНИРОВАЛ:
-Exact Windows E2E на уже подтверждённом decoded NXSB evidence path без повторного wiring.
-
-ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Стартовый доклад опубликован, но обязательный Agent Runtime Check завершился FAILURE до target work. Target repository не изменялся.
-
-ЧТО ПОДТВЕРЖДЕНО:
-Heartbeat 16:16:36 МСК; stale 16:19:36; recovery/fencing 16:22:01. Runtime loss валиден.
-
-ГДЕ ОСТАНОВИЛСЯ:
-На control-plane barrier.
-
-СЛЕДУЮЩЕМУ:
-DIR-016: bounded repair Agent Runtime Check, затем exact Windows E2E; APFS writer заморожен до causal evidence.
-
-ОЦЕНКА: 0/4 + 2/3 + 2/2 + 1/1 = 5/10
-Вердикт: APPROVED
-Рейтинг: 1150 (+0)
+Runtime loss подтверждён: heartbeat 17:01:03 МСК, stale boundary 17:04:03 МСК, recovery 17:10:01 МСК. Стартовый план DIR-016 корректен; target mutation до потери runtime не было. Следующему: продолжить bounded control-plane recovery, не трогая iOS-Research-Runtime до SUCCESS обязательного gate.
