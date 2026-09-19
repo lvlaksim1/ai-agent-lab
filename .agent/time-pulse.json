@@ -1,12 +1,3 @@
 {
-  "schema_version": 1,
-  "sequence": 31,
-  "purpose": "heartbeat",
-  "role": "production",
-  "worker_id": "ivanych",
-  "object_id": "ios-research-runtime",
-  "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Verified exact OpenWithOffset contract and NXSB field offsets; selecting minimal wiring path without writer changes.",
-  "fence_generation": 22
+  "schema_version":1,"sequence":32,"purpose":"heartbeat","role":"production","worker_id":"ivanych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"external_wait","activity_detail":"Ramdisk Tool Windows run 35413998505 is in progress; Setup Go active, test/build steps pending.","fence_generation":22
 }
