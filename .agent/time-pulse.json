@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 173,
-  "purpose": "lease_claim",
+  "sequence": 174,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 70 for DIR-017 bounded snapshot-preservation mutation.",
-  "fence_generation": 117
+  "activity_kind": "blocked",
+  "activity_detail": "Start-report contract gate failed because immutable shift-70 report lacks required v2 literal markers; target mutation remains forbidden.",
+  "fence_generation": 118
 }
