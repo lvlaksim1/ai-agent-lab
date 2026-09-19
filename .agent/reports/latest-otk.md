@@ -1,31 +1,31 @@
 Проект: iOS-Research-Runtime
-Работник: Иваныч
-Смена: №37
-Начало смены: 19.09.2026 04:50:45 МСК
-Конец смены: 19.09.2026 04:53:42 МСК
+Работник: Федорыч
+Смена: №38
+Начало смены: 19.09.2026 05:04:20 МСК
+Конец смены: 19.09.2026 05:05:17 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Реализовать минимальный read-only decoded source/rebuilt NXSB evidence channel, не меняя APFS writer до причинного mismatch.
+Федорыч планировал подключить уже проверенный decoded NXSB reader к source DMG и rebuilt bare staging, вывести обе структуры в E2E evidence, затем убрать прежний wrong-layer C# abort и прогнать обязательные gates и exact Windows E2E. Writer разрешалось менять только после доказанного mismatch.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Добавлен decoded-layer NXSB reader через disk.OpenWithOffset и точечные тесты container-relative offset/отбраковки неправильного слоя. Writer semantics не менялись.
+Успел повторно проверить текущую границу wiring в `ios-ramdisk-tool` и сохранить технический checkpoint. Целевой код в этой смене не изменялся; APFS writer не трогался.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Ramdisk Tool Windows run 35413998505 завершился SUCCESS на commit 5d261300c30c42a9c64a82299d145211c04778f7. Runtime loss подтверждён GitHub-якорями: heartbeat 01:53:42Z, stale 01:56:42Z, recovery 01:58:01Z.
+Runtime loss подтверждён независимыми GitHub-якорями: последний heartbeat 02:05:17 UTC, stale boundary 02:08:17 UTC, recovery guard 02:10:01 UTC. Последний heartbeat фиксирует конкретный следующий шаг — target wiring edit.
 
 ГДЕ ОСТАНОВИЛСЯ:
-Во время ожидания CI после реализации core reader; source/rebuilt snapshots ещё не протянуты в полный E2E evidence path.
+На точной границе перед подключением source/rebuilt NXSB snapshots в production flow. Нового кода или нового E2E evidence за смену получить не успел.
 
 СЛЕДУЮЩЕМУ:
-Протянуть reader в source и rebuilt snapshots, заменить/обойти старый C# raw-DMG scan после появления нового evidence path, затем выполнить обязательные gates и exact Windows E2E. Writer менять только по доказанному mismatch.
+Не повторять разведку. Подключить `readSourceNXSnapshot`/`readNXSnapshot` к source DMG и rebuilt bare staging после `rawFile.Sync()`, вывести стабильные snapshots, затем заменить/обойти raw-DMG C# pre-provision scan и прогнать обязательные gates плюс exact Windows E2E. Writer не менять без конкретного причинного mismatch.
 
 Оценка ОТК:
-Прогресс: 3/4
-Инженерное качество: 3/3
+Прогресс: 0/4
+Инженерное качество: 2/3
 Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
-Итого: 9/10 — APPROVED
-Рейтинг: 1150 (+40)
+Итого: 5/10 — APPROVED
+Рейтинг: 1100 (+0)
