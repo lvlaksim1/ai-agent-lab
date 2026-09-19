@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { validateStartReportV2, validateOtkReportV2 } from "./agent-report-contract.mjs";
 
 const root = process.cwd();
 
@@ -19,6 +20,20 @@ function check(condition, message) {
 
 function git(args) {
   return execFileSync("git", args, { cwd: root, encoding: "utf8" }).trim();
+}
+
+function addedPathsInHead(prefix) {
+  try {
+    const out = git(["diff-tree", "--root", "--no-commit-id", "--name-only", "--diff-filter=A", "-r", "HEAD", "--", prefix]);
+    return out ? out.split("\n").filter((item) => item.startsWith(prefix)) : [];
+  } catch {
+    fail("unable to resolve newly added paths for " + prefix);
+    return [];
+  }
+}
+
+function applyReportErrors(errors) {
+  for (const error of errors) fail(error);
 }
 
 function verifyCommitChangedPath(commitSha, expectedPath, label) {
@@ -135,6 +150,10 @@ if (state.status === "idle") {
         check(state.shift_start_report_path.startsWith(".agent/reports/starts/"), "active production start report must be under .agent/reports/starts/");
         check(fs.existsSync(path.join(root, state.shift_start_report_path)), "active production start report must exist");
         verifyCommitChangedPath(state.shift_start_report_commit, state.shift_start_report_path, "active production start report");
+        if (fs.existsSync(path.join(root, state.shift_start_report_path))) {
+          const activeStartBody = fs.readFileSync(path.join(root, state.shift_start_report_path), "utf8");
+          applyReportErrors(validateStartReportV2(activeStartBody, state.shift_start_report_path));
+        }
       }
     }
     check(state.heartbeat.time_source === "github_commit_committer_date", "heartbeat time_source must be github_commit_committer_date");
@@ -475,31 +494,16 @@ if (fs.existsSync(reportPath)) {
   check(legacy || otkV2, "latest human report must be legacy report or independent OTK v2 report");
 }
 
-const startsDir = path.join(root, ".agent/reports/starts");
-if (fs.existsSync(startsDir)) {
-  for (const name of fs.readdirSync(startsDir).filter((name) => name.endsWith(".md"))) {
-    const body = fs.readFileSync(path.join(startsDir, name), "utf8");
-    for (const marker of ["Проект:", "Работник:", "Смена:", "Начало смены:", "СТАРТОВЫЙ ДОКЛАД:", "ОЦЕНКА ПРЕДШЕСТВЕННИКА:", "МОЙ ПЛАН:"]) {
-      check(body.includes(marker), ".agent/reports/starts/" + name + " missing marker: " + marker);
-    }
-    check(!body.includes("ЧТО ПОЛУЧИЛОСЬ:"), ".agent/reports/starts/" + name + " must not contain end-of-shift result");
-    check(!body.includes("Оценка ОТК:"), ".agent/reports/starts/" + name + " must not contain OTK score");
-  }
+const newlyAddedStartReports = addedPathsInHead(".agent/reports/starts/").filter((name) => name.endsWith(".md"));
+for (const rel of newlyAddedStartReports) {
+  const body = fs.readFileSync(path.join(root, rel), "utf8");
+  applyReportErrors(validateStartReportV2(body, rel));
 }
 
-const otkReportsDir = path.join(root, ".agent/reports/otk");
-if (fs.existsSync(otkReportsDir)) {
-  for (const name of fs.readdirSync(otkReportsDir).filter((name) => name.endsWith(".md"))) {
-    const body = fs.readFileSync(path.join(otkReportsDir, name), "utf8");
-    for (const marker of [
-      "Проект:", "Работник:", "Смена:", "Начало смены:", "Конец смены:", "Причина завершения:",
-      "ЗАКЛЮЧЕНИЕ ОТК:", "ЧТО ПЛАНИРОВАЛ:", "ЧТО ФАКТИЧЕСКИ СДЕЛАНО:", "ЧТО ПОДТВЕРЖДЕНО:",
-      "ГДЕ ОСТАНОВИЛСЯ:", "СЛЕДУЮЩЕМУ:", "Оценка ОТК:", "Прогресс:", "Инженерное качество:",
-      "Эффективность/фокус:", "Стартовая оценка и план:", "Итого:", "Рейтинг:"
-    ]) {
-      check(body.includes(marker), ".agent/reports/otk/" + name + " missing marker: " + marker);
-    }
-  }
+const newlyAddedOtkReports = addedPathsInHead(".agent/reports/otk/").filter((name) => name.endsWith(".md"));
+for (const rel of newlyAddedOtkReports) {
+  const body = fs.readFileSync(path.join(root, rel), "utf8");
+  applyReportErrors(validateOtkReportV2(body, rel));
 }
 
 if (!process.exitCode) {
