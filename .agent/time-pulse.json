@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 163,
-  "purpose": "lease_claim",
+  "sequence": 164,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 67 for DIR-017 mutation-first snapshot preservation.",
+  "activity_kind": "working",
+  "activity_detail": "Start-report gate passed; checkpointed exact target blob and proceeding directly to DIR-017 mutation-first milestone.",
   "fence_generation": 109
 }
