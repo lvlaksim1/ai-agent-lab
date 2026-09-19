@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-52-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-19T09:22:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "borisych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "shift_number": 52,
+  "shift_started_at_utc": "2026-09-19T09:13:00Z",
+  "shift_completed_at_utc": "2026-09-19T09:16:00Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "9014869f4d315af20ae4070bc16cf08336a5a376",
+    "recovery_anchor_commit": "bf5e5d6ffe84d54f720a1d68dad39993080c302d",
+    "start_report_path": ".agent/reports/starts/shift-52-borisych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-52-borisych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "41b3397827f0cb891f683f89bb31a0307425631a",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-19T09:16:00Z",
+      "heartbeat_stale_at_utc": "2026-09-19T09:19:00Z",
+      "heartbeat_anchor_commit": "9014869f4d315af20ae4070bc16cf08336a5a376",
+      "recovery_observed_at_utc": "2026-09-19T09:22:01Z",
+      "recovery_anchor_commit": "bf5e5d6ffe84d54f720a1d68dad39993080c302d",
+      "fenced_generation": 67,
+      "activity_kind": "working",
+      "activity_detail": "Bounded NXSB evidence mutation persisted at target commit a71c2af2 and checkpoint b936bfcf; now wiring helper into rebuild flow and evidence-output CLI."
+    }
+  }
+}
