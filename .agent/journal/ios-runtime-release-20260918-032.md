@@ -32,3 +32,9 @@
 - Re-read target `tools/ios-ramdisk-tool/main.go`: `CreateOptions` still leaves `Snapshots` empty. No target mutation has yet occurred in shift 71.
 - Re-verified pinned upstream go-apfs-v2 API at commit `36ec4f53a3fecc5692eb6bf85f399a48729a77f1`: `Volume.NumberOfSnapshots()`, `Volume.Snapshot(index)`, `Snapshot.UTF8Name()`, `Snapshot.SnapshotMetadata.ChangeTime/CreationTime`, and `apfswrite.SnapshotSpec{Name string, ModTime time.Time}` are exact available APIs.
 - Immediate next action remains the bounded edit only: enumerate source snapshots, derive ModTime from ChangeTime with CreationTime fallback, assign `createOpts.Snapshots`, commit target, then checkpoint exact target SHA before tests/gate/E2E.
+
+## Shift 75 — Михалыч — checkpoint
+- Canonical immutable start report commit `889861fac1487f8eaa3439ebd29676dc426f2dcd` passed the exact report-commit validation checks SUCCESS before target work.
+- DIR-019 target-first boundary was re-read without architecture/API rediscovery: target `tools/ios-ramdisk-tool/main.go` blob is `502659e5a7f0b1a5a0a46374be2a6abd3cef3270`; `CreateOptions` still leaves `Snapshots` empty immediately before `CreateContainer`.
+- The GitHub connector available in this execution exposes whole-file replacement for existing files but no bounded patch operation. The target blob was fetched intact; applying only a partial replacement would truncate the file and is forbidden. No target write was attempted, so target remains unchanged.
+- Exact required edit remains unchanged: enumerate `volume.NumberOfSnapshots()`, read each `volume.Snapshot(i)`, use `UTF8Name()`, choose `SnapshotMetadata.ChangeTime` with `CreationTime` fallback when zero, append `apfswrite.SnapshotSpec{Name: name, ModTime: time.Unix(0, int64(modTime))}`, and assign the slice to `createOpts.Snapshots` before `CreateContainer`.
