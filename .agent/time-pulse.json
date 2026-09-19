@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 197,
-  "purpose": "lease_claim",
+  "sequence": 198,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 76 for DIR-020 deterministic whole-file CAS snapshot mutation.",
+  "activity_kind": "blocked_control_plane",
+  "activity_detail": "Immutable shift 76 start report fails Reporting v2 literal marker contract; target work remains forbidden.",
   "fence_generation": 134
 }
