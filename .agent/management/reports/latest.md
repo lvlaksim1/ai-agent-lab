@@ -1,31 +1,29 @@
-# Начальник участка — обзор DEC-033
+# Начальник участка — обзор DEC-034
 
 **Объект:** `ios-research-runtime`  
-**Решение:** `STOP_AND_REPAIR_CONTROL_PLANE`  
+**Решение:** `KEEP_CONTROL_PLANE_STOP`  
 **Здоровье:** `RED`
 
 ## Обстановка
 
-Продуктовый курс не сломался: decoded source/rebuilt NXSB evidence уже проведён end-to-end, а следующий доказанный шаг остаётся exact Windows E2E. Но смена №59 не смогла законно перейти к target-работе: `Agent Runtime Check` упал уже на commit нормального production lease claim, а затем снова на immutable start-report commit. Предыдущий idle OTK-finalized state этот же gate проходил.
-
-Сам стартовый доклад смены №59 содержит все обязательные literal markers v2, поэтому evidence не поддерживает гипотезу о простой ошибке формата доклада. Граница дефекта — orchestration transition из валидного idle state в production processing claim.
+Производство сейчас `idle`; нового работника материализовывать нельзя. После DEC-033 новых доказательств, позволяющих безопасно снять STOP, не появилось. Блокер остаётся в control plane: `Agent Runtime Check` не принимает нормальный production processing claim до начала target-работы. Продуктовый continuation сохранён: после восстановления orchestration gate работа должна вернуться к exact Windows E2E на уже подключённом decoded source/rebuilt NXSB evidence path.
 
 ## Управленческое решение
 
-Новые production shifts остановлены. `DIR-015` запрещает обходить, ослаблять или отключать runtime/report/heartbeat/lease gates и запрещает переписывать immutable start report. После восстановления control plane продуктовая работа возвращается ровно к exact Windows E2E; APFS writer остаётся заморожен до causal structural evidence.
+Сохраняю `DIR-015`, `stop_production=true` и запрет на ослабление runtime/report/heartbeat/lease/fencing invariants. Новую продуктовую смену не запускать до разрешения владельца и последующей успешной проверки неизменённого gate.
 
 ## Что требуется от владельца
 
-Разрешить отдельное исправление control-plane/runtime-инварианта в `lvlaksim1/ai-agent-lab`, после чего автоматически возобновить производство на сохранённом продуктовым маршруте.
+Разрешить отдельное исправление control-plane `Agent Runtime Check` в `lvlaksim1/ai-agent-lab` без ослабления инвариантов и после успешной проверки автоматически возобновить производство.
 
 ## Зачем это нужно
 
-Production protocol не разрешает target-repository работу, пока `Agent Runtime Check` для production claim/start-report boundary не проходит. После исправления gate следующая смена сможет продолжить exact Windows E2E без повторения уже завершённой NXSB локализации.
+Без этого разрешения начальник участка не должен самостоятельно менять управляющий контур. После разрешения можно локализовать и исправить regression, доказать прохождение обычного production claim через тот же gate и затем вернуть бригаду к сохранённому exact Windows E2E без повторного NXSB-исследования.
 
 ## Варианты ответа
 
-1. **Рекомендуемый:** `Разрешаю исправить control-plane Agent Runtime Check в ai-agent-lab без ослабления инвариантов и после успешной проверки возобновить производство.` — разрешает локализовать и исправить orchestration regression, проверить неизменённый gate и затем автоматически снять STOP.
-2. `Оставить производство остановленным. Control plane пока не менять.` — объект остаётся законсервирован на текущем доказанном product continuation; новые смены не запускаются.
+1. **Рекомендуемый:** `Разрешаю исправить control-plane Agent Runtime Check в ai-agent-lab без ослабления инвариантов и после успешной проверки возобновить производство.` — разрешает ремонт управляющего контура; после успешной проверки производство сможет возобновиться автоматически.
+2. `Оставить производство остановленным. Control plane пока не менять.` — никаких изменений управляющего контура; объект остаётся остановлен на сохранённом continuation.
 
-**Decision:** `DEC-033`.  
+**Decision:** `DEC-034`.  
 **Directive:** `DIR-015`.
