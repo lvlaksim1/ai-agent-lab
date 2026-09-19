@@ -1,26 +1,26 @@
 Проект: iOS-Research-Runtime
-Работник: Федорыч
-Смена: №46
-Начало смены: 19.09.2026 08:24:58 МСК
-Конец смены: 19.09.2026 08:25:59 МСК
+Работник: Кузьмич
+Смена: №47
+Начало смены: 19.09.2026 08:48:31 МСК
+Последний подтверждённый момент работы: 19.09.2026 08:49:25 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Подключить decoded source NXSB и rebuilt staging NXSB snapshots, добавить детерминированный evidence record, затем убрать неверный raw-DMG abort и пройти Windows gates/exact E2E; APFS writer менять только после доказанного structural mismatch.
+Подключить decoded source/rebuilt NXSB evidence к реальному rebuild flow, затем убрать wrong-layer C# abort и довести Windows gates/exact E2E до terminal результата. APFS writer — только после доказанного mismatch.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Федорыч повторно проверил точную границу main/helper wiring и зафиксировал минимальный вариант детерминированного NXSB evidence edit. До изменения целевого репозитория исполнение было потеряно.
+Опубликован стартовый доклад и повторно проверены точные точки wiring в main.go/apfs_evidence.go. До target edit runtime оборвался; нового target commit, CI или E2E evidence за смену нет.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Последний heartbeat GitHub подтверждён в 08:25:59 МСК, stale boundary наступил в 08:28:59, recovery guard сработал в 08:34:02 и fenced старое исполнение. Target mutation, CI/E2E и изменение APFS writer в этой смене не подтверждены.
+Heartbeat 05:49:25Z, stale boundary 05:52:25Z, recovery guard 05:58:02Z; потерянное исполнение fenced. Writer semantics и proof gates не менялись.
 
 ГДЕ ОСТАНОВИЛСЯ:
-На подготовке target mutation после проверки точной точки подключения source/rebuilt NXSB evidence.
+На подготовке минимального wiring decoded source/rebuilt NXSB evidence.
 
 СЛЕДУЮЩЕМУ:
-Не повторять локализацию. Сразу внести минимальное source-before-rebuild + rebuilt-after-Sync wiring с детерминированной выдачей evidence, затем заменить wrong-layer C# abort и пройти обязательные Windows gates/exact E2E. Writer не менять без причинного structural evidence.
+Не повторять локализацию. Реализовать source/rebuilt wiring и детерминированную выдачу evidence, затем заменить неверный raw-DMG C# abort и выполнить Windows gates/exact E2E. Writer менять только по причинному structural diff.
 
 Оценка ОТК:
 Прогресс: 0/4
@@ -28,4 +28,4 @@
 Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
 Итого: 5/10 — APPROVED
-Рейтинг: 1100 (+0)
+Рейтинг: 1170 (+0)
