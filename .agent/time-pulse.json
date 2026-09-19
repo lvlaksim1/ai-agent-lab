@@ -1,12 +1,1 @@
-{
-  "schema_version": 1,
-  "sequence": 113,
-  "purpose": "stale_recovery_probe",
-  "role": "production",
-  "worker_id": "palych",
-  "object_id": "ios-research-runtime",
-  "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "recovery_probe",
-  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
-  "fence_generation": 77
-}
+{"schema_version":1,"sequence":114,"purpose":"lease_claim","role":"otk","worker_id":"otk","object_id":"ios-research-runtime","active_event":"review-shift-56-ios-runtime-release-20260918-032","activity_kind":"otk_review","activity_detail":"Claiming independent OTK review of recovered shift 56.","fence_generation":78}
