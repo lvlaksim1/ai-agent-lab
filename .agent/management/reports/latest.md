@@ -1,20 +1,31 @@
-# Начальник участка — обзор DEC-032
+# Начальник участка — обзор DEC-033
 
 **Объект:** `ios-research-runtime`  
-**Решение:** `KEEP_COURSE`  
-**Здоровье:** `ORANGE`
+**Решение:** `STOP_AND_REPAIR_CONTROL_PLANE`  
+**Здоровье:** `RED`
 
 ## Обстановка
 
-Производство `idle` / `NO_WORKER`. ОТК закрыл смену №57 `APPROVED 6/10`; подтверждённого target-прогресса снова нет, и серия достигла пяти смен. При этом смена №57 сняла последнюю практическую неопределённость DIR-014: найден authoritative target `tools/ios-ramdisk-tool/main.go`, получен полный файл без усечения (19,847 bytes), сохранён exact blob SHA `2aa440e1`. Runtime закончился уже при подготовке bounded CAS edit, до записи target.
+Продуктовый курс не сломался: decoded source/rebuilt NXSB evidence уже проведён end-to-end, а следующий доказанный шаг остаётся exact Windows E2E. Но смена №59 не смогла законно перейти к target-работе: `Agent Runtime Check` упал уже на commit нормального production lease claim, а затем снова на immutable start-report commit. Предыдущий idle OTK-finalized state этот же gate проходил.
+
+Сам стартовый доклад смены №59 содержит все обязательные literal markers v2, поэтому evidence не поддерживает гипотезу о простой ошибке формата доклада. Граница дефекта — orchestration transition из валидного idle state в production processing claim.
 
 ## Управленческое решение
 
-Новый технический курс сейчас не нужен: `DIR-014` остаётся активной без замены. Следующая смена начинает непосредственно с доказанного full-file/blob-SHA CAS маршрута, сохраняет уже локализованный NXSB wiring и немедленно делает checkpoint. Повторять NXSB/APFS анализ или искать ещё один способ записи до этой попытки запрещено действующей директивой.
+Новые production shifts остановлены. `DIR-015` запрещает обходить, ослаблять или отключать runtime/report/heartbeat/lease gates и запрещает переписывать immutable start report. После восстановления control plane продуктовая работа возвращается ровно к exact Windows E2E; APFS writer остаётся заморожен до causal structural evidence.
 
-Если CAS update после единственного разрешённого authoritative reconcile реально откажет, смена сохраняет точную ошибку и останавливается — тогда появится доказательство для новой управленческой эскалации. При успехе — known C# abort replacement и обязательные Windows gates/exact E2E.
+## Что требуется от владельца
 
-APFS writer остаётся заморожен до причинного structural evidence. STOP, перевод объекта и решение владельца сейчас не требуются.
+Разрешить отдельное исправление control-plane/runtime-инварианта в `lvlaksim1/ai-agent-lab`, после чего автоматически возобновить производство на сохранённом продуктовым маршруте.
 
-**Decision:** `DEC-032`.  
-**Directive:** `DIR-014`.
+## Зачем это нужно
+
+Production protocol не разрешает target-repository работу, пока `Agent Runtime Check` для production claim/start-report boundary не проходит. После исправления gate следующая смена сможет продолжить exact Windows E2E без повторения уже завершённой NXSB локализации.
+
+## Варианты ответа
+
+1. **Рекомендуемый:** `Разрешаю исправить control-plane Agent Runtime Check в ai-agent-lab без ослабления инвариантов и после успешной проверки возобновить производство.` — разрешает локализовать и исправить orchestration regression, проверить неизменённый gate и затем автоматически снять STOP.
+2. `Оставить производство остановленным. Control plane пока не менять.` — объект остаётся законсервирован на текущем доказанном product continuation; новые смены не запускаются.
+
+**Decision:** `DEC-033`.  
+**Directive:** `DIR-015`.
