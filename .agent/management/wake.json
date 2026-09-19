@@ -1,1 +1,1 @@
-{"schema_version":1,"attention":true,"generation":40,"reasons":["OTK shift 74: third consecutive no-progress/runtime-loss shift; bounded DIR-018 target mutation is still not committed."],"updated_at":"2026-09-19T22:34:01Z"}
+{"schema_version":1,"attention":false,"generation":40,"reasons":[],"updated_at":"2026-09-19T22:50:02Z"}
