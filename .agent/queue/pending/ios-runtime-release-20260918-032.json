@@ -10,9 +10,9 @@
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
   "goal": "Implement read-only source/rebuilt NXSB structural snapshots at the decoded ios-ramdisk-tool / disk.OpenWithOffset layer, rerun exact Windows E2E, identify the first causally incompatible APFS metadata field, and make the smallest writer correction only if evidence supports it.",
   "constraints": ["Do not weaken proof gates or Definition of Done.","Do not make speculative APFS writer changes.","Use the evidence-acquisition ladder before declaring BLOCKED."],
-  "predecessor_review_event_id": "review-shift-33-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/review-shift-33-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-33-review-shift-33-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 33,
-  "predecessor_worker_id": "petrovich"
+  "predecessor_review_event_id": "review-shift-34-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/review-shift-34-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-34-review-shift-34-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 34,
+  "predecessor_worker_id": "sanych"
 }
