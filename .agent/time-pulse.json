@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 127,
-  "purpose": "lease_claim",
+  "sequence": 128,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 59 to run exact Windows E2E on verified decoded NXSB evidence path.",
+  "activity_kind": "blocked_control_plane",
+  "activity_detail": "Required Agent Runtime Check for immutable shift 59 start report failed; target repository remains untouched and manager attention is raised.",
   "fence_generation": 86
 }
