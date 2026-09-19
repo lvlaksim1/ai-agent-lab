@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 194,
-  "purpose": "heartbeat_refresh",
+  "sequence": 195,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Checkpointed DIR-019 exact target boundary; target unchanged because available GitHub write primitive requires safe whole-file replacement.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 131
 }
