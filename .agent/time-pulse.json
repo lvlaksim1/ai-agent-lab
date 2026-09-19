@@ -1,1 +1,12 @@
-{"schema_version":1,"sequence":103,"purpose":"heartbeat","role":"production","worker_id":"fedorych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"working","activity_detail":"Fetched current full main.go through contents route and verified writeNXEvidenceFile helper contract. Preparing minimal optional evidence-output CLI wiring immediately after rawFile.Sync(); APFS writer semantics remain untouched.","fence_generation":71}
+{
+  "schema_version": 1,
+  "sequence": 104,
+  "purpose": "stale_recovery_probe",
+  "role": "production",
+  "worker_id": "fedorych",
+  "object_id": "ios-research-runtime",
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
+  "fence_generation": 71
+}
