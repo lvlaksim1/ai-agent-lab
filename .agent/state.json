@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-19T14:01:03Z",
     "stale_at": "2026-09-19T14:04:03Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed shift 60 for DIR-016 bounded control-plane recovery; start-report barrier pending.",
+    "activity_detail": "Shift 60 immutable start report published; awaiting exact report commit Agent Runtime Check before any target work.",
     "external_wait": null,
     "source": "lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 60,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-60-borisych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "4605d9a00885e1e57dbf4f42eddadad6e34bba82",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
