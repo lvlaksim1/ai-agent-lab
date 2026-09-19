@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "sequence": 140,
+  "sequence": 141,
   "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "fedorych",
