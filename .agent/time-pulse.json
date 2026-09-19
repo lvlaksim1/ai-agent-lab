@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 174,
-  "purpose": "heartbeat",
-  "role": "production",
-  "worker_id": "fedorych",
+  "sequence": 175,
+  "purpose": "lease_claim",
+  "role": "otk",
+  "worker_id": "otk",
   "object_id": "ios-research-runtime",
-  "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "blocked",
-  "activity_detail": "Start-report contract gate failed because immutable shift-70 report lacks required v2 literal markers; target mutation remains forbidden.",
-  "fence_generation": 118
+  "active_event": "review-shift-70-ios-runtime-release-20260918-032",
+  "activity_kind": "otk_review",
+  "activity_detail": "Independent OTK review of shift 70 report-contract gate failure.",
+  "fence_generation": 119
 }
