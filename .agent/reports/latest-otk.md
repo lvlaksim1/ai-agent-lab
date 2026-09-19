@@ -1,31 +1,27 @@
 Проект: iOS-Research-Runtime
-Работник: Иваныч
-Смена: №61
-Начало смены: 19.09.2026 17:47:46 МСК
-Конец смены: 19.09.2026 17:48:27 МСК
+Работник: Федорыч
+Смена: №62
+Начало смены: 19.09.2026 18:04:48 МСК
+Конец смены: 19.09.2026 18:08:39 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Иваныч принял DIR-016: воспроизвести и локализовать дефект Agent Runtime Check на обычном production claim, не ослабляя reporting/heartbeat/lease/fencing, и считать успехом прохождение неизменённого gate эквивалентным normal production claim. Только после этого — возврат к Windows E2E.
+Подтвердить runtime gate, затем пройти exact Windows E2E и локализовать первый причинный decoded structural mismatch без спекулятивного изменения writer.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Стартовый доклад опубликован до target-работы, его обязательный Agent Runtime Check дождался terminal SUCCESS. После этого Иваныч зафиксировал переход к DIR-016 control-plane diagnosis; до изменений iOS-Research-Runtime исполнение было потеряно.
+Exact Windows E2E разобран до реального product blocker: provisioning проходит, XNU достигает APFS mountroot, rebuilt ramdisk падает error 79. Decoded NXSB сравнение показало source XID 9/nextXID 10 против rebuilt 1/2 при совпадающих UUID/features; следующий bounded lead — сохранение source snapshot history через CreateOptions.Snapshots.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Exact start-report commit прошёл Agent Runtime Check успешно. Runtime loss подтверждён независимыми GitHub time anchors: последний heartbeat 14:48:27 UTC, stale boundary 14:51:27 UTC, recovery 14:58:01 UTC. Target repository и APFS writer в смене не изменялись.
+Runtime loss подтверждён GitHub anchors; writer не менялся; structural evidence получено из decoded artifact.
 
 ГДЕ ОСТАНОВИЛСЯ:
-На последнем подтверждённом heartbeat обязательный runtime gate уже был зелёным, и worker начинал control-plane diagnosis перед любыми target mutation. Исполнение исчезло не по добровольной передаче смены.
+Перед реализацией snapshot preservation.
 
 СЛЕДУЮЩЕМУ:
-Продолжить production event и перейти к exact Windows E2E на уже подключённом decoded source/rebuilt NXSB evidence path. Если E2E упадёт — сначала сравнить source/rebuilt structural evidence; APFS writer остаётся замороженным до доказанного причинного mismatch.
+Сохранить snapshot specs, добавить focused tests, пройти Ramdisk Tool Windows gate и exact Windows E2E.
 
-Оценка ОТК:
-Прогресс: 2/4
-Инженерное качество: 2/3
-Эффективность/фокус: 2/2
-Стартовая оценка и план: 1/1
-Итого: 7/10 — APPROVED
-Рейтинг: 1170 (+20)
+Оценка компонентов: 4/4 + 3/3 + 2/2 + 1/1.
+Оценка ОТК: 10/10 — APPROVED
+Рейтинг: 1150 (+50)
