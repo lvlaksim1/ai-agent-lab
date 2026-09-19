@@ -1,15 +1,15 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-037 — KEEP_COURSE
+Решение: DEC-038 — KEEP_COURSE
 Директива: DIR-016
 Здоровье: RED
-Фаза: control-plane-recovery
+Фаза: boot-debugging
 
-ОТК смены №60 завершён: APPROVED, 6/10, подтверждён runtime loss до substantive engineering action. Целевой репозиторий iOS-Research-Runtime смена не изменяла.
+Производство idle после stale-recovery смены №64; независимый ОТК этой смены ещё ожидается. Последняя принятая смена №63 дала incremental progress: подтверждены source-snapshot APIs и bounded mapping в `CreateOptions.Snapshots`.
 
-Две подряд смены без прогресса не меняют технический курс: owner-authorized ремонт Agent Runtime Check остаётся правильным следующим действием. Следующая производственная смена должна выполнить bounded repair в ai-agent-lab/work-webhook-test и доказать прохождение эквивалентного normal production claim через неизменённый gate.
+Контрольный контур восстановлен достаточно для возврата к продуктовой работе: смена №64 прошла неизменённый `Agent Runtime Check` и дошла до bounded snapshot-preservation patch перед runtime loss. Нового противоречащего evidence нет.
 
-До этого доказательства iOS-Research-Runtime не изменять. После PASS автоматически вернуться к exact Windows E2E; APFS writer остаётся заморожен до causal structural evidence.
+Курс не меняется: сначала ОТК смены №64, затем продолжить сохранение snapshot Name/ModTime, focused tests, Windows gate и exact E2E. APFS writer не менять без causal structural evidence.
 
-Дополнительное решение владельца не требуется.
+STOP, transfer и дополнительное решение владельца не требуются.
