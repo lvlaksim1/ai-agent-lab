@@ -215,6 +215,10 @@ check(config.score_weights && config.score_weights.efficiency_focus_while_alive 
 check(config.score_weights && config.score_weights.start_assessment_and_plan_quality === 1, "score weight start assessment/plan must remain 1");
 check(config.unique_review_event_per_shift === true, "review events must remain unique per shift");
 check(config.review_event_id_pattern === "review-shift-<shift-number>-<production-event>", "review event id pattern must remain shift-unique");
+check(config.transition_engine_version === 1, "transition engine version must be 1");
+check(config.atomic_transition_commit_required === true, "deterministic runtime transitions must remain atomic");
+check(config.runtime_transition_replay_required === true, "runtime transition replay tests must remain required");
+check(config.live_validation_scope === "current-state-and-new-artifacts", "live validation scope must remain current-state-and-new-artifacts");
 check(config.work_package_policy === "causal-chain-until-natural-boundary", "work package must follow the causal chain");
 check(config.actionable_next_step_required === true, "actionable-next-step closure must remain required");
 check(config.continuation_policy === "natural-boundary-or-objective-forced-stop-only", "continuation policy must remain objective-forced-stop-only");

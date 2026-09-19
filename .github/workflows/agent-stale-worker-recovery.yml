@@ -8,6 +8,7 @@ on:
       - ".agent/state.json"
       - ".github/scripts/stale-worker-recovery.cjs"
       - ".github/scripts/stale-worker-watchdog.cjs"
+      - ".github/scripts/lib/**"
       - ".github/workflows/agent-stale-worker-recovery.yml"
 
 permissions:

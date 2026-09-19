@@ -1,5 +1,7 @@
 # Agent Runtime Protocol
 
+Read `.agent/runtime-transitions.md` for deterministic bookkeeping/CAS rules. Reasoning remains in Chat; state-machine mutations use transition plans.
+
 ## Purpose
 
 GitHub is the authoritative persistent state and message bus. Native Scheduled Chat supplies periodic clock ticks. Ordinary Chat performs reasoning.

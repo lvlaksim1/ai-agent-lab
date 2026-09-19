@@ -16,6 +16,7 @@ Read `.agent/production-topology.md` for the topology.
 Read `.agent/evidence-acquisition.md` before production work; it is authoritative for actionable-next-step and BLOCKED closure.
 Read `.agent/liveness.md`; its heartbeat contract is mandatory for every processing production/OTK lease.
 Read `.agent/emergency-recovery.md`; verified stale workers may be externally fenced by the recovery guard even while an old lease timestamp remains in the future.
+Read `.agent/runtime-transitions.md`; deterministic queue/state/wake/review bookkeeping must use snapshot-based transition plans and non-force CAS commits where implemented.
 
 ## 1. Resolve eligible work
 
