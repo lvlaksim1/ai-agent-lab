@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-46-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-19T05:34:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "fedorych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "shift_number": 46,
+  "shift_started_at_utc": "2026-09-19T05:24:58Z",
+  "shift_completed_at_utc": "2026-09-19T05:25:59Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "6dfc20bc4030487a18c200f93838a39e4b1519c1",
+    "recovery_anchor_commit": "05d0970bfd9916325bcb39624e2f72635cfc900d",
+    "start_report_path": ".agent/reports/starts/shift-46-fedorych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-46-fedorych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "456dc65f6f0f76824e8ebed17303237eaaf71317",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-19T05:25:59Z",
+      "heartbeat_stale_at_utc": "2026-09-19T05:28:59Z",
+      "heartbeat_anchor_commit": "6dfc20bc4030487a18c200f93838a39e4b1519c1",
+      "recovery_observed_at_utc": "2026-09-19T05:34:02Z",
+      "recovery_anchor_commit": "05d0970bfd9916325bcb39624e2f72635cfc900d",
+      "fenced_generation": 50,
+      "activity_kind": "working",
+      "activity_detail": "Verified exact main/helper wiring boundary and checkpointed minimal deterministic NXSB evidence edit; preparing target mutation."
+    }
+  }
+}
