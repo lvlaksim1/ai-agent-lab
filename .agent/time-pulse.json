@@ -1,1 +1,12 @@
-{"schema_version":1,"sequence":87,"purpose":"heartbeat","role":"production","worker_id":"sanych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"working","activity_detail":"Shift 50 checkpoint persisted; exact bounded wiring edit confirmed, safely acquiring complete main.go for non-truncating target replacement.","fence_generation":60}
+{
+  "schema_version": 1,
+  "sequence": 88,
+  "purpose": "stale_recovery_probe",
+  "role": "production",
+  "worker_id": "sanych",
+  "object_id": "ios-research-runtime",
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
+  "fence_generation": 60
+}
