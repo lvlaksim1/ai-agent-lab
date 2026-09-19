@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "sequence": 145,
+  "sequence": 146,
   "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "kuzmich",
