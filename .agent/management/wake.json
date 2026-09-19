@@ -1,1 +1,1 @@
-{"schema_version":1,"attention":false,"generation":31,"reasons":[],"updated_at":"2026-09-19T16:15:44Z"}
+{"schema_version":1,"attention":true,"generation":32,"reasons":["Two consecutive OTK-reviewed shifts (64 and 65) produced no confirmed target progress; both runtime losses occurred before the already-localized snapshot-preservation mutation. Manager should address repeated pre-mutation churn without weakening gates."],"updated_at":"2026-09-19T16:36:05Z"}
