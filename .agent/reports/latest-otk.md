@@ -1,31 +1,31 @@
 Проект: iOS-Research-Runtime
-Работник: Кузьмич
-Смена: №39
-Начало смены: 19.09.2026 05:24:29 МСК
-Конец смены: 19.09.2026 05:25:30 МСК
+Работник: Палыч
+Смена: №40
+Начало смены: 19.09.2026 05:52:52 МСК
+Конец смены: 19.09.2026 05:53:23 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Подключить проверенный decoded NXSB reader к source/rebuilt evidence path, дать стабильный вывод для E2E и не трогать APFS writer без причинного доказательства.
+Подключить уже проверенный NXSB reader/serializer к реальному decoded source и rebuilt staging flow, получить две сравнимые записи evidence и только после этого запускать exact E2E и решать вопрос об APFS writer.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Кузьмич успел добавить стабильный сериализатор source/rebuilt NXSB evidence и отдельный тест сериализации. Изменение узкое и диагностическое; writer semantics не менялись.
+Палыч успел перепроверить точные места подключения в main.go и API сериализатора и подготовил минимальную схему source/rebuilt wiring без изменения writer semantics. До изменения target-репозитория выполнение оборвалось.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Два target build-check завершились SUCCESS. Boot-proof завершился FAILURE, поэтому весь причинный пакет ещё не закрыт. Runtime loss подтверждён независимыми GitHub time anchors: последний heartbeat был раньше stale boundary, recovery guard сработал позже и fenced старое исполнение.
+Последний GitHub-anchored heartbeat подтверждает работу именно над wiring decoded source/rebuilt snapshots. Runtime loss подтверждён независимо: последний heartbeat 02:53:23Z, stale boundary 02:56:23Z, recovery guard 02:58:11Z. Нового target commit или terminal E2E в этой смене нет.
 
 ГДЕ ОСТАНОВИЛСЯ:
-На 05:25:30 МСК, ожидая push-triggered Windows verification. Сериализатор уже был в main, но wiring source/rebuilt snapshots в реальный rebuild/E2E flow ещё не выполнен.
+На подготовке минимальной интеграции source/rebuilt snapshot в ios-ramdisk-tool; APFS writer не менялся.
 
 СЛЕДУЮЩЕМУ:
-Подключить сериализатор к decoded source snapshot и rebuilt bare-staging snapshot, затем заменить/обойти старый raw-DMG C# abort только после появления replacement evidence. После этого пройти exact Windows E2E и менять writer только при доказанном causal mismatch.
+Сразу реализовать wiring: source snapshot через decoded reader, rebuilt snapshot после rawFile.Sync(), вывести обе записи через стабильный serializer, затем заменить/обойти старый raw-DMG C# abort и прогнать обязательные gates + exact Windows E2E. Writer менять только по доказанному mismatch.
 
 Оценка ОТК:
-Прогресс: 3/4
+Прогресс: 1/4
 Инженерное качество: 3/3
 Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
-Итого: 9/10 — APPROVED
-Рейтинг: 1170 (+40)
+Итого: 7/10 — APPROVED
+Рейтинг: 1160 (+20)
