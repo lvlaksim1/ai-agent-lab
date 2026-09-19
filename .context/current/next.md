@@ -1,20 +1,8 @@
-1. P1: extract repeated runtime bookkeeping into deterministic atomic transition helpers/reducer so related state/wake/report/object mutations can be committed as one CAS-protected transition where time-anchor separation is not required.
-2. P1: build replay tests for CAS conflicts, heartbeat refresh during recovery, zombie fencing, duplicate intake, interrupted OTK, duplicate report publication and manager+worker concurrent writes.
-3. P1: reduce write/CI amplification by keeping per-runtime-commit validation focused on current state/new artifacts and reserving full historical audits for contract/schema changes.
-4. After P1 is stable, plan the code/state branch split and private-repository security boundary without changing the one-worker production invariant.
+# Next
 
-1. Validate the first production shift under shift-policy v2: confirm the worker continues through directly actionable next blockers, uses the evidence-acquisition ladder before BLOCKED, and emits a valid stop record for OTK.
-1. Continue Variant C-5 proof: :24 already successfully performed OTK -> next worker. Verify later generic ticks do not replace an active worker, and verify manager+worker concurrency when management attention exists.
-2. If the generic dispatcher proves unreliable, roll back to documented Variant A without reverting project state.
-
-1. Observe the next **natural** worker report after shift #22 and confirm its immutable published-file commit triggers Telegram without a redelivery request.
-2. Continue event 025: its required qemu-sptm Windows Gate is already terminal and successful, so the next production tick may proceed with exact E2E evidence.
-3. Confirm subsequent :47/:02/:17/:32 exact-schedule cadence continues without manual scheduler mutation, and verify a production worker can remain active across clock slots under the renewable natural-boundary shift policy.
-4. Keep one-worker runtime stable; do not add worker+worker parallelism without explicit owner reversal.
-6. Eventually complete a real cross-repository forwarding E2E proof.
-
-
-7. Observe the next production shift under active-evidence-wait semantics. Verify that a worker who starts mandatory CI remains owner of the same shift through terminal CI and continues from the result instead of creating a routine wait_for handoff.
-
-
-8. Observe event `ios-runtime-release-20260918-031`: verify the next worker adds the authorized Windows E2E APFS structural evidence channel, consumes exact evidence in the same causal chain, and does not change APFS writer semantics until a concrete incompatible field is proven.
+1. Observe the first natural supervisor-review carrying `otk_finalize_policy_version: 1` and confirm Runtime Check proves one atomic OTK-finalize commit from immutable report creation through state release.
+2. Observe the next production shift after the heartbeat contract fix and confirm its literal Reporting-v2 start-report commit gets a green Runtime Check before any target-repository mutation.
+3. Keep the deterministic transition/replay suite green; any new state-machine mutation class must receive replay coverage before production use.
+4. After those live P1 proofs, begin P2 design: separate stable control-plane code from mutable runtime state and define a private/security boundary for private target repositories.
+5. Complete an explicit real cross-repository forwarding E2E proof.
+6. Do not add worker+worker parallelism, mutable scheduler orchestration or Work-based wakeups.

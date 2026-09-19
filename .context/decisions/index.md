@@ -12,3 +12,4 @@
 | DEC-20260918-generic-dispatcher | 2026-09-18 | ACTIVE | Five generic clock tasks at :00/:12/:24/:36/:48 with Variant A rollback | DEC-20260918-generic-dispatcher.md |
 | DEC-20260918-apfs-evidence-channel | 2026-09-18 | ACTIVE | Owner authorized diagnostic APFS evidence channel and production resume | DEC-20260918-apfs-evidence-channel.md |
 | DEC-20260919-p0-control-plane-stabilization | 2026-09-19 | ACTIVE | Current/live validation separated from immutable-history audit; strict machine report contract before target work | DEC-20260919-p0-control-plane-stabilization.md |
+| DEC-20260919-p1-deterministic-transitions | 2026-09-19 | ACTIVE | Deterministic snapshot-based transition plans + CAS; atomic OTK finalize; replay-before-production | DEC-20260919-p1-deterministic-transitions.md |

@@ -179,3 +179,21 @@ The audit-driven P0 is complete and live in `work-webhook-test` at commit `3acdc
 Key consequence: do not weaken or bypass Runtime Check. It is now split correctly: new/live artifacts are strict, immutable historical report drift is audited separately. New worker start reports must pass the literal Reporting v2 contract and the exact report commit's Runtime Check before any substantive target-repository mutation.
 
 Next engineering priority is P1 transition/replay hardening, not new factory features.
+
+
+## P1 deterministic transition layer — 2026-09-19
+
+P1 implementation is live. Deterministic bookkeeping now uses `.github/scripts/lib/runtime-transition.cjs` plus `.github/scripts/lib/atomic-plan.cjs`, while Chat remains responsible for reasoning and evidence interpretation.
+
+New production invariants:
+- snapshot-consistent reads from one parent SHA;
+- non-force CAS application;
+- separate GitHub time-pulse evidence commits;
+- replay tests for races/fencing/idempotency/recovery;
+- atomic OTK finalization v1;
+- heavyweight control-plane tests separated from ordinary live Runtime Check;
+- pulse-only commits do not launch heavyweight CI.
+
+Shift 59 empirically proved the start-report safety barrier: a control-plane validation failure froze target work and raised manager attention. The start report itself was valid; the defect was missing heartbeat activity kinds `starting` / `blocked_control_plane`. The contract is now corrected and green on the exact blocked-state snapshot.
+
+Still require one natural live proof of atomic OTK finalization before declaring P1 fully empirically closed.

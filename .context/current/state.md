@@ -302,3 +302,29 @@ P0 stabilization was implemented in authoritative runtime commit `3acdc72905d024
 - immutable legacy reports remain unchanged.
 
 Both `Agent Runtime Check` and `Agent History Audit` passed on the authoritative P0 commit.
+
+
+## P1 deterministic transitions and replay hardening — 2026-09-19
+
+P1 moved deterministic control-plane bookkeeping out of free-form Chat choreography and into replayable transition planning.
+
+Production commits:
+- `6ec4d28cafa374a34d738cbbcabdb59455431f20` — shared non-force CAS commit primitive, pure runtime transition reducer, snapshot-consistent intake, stale-recovery reducer, replay CI and narrowed live Runtime Check scope;
+- `1ba0e4d46a1c03705acb0e92e6904671c31f857b` — atomic OTK-finalize policy v1 and Git-history enforcement;
+- `ebd8e97930f56b7c6ad94c79c10f0a2741b7f960` — live heartbeat contract correction for legitimate `starting` and `blocked_control_plane` phases.
+
+Key invariants:
+- transition inputs are read from one immutable parent SHA;
+- related non-time-anchor bookkeeping is planned deterministically and committed as one non-force CAS Git tree transition;
+- authoritative `.agent/time-pulse.json` remains intentionally separate because its GitHub commit timestamp is evidence;
+- stale recovery uses the reducer and execution identity/fence checks;
+- new OTK reviews carry `otk_finalize_policy_version: 1`;
+- OTK finalization must atomically persist review/report/rating/object/management/continuation/done/pending-review deletion/state release;
+- Runtime Check verifies atomic OTK finalization from Git history;
+- replay tests cover CAS conflicts, heartbeat races, zombie fencing, duplicate intake, stale production/OTK recovery, immutable creation/deletion and OTK finalization.
+
+CI amplification was reduced: a pulse-only test commit `351698ceccd9682ac96b3d00490abaceab248ec5` started zero workflows, proving `.agent/time-pulse.json` no longer launches heavyweight Runtime Check/Control Plane Tests by itself.
+
+Live shift 59 provided a useful fault-injection proof. The worker claimed with `activity_kind=starting`; the old validator rejected that legitimate phase. The Reporting-v2 barrier then behaved correctly: Михалыч published a valid immutable start report, did not touch the target repository, switched to `blocked_control_plane` and raised manager attention. The contract was fixed without rewriting the report or target history, and the exact blocked-state snapshot then passed Runtime Check and History Audit.
+
+The remaining P1 proof is empirical rather than implementation work: observe a natural post-policy OTK close and confirm its immutable OTK report is created in the same single finalize commit as all required bookkeeping.

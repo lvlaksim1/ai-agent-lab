@@ -9,3 +9,4 @@
 
 Semantic reconstructions from available project/chat context; not guaranteed verbatim transcripts.
 | CHAT-20260919-project-audit-p0-stabilization | 2026-09-19 | Expert project audit + P0 stabilization | Report contract, live/history validation split and schema synchronization shipped green | CHAT-20260919-project-audit-p0-stabilization.md |
+| CHAT-20260919-p1-transition-replay | 2026-09-19 | P1 deterministic transitions, replay and CI amplification | Reducer/CAS/replay shipped; atomic OTK finalize enforced; live gate contract defect caught safely | CHAT-20260919-p1-transition-replay.md |
