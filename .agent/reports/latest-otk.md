@@ -1,31 +1,31 @@
 Проект: iOS-Research-Runtime
-Работник: Кузьмич
-Смена: №47
-Начало смены: 19.09.2026 08:48:31 МСК
-Последний подтверждённый момент работы: 19.09.2026 08:49:25 МСК
+Работник: Палыч
+Смена: №48
+Начало смены: 19.09.2026 09:12:38 МСК
+Конец смены: 19.09.2026 09:13:51 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Подключить decoded source/rebuilt NXSB evidence к реальному rebuild flow, затем убрать wrong-layer C# abort и довести Windows gates/exact E2E до terminal результата. APFS writer — только после доказанного mismatch.
+Палыч планировал подключить уже существующий decoded NXSB reader к source/rebuilt точкам rebuild flow, обеспечить стабильную evidence-выдачу, затем убрать wrong-layer C# abort и пройти Windows gates/exact E2E без спекулятивного изменения APFS writer.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Опубликован стартовый доклад и повторно проверены точные точки wiring в main.go/apfs_evidence.go. До target edit runtime оборвался; нового target commit, CI или E2E evidence за смену нет.
+Проверил текущий target и исправил важную неточность унаследованного состояния: стабильный serializer `writeNXEvidence` уже существует и покрыт тестом. Тем самым оставшийся Go diff сузился до wiring source/rebuilt snapshots в `main.go`. До target mutation runtime не дожил.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Heartbeat 05:49:25Z, stale boundary 05:52:25Z, recovery guard 05:58:02Z; потерянное исполнение fenced. Writer semantics и proof gates не менялись.
+Последний GitHub-anchored heartbeat подтверждает именно эту границу. Runtime loss валиден: heartbeat устарел в 09:16:51 МСК, recovery guard позже зафиксировал и fenced потерянное выполнение. Нового CI/E2E результата или APFS structural evidence смена не получила.
 
 ГДЕ ОСТАНОВИЛСЯ:
-На подготовке минимального wiring decoded source/rebuilt NXSB evidence.
+На подготовке минимального wiring edit: source snapshot перед `apfs.OpenImage`, rebuilt snapshot после `rawFile.Sync()`, затем существующий `writeNXEvidence`. APFS writer не менялся.
 
 СЛЕДУЮЩЕМУ:
-Не повторять локализацию. Реализовать source/rebuilt wiring и детерминированную выдачу evidence, затем заменить неверный raw-DMG C# abort и выполнить Windows gates/exact E2E. Writer менять только по причинному structural diff.
+Не повторять локализацию и не писать новый serializer. Сразу выполнить bounded wiring в `main.go`, затем перевести Integration с wrong-layer raw-DMG abort на replacement evidence и пройти обязательные Windows gates/exact E2E.
 
 Оценка ОТК:
 Прогресс: 0/4
-Инженерное качество: 2/3
+Инженерное качество: 3/3
 Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
-Итого: 5/10 — APPROVED
-Рейтинг: 1170 (+0)
+Итого: 6/10 — APPROVED
+Рейтинг: 1170 (+10)
