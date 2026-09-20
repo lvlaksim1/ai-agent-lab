@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 211,
+  "sequence": 212,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-78-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Claiming OTK lease for independent review of shift 78.",
-  "fence_generation": 142
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "production_start",
+  "activity_detail": "Claiming shift 79 to consume exact Windows E2E failure evidence.",
+  "fence_generation": 143
 }
