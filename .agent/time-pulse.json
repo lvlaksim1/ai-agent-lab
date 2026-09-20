@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 201,
-  "purpose": "lease_claim",
+  "sequence": 202,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 77 under DIR-021 canonical report preflight.",
+  "activity_kind": "closing",
+  "activity_detail": "Checkpointed DIR-021 complete-file retrieval blocker; no target mutation performed.",
   "fence_generation": 137
 }
