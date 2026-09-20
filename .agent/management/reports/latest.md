@@ -1,15 +1,13 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-055 — KEEP_COURSE
+Решение: DEC-056 — KEEP_COURSE
 Директива: DIR-022
 Здоровье: ORANGE
 Фаза: boot-debugging
 
-Смена №89 завершилась подтверждённой потерей runtime: Reporting v2 barrier был пройден, точная bounded граница APSB `modificationTime` -> `FixedTime` перечитана, но target write до обрыва не появился. Независимый ОТК смены №89 сейчас pending.
+Смена №89 независимо завершена ОТК: APPROVED 5/10. Runtime loss подтверждён, но target-прогресса не было. Повторяющийся no-progress уже дорог по времени, однако нового архитектурного тупика не доказано: ближайшая техническая граница остаётся конкретной и bounded.
 
-Триггер начальника — три подряд no-progress смены. Однако менять технический курс до независимой оценки смены №89 преждевременно: нового архитектурного тупика не доказано, а ближайшее действие остаётся конкретным, bounded и согласованным с текущей директивой.
-
-Курс сохраняется. Сначала ОТК должен независимо принять смену №89. После этого, если производство остаётся допущенным, следующая смена должна непосредственно продолжить whole-file-preserving APSB `modificationTime` -> существующий `FixedTime`, сразу зафиксировать exact target SHA после любого target commit и затем выполнить focused tests, Windows gate и exact Windows E2E с потреблением terminal evidence. XID/checkpoint и спекулятивный MetaCrypto повторно не открывать без нового доказательства.
+Курс сохраняется. Следующая производственная смена должна без повторной архитектурной разведки выполнить whole-file/CAS-safe APSB `modificationTime` -> существующий `FixedTime`, сразу закрепить exact target SHA после любого target commit и затем пройти focused tests -> Windows gate -> exact Windows E2E. XID/checkpoint semantics и speculative MetaCrypto не открывать без нового причинного доказательства.
 
 Решение владельца, STOP и transfer не требуются.
