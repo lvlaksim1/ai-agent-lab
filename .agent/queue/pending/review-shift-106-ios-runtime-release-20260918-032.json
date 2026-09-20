@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-106-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T15:46:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "sanych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 106,
+  "shift_started_at_utc": "2026-09-20T15:41:42Z",
+  "shift_completed_at_utc": "2026-09-20T15:42:49Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "509bd8c9cc05c14539a680c52523c95f67528ffd",
+    "recovery_anchor_commit": "9c4ff4aa38e6f602c9dac1c756ab3620e76f32b6",
+    "start_report_path": ".agent/reports/starts/shift-106-sanych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-106-sanych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "14c7c9745868ee8c3a3889e2eee1214b766ce392",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T15:42:49Z",
+      "heartbeat_stale_at_utc": "2026-09-20T15:45:49Z",
+      "heartbeat_anchor_commit": "509bd8c9cc05c14539a680c52523c95f67528ffd",
+      "recovery_observed_at_utc": "2026-09-20T15:46:01Z",
+      "recovery_anchor_commit": "9c4ff4aa38e6f602c9dac1c756ab3620e76f32b6",
+      "fenced_generation": 224,
+      "activity_kind": "working",
+      "activity_detail": "Reporting v2 gate passed via Agent Runtime Check 35520404576; authoritative main.go blob 9eec2108fdac0f1074d66d6ffd6be1d4d428eac6 re-read losslessly in non-overlapping ranges. Preparing exact bounded KeyOSVersion mutation."
+    }
+  }
+}
