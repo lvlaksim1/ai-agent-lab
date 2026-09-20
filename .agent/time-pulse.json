@@ -1,3 +1,12 @@
 {
-  "schema_version":1,"sequence":218,"purpose":"heartbeat","role":"production","worker_id":"palych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"verification","activity_detail":"Checkpointed target f56c1d563f73c2621b4e3a5dac95330741d2b98c; awaiting focused/Windows verification for active checkpoint evidence.","fence_generation":145
+  "schema_version": 1,
+  "sequence": 219,
+  "purpose": "stale_recovery_probe",
+  "role": "production",
+  "worker_id": "palych",
+  "object_id": "ios-research-runtime",
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
+  "fence_generation": 145
 }
