@@ -1,15 +1,15 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-059 — KEEP_COURSE
-Директива: DIR-023
+Решение: DEC-060 — CHANGE_COURSE
+Директива: DIR-024
 Здоровье: ORANGE
 Фаза: boot-debugging
 
-После ОТК смены №94 производство idle. Управленческий триггер сработал одновременно по THREE_SHIFTS_SINCE_MANAGER_REVIEW и TWO_NO_PROGRESS_SHIFTS. Последняя смена принята ОТК, но классифицирована как no-progress: bounded authoritative `main.go` preimage уже перечитан и checkpointed на blob `f31534635096b173809b52057bad83635ea032e6`, однако exact reconstructed-byte SHA verification и target CAS ещё не выполнены.
+После ОТК смены №97 производство idle. За три смены после предыдущего manager review появился важный технический результат: смена №96 доказала, что pinned go-apfs-v2 `FixedTime` доходит до builder/formatted-by timestamp, но не присваивает APSB `LastModTime` / reader `ModificationTime`. Смена №97 затем потеряла runtime до сохранения нового механизма и принята ОТК 5/10, progress_class=none.
 
-Курс DIR-023 сохраняется, но следующая смена не должна снова расходоваться только на повторное чтение или checkpoint того же preimage. Она должна завершить exact byte/blob verification и, если оно успешно, выполнить только локализованную APSB `modificationTime -> FixedTime` whole-file CAS mutation. Затем обязателен exact target SHA checkpoint и цепочка focused tests -> Windows gate -> exact Windows E2E.
+Поэтому прежняя исполнимая часть DIR-023 устарела: повторять whole-file reconstruction ради прямой `modificationTime -> FixedTime` mutation нельзя, потому что этот primitive уже доказан как не записывающий требуемое поле.
 
-Если доступные authoritative GitHub primitives действительно не позволяют доказать exact reconstruction/SHA verification, target не менять: сохранить один конкретный primitive-level defect с достаточным evidence и остановить повторение того же пути. Широкая повторная разведка APSB/XID/checkpoint/MetaCrypto без нового discriminating evidence остаётся запрещена.
+Новая DIR-024 сохраняет узкую APSB LastModTime гипотезу, но меняет следующий шаг на mechanism-first: найти минимальную typed точку присваивания LastModTime и доказать, что она проходит через штатную регенерацию checksum до записи. Только после такого доказательства разрешена одна bounded CAS mutation, затем exact target SHA checkpoint и focused tests -> Windows gate -> exact Windows E2E. XID/checkpoint и metaCryptoKeyOsVersion остаются заморожены без нового discriminating evidence.
 
 Решение владельца, STOP и transfer не требуются. Production wake остаётся pending и может автоматически продолжить производство после reconcile manager wake.
