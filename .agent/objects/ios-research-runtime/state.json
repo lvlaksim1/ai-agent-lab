@@ -1,1 +1,15 @@
-{"schema_version":1,"object_id":"ios-research-runtime","status":"ACTIVE","health":"RED","current_phase":"boot-debugging","current_blocker_summary":"Snapshot-preservation commit 8288dfabeefd069066d931d09cb4508421eedf29 passed Ramdisk Tool Windows, but exact Windows E2E run 35480398951 failed in provisioning/Darwin root-shell proof; consume uploaded failure evidence next.","last_scored_shift":78,"last_otk_verdict":"APPROVED","last_progress_class":"substantial","last_event":"ios-runtime-release-20260918-032","checkpoint_generation":1,"last_checkpoint_at":"2026-09-18T21:26:03Z","updated_at":"2026-09-20T01:25:13Z"}
+{
+  "schema_version": 1,
+  "object_id": "ios-research-runtime",
+  "status": "ACTIVE",
+  "health": "RED",
+  "current_phase": "control-plane-recovery",
+  "current_blocker_summary": "Shift 79 exact-commit Agent Runtime Check failed on non-canonical production_start heartbeat activity emitted by the production claim path. Pending OTK review remains first; then repair to canonical starting and verify unchanged gate before resuming exact Windows E2E failure analysis.",
+  "last_scored_shift": 78,
+  "last_otk_verdict": "APPROVED",
+  "last_progress_class": "substantial",
+  "last_event": "ios-runtime-release-20260918-032",
+  "checkpoint_generation": 1,
+  "last_checkpoint_at": "2026-09-18T21:26:03Z",
+  "updated_at": "2026-09-20T01:39:43Z"
+}
