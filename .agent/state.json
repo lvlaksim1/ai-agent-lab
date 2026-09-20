@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T16:26:13Z",
     "stale_at": "2026-09-20T16:29:13Z",
     "activity_kind": "lease_claim",
-    "activity_detail": "Shift 107 claimed by Mikhalych for the pending iOS Research Runtime continuation.",
+    "activity_detail": "Shift 107 claimed by Mikhalych; immutable start report published.",
     "external_wait": null,
     "source": "production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 107,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-107-mikhalych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "ff5b3c6fbdbe68cfef6dd8c27e018151be5ca7dc",
   "last_runtime_loss": {
     "role": "otk",
     "event": "review-shift-106-ios-runtime-release-20260918-032",
