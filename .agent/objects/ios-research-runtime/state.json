@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 89 OTK finalized APPROVED 5/10 after genuine runtime loss with no target progress. Resume the bounded whole-file/CAS-safe APSB modificationTime -> existing FixedTime preservation, checkpoint exact target SHA after any target commit, then run focused tests, Windows gate and exact Windows E2E. XID/checkpoint and speculative MetaCrypto remain closed without new evidence.",
-  "last_scored_shift": 89,
+  "current_blocker_summary": "Shift 90 OTK finalized APPROVED 5/10 after verified runtime loss at the report barrier with no target progress. Resume bounded whole-file/CAS-safe APSB modificationTime -> existing FixedTime preservation, checkpoint exact target SHA, then focused tests, Windows gate and exact Windows E2E. XID/checkpoint and speculative MetaCrypto remain closed without new evidence.",
+  "last_scored_shift": 90,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-20T07:38:22Z"
+  "updated_at": "2026-09-20T08:02:25Z"
 }
