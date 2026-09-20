@@ -1,10 +1,12 @@
-# Manager report — DEC-067
+# Manager report — DEC-068
 
 Object: `ios-research-runtime`
 Health: ORANGE
 Decision: KEEP_COURSE
 Active directive: DIR-027
 
-Shift 109 is finalized APPROVED with no progress and verified runtime loss before target mutation. This raises the no-progress streak to three, but does not falsify the bounded KeyOSVersion repair: the repair has still not been executed. The known lossless-preimage problem is resolved; the remaining next action is narrow and testable.
+Shift 110 is finalized CORRECTED with no progress: it failed the Reporting v2 start-report contract and then suffered verified runtime loss before target mutation. The no-progress streak is now four, but this still does not falsify the bounded KeyOSVersion repair because that repair has not yet been executed. The lossless authoritative preimage route is already established, so the remaining technical action is narrow and testable.
 
-DIR-027 therefore remains unchanged. Next production should minimize pre-mutation overhead, re-establish the authoritative preimage/fence, execute the offset-108 KeyOSVersion repair with Fletcher64/checksum validation, checkpoint the exact target SHA, then run focused tests → Windows gate → exact Windows E2E and consume terminal evidence. No owner decision, STOP, transfer, or architecture change is required.
+DIR-027 therefore remains unchanged. Next production must satisfy the Reporting v2 start barrier exactly, minimize pre-mutation overhead, revalidate authoritative preimage and fence, execute only the offset-108 KeyOSVersion repair with Fletcher64/checksum validation, checkpoint the exact target SHA, then consume focused tests → Windows gate → exact Windows E2E terminal evidence in the same live shift.
+
+No owner decision, STOP, transfer, architecture change, or new directive is required. Repeated runtime loss remains an execution/reliability cost to watch; course change becomes justified if the bounded repair is actually executed without useful discriminating evidence or a new integrity/owner-goal conflict appears.
