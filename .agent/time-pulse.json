@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 398,
-  "purpose": "heartbeat",
+  "sequence": 399,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Reporting v2 barrier passed; re-verified pinned go-apfs-v2 v0.3.0 live volume block resolution and Fletcher64 reseal/write pattern; bounded DIR-027 mutation remains next.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 252
 }
