@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 387,
-  "purpose": "lease_claim",
+  "sequence": 388,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "starting",
-  "activity_detail": "Claim production shift 113 for DIR-027 continuation.",
+  "activity_detail": "Published immutable shift 113 start report; awaiting mandatory report-contract Runtime Check.",
   "fence_generation": 246
 }
