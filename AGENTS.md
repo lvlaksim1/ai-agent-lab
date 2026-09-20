@@ -1,5 +1,9 @@
-# AI agent entrypoint
+# Agent Instructions
 
-Перед существенной работой прочитай `AI_CONTEXT.md`.
+<!-- context-capsule:begin -->
+## Context Capsule discovery
 
-Полная Project Context Capsule находится в этом же репозитории в authoritative branch `work-webhook-test`.
+Before substantial work, read `.context/ENTRYPOINT.md`.
+
+The authoritative durable context is on `work-webhook-test`. Restore it there before analysis or mutation. For live autonomous-shop state, use the authoritative `.agent/` data on that same branch.
+<!-- context-capsule:end -->

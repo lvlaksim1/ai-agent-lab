@@ -1,13 +1,11 @@
-# AI Project Context — discovery
+# AI Context
 
-Этот репозиторий использует **Project Context Capsule v1.0**.
+<!-- context-capsule:begin -->
+## Context Capsule discovery
 
-Authoritative context/runtime branch: `work-webhook-test`.
+This is the discovery branch `main`, not the authoritative project-context branch.
 
-До анализа проекта с нуля:
-1. открой `.context/ENTRYPOINT.md` в ветке `work-webhook-test`;
-2. выполни bootstrap;
-3. для живого runtime используй `.agent/` в той же ветке;
-4. при значимых изменениях синхронизируй Context Capsule обратно в `work-webhook-test`.
+Read `.context/ENTRYPOINT.md` here first. It redirects recovery to `work-webhook-test`, where the authoritative Context Capsule Core v1.3 context and live `.agent/` runtime are maintained.
 
-Не проси пользователя пересказывать старые Chat, пока контекст доступен в Capsule.
+Do not treat context files on `main` as the current project state.
+<!-- context-capsule:end -->

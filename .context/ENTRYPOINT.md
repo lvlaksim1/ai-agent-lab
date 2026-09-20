@@ -1,13 +1,10 @@
-# Project Context Capsule — default branch redirect
+# Context Capsule — discovery redirect
 
-The authoritative Project Context Capsule for this repository is stored in branch:
+This repository uses Context Capsule Core v1.3.
 
-`work-webhook-test`
+- Discovery branch: `main`
+- Authoritative context/runtime branch: `work-webhook-test`
 
-Continue bootstrap by reading:
+Continue recovery by reading `.context/ENTRYPOINT.md` from `work-webhook-test`, then follow its v1.3 manifest, recovery protocol, and live-runtime reconciliation instructions.
 
-`.context/ENTRYPOINT.md`
-
-from that branch, then follow its read order.
-
-Do not treat this redirect file as the project context itself.
+This redirect file is not project context and must not be used as current state.
