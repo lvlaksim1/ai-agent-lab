@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 98 made no target progress because its immutable Reporting v2 start report failed the exact runtime invariant gate; DIR-025 requires canonical render/validate preflight and exact Agent Runtime Check SUCCESS before resuming DIR-024 checksum-safe APSB LastModTime proof.",
-  "last_scored_shift": 98,
+  "current_blocker_summary": "Shift 99 landed the bounded APSB LastModTime writer fix at target 699c240a; Ramdisk Tool Windows passed, but exact Windows E2E 35511828863 later failed and its terminal boot/APFS evidence remains to be consumed.",
+  "last_scored_shift": 99,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "none",
+  "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 3,
   "last_checkpoint_at": "2026-09-20T11:03:55Z",
-  "updated_at": "2026-09-20T12:34:04Z"
+  "updated_at": "2026-09-20T13:04:31Z"
 }

@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-025"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "First satisfy DIR-025 by generating the immutable Reporting v2 start report with exact canonical section markers and obtaining exact Agent Runtime Check SUCCESS. Only then resume DIR-024: establish an evidence-backed checksum/serialization-safe mechanism to set APSB LastModTime, perform only the justified bounded mutation, and verify focused tests, Windows gate, and exact Windows E2E. Keep metaCryptoKeyOsVersion and XID/checkpoint semantics frozen absent new evidence.",
-  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not touch the target repository before exact start-report Agent Runtime Check SUCCESS.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Any LastModTime write must preserve APFS checksum/serialization correctness and be verified before E2E conclusions."],
-  "predecessor_review_event_id": "review-shift-98-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-98-review-shift-98-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-98-review-shift-98-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 98,
-  "predecessor_worker_id": "sanych"
+  "goal": "Consume terminal exact Windows E2E run 35511828863 for target 699c240af49b00ca2168d0761700d4eb274e0ab8, extract and compare its boot/APFS structural evidence, then continue the nearest evidence-backed discriminating step for mountroot error 79. Do not repeat the landed LastModTime mutation. Keep metaCryptoKeyOsVersion and XID/checkpoint semantics frozen absent new evidence.",
+  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Preserve the bounded LastModTime fix unless terminal evidence disproves it."],
+  "predecessor_review_event_id": "review-shift-99-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-99-review-shift-99-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-99-review-shift-99-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 99,
+  "predecessor_worker_id": "mikhalych"
 }
