@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 86 ended by verified runtime loss immediately after its validated start report, before target mutation. The evidence-backed next action remains bounded preservation of source APSB modificationTime through the existing FixedTime mapping, with MetaCryptoKeyOSVersion evidence-only unless a supported bounded writer path is proven; then focused/Windows/exact-E2E verification.",
-  "last_scored_shift": 86,
+  "current_blocker_summary": "Shift 87 ended by verified runtime loss while preparing the already-localized whole-file-preserving source APSB modificationTime -> FixedTime mutation; no target commit landed. Resume that bounded mutation directly, keep MetaCryptoKeyOSVersion evidence-only absent a supported bounded writer path, then checkpoint exact target SHA and run focused/Windows/exact-E2E verification.",
+  "last_scored_shift": 87,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-20T04:59:57Z"
+  "updated_at": "2026-09-20T05:15:02Z"
 }

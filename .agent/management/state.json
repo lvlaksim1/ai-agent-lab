@@ -8,18 +8,18 @@
   "definition_of_done": ["Use the authoritative object mission Definition of Done"],
   "current_phase": "boot-debugging",
   "health": "ORANGE",
-  "current_blocker_summary": "Shift 86 ended by verified runtime loss immediately after its validated start report, before target mutation. The evidence-backed next action remains bounded preservation of source APSB modificationTime through the existing FixedTime mapping, with MetaCryptoKeyOSVersion evidence-only unless a supported bounded writer path is proven; then focused/Windows/exact-E2E verification.",
-  "shifts_since_manager_review": 2,
-  "consecutive_no_progress": 1,
+  "current_blocker_summary": "Shift 87 ended by verified runtime loss while preparing the already-localized whole-file-preserving source APSB modificationTime -> FixedTime mutation; no target commit landed. Resume that bounded mutation directly, keep MetaCryptoKeyOSVersion evidence-only absent a supported bounded writer path, then checkpoint exact target SHA and run focused/Windows/exact-E2E verification.",
+  "shifts_since_manager_review": 3,
+  "consecutive_no_progress": 2,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
-  "last_scored_shift": 86,
+  "last_scored_shift": 87,
   "manager_review_count": 52,
   "last_manager_review_at": "2026-09-20T04:26:35Z",
   "last_manager_decision": "DEC-053: KEEP_COURSE; analyze APSB writer mapping before any semantic mutation",
   "active_directive": "DIR-022",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-20T04:59:57Z"
+  "updated_at": "2026-09-20T05:15:02Z"
 }
