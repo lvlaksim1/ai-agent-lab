@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T12:48:06Z",
     "stale_at": "2026-09-20T12:51:06Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production lease for shift 99 under DIR-025; preparing canonical Reporting v2 start report.",
+    "activity_detail": "Canonical Reporting v2 start report published for shift 99; awaiting exact Agent Runtime Check gate.",
     "external_wait": null,
     "source": "production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 99,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-99-mikhalych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "31cbe77ba3a5ae29e7dc472cace128f48e57707d",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
