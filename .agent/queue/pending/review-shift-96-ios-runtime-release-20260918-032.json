@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-96-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T11:10:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "palych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 96,
+  "shift_started_at_utc": "2026-09-20T11:03:55Z",
+  "shift_completed_at_utc": "2026-09-20T11:06:14Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "a151b7488bc435cc10a8b9fc5372400f150eee3d",
+    "recovery_anchor_commit": "746be7647d28780b4fb2344dacc956f333683224",
+    "start_report_path": ".agent/reports/starts/shift-96-palych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-96-palych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "df8ffdd083087eca21cfef8546d02881b99b4f31",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T11:06:14Z",
+      "heartbeat_stale_at_utc": "2026-09-20T11:09:14Z",
+      "heartbeat_anchor_commit": "a151b7488bc435cc10a8b9fc5372400f150eee3d",
+      "recovery_observed_at_utc": "2026-09-20T11:10:01Z",
+      "recovery_anchor_commit": "746be7647d28780b4fb2344dacc956f333683224",
+      "fenced_generation": 194,
+      "activity_kind": "working",
+      "activity_detail": "Pinned go-apfs-v2 mapping proved: FixedTime sets builder.timestamp and FormattedBy.Timestamp, but volumeSuperblock omits LastModTime entirely; v0.3.1/main has same defect. Evaluating safe LastModTime write mechanism without speculative APFS changes."
+    }
+  }
+}
