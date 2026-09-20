@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T20:59:34Z",
     "stale_at": "2026-09-20T21:02:34Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production shift 116 for DIR-027 continuation; materializing context before start-report barrier.",
+    "activity_detail": "Published immutable shift 116 start report; awaiting exact report commit Agent Runtime Check before target work.",
     "external_wait": null,
     "source": "production_lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 116,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-116-borisych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "7076372c973d7c09405114de360cdb0112bda838",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
