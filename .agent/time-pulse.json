@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 396,
-  "purpose": "heartbeat",
-  "role": "otk",
-  "worker_id": "otk",
+  "sequence": 397,
+  "purpose": "lease_claim",
+  "role": "production",
+  "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-114-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Shift 114 evidence verified and scored; preparing atomic OTK finalization.",
-  "fence_generation": 251
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production lease for shift 115 continuation under DIR-027.",
+  "fence_generation": 252
 }
