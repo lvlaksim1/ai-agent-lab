@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 202,
-  "purpose": "heartbeat",
-  "role": "production",
-  "worker_id": "ivanych",
+  "sequence": 203,
+  "purpose": "lease_claim",
+  "role": "otk",
+  "worker_id": "otk",
   "object_id": "ios-research-runtime",
-  "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "closing",
-  "activity_detail": "Checkpointed DIR-021 complete-file retrieval blocker; no target mutation performed.",
-  "fence_generation": 137
+  "active_event": "review-shift-77-ios-runtime-release-20260918-032",
+  "activity_kind": "otk_review",
+  "activity_detail": "Independent OTK review of shift 77.",
+  "fence_generation": 138
 }
