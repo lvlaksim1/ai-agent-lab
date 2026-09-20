@@ -8,18 +8,18 @@
   "definition_of_done": ["Use the authoritative object mission Definition of Done"],
   "current_phase": "control-plane-recovery",
   "health": "RED",
-  "current_blocker_summary": "DIR-022 startup control-plane defect is proven repaired. Shift 80 consumed the exact error-79 E2E and landed evidence-only active-checkpoint descriptor-ring instrumentation at target f56c1d563f73c2621b4e3a5dac95330741d2b98c; focused/Windows verification and exact E2E evidence are still required before any further writer change.",
-  "shifts_since_manager_review": 2,
+  "current_blocker_summary": "Shift 81 verified the active checkpoint XID mismatch but pinned writer evidence shows rebuilt XID 1 is intentional static-checkpoint architecture, not sufficient proof of corruption. The next discriminating evidence is source/rebuilt APSB semantic comparison; no writer mutation is justified before it.",
+  "shifts_since_manager_review": 3,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
-  "last_scored_shift": 80,
+  "last_progress_class": "substantial",
+  "last_scored_shift": 81,
   "manager_review_count": 50,
   "last_manager_review_at": "2026-09-20T01:39:43Z",
   "last_manager_decision": "DEC-051: CHANGE_COURSE; repair non-canonical production_start activity kind under DIR-022",
   "active_directive": "DIR-022",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-20T02:02:36Z"
+  "updated_at": "2026-09-20T02:35:36Z"
 }

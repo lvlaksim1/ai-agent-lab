@@ -1,31 +1,31 @@
 Проект: iOS-Research-Runtime
-Работник: Федорыч
-Смена: №70
-Начало смены: 19.09.2026 23:10:10 МСК
-Конец смены: 19.09.2026 23:10:56 МСК
-Причина завершения: blocked
+Работник: Петрович
+Смена: №81
+Начало смены: 20.09.2026 05:03:42 МСК
+Конец смены: 20.09.2026 05:06:37 МСК
+Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Федорыч намеревался без повторной архитектурной разведки сразу выполнить bounded snapshot-preservation mutation, зафиксировать точный target SHA, затем пройти focused tests, Windows gate и exact Windows E2E.
+Петрович планировал сначала проверить уже добавленную evidence-only диагностику активного APFS checkpoint, затем потребить exact Windows E2E и по полученной структуре решить, остаётся ли checkpoint/history причинным кандидатом без спекулятивного изменения writer.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Опубликован immutable start report, но он не содержал обязательных literal v2 protocol labels. Mandatory Agent Runtime Check закономерно завершился FAILURE, после чего worker не переписывал immutable report и не трогал target repository.
+Он потребил терминальную проверку target: Windows ramdisk gate и Windows Build прошли, exact Windows E2E снова дошёл до APFS mountroot и завершился error 79. Новая descriptor-ring диагностика показала, что block-0 NXSB не скрывал более новый checkpoint: у source активный XID 9 / nextXID 10, у rebuilt XID 1 / nextXID 2. После этого Петрович проверил pinned writer и установил, что XID 1 является намеренной архитектурой single-static-checkpoint, поэтому слепая подмена XID на source-значение не доказана и не выполнялась.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Падение относится к report-contract/control-plane, а не к iOS product path. Target mutation в смене отсутствует. Менеджер уже выпустил DIR-018 с безопасной remediation: валидировать canonical markers до публикации следующего report и только после успешного Runtime Check продолжить mutation-first course.
+Диагностическая мутация shift 80 работает и дала требуемое discriminating evidence. Ошибка 79 сохраняется. Само различие checkpoint XID не является достаточным доказательством повреждения rebuilt APFS, потому что writer штатно использует static formatXID=1. Новых изменений APFS writer или target repository в смене не было.
 
 ГДЕ ОСТАНОВИЛСЯ:
-На обязательном pre-target report-contract barrier после terminal FAILURE Agent Runtime Check; product repository остался неизменным.
+Последний подтверждённый heartbeat — 20.09.2026 05:06:37 МСК. Причинная цепочка сужена до следующего доказательного слоя: сравнение source/rebuilt APFS volume-superblock (APSB) semantics.
 
 СЛЕДУЮЩЕМУ:
-Сначала сформировать новый start report строго по literal v2 labels и проверить markers до immutable publication. После SUCCESS exact report commit Runtime Check немедленно выполнить уже локализованную bounded snapshot Name/ModTime mutation, checkpoint exact target SHA и продолжить tests, Windows gate и exact E2E.
+Не менять writer по XID. Сразу получить и сравнить APSB semantics source/rebuilt: FSIndex, compatible/read-only/incompatible features, meta-crypto state, tree types, volume flags, role/group и root/revert/snapshot metadata. Только найденное доказательное различие может обосновать следующую writer mutation.
 
 Оценка ОТК:
-Прогресс: 0/4
+Прогресс: 4/4
 Инженерное качество: 2/3
-Эффективность/фокус: 1/2
+Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
-Итого: 4/10 — BLOCKED
-Рейтинг: 1140 (-10)
+Итого: 9/10 — APPROVED
+Рейтинг: 1190 (+40)

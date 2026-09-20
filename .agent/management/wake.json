@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "attention": false,
-  "generation": 44,
-  "reasons": [],
-  "updated_at": "2026-09-20T01:39:43Z"
+  "attention": true,
+  "generation": 45,
+  "reasons": ["THREE_SHIFTS_SINCE_MANAGER_REVIEW"],
+  "updated_at": "2026-09-20T02:35:36Z"
 }

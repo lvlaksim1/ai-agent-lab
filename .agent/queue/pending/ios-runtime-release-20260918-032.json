@@ -1,1 +1,18 @@
-{"schema_version":1,"id":"ios-runtime-release-20260918-032","created_at":"2026-09-18T20:12:46Z","type":"task","priority":90,"status":"pending","object_id":"ios-research-runtime","source":{"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-022"},"target":{"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},"goal":"Verify target f56c1d563f73c2621b4e3a5dac95330741d2b98c with focused Go tests and the Windows gate, then run exact Windows E2E and consume active-checkpoint structural evidence. Use that evidence to decide whether error 79 is caused by checkpoint transaction/history or another structural semantic; do not change APFS writer semantics before this evidence.","constraints":["Preserve immutable shift-80 report unchanged.","Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not repeat snapshot API or architecture reconnaissance.","Do not revert durable snapshot preservation without causal evidence.","Do not make speculative APFS writer changes."],"predecessor_review_event_id":"review-shift-80-ios-runtime-release-20260918-032","predecessor_review_path":".agent/reviews/shift-80-review-shift-80-ios-runtime-release-20260918-032.md","predecessor_otk_report_path":".agent/reports/otk/shift-80-review-shift-80-ios-runtime-release-20260918-032.md","predecessor_shift_number":80,"predecessor_worker_id":"palych"}
+{
+  "schema_version": 1,
+  "id": "ios-runtime-release-20260918-032",
+  "created_at": "2026-09-18T20:12:46Z",
+  "type": "task",
+  "priority": 90,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-022"},
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
+  "goal": "Do not change APFS writer by checkpoint XID. Obtain and compare source/rebuilt APSB volume-superblock semantics (FSIndex, feature flags, meta-crypto state, tree types, volume flags, role/group, root/revert/snapshot metadata) from the exact error-79 evidence path, then perform only the nearest evidence-backed repair or diagnostic step.",
+  "constraints": ["Preserve immutable shift-81 report unchanged.","Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not repeat snapshot/API or checkpoint-XID architecture reconnaissance.","Do not revert durable snapshot preservation without causal evidence.","Do not make speculative APFS writer changes."],
+  "predecessor_review_event_id": "review-shift-81-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-81-review-shift-81-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-81-review-shift-81-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 81,
+  "predecessor_worker_id": "petrovich"
+}
