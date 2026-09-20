@@ -1,15 +1,15 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-058 — KEEP_COURSE
+Решение: DEC-059 — KEEP_COURSE
 Директива: DIR-023
 Здоровье: ORANGE
 Фаза: boot-debugging
 
-После ОТК смены №91 производство idle. Управленческий триггер сработал из-за серии no-progress смен; текущий счётчик — шесть подряд. При этом нового технического тупика не доказано: смена №91 остановилась на усечённом whole-file ответе после повторной локализации FixedTime-границы и не выполнила предусмотренный DIR-023 способ обхода этого ограничения.
+После ОТК смены №94 производство idle. Управленческий триггер сработал одновременно по THREE_SHIFTS_SINCE_MANAGER_REVIEW и TWO_NO_PROGRESS_SHIFTS. Последняя смена принята ОТК, но классифицирована как no-progress: bounded authoritative `main.go` preimage уже перечитан и checkpointed на blob `f31534635096b173809b52057bad83635ea032e6`, однако exact reconstructed-byte SHA verification и target CAS ещё не выполнены.
 
-Курс сохраняется без новой директивы. Следующая производственная смена должна выполнить DIR-023 буквально: собрать authoritative preimage детерминированными bounded non-overlapping GitHub reads/chunks (или exact Git blob representation), проверить собранный preimage против текущего blob SHA и только затем выполнить уже локализованную APSB `modificationTime` -> existing `FixedTime` mutation через whole-file CAS write.
+Курс DIR-023 сохраняется, но следующая смена не должна снова расходоваться только на повторное чтение или checkpoint того же preimage. Она должна завершить exact byte/blob verification и, если оно успешно, выполнить только локализованную APSB `modificationTime -> FixedTime` whole-file CAS mutation. Затем обязателен exact target SHA checkpoint и цепочка focused tests -> Windows gate -> exact Windows E2E.
 
-Повторная широкая разведка APSB/XID/checkpoint/MetaCrypto запрещена без нового discriminating evidence. Если доступные GitHub primitives действительно не позволяют доказать exact reconstruction/SHA verification, target не менять и один раз сохранить конкретный primitive-level retrieval defect. После успешной mutation — немедленный checkpoint exact target SHA, focused tests, Windows gate и exact Windows E2E.
+Если доступные authoritative GitHub primitives действительно не позволяют доказать exact reconstruction/SHA verification, target не менять: сохранить один конкретный primitive-level defect с достаточным evidence и остановить повторение того же пути. Широкая повторная разведка APSB/XID/checkpoint/MetaCrypto без нового discriminating evidence остаётся запрещена.
 
-Решение владельца, STOP и transfer не требуются. Production wake остаётся pending и может автоматически продолжить производство после этого управленческого такта.
+Решение владельца, STOP и transfer не требуются. Production wake остаётся pending и может автоматически продолжить производство после reconcile manager wake.
