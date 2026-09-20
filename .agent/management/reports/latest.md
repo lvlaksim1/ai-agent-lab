@@ -1,15 +1,13 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-061 — CHANGE_COURSE
+Решение: DEC-062 — KEEP_COURSE
 Директива: DIR-025
 Здоровье: ORANGE
 Фаза: boot-debugging
 
-Смена №98 не дошла до технической работы DIR-024. Immutable стартовый доклад был опубликован с заголовками `ОЦЕНКА ПРЕДШЕСТВЕННИКА` и `МОЙ ПЛАН` без обязательных двоеточий, тогда как канонический Reporting v2 contract требует точные literal markers `ОЦЕНКА ПРЕДШЕСТВЕННИКА:` и `МОЙ ПЛАН:`. Поэтому exact Agent Runtime Check 35509524739 корректно завершился FAILURE на runtime invariant validation, а target repository остался нетронутым.
+Порог TWO_NO_PROGRESS_SHIFTS проверен. Нового архитектурного тупика не выявлено: последний no-progress вызван уже локализованным дефектом immutable Reporting v2 start report, а не отрицательным техническим evidence против APSB LastModTime направления.
 
-DIR-025 исправляет именно способ прохождения control-plane gate: следующая смена обязана сформировать candidate через канонический Reporting v2 renderer, проверить candidate тем же validator до immutable publication и после публикации дождаться terminal SUCCESS exact Agent Runtime Check. Неисправимый immutable отчёт смены №98 не редактируется и не подменяется.
+DEC-061/DIR-025 уже задают достаточный bounded recovery: следующая смена сначала формирует и валидирует стартовый доклад через канонический Reporting v2 contract и обязана получить terminal SUCCESS exact Agent Runtime Check. Только после зелёного gate разрешено продолжить DIR-024: доказать checksum-safe APSB LastModTime assignment/write path, затем при доказанном механизме выполнить bounded CAS-safe mutation и focused tests -> Windows gate -> exact Windows E2E.
 
-После зелёного gate технический курс DIR-024 продолжается без ослабления: доказать минимальную typed точку APSB LastModTime assignment и штатную checksum/write цепочку, затем только при доказанном механизме выполнить одну bounded CAS-safe mutation и focused tests -> Windows gate -> exact Windows E2E.
-
-Решение владельца, STOP и transfer не требуются. Production wake остаётся pending и может автоматически продолжить после reconcile manager wake.
+XID/checkpoint semantics и metaCryptoKeyOsVersion остаются заморожены без нового discriminating evidence. STOP, transfer и решение владельца не требуются. Production остаётся idle, wake pending; после reconcile manager wake следующий такт может запускать одну производственную смену.
