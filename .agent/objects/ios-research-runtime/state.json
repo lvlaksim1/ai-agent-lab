@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 95 terminal E2E disproved the DIR-023 mapping assumption: target 415ff121bf0524a8509ec316d4fbfdc6d140a4cd passes Windows helper/build gates but rebuilt APSB modificationTime remains 0 while source is 1789017426360965200, and mountroot still fails error 79. Next step is pinned-writer mapping evidence for the actual APSB ModificationTime field before any further mutation; metaCryptoKeyOsVersion remains a separate proven mismatch.",
+  "current_blocker_summary": "Shift 96 source inspection proved the DIR-023 primitive defect in pinned go-apfs-v2 v0.3.0: CreateContainer resolves FixedTime into builder.timestamp and volumeSuperblock writes it to FormattedBy.Timestamp, but never assigns apfsSuperblock.LastModTime. The struct field exists and maps to reader VolumeSuperblock.ModificationTime at offset 256. v0.3.1/main has the same omission, so a dependency upgrade does not fix it. Next action is an evidence-backed mechanism to set LastModTime (upstream/fork or safe post-write checksum-preserving patch) before rerunning E2E; metaCryptoKeyOsVersion remains a separate proven mismatch.",
   "last_scored_shift": 95,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-032",
-  "checkpoint_generation": 2,
-  "last_checkpoint_at": "2026-09-20T10:41:32Z",
-  "updated_at": "2026-09-20T11:02:13Z"
+  "checkpoint_generation": 3,
+  "last_checkpoint_at": "2026-09-20T11:03:55Z",
+  "updated_at": "2026-09-20T11:03:55Z"
 }
