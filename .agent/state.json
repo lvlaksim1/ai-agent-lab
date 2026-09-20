@@ -22,8 +22,8 @@
     "last_seen_at": "2026-09-20T14:27:55Z",
     "stale_at": "2026-09-20T14:30:55Z",
     "activity_kind": "starting",
-    "activity_detail": "Starting shift 104 from OTK-approved bounded KeyOSVersion repair continuation.",
-    "external_wait": null,
+    "activity_detail": "Immutable shift-104 start report published; awaiting exact-commit Agent Runtime Check barrier.",
+    "external_wait": {"kind":"github_actions","target_commit":"e815804858450d34617768c2e4e65df24081e385","workflow":"Agent Runtime Check"},
     "source": "production_relay"
   },
   "time_authority": "github_commit_committer_date",
@@ -33,7 +33,7 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 104,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-104-palych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "e815804858450d34617768c2e4e65df24081e385",
   "last_runtime_loss": null
 }
