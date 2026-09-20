@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-022"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Do not change APFS writer by checkpoint XID. Obtain and compare source/rebuilt APSB volume-superblock semantics (FSIndex, feature flags, meta-crypto state, tree types, volume flags, role/group, root/revert/snapshot metadata) from the exact error-79 evidence path, then perform only the nearest evidence-backed repair or diagnostic step.",
-  "constraints": ["Preserve immutable shift-81 report unchanged.","Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not repeat snapshot/API or checkpoint-XID architecture reconnaissance.","Do not revert durable snapshot preservation without causal evidence.","Do not make speculative APFS writer changes."],
-  "predecessor_review_event_id": "review-shift-81-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-81-review-shift-81-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-81-review-shift-81-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 81,
-  "predecessor_worker_id": "petrovich"
+  "goal": "Consume exact Windows E2E run 35485676542 and its artifact for target 438ea9fcfdc33a6114ca00e0f3cbba65dd8fb69c. The run is terminal FAILURE and still shows APFS mountroot error 79, while its apfs-structural-evidence.json lacks the new APSB/Volume fields despite revisions.txt recording the current application SHA. Determine why the exact E2E evidence producer did not emit the shift-82 instrumentation (including stale integration/gate artifact provenance), repair only that evidence path if required, rerun exact evidence, then compare source/rebuilt APSB semantics before any APFS writer mutation.",
+  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID.","Do not make speculative APFS writer changes.","Preserve durable snapshot preservation.","Treat the missing APSB fields in the exact shift-82 artifact as the immediate evidence-path blocker."],
+  "predecessor_review_event_id": "review-shift-82-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-82-review-shift-82-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-82-review-shift-82-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 82,
+  "predecessor_worker_id": "sanych"
 }

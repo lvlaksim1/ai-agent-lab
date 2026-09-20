@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Exact Windows E2E still fails at APFS mountroot error 79. Shift 81 showed source/rebuilt active checkpoint XID mismatch, but pinned writer intentionally uses static formatXID=1, so XID alone is not causal proof. Next discriminating evidence is source/rebuilt APSB semantic comparison before any writer mutation.",
-  "last_scored_shift": 81,
+  "current_blocker_summary": "Shift 82 landed APSB evidence instrumentation at target 438ea9f, but exact E2E run 35485676542 still failed at APFS mountroot error 79 and its artifact did not contain the new APSB/Volume fields despite recording APPLICATION_SHA 438ea9f. Next step is to repair/verify the exact E2E evidence path so current instrumentation is actually emitted, then compare source/rebuilt APSB semantics before any writer mutation.",
+  "last_scored_shift": 82,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
+  "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-20T02:51:02Z"
+  "updated_at": "2026-09-20T03:15:12Z"
 }
