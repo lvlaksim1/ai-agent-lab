@@ -6,13 +6,13 @@
   "priority": 90,
   "status": "pending",
   "object_id": "ios-research-runtime",
-  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-023"},
+  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-025"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Continue from shift-96 source proof: pinned go-apfs-v2 CreateContainer resolves FixedTime into builder.timestamp and writes it to FormattedBy.Timestamp, but volumeSuperblock never assigns apfsSuperblock.LastModTime; v0.3.1/main has the same omission. Establish an evidence-backed checksum/serialization-safe mechanism to set APSB LastModTime (upstream/fork or bounded post-write patch), then perform only the justified bounded mutation and verify with focused tests, Windows gate, and exact Windows E2E. Keep metaCryptoKeyOsVersion source=407249186/rebuilt=0 as a separate proven mismatch; do not touch XID/checkpoint semantics without structural proof.",
-  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Preserve durable snapshot preservation.","Treat shift-96 LastModTime source mapping as authoritative until contradicted by stronger evidence.","Any LastModTime write must preserve APFS checksum/serialization correctness and be verified before E2E conclusions."],
-  "predecessor_review_event_id": "review-shift-97-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-97-review-shift-97-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-97-review-shift-97-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 97,
-  "predecessor_worker_id": "petrovich"
+  "goal": "First satisfy DIR-025 by generating the immutable Reporting v2 start report with exact canonical section markers and obtaining exact Agent Runtime Check SUCCESS. Only then resume DIR-024: establish an evidence-backed checksum/serialization-safe mechanism to set APSB LastModTime, perform only the justified bounded mutation, and verify focused tests, Windows gate, and exact Windows E2E. Keep metaCryptoKeyOsVersion and XID/checkpoint semantics frozen absent new evidence.",
+  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not touch the target repository before exact start-report Agent Runtime Check SUCCESS.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Any LastModTime write must preserve APFS checksum/serialization correctness and be verified before E2E conclusions."],
+  "predecessor_review_event_id": "review-shift-98-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-98-review-shift-98-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-98-review-shift-98-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 98,
+  "predecessor_worker_id": "sanych"
 }

@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 98 target work was frozen by a Reporting v2 start-report format defect: required canonical section markers lacked trailing colons. DIR-025 requires canonical render/validate preflight and exact Agent Runtime Check SUCCESS, then resumes the checksum-safe APSB LastModTime mechanism proof from DIR-024; XID/checkpoint and metaCryptoKeyOsVersion remain frozen absent new evidence.",
-  "last_scored_shift": 97,
+  "current_blocker_summary": "Shift 98 made no target progress because its immutable Reporting v2 start report failed the exact runtime invariant gate; DIR-025 requires canonical render/validate preflight and exact Agent Runtime Check SUCCESS before resuming DIR-024 checksum-safe APSB LastModTime proof.",
+  "last_scored_shift": 98,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 3,
   "last_checkpoint_at": "2026-09-20T11:03:55Z",
-  "updated_at": "2026-09-20T12:03:48Z"
+  "updated_at": "2026-09-20T12:24:25Z"
 }
