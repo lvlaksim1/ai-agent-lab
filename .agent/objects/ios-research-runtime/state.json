@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-027 remains active. Shift 115 re-verified the already-established live volume paddr/checksum path but runtime was lost before bounded KeyOSVersion repair; next shift should execute the established mutation without broad APFS rediscovery.",
-  "last_scored_shift": 115,
-  "last_otk_verdict": "APPROVED",
-  "last_progress_class": "none",
+  "current_blocker_summary": "Shift 116 landed KeyOSVersion repair as ef22d889 and exact Windows E2E 35537412314 is terminal FAILURE. OTK found the implementation deviated from DIR-027's established live-volume paddr/library-checksum path; correct that bounded repair and consume E2E evidence before any broader APFS change.",
+  "last_scored_shift": 116,
+  "last_otk_verdict": "CORRECTED",
+  "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-20T20:50:08Z"
+  "updated_at": "2026-09-20T21:12:03Z"
 }
