@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-025"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Download and inspect exact artifact 10606121140 (ios-darwin-windows-e2e) from terminal Windows E2E run 35511828863 for target 699c240af49b00ca2168d0761700d4eb274e0ab8. Correlate provisioning/root-shell proof with boot/APFS structural evidence, then continue only the nearest evidence-backed discriminating step for mountroot error 79. Do not repeat the landed LastModTime mutation; keep XID/checkpoint and metaCrypto semantics frozen absent new evidence.",
-  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Preserve the bounded LastModTime fix unless terminal evidence disproves it."],
-  "predecessor_review_event_id": "review-shift-100-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-100-review-shift-100-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-100-review-shift-100-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 100,
-  "predecessor_worker_id": "borisych"
+  "goal": "Preserve source APSB MetaCryptoKeyOSVersion through the pinned APFS writer using a checksum/serialization-safe bounded change. Keep XID/checkpoint and all other metaCrypto semantics frozen. Then run focused tests, Windows gate, and exact Windows E2E and consume terminal evidence before deciding any further APFS change.",
+  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not alter metaCrypto fields other than KeyOSVersion without new discriminating evidence.","Preserve the landed LastModTime fix."],
+  "predecessor_review_event_id": "review-shift-101-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-101-review-shift-101-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-101-review-shift-101-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 101,
+  "predecessor_worker_id": "ivanych"
 }
