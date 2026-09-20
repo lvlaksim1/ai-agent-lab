@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-82-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T03:10:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "sanych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 82,
+  "shift_started_at_utc": "2026-09-20T03:03:00Z",
+  "shift_completed_at_utc": "2026-09-20T03:06:37Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "2b9c9fee826c4c7424334813afca52694015db55",
+    "recovery_anchor_commit": "c19e4dfc3719607acd68a1acda13c558e71dcdb4",
+    "start_report_path": ".agent/reports/starts/shift-82-sanych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-82-sanych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "9662898da0558d6554f7ac4d2a426540fa38dbc7",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T03:06:37Z",
+      "heartbeat_stale_at_utc": "2026-09-20T03:09:37Z",
+      "heartbeat_anchor_commit": "2b9c9fee826c4c7424334813afca52694015db55",
+      "recovery_observed_at_utc": "2026-09-20T03:10:01Z",
+      "recovery_anchor_commit": "c19e4dfc3719607acd68a1acda13c558e71dcdb4",
+      "fenced_generation": 152,
+      "activity_kind": "external_wait",
+      "activity_detail": "Durable shift-82 checkpoint saved for APSB diagnostic target 438ea9f; exact Windows E2E run 35485676542 remains active."
+    }
+  }
+}
