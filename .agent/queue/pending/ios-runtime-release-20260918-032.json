@@ -10,9 +10,9 @@
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
   "goal": "Continue from shift 118 evidence: trace ramdisk packaging and explain the APFS-container-versus-md0 size mismatch observed after consuming exact Windows E2E 35539990359. Preserve corrected KeyOSVersion live-volume paddr/library-checksum path and landed LastModTime fix. Use the smallest evidence-backed repair or instrumentation, then run focused Windows verification and exact E2E to terminal evidence.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter metaCrypto fields other than already-corrected KeyOSVersion without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume mapping path."],
-  "predecessor_review_event_id": "review-shift-118-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-118-review-shift-118-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-118-review-shift-118-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 118,
-  "predecessor_worker_id": "fedorych"
+  "predecessor_review_event_id": "review-shift-119-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-119-review-shift-119-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-119-review-shift-119-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 119,
+  "predecessor_worker_id": "kuzmich"
 }

@@ -5,11 +5,11 @@
   "health": "ORANGE",
   "current_phase": "boot-debugging",
   "current_blocker_summary": "Shift 118 consumed E2E 35539990359 and localized an APFS-container-versus-md0 size mismatch; trace ramdisk packaging next before any broader APFS mutation.",
-  "last_scored_shift": 118,
+  "last_scored_shift": 119,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
+  "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-20T22:14:16Z"
+  "updated_at": "2026-09-20T23:02:47Z"
 }
