@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 406,
-  "purpose": "lease_claim",
+  "sequence": 407,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Claiming production shift 117 for corrected DIR-027 bounded repair and validation.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Waiting for exact Agent Runtime Check 35539898728 for immutable shift-117 start report.",
   "fence_generation": 258
 }
