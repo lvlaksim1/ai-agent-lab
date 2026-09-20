@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 91 OTK APPROVED after verified runtime loss; no target mutation landed. DIR-023 requires deterministic bounded reconstruction and blob-SHA verification of the exact preimage before the localized whole-file CAS APSB modificationTime -> FixedTime mutation, then exact target SHA, focused tests, Windows gate and exact Windows E2E.",
+  "current_blocker_summary": "Six consecutive no-progress shifts; DIR-023 remains active and unexhausted. Next production must reconstruct the authoritative preimage from bounded non-overlapping GitHub reads, verify the blob SHA, then and only then apply the localized APSB modificationTime -> FixedTime whole-file CAS mutation and verification chain.",
   "last_scored_shift": 91,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-20T08:39:17Z"
+  "updated_at": "2026-09-20T08:48:48Z"
 }
