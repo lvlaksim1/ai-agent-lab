@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T12:02:48Z",
     "stale_at": "2026-09-20T12:05:48Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed shift 98; materializing inherited evidence and immutable start report before target work.",
+    "activity_detail": "Immutable shift-98 start report published; waiting for exact report-commit runtime gate before target work.",
     "external_wait": null,
     "source": "lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 98,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-98-sanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "f9a96b7701aecd94b61425d58122e378eb731f4e",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
