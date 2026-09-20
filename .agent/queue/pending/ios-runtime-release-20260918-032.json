@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-027"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Consume exact terminal Windows E2E failure run 35539990359 for target a8bf0471c4a180ee99900e7d85c6ad627315eaae. Inspect the exact failure evidence/artifact and localize the next evidence-backed structural boot blocker. Preserve the corrected live-volume paddr/library-checksum KeyOSVersion path; do not alter LastModTime, XID/checkpoint or adjacent MetaCrypto semantics without new discriminating evidence. Continue the causal chain with the smallest justified repair/instrumentation and terminal verification.",
+  "goal": "Continue from shift 118 evidence: trace ramdisk packaging and explain the APFS-container-versus-md0 size mismatch observed after consuming exact Windows E2E 35539990359. Preserve corrected KeyOSVersion live-volume paddr/library-checksum path and landed LastModTime fix. Use the smallest evidence-backed repair or instrumentation, then run focused Windows verification and exact E2E to terminal evidence.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter metaCrypto fields other than already-corrected KeyOSVersion without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume mapping path."],
-  "predecessor_review_event_id": "review-shift-117-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-117-review-shift-117-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-117-review-shift-117-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 117,
-  "predecessor_worker_id": "ivanych"
+  "predecessor_review_event_id": "review-shift-118-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-118-review-shift-118-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-118-review-shift-118-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 118,
+  "predecessor_worker_id": "fedorych"
 }
