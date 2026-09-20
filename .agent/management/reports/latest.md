@@ -1,14 +1,10 @@
-# Manager report — DEC-066
+# Manager report — DEC-067
 
 Object: `ios-research-runtime`
 Health: ORANGE
 Decision: KEEP_COURSE
 Active directive: DIR-027
 
-The `TWO_NO_PROGRESS_SHIFTS` attention is acknowledged. It does not yet prove a new engineering dead end: the lossless `main.go` preimage blocker remains resolved, and the latest recorded runtime loss occurred while shift 108 was still at start/report-gate activity rather than after a failed bounded KeyOSVersion experiment.
+Shift 109 is finalized APPROVED with no progress and verified runtime loss before target mutation. This raises the no-progress streak to three, but does not falsify the bounded KeyOSVersion repair: the repair has still not been executed. The known lossless-preimage problem is resolved; the remaining next action is narrow and testable.
 
-No course change is justified. The next production shift should execute DIR-027 literally: re-read the production fence, perform only the bounded source-preserving APSB KeyOSVersion offset-108 repair with Fletcher64/checksum validation, checkpoint the exact target SHA, then run focused tests, Windows gate and exact Windows E2E while consuming terminal evidence in the same live shift.
-
-Do not broaden into XID/checkpoint semantics, adjacent MetaCrypto fields, or unrelated APFS writer changes without new discriminating evidence.
-
-No owner decision, STOP or transfer is required.
+DIR-027 therefore remains unchanged. Next production should minimize pre-mutation overhead, re-establish the authoritative preimage/fence, execute the offset-108 KeyOSVersion repair with Fletcher64/checksum validation, checkpoint the exact target SHA, then run focused tests → Windows gate → exact Windows E2E and consume terminal evidence. No owner decision, STOP, transfer, or architecture change is required.
