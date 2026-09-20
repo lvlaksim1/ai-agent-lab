@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-023 bounded authoritative main.go reconstruction reached blob f31534635096b173809b52057bad83635ea032e6; next production must complete exact reconstructed-byte SHA verification, then either perform only the APSB modificationTime -> FixedTime whole-file CAS mutation and verification chain or persist one concrete primitive-level proof that exact verification is impossible.",
+  "current_blocker_summary": "Shift 95 passed DIR-023 exact authoritative preimage boundary via GitHub blob f31534635096b173809b52057bad83635ea032e6 and committed the sole APSB modificationTime -> FixedTime preservation mutation to target main at 415ff121bf0524a8509ec316d4fbfdc6d140a4cd (main.go blob 9eec2108fdac0f1074d66d6ffd6be1d4d428eac6). Verification chain is now required: focused tests, Windows gate, exact Windows E2E terminal evidence.",
   "last_scored_shift": 94,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
-  "checkpoint_generation": 1,
-  "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-20T10:21:43Z"
+  "checkpoint_generation": 2,
+  "last_checkpoint_at": "2026-09-20T10:39:10Z",
+  "updated_at": "2026-09-20T10:39:10Z"
 }
