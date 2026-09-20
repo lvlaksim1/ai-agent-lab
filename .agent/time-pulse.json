@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 329,
-  "purpose": "otk_evidence_checkpoint",
-  "role": "otk",
-  "worker_id": "otk",
+  "sequence": 330,
+  "purpose": "lease_claim",
+  "role": "production",
+  "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-100-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Verified runtime-loss anchors, immutable start report, exact E2E terminal failure and artifact identity; preparing atomic OTK finalization.",
-  "fence_generation": 207
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production lease for shift 101 to inspect authoritative Windows E2E artifact 10606121140 and continue the bounded mountroot error 79 evidence chain.",
+  "fence_generation": 208
 }
