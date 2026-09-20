@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-81-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T02:10:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "petrovich",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 81,
+  "shift_started_at_utc": "2026-09-20T02:03:42Z",
+  "shift_completed_at_utc": "2026-09-20T02:06:37Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "5a3d234d679786c03303d5dae881598333259553",
+    "recovery_anchor_commit": "238200d602e324a1f8b192d41b596f328cf19a5d",
+    "start_report_path": ".agent/reports/starts/shift-81-petrovich-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-81-petrovich-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "60a55b441bcd325e19bb39ee36f9b88f9d2842e2",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T02:06:37Z",
+      "heartbeat_stale_at_utc": "2026-09-20T02:09:37Z",
+      "heartbeat_anchor_commit": "5a3d234d679786c03303d5dae881598333259553",
+      "recovery_observed_at_utc": "2026-09-20T02:10:02Z",
+      "recovery_anchor_commit": "238200d602e324a1f8b192d41b596f328cf19a5d",
+      "fenced_generation": 149,
+      "activity_kind": "verification",
+      "activity_detail": "Checkpointed shift 81: active checkpoint XID mismatch confirmed but upstream writer intentionally uses static formatXID=1; next discriminating evidence is source/rebuilt APSB semantic comparison."
+    }
+  }
+}
