@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "sequence": 263,
+  "sequence": 264,
   "purpose": "lease_claim",
   "role": "otk",
   "worker_id": "otk",
