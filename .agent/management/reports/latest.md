@@ -1,13 +1,15 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-053 — KEEP_COURSE
+Решение: DEC-054 — KEEP_COURSE
 Директива: DIR-022
 Здоровье: ORANGE
 Фаза: boot-debugging
 
-После прошлого управленческого обзора производство получило новое discriminating evidence. Смена №83 восстановила exact E2E APSB evidence path; run 35486388059 на target b5d83ec снова дошёл до APFS mountroot error 79 и показал, что основные source/rebuilt feature/tree/UUID/role поля совпадают. Среди оставшихся различий зафиксированы metaCryptoKeyOsVersion 407249186 против 0 и modificationTime nonzero против 0.
+Последняя независимо принятая смена №87 завершилась подтверждённой потерей runtime. ОТК поставил 5/10 без изменения рейтинга: durable target commit или новое terminal verification evidence до обрыва не появились, но работник оставался строго на уже доказанной bounded границе APSB `modificationTime` -> существующий `FixedTime` mapping и успел локализовать точное место изменения.
 
-Смена №84 потеряла runtime до target work и независимо принята ОТК. Это не опровергает технический курс. Следующая смена должна проверить, как pinned APFS writer формирует эти два APSB поля, и только при доказанном mapping/semantic defect выполнять ближайшую bounded mutation с последующим Windows gate и exact E2E.
+Две подряд no-progress смены требуют контроля, но сейчас это не доказательство ошибочного технического курса: ближайшее действие уже конкретно и независимо подтверждено ОТК. Поэтому новый разворот стратегии только создаст повторное исследование и риск спекулятивной APFS-мутации.
 
-Курс сохраняется. Snapshot-preservation и checkpoint-XID ветки повторно не открывать. DIR-022 сохраняет силу в части reporting/runtime invariants и evidence-first/no-speculation ограничений. Решение владельца, STOP и transfer не требуются.
+Курс сохраняется. Следующая смена должна непосредственно выполнить только whole-file-preserving сохранение source APSB `modificationTime` через существующий `FixedTime`, оставить MetaCryptoKeyOSVersion evidence-only без доказанного bounded writer path, сразу зафиксировать exact target SHA и затем выполнить focused tests, Windows gate и exact Windows E2E с потреблением terminal evidence. XID/checkpoint semantics повторно не открывать без нового структурного доказательства.
+
+Решение владельца, STOP и transfer не требуются.
