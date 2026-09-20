@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 312,
+  "sequence": 313,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "sanych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-97-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Claiming independent OTK review for shift 97 runtime-loss recovery.",
-  "fence_generation": 198
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production shift 98 for DIR-024 checksum-safe APSB LastModTime mechanism proof.",
+  "fence_generation": 199
 }
