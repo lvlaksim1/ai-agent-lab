@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-027 remains the bounded source-preserving APSB KeyOSVersion offset-108 repair with Fletcher64 validation; shift 109 ended by verified runtime loss before target mutation.",
-  "last_scored_shift": 109,
-  "last_otk_verdict": "APPROVED",
+  "current_blocker_summary": "DIR-027 remains the bounded source-preserving APSB KeyOSVersion offset-108 repair with Fletcher64 validation; shift 110 ended by verified runtime loss at a failed Reporting v2 start barrier before target mutation.",
+  "last_scored_shift": 110,
+  "last_otk_verdict": "CORRECTED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-20T18:04:51Z"
+  "updated_at": "2026-09-20T18:37:18Z"
 }
