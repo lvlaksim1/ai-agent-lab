@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 89 ended by verified runtime loss after Reporting v2 passed and the exact bounded FixedTime insertion point was re-read; no target write landed. Independent OTK review is pending. After OTK, resume the bounded whole-file-preserving APSB modificationTime -> FixedTime mutation, checkpoint exact target SHA, then run focused/Windows/exact-E2E verification.",
-  "last_scored_shift": 88,
+  "current_blocker_summary": "Shift 89 OTK APPROVED 5/10 after independently verifying runtime loss. Reporting v2 passed and the exact bounded FixedTime insertion point was re-read, but no target write or terminal verification landed. Resume the bounded whole-file-preserving APSB modificationTime -> FixedTime mutation, checkpoint exact target SHA, then run focused/Windows/exact-E2E verification.",
+  "last_scored_shift": 89,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-20T06:10:53Z"
+  "updated_at": "2026-09-20T07:14:29Z"
 }

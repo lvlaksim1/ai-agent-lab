@@ -8,18 +8,18 @@
   "definition_of_done": ["Use the authoritative object mission Definition of Done"],
   "current_phase": "boot-debugging",
   "health": "ORANGE",
-  "current_blocker_summary": "Shift 89 ended by verified runtime loss after Reporting v2 passed and the exact bounded FixedTime insertion point was re-read; no target write landed. Independent OTK review is pending. After OTK, resume the bounded whole-file-preserving APSB modificationTime -> FixedTime mutation, checkpoint exact target SHA, then run focused/Windows/exact-E2E verification.",
-  "shifts_since_manager_review": 0,
-  "consecutive_no_progress": 3,
+  "current_blocker_summary": "Shift 89 OTK APPROVED 5/10 after independently verifying runtime loss. Reporting v2 passed and the exact bounded FixedTime insertion point was re-read, but no target write or terminal verification landed. Resume the bounded whole-file-preserving APSB modificationTime -> FixedTime mutation, checkpoint exact target SHA, then run focused/Windows/exact-E2E verification.",
+  "shifts_since_manager_review": 1,
+  "consecutive_no_progress": 4,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
-  "last_scored_shift": 88,
+  "last_scored_shift": 89,
   "manager_review_count": 54,
   "last_manager_review_at": "2026-09-20T06:10:53Z",
   "last_manager_decision": "DEC-055: KEEP_COURSE; await shift 89 OTK then resume bounded APSB modificationTime -> FixedTime mutation",
   "active_directive": "DIR-022",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-20T06:10:53Z"
+  "updated_at": "2026-09-20T07:14:29Z"
 }

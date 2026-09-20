@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-022"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Resume directly from verified shift-88 runtime loss at the pinned whole-file-preserving mutation boundary. Implement only the causally justified preservation of source APSB modificationTime through the existing FixedTime mapping. Keep MetaCryptoKeyOSVersion evidence-only unless a supported bounded writer path is proven. Checkpoint the exact target SHA immediately, then run focused tests, Windows gate and exact Windows E2E and consume the terminal result.",
+  "goal": "Resume directly from verified shift-89 runtime loss at the pinned whole-file-preserving mutation boundary. Implement only the causally justified preservation of source APSB modificationTime through the existing FixedTime mapping. Keep MetaCryptoKeyOSVersion evidence-only unless a supported bounded writer path is proven. Checkpoint the exact target SHA immediately, then run focused tests, Windows gate and exact Windows E2E and consume the terminal result.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Preserve durable snapshot preservation.","Treat exact run 35486388059 artifact as authoritative current APSB evidence."],
-  "predecessor_review_event_id": "review-shift-88-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-88-review-shift-88-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-88-review-shift-88-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 88,
-  "predecessor_worker_id": "palych"
+  "predecessor_review_event_id": "review-shift-89-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-89-review-shift-89-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-89-review-shift-89-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 89,
+  "predecessor_worker_id": "petrovich"
 }
