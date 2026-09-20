@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 241,
+  "sequence": 242,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "borisych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-83-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of recovered shift 83.",
-  "fence_generation": 156
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production shift 84 for DIR-022 continuation.",
+  "fence_generation": 157
 }
