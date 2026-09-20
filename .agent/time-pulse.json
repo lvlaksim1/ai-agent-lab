@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 336,
-  "purpose": "otk_finalize",
-  "role": "otk",
-  "worker_id": "otk",
+  "sequence": 337,
+  "purpose": "lease_claim",
+  "role": "production",
+  "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-101-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Finalizing independent OTK review for shift 101.",
-  "fence_generation": 210
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production shift 102 for DIR-026 bounded MetaCryptoKeyOSVersion preservation.",
+  "fence_generation": 211
 }
