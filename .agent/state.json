@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T07:47:01Z",
     "stale_at": "2026-09-20T07:50:01Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production shift 90; materializing inherited evidence before Reporting v2 start report.",
+    "activity_detail": "Shift 90 immutable Reporting v2 start report published; waiting for exact report commit Runtime Check before target work.",
     "external_wait": null,
     "source": "relay_production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 90,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-90-sanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "53555c67cdc30576a97126ed8e0f0d56a3a65698",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
