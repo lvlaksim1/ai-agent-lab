@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T14:00:55Z",
     "stale_at": "2026-09-20T14:03:55Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production shift 102 for DIR-026 bounded MetaCryptoKeyOSVersion preservation.",
+    "activity_detail": "Published immutable shift-102 start report; awaiting exact report-commit Agent Runtime Check before target work.",
     "external_wait": null
   },
   "time_authority": "github_commit_committer_date",
@@ -32,8 +32,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 102,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-102-fedorych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "904eddac6dc597d13157a6a8a0cedc6f9491219f",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
