@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 230,
-  "purpose": "heartbeat",
+  "sequence": 231,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Durable shift-82 checkpoint saved for APSB diagnostic target 438ea9f; exact Windows E2E run 35485676542 remains active.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 151
 }
