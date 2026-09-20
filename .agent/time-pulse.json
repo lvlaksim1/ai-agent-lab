@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 381,
-  "purpose": "heartbeat",
+  "sequence": 382,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "DIR-027 evidence resolved. A transient mistaken target write was fully fenced out by restoring main exactly to pre-shift commit 699c240a/tree 19aef6d6; no target diff remains. Preparing mutation via atomic tree path only.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 240
 }
