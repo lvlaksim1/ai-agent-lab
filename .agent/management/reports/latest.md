@@ -1,12 +1,12 @@
-# Manager report — DEC-069
+# Manager report — DEC-070
 
 Object: `ios-research-runtime`
 Health: ORANGE
 Decision: KEEP_COURSE
 Active directive: DIR-027
 
-Production is idle after shift 113. The last two scored shifts produced no engineering progress because runtime was lost after the Reporting v2/preimage verification work but before the already-defined bounded KeyOSVersion repair. The target remains unchanged at the verified pre-repair state.
+Production is idle after OTK finalization of shift 116. The authoritative OTK review records substantial progress but a CORRECTED verdict: target `ef22d889c400add80c28544e309160c816e0382f` preserves source MetaCryptoKeyOSVersion; Ramdisk Tool Windows and Windows Build passed, while exact Windows E2E run `35537412314` failed.
 
-This is now an execution-efficiency problem, not evidence that the technical direction is wrong. DIR-027 already fixes the repair boundary and forbids broad APFS re-investigation. The next shift should consume the existing verified lossless-preimage evidence, revalidate the production fence, execute the bounded KeyOSVersion repair, checkpoint the exact target SHA, and then consume focused tests → Windows gate → exact Windows E2E terminal evidence in the same live shift.
+The failure does not justify broad APFS investigation. OTK identified a bounded implementation deviation: the landed repair scanned for the first APSB and introduced a local Fletcher path instead of using DIR-027's already-established rebuilt live-volume paddr resolution and library checksum calculation/validation path. The pending continuation already encodes the exact correction and preserves LastModTime, XID/checkpoint and adjacent MetaCrypto semantics.
 
-No owner decision, STOP, transfer, architecture change, or new directive is required. Health remains ORANGE until the established repair is actually executed and terminal evidence gives a new discriminating result.
+KEEP_COURSE. The next production shift should execute that corrected DIR-027 continuation, then consume focused tests, Windows gate and exact Windows E2E terminal evidence before any broader APFS mutation. No owner decision, STOP, transfer or new directive is required. Health remains ORANGE until terminal validation proves the bounded repair path.
