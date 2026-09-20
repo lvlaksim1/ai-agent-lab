@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 281,
-  "purpose": "heartbeat",
+  "sequence": 282,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Report gate passed; authoritative main.go reconstructed from bounded non-overlapping reads 1-400 and 401-800, both anchored to blob f31534635096b173809b52057bad83635ea032e6; target HEAD b5d83ecb7f4d914c00cc0ac7e568ecb724d8c567 unchanged.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 181
 }
