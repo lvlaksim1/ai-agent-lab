@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 299,
+  "sequence": 300,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "external_wait",
-  "activity_detail": "Ramdisk Tool Windows 35505770257 succeeded; Windows Build 35505770260 and Windows End-to-End Boot 35505770284 remain in progress and are being actively polled.",
+  "activity_detail": "Ramdisk Tool Windows succeeded; Windows Build and exact Windows E2E remain active for target 415ff121bf0524a8509ec316d4fbfdc6d140a4cd.",
   "fence_generation": 190
 }
