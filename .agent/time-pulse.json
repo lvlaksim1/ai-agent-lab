@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 290,
+  "sequence": 291,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Immutable shift-94 report gate passed: Agent Runtime Check 35504019933 SUCCESS; beginning DIR-023 bounded preimage verification.",
+  "activity_detail": "DIR-023 bounded preimage re-read checkpointed at authoritative blob f31534635096b173809b52057bad83635ea032e6; exact reconstructed-byte SHA verification remains before target CAS.",
   "fence_generation": 187
 }
