@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Exact Windows E2E 35511828863 is terminal FAILURE for target 699c240a; artifact 10606121140 is the authoritative next evidence source and must be inspected before any further APFS writer mutation.",
+  "current_blocker_summary": "Artifact 10606121140 exposes a new bounded APSB discriminator: source metaCryptoKeyOsVersion=407249186 (0x18462122) while rebuilt=0; Major/Minor/Flags/PersistentClass/KeyRevision and LastModTime match. Boot repeatedly fails mountroot error 79 after SEP timeout. Investigate checksum-safe source-preservation of KeyOSVersion before touching XID/checkpoint or other metaCrypto fields.",
   "last_scored_shift": 100,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
-  "checkpoint_generation": 3,
-  "last_checkpoint_at": "2026-09-20T11:03:55Z",
-  "updated_at": "2026-09-20T13:16:54Z"
+  "checkpoint_generation": 4,
+  "last_checkpoint_at": "2026-09-20T13:27:00Z",
+  "updated_at": "2026-09-20T13:27:00Z"
 }
