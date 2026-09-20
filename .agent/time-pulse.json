@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 275,
-  "purpose": "lease_claim",
+  "sequence": 276,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 91 for DIR-022 bounded APSB modificationTime preservation.",
+  "activity_kind": "checkpoint",
+  "activity_detail": "Shift 91 report gate passed; exact FixedTime target boundary re-read and durable checkpoint saved; target remains unmodified because returned whole-file content was truncated.",
   "fence_generation": 178
 }
