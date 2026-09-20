@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 353,
-  "purpose": "heartbeat",
+  "sequence": 354,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Reporting v2 gate passed via Agent Runtime Check 35518960973; exact Git blob 9eec2108fdac0f1074d66d6ffd6be1d4d428eac6 yielded lossless main.go preimage. Preparing bounded KeyOSVersion mutation.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 220
 }
