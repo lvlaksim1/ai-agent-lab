@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 266,
-  "purpose": "lease_claim",
+  "sequence": 267,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 89 to resume bounded APSB modificationTime -> FixedTime mutation.",
-  "fence_generation": 171
+  "activity_kind": "working",
+  "activity_detail": "Reporting v2 barrier passed; target main.go exact bounded FixedTime insertion point re-read; preserving whole-file CAS safety before target write.",
+  "fence_generation": 172
 }
