@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 289,
-  "purpose": "lease_claim",
+  "sequence": 290,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 94 under DIR-023 after OTK shift 93 finalization.",
+  "activity_kind": "working",
+  "activity_detail": "Immutable shift-94 report gate passed: Agent Runtime Check 35504019933 SUCCESS; beginning DIR-023 bounded preimage verification.",
   "fence_generation": 187
 }
