@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T05:36:57Z",
     "stale_at": "2026-09-20T05:39:57Z",
     "activity_kind": "starting",
-    "activity_detail": "Claiming production shift 88 for bounded APSB modificationTime preservation continuation.",
+    "activity_detail": "Published immutable shift 88 start report; awaiting mandatory Runtime Check barrier.",
     "external_wait": null,
     "source": "lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 88,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-88-palych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "c14df0c71c42b030fe602dba773ad3e0533ceef3",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
