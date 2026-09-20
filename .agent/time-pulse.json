@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 227,
+  "sequence": 228,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Consumed exact error-79 artifact; existing evidence exposes NXSB only, so nearest evidence-backed step is APSB diagnostic extension.",
+  "activity_kind": "external_wait",
+  "activity_detail": "APSB evidence diagnostic committed at target 438ea9f; actively waiting for exact Windows E2E boot-proof run 35485676542.",
   "fence_generation": 151
 }
