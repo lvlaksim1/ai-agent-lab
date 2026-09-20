@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 221,
-  "purpose": "lease_claim",
+  "sequence": 222,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Starting shift 81 from verified shift-80 continuation.",
+  "activity_kind": "verification",
+  "activity_detail": "Consumed shift-80 target verification: Ramdisk Tool Windows SUCCESS; exact E2E failure artifact shows source active checkpoint XID 9/next 10 versus rebuilt XID 1/next 2.",
   "fence_generation": 148
 }
