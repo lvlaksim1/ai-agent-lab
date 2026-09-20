@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 410,
-  "purpose": "heartbeat",
+  "sequence": 411,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Target a8bf0471 validation active: Ramdisk 35539990355, Windows Build 35539990374, exact E2E 35539990359.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 258
 }
