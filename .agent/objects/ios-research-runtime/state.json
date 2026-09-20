@@ -5,11 +5,11 @@
   "health": "ORANGE",
   "current_phase": "boot-debugging",
   "current_blocker_summary": "DIR-023 bounded authoritative main.go reconstruction is proven; next production must verify reconstructed bytes against blob f31534635096b173809b52057bad83635ea032e6, then apply only APSB modificationTime -> FixedTime whole-file CAS mutation and complete focused tests, Windows gate and exact Windows E2E.",
-  "last_scored_shift": 93,
+  "last_scored_shift": 94,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-20T10:02:06Z"
+  "updated_at": "2026-09-20T10:14:49Z"
 }

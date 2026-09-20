@@ -9,17 +9,17 @@
   "current_phase": "boot-debugging",
   "health": "ORANGE",
   "current_blocker_summary": "DIR-023 bounded authoritative main.go reconstruction is proven; next production must verify reconstructed bytes against blob f31534635096b173809b52057bad83635ea032e6, then apply only APSB modificationTime -> FixedTime whole-file CAS mutation and complete the verification chain.",
-  "shifts_since_manager_review": 2,
-  "consecutive_no_progress": 1,
+  "shifts_since_manager_review": 3,
+  "consecutive_no_progress": 2,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
-  "last_scored_shift": 93,
+  "last_scored_shift": 94,
   "manager_review_count": 57,
   "last_manager_review_at": "2026-09-20T08:48:48Z",
   "last_manager_decision": "DEC-058: KEEP_COURSE; execute DIR-023 bounded reconstruction literally before any target mutation",
   "active_directive": "DIR-023",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-20T10:02:06Z"
+  "updated_at": "2026-09-20T10:14:49Z"
 }

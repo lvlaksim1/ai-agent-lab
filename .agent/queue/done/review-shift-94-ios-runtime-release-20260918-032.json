@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-94-ios-runtime-release-20260918-032",
+  "type": "supervisor-review",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "shift_number": 94,
+  "source_event": "ios-runtime-release-20260918-032",
+  "worker_id": "fedorych",
+  "verdict": "APPROVED",
+  "score": 6,
+  "rating_delta": 10,
+  "progress_class": "none",
+  "review_path": ".agent/reviews/shift-94-review-shift-94-ios-runtime-release-20260918-032.md",
+  "otk_report_path": ".agent/reports/otk/shift-94-review-shift-94-ios-runtime-release-20260918-032.md",
+  "start_report_path": ".agent/reports/starts/shift-94-fedorych-ios-runtime-release-20260918-032.md",
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "otk_finalize_policy_version": 1
+}
