@@ -15,14 +15,14 @@
     "worker_id": "kuzmich",
     "object_id": "ios-research-runtime",
     "active_event": "ios-runtime-release-20260918-032",
-    "sequence": 298,
+    "sequence": 299,
     "time_source": "github_commit_committer_date",
-    "time_anchor_commit": "5b52b659ef346866ae1f3b3740e0a828fdfba22d",
+    "time_anchor_commit": "d093b4a058f817e01846803308ecc24368611d1d",
     "time_anchor_path": ".agent/time-pulse.json",
-    "last_seen_at": "2026-09-20T10:42:47Z",
-    "stale_at": "2026-09-20T10:45:47Z",
+    "last_seen_at": "2026-09-20T10:44:19Z",
+    "stale_at": "2026-09-20T10:47:19Z",
     "activity_kind": "external_wait",
-    "activity_detail": "Ramdisk Tool Windows 35505770257 succeeded; Windows Build 35505770260 and Windows End-to-End Boot 35505770284 remain in progress and are being actively polled.",
+    "activity_detail": "Ramdisk Tool Windows succeeded; Windows Build and exact Windows E2E remain active for target 415ff121bf0524a8509ec316d4fbfdc6d140a4cd.",
     "external_wait": {
       "active": true,
       "kind": "github_actions_runs",
@@ -31,8 +31,8 @@
       "worker_observed_status": "in_progress",
       "since_at": "2026-09-20T10:42:17Z",
       "since_anchor_commit": "b7e027d16ae80e50a4cafe17eee8f521ad8200b9",
-      "last_polled_at": "2026-09-20T10:42:47Z",
-      "last_polled_anchor_commit": "5b52b659ef346866ae1f3b3740e0a828fdfba22d"
+      "last_polled_at": "2026-09-20T10:44:19Z",
+      "last_polled_anchor_commit": "d093b4a058f817e01846803308ecc24368611d1d"
     },
     "source": "relay_production"
   },
