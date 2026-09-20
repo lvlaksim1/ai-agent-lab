@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T14:14:52Z",
     "stale_at": "2026-09-20T14:17:52Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed shift 103; preparing immutable Reporting v2 start report from exact shift-102 OTK evidence.",
+    "activity_detail": "Immutable Reporting v2 start report published; awaiting exact report-commit Agent Runtime Check barrier.",
     "external_wait": null,
     "source": "production_lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 103,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-103-kuzmich-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "6699fac04c836e149504cd0fe03b9a569af40885",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
