@@ -2,14 +2,14 @@
   "schema_version": 1,
   "object_id": "ios-research-runtime",
   "status": "ACTIVE",
-  "health": "RED",
-  "current_phase": "control-plane-recovery",
-  "current_blocker_summary": "Shift 81 verified the active checkpoint XID mismatch but pinned writer evidence shows rebuilt XID 1 is intentional static-checkpoint architecture, not sufficient proof of corruption. The next discriminating evidence is source/rebuilt APSB semantic comparison; no writer mutation is justified before it.",
+  "health": "ORANGE",
+  "current_phase": "boot-debugging",
+  "current_blocker_summary": "Exact Windows E2E still fails at APFS mountroot error 79. Shift 81 showed source/rebuilt active checkpoint XID mismatch, but pinned writer intentionally uses static formatXID=1, so XID alone is not causal proof. Next discriminating evidence is source/rebuilt APSB semantic comparison before any writer mutation.",
   "last_scored_shift": 81,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-20T02:35:36Z"
+  "updated_at": "2026-09-20T02:51:02Z"
 }
