@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 232,
+  "sequence": 233,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-82-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Claiming OTK lease for independent review of shift 82.",
-  "fence_generation": 153
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 83 to repair the exact APSB evidence path and consume terminal E2E evidence.",
+  "fence_generation": 154
 }
