@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 357,
-  "purpose": "lease_claim",
+  "sequence": 358,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production lease for shift 106 under DIR-027.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Immutable shift-106 start report published; waiting for exact Agent Runtime Check terminal result.",
   "fence_generation": 223
 }
