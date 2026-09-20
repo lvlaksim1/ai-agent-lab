@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "attention": true,
+  "attention": false,
   "generation": 47,
-  "reasons": ["three_shifts_since_manager_review", "two_consecutive_no_progress"],
-  "updated_at": "2026-09-20T05:15:02Z"
+  "reasons": [],
+  "updated_at": "2026-09-20T05:22:46Z"
 }
