@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 321,
-  "purpose": "external_wait_poll",
+  "sequence": 322,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Ramdisk Tool Windows passed; Windows Build and exact Windows E2E 35511828863 remain in progress for target SHA 699c240a.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 202
 }
