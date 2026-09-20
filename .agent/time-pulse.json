@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 235,
+  "sequence": 236,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Target 3dd7a99 now emits APSB evidence from the actual Go ramdisk evidence producer; checking CI before exact E2E consumption.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Durable shift-83 checkpoint saved for target 3dd7a99; polling Ramdisk Tool Windows 35486307859 and exact E2E 35486307872.",
   "fence_generation": 154
 }
