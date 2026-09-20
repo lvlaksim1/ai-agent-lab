@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 265,
-  "purpose": "heartbeat",
-  "role": "otk",
-  "worker_id": "otk",
+  "sequence": 266,
+  "purpose": "lease_claim",
+  "role": "production",
+  "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-88-ios-runtime-release-20260918-032",
-  "activity_kind": "persisting",
-  "activity_detail": "Finalizing independent OTK review for recovered shift 88 atomically.",
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 89 to resume bounded APSB modificationTime -> FixedTime mutation.",
   "fence_generation": 171
 }
