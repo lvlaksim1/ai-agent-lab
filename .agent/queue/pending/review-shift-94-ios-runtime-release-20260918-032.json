@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-94-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T10:10:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "fedorych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 94,
+  "shift_started_at_utc": "2026-09-20T10:03:47Z",
+  "shift_completed_at_utc": "2026-09-20T10:05:33Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "23b25343889d23600c6b9afb7915d2e0568cb4ee",
+    "recovery_anchor_commit": "f0535840c18489d90ade339231f4581e13ac6e7c",
+    "start_report_path": ".agent/reports/starts/shift-94-fedorych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-94-fedorych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "15a7e8365882d1a9ea173dbc4d17b54647a4ae23",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T10:05:33Z",
+      "heartbeat_stale_at_utc": "2026-09-20T10:08:33Z",
+      "heartbeat_anchor_commit": "23b25343889d23600c6b9afb7915d2e0568cb4ee",
+      "recovery_observed_at_utc": "2026-09-20T10:10:02Z",
+      "recovery_anchor_commit": "f0535840c18489d90ade339231f4581e13ac6e7c",
+      "fenced_generation": 188,
+      "activity_kind": "working",
+      "activity_detail": "DIR-023 bounded preimage re-read checkpointed at authoritative blob f31534635096b173809b52057bad83635ea032e6; exact reconstructed-byte SHA verification remains before target CAS."
+    }
+  }
+}
