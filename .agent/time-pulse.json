@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 226,
-  "purpose": "lease_claim",
+  "sequence": 227,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 82 for DIR-022 APSB semantic comparison.",
+  "activity_kind": "working",
+  "activity_detail": "Consumed exact error-79 artifact; existing evidence exposes NXSB only, so nearest evidence-backed step is APSB diagnostic extension.",
   "fence_generation": 151
 }
