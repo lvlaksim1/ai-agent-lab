@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 423,
+  "sequence": 424,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "palych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "external_wait",
-  "activity_detail": "Active evidence wait for exact Windows E2E 35545935392 and Windows Build 35545935393 on target 4306296b.",
+  "activity_detail": "Polled exact E2E 35545935392; still in progress during setup/build stages. Continuing active evidence wait.",
   "fence_generation": 265
 }
