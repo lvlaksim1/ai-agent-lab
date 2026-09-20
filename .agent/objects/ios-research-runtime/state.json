@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 85 pinned the APSB writer mapping before runtime loss: the discriminating volume last-modified time is driven by writer FixedTime rather than preserved source metadata, and the inspected pinned create API exposes no MetaCryptoKeyOSVersion option. No target mutation landed. Next step is a bounded, evidence-backed preservation change followed by focused/Windows/exact-E2E verification.",
-  "last_scored_shift": 85,
+  "current_blocker_summary": "Shift 86 ended by verified runtime loss immediately after its validated start report, before target mutation. The evidence-backed next action remains bounded preservation of source APSB modificationTime through the existing FixedTime mapping, with MetaCryptoKeyOSVersion evidence-only unless a supported bounded writer path is proven; then focused/Windows/exact-E2E verification.",
+  "last_scored_shift": 86,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
+  "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-20T04:50:59Z"
+  "updated_at": "2026-09-20T04:59:57Z"
 }
