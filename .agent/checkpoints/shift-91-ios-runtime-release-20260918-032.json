@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "shift_number": 91,
+  "worker_id": "mikhalych",
+  "object_id": "ios-research-runtime",
+  "event_id": "ios-runtime-release-20260918-032",
+  "start_report_commit": "f8d815f34f66f8c9c9fce6e8d61c52957ae6a0f6",
+  "report_gate": "SUCCESS",
+  "target_repository": "lvlaksim1/iOS-Research-Runtime",
+  "target_ref": "main",
+  "target_path": "tools/ios-ramdisk-tool/main.go",
+  "observed_boundary": "CreateOptions currently preserves snapshots but has no FixedTime field; exact intended mutation is source VolumeSuperblock.ModificationTime -> CreateOptions.FixedTime without changing XID/checkpoint or MetaCrypto semantics.",
+  "target_mutated": false,
+  "next_action": "Obtain a whole-file-safe writable representation of main.go, apply only the FixedTime mapping, commit with current blob CAS, record exact target SHA, then run focused tests, Windows gate and exact Windows E2E.",
+  "safety_note": "The current connector returned the file content truncated in the tool response; no partial replacement was attempted because update_file is whole-file replacement and truncation would corrupt target."
+}
