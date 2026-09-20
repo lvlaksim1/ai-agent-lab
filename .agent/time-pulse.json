@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 228,
+  "sequence": 229,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "external_wait",
-  "activity_detail": "APSB evidence diagnostic committed at target 438ea9f; actively waiting for exact Windows E2E boot-proof run 35485676542.",
+  "activity_detail": "Polled exact Windows E2E run 35485676542; still in progress after APSB diagnostic commit.",
   "fence_generation": 151
 }
