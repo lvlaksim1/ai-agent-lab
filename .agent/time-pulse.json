@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 245,
-  "purpose": "lease_claim",
+  "sequence": 246,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "starting",
-  "activity_detail": "Claim production shift 85 for DIR-022 continuation.",
+  "activity_detail": "Immutable start report published; waiting for exact report commit Agent Runtime Check.",
   "fence_generation": 160
 }
