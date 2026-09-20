@@ -38,3 +38,10 @@
 - DIR-019 target-first boundary was re-read without architecture/API rediscovery: target `tools/ios-ramdisk-tool/main.go` blob is `502659e5a7f0b1a5a0a46374be2a6abd3cef3270`; `CreateOptions` still leaves `Snapshots` empty immediately before `CreateContainer`.
 - The GitHub connector available in this execution exposes whole-file replacement for existing files but no bounded patch operation. The target blob was fetched intact; applying only a partial replacement would truncate the file and is forbidden. No target write was attempted, so target remains unchanged.
 - Exact required edit remains unchanged: enumerate `volume.NumberOfSnapshots()`, read each `volume.Snapshot(i)`, use `UTF8Name()`, choose `SnapshotMetadata.ChangeTime` with `CreationTime` fallback when zero, append `apfswrite.SnapshotSpec{Name: name, ModTime: time.Unix(0, int64(modTime))}`, and assign the slice to `createOpts.Snapshots` before `CreateContainer`.
+
+## Shift 79 — Кузьмич — control-plane checkpoint
+- OTK finalized shift 78 APPROVED 9/10 after verifying runtime loss. Shift 78 durably landed bounded snapshot preservation at target `8288dfabeefd069066d931d09cb4508421eedf29`; Ramdisk Tool Windows run `35480398952` succeeded and exact Windows E2E run `35480398951` later failed in provisioning/Darwin root-shell proof.
+- Shift-79 immutable start report was created at commit `df0c791a1bafa518946f3c44ed01d0645689985f` with all canonical v2 literal markers.
+- Mandatory exact-commit Agent Runtime Check run `35481415797` nevertheless completed FAILURE in `Validate agent runtime invariants` before any target work.
+- Workflow forbids rewriting the immutable report after gate failure. No target-repository mutation or evidence-changing engineering action was performed in shift 79.
+- This is a control-plane defect requiring manager/recovery attention; the terminal E2E failure evidence remains the next engineering input once the report gate is legally restored.
