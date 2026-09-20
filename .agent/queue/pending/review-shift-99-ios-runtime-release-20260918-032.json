@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-99-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T12:58:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "mikhalych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 99,
+  "shift_started_at_utc": "2026-09-20T12:48:06Z",
+  "shift_completed_at_utc": "2026-09-20T12:53:21Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "f39a631b5e9d5981d4c41bd3e67a108449de790a",
+    "recovery_anchor_commit": "1864e113539a7da85f07e95be891d33937e09064",
+    "start_report_path": ".agent/reports/starts/shift-99-mikhalych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-99-mikhalych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "31cbe77ba3a5ae29e7dc472cace128f48e57707d",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T12:53:21Z",
+      "heartbeat_stale_at_utc": "2026-09-20T12:56:21Z",
+      "heartbeat_anchor_commit": "f39a631b5e9d5981d4c41bd3e67a108449de790a",
+      "recovery_observed_at_utc": "2026-09-20T12:58:02Z",
+      "recovery_anchor_commit": "1864e113539a7da85f07e95be891d33937e09064",
+      "fenced_generation": 203,
+      "activity_kind": "external_wait",
+      "activity_detail": "Ramdisk Tool Windows passed; Windows Build and exact Windows E2E 35511828863 remain in progress for target SHA 699c240a."
+    }
+  }
+}
