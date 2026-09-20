@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 209,
-  "purpose": "heartbeat",
+  "sequence": 210,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Ramdisk Tool Windows run 35480398952 SUCCESS; exact Windows E2E run 35480398951 still in_progress and is being actively polled.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 140
 }
