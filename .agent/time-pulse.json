@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 259,
-  "purpose": "lease_claim",
+  "sequence": 260,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "palych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 88 for bounded APSB modificationTime preservation continuation.",
+  "activity_kind": "working",
+  "activity_detail": "Reporting v2 barrier passed; exact target main SHA b5d83ecb7f4d914c00cc0ac7e568ecb724d8c567 pinned; preparing bounded FixedTime mutation.",
   "fence_generation": 169
 }
