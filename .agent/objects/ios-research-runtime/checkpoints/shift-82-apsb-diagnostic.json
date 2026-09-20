@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "object_id": "ios-research-runtime",
+  "event_id": "ios-runtime-release-20260918-032",
+  "shift_number": 82,
+  "worker_id": "sanych",
+  "target_repository": "lvlaksim1/iOS-Research-Runtime",
+  "target_ref": "main",
+  "target_commit": "438ea9fcfdc33a6114ca00e0f3cbba65dd8fb69c",
+  "evidence_run_id": 35485676542,
+  "status": "external_wait",
+  "summary": "Exact prior error-79 artifact contained NXSB-only structural evidence. Added evidence-only APSB parser to Integration evidence, exposing FSIndex, feature masks, meta-crypto bytes, tree types/OIDs, revert metadata, counts, UUID, fs flags and a raw 0x400-byte APSB prefix for source/rebuilt comparison. No APFS writer semantics changed. Exact Windows E2E for this target commit is in progress."
+}
