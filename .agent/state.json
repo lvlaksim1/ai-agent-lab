@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T13:06:11Z",
     "stale_at": "2026-09-20T13:09:11Z",
     "activity_kind": "starting",
-    "activity_detail": "Starting shift 100 to consume terminal E2E 35511828863 and continue APFS error-79 diagnosis.",
+    "activity_detail": "Shift 100 immutable start report published; waiting for exact report-commit runtime gate.",
     "external_wait": null,
     "source": "production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 100,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-100-borisych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "4714f6cdfd8c6e17fe39efe3e82912447a108195",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
