@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 320,
+  "sequence": 321,
   "purpose": "external_wait_poll",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "external_wait",
-  "activity_detail": "Ramdisk Tool Windows run 35511828825 for exact target SHA remains in progress; actively waiting for terminal evidence.",
+  "activity_detail": "Ramdisk Tool Windows passed; Windows Build and exact Windows E2E 35511828863 remain in progress for target SHA 699c240a.",
   "fence_generation": 202
 }
