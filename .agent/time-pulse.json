@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 254,
-  "purpose": "lease_claim",
+  "sequence": 255,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 87 after shift-86 OTK.",
+  "activity_kind": "engineering",
+  "activity_detail": "Pinned exact FixedTime mutation after checkpoint; preparing whole-file-preserving target write.",
   "fence_generation": 166
 }
