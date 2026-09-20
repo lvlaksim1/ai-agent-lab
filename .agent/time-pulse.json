@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 380,
+  "sequence": 381,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Reporting v2 gate passed; authoritative main.go blob and pinned APFS paddr/checksum APIs verified; preparing bounded DIR-027 mutation.",
+  "activity_detail": "DIR-027 evidence resolved. A transient mistaken target write was fully fenced out by restoring main exactly to pre-shift commit 699c240a/tree 19aef6d6; no target diff remains. Preparing mutation via atomic tree path only.",
   "fence_generation": 240
 }
