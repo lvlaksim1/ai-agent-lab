@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 355,
-  "purpose": "lease_claim",
+  "sequence": 356,
+  "purpose": "otk_finalize",
   "role": "otk",
   "worker_id": "otk",
   "object_id": "ios-research-runtime",
   "active_event": "review-shift-105-ios-runtime-release-20260918-032",
   "activity_kind": "otk_review",
-  "activity_detail": "Claiming OTK lease for independent review of shift 105.",
+  "activity_detail": "Shift 105 evidence reviewed: runtime loss verified; lossless authoritative main.go preimage established; bounded KeyOSVersion mutation remained unperformed.",
   "fence_generation": 222
 }
