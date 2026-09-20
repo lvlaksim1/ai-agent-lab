@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-026 implementation remains bounded and unresolved: obtain a lossless authoritative main.go preimage/write route, then apply only the checksum-safe APSB KeyOSVersion offset-108 repair. Shift 104 made no target mutation.",
+  "current_blocker_summary": "APFS KeyOSVersion repair boundary is proven. Obtain a blob-verified lossless authoritative target preimage via bounded non-overlapping reads or exact Git blob/raw route, then perform only the DIR-027 bounded offset-108 repair and verification chain.",
   "last_scored_shift": 104,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-20T14:37:36Z"
+  "updated_at": "2026-09-20T14:49:43Z"
 }
