@@ -6,13 +6,13 @@
   "priority": 90,
   "status": "pending",
   "object_id": "ios-research-runtime",
-  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-025"},
+  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-026"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Preserve source APSB MetaCryptoKeyOSVersion through the pinned APFS writer using a checksum/serialization-safe bounded change. Keep XID/checkpoint and all other metaCrypto semantics frozen. Then run focused tests, Windows gate, and exact Windows E2E and consume terminal evidence before deciding any further APFS change.",
+  "goal": "Implement the smallest source-preserving APSB MetaCryptoKeyOSVersion path supported by shift-102 evidence. Prefer typed writer plumbing; if a local post-create APSB patch is necessary, resolve the correct volume paddr and recompute Fletcher64 over block[8:]. Preserve the landed LastModTime fix and keep XID/checkpoint and all other MetaCrypto semantics frozen. Then run focused tests, Windows gate and exact Windows E2E and consume terminal evidence before any further APFS change.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not alter metaCrypto fields other than KeyOSVersion without new discriminating evidence.","Preserve the landed LastModTime fix."],
-  "predecessor_review_event_id": "review-shift-101-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-101-review-shift-101-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-101-review-shift-101-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 101,
-  "predecessor_worker_id": "ivanych"
+  "predecessor_review_event_id": "review-shift-102-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-102-review-shift-102-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-102-review-shift-102-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 102,
+  "predecessor_worker_id": "fedorych"
 }
