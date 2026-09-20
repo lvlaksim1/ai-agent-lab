@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-89-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T06:10:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "petrovich",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 89,
+  "shift_started_at_utc": "2026-09-20T06:05:25Z",
+  "shift_completed_at_utc": "2026-09-20T06:06:17Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "7a3587d7052b4654cd2e4aeb8c2780556eda42ac",
+    "recovery_anchor_commit": "56f05fa581b63a7604f8c161c8ce40054c65a707",
+    "start_report_path": ".agent/reports/starts/shift-89-petrovich-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-89-petrovich-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "362c4166cff54f544264af265e93d75ef8380801",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T06:06:17Z",
+      "heartbeat_stale_at_utc": "2026-09-20T06:09:17Z",
+      "heartbeat_anchor_commit": "7a3587d7052b4654cd2e4aeb8c2780556eda42ac",
+      "recovery_observed_at_utc": "2026-09-20T06:10:01Z",
+      "recovery_anchor_commit": "56f05fa581b63a7604f8c161c8ce40054c65a707",
+      "fenced_generation": 173,
+      "activity_kind": "working",
+      "activity_detail": "Reporting v2 barrier passed; target main.go exact bounded FixedTime insertion point re-read; preserving whole-file CAS safety before target write."
+    }
+  }
+}
