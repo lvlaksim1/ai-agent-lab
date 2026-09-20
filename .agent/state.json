@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T17:46:47Z",
     "stale_at": "2026-09-20T17:49:47Z",
     "activity_kind": "starting",
-    "activity_detail": "Shift 109 claimed by Ivanych; preparing immutable start report for DIR-027.",
+    "activity_detail": "Shift 109 immutable start report published; awaiting exact Agent Runtime Check gate.",
     "external_wait": null,
     "source": "lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 109,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-109-ivanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "2c3796e4cb58bd0970e0e083ff7bc938793278d0",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
