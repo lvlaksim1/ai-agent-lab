@@ -16,7 +16,7 @@
 - Independent OTK finalized shift 64 APPROVED 5/10; runtime loss was verified from heartbeat/recovery anchors and no target mutation was attributed to Palych.
 - Immutable shift-65 start report commit `e7d369adfaebe00b3a3cf4b021a3a23399616f74` passed unchanged Agent Runtime Check run `35454933528` SUCCESS.
 - Re-read target `tools/ios-ramdisk-tool/main.go` at `2b1003bb7e123b696e513c0ef9ec736477c2271f`: `CreateOptions` still has no `Snapshots`; exact insertion remains immediately before `CreateContainer` after source volume metadata is collected.
-- Re-verified pinned upstream API from deploymenttheory/go-apfs-v2: `Volume.NumberOfSnapshots()` and `Volume.Snapshot(i)` are present; `Snapshot.SnapshotMetadata` is a pointer containing `CreationTime`, `ChangeTime`, and `Name`; writer `CreateOptions.Snapshots` accepts `[]apfswrite.SnapshotSpec`.
+- Re-verified pinned upstream API from deploymenttheory/go-apfs-v2: `Volume.NumberOfSnapshots()`, `Volume.Snapshot(i)`, `Snapshot.SnapshotMetadata` is a pointer containing `CreationTime`, `ChangeTime`, and `Name`; writer `CreateOptions.Snapshots` accepts `[]apfswrite.SnapshotSpec`.
 - No target mutation has been made yet. The next safe action remains the bounded snapshot-preservation edit followed by focused tests, Windows gate, and exact E2E; do not broaden writer changes.
 
 ## Shift 70 — Федорыч — control-plane checkpoint
@@ -45,3 +45,11 @@
 - Mandatory exact-commit Agent Runtime Check run `35481415797` nevertheless completed FAILURE in `Validate agent runtime invariants` before any target work.
 - Workflow forbids rewriting the immutable report after gate failure. No target-repository mutation or evidence-changing engineering action was performed in shift 79.
 - This is a control-plane defect requiring manager/recovery attention; the terminal E2E failure evidence remains the next engineering input once the report gate is legally restored.
+
+## Shift 80 — Палыч — checkpoint
+- OTK finalized shift 79 APPROVED 5/10 and attached authoritative shift-79 review/OTK paths to the continuation.
+- Production claim used canonical `heartbeat.activity_kind=starting`; immutable shift-80 report commit `25804b53aad19b547f0d44e85e82fef7df36af73` passed unchanged Agent Runtime Check run `35482467879` SUCCESS. DIR-022 control-plane proof is therefore satisfied without weakening invariants.
+- Consumed exact Windows E2E run `35480398951` and artifact `ios-darwin-windows-e2e`: boot still reaches `BSD root: md0` and repeatedly fails `apfs_vfsop_mountroot` with error 79 until the 5-minute no-progress timeout. Snapshot preservation did not remove the mount failure.
+- Existing `apfs-structural-evidence.json` compares only the block-0 NXSB (`source xid=9/nextXid=10`, `rebuilt xid=1/nextXid=2`). After snapshots are emitted, block 0 is not sufficient evidence for the active checkpoint transaction; the rebuilt descriptor ring may contain a later NXSB.
+- Nearest evidence-backed step landed at target commit `f56c1d563f73c2621b4e3a5dac95330741d2b98c`: evidence-only instrumentation now scans the checkpoint descriptor ring and records `latestCheckpointXid`, `latestCheckpointNextXid`, and `latestCheckpointBlock` for source and rebuilt containers. APFS writer semantics are unchanged.
+- Next verification chain: focused Go tests / Windows gate, then exact Windows E2E to obtain active-checkpoint evidence and decide whether the remaining error-79 boundary is transaction/checkpoint history or another structural semantic.
