@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-025"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Consume terminal exact Windows E2E run 35511828863 for target 699c240af49b00ca2168d0761700d4eb274e0ab8, extract and compare its boot/APFS structural evidence, then continue the nearest evidence-backed discriminating step for mountroot error 79. Do not repeat the landed LastModTime mutation. Keep metaCryptoKeyOsVersion and XID/checkpoint semantics frozen absent new evidence.",
+  "goal": "Download and inspect exact artifact 10606121140 (ios-darwin-windows-e2e) from terminal Windows E2E run 35511828863 for target 699c240af49b00ca2168d0761700d4eb274e0ab8. Correlate provisioning/root-shell proof with boot/APFS structural evidence, then continue only the nearest evidence-backed discriminating step for mountroot error 79. Do not repeat the landed LastModTime mutation; keep XID/checkpoint and metaCrypto semantics frozen absent new evidence.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Preserve the bounded LastModTime fix unless terminal evidence disproves it."],
-  "predecessor_review_event_id": "review-shift-99-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-99-review-shift-99-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-99-review-shift-99-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 99,
-  "predecessor_worker_id": "mikhalych"
+  "predecessor_review_event_id": "review-shift-100-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-100-review-shift-100-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-100-review-shift-100-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 100,
+  "predecessor_worker_id": "borisych"
 }
