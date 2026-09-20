@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-98-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T12:10:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "sanych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 98,
+  "shift_started_at_utc": "2026-09-20T12:02:48Z",
+  "shift_completed_at_utc": "2026-09-20T12:03:48Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "db0b40191d83939589891714deffdef77803addb",
+    "recovery_anchor_commit": "813e76cc293293745253f4e0273fdc88912bcb7d",
+    "start_report_path": ".agent/reports/starts/shift-98-sanych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-98-sanych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "f9a96b7701aecd94b61425d58122e378eb731f4e",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T12:03:48Z",
+      "heartbeat_stale_at_utc": "2026-09-20T12:06:48Z",
+      "heartbeat_anchor_commit": "db0b40191d83939589891714deffdef77803addb",
+      "recovery_observed_at_utc": "2026-09-20T12:10:01Z",
+      "recovery_anchor_commit": "813e76cc293293745253f4e0273fdc88912bcb7d",
+      "fenced_generation": 200,
+      "activity_kind": "blocked_control_plane",
+      "activity_detail": "Exact immutable start-report Agent Runtime Check 35509524739 failed at runtime invariant validation; target repository remains untouched."
+    }
+  }
+}
