@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 318,
+  "sequence": 319,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Reporting v2 gate passed; beginning DIR-024 checksum-safe APSB LastModTime evidence work.",
+  "activity_detail": "Checkpointed exact target SHA 699c240a after checksum-safe APSB LastModTime mutation; consuming exact-SHA CI evidence.",
   "fence_generation": 202
 }
