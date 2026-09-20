@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 103 passed Reporting v2 and reduced the KeyOSVersion repair to concrete exported v0.3.0 APIs: after CreateContainer, reopen the raw staging image, resolve the single rebuilt volume physical address from Container.VolumeObjectIdentifiers via CheckpointMap.PhysicalAddressByObjectIdentifier with ObjectMapBTree.DescriptorByObjectIdentifier fallback, read its 4096-byte APSB block, write source MetaCryptoKeyOSVersion at offset 108, recompute the object checksum with apfs.CalculateFletcher64(block[8:], 0), verify with apfs.ValidateChecksum, then WriteAt the same physical block before DMG wrapping. Target remains unchanged; XID/checkpoint, LastModTime and adjacent MetaCrypto fields remain frozen.",
-  "last_scored_shift": 102,
+  "current_blocker_summary": "Shift 103 reduced the KeyOSVersion repair to concrete exported APIs: after CreateContainer, reopen the raw staging image, resolve the rebuilt volume physical address via CheckpointMap with ObjectMapBTree fallback, patch only APSB KeyOSVersion at offset 108, recompute Fletcher64 over block[8:], validate checksum, and write the same physical block. Target remains unchanged; XID/checkpoint, LastModTime and adjacent MetaCrypto semantics remain frozen.",
+  "last_scored_shift": 103,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-20T14:18:20Z"
+  "updated_at": "2026-09-20T14:26:12Z"
 }
