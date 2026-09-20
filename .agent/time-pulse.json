@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 205,
-  "purpose": "lease_claim",
+  "sequence": 206,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Shift 78 starting under DIR-021 after OTK correction of shift 77.",
+  "activity_kind": "working",
+  "activity_detail": "Reporting v2 exact-commit gate SUCCESS; beginning authoritative chunked main.go retrieval for bounded CAS mutation.",
   "fence_generation": 140
 }
