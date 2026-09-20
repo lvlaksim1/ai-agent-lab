@@ -1,1 +1,7 @@
-{"schema_version":1,"attention":true,"generation":44,"reasons":["shift-79 mandatory Agent Runtime Check failed before target work; control-plane recovery required"],"updated_at":"2026-09-20T01:27:39Z"}
+{
+  "schema_version": 1,
+  "attention": false,
+  "generation": 44,
+  "reasons": [],
+  "updated_at": "2026-09-20T01:39:43Z"
+}
