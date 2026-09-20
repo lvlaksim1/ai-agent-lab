@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 306,
-  "purpose": "heartbeat",
+  "sequence": 307,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "palych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Pinned go-apfs-v2 mapping proved: FixedTime sets builder.timestamp and FormattedBy.Timestamp, but volumeSuperblock omits LastModTime entirely; v0.3.1/main has same defect. Evaluating safe LastModTime write mechanism without speculative APFS changes.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 193
 }
