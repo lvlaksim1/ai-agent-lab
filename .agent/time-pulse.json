@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 328,
-  "purpose": "lease_claim",
+  "sequence": 329,
+  "purpose": "otk_evidence_checkpoint",
   "role": "otk",
   "worker_id": "otk",
   "object_id": "ios-research-runtime",
   "active_event": "review-shift-100-ios-runtime-release-20260918-032",
   "activity_kind": "otk_review",
-  "activity_detail": "Claiming OTK lease for independent review of production shift 100.",
+  "activity_detail": "Verified runtime-loss anchors, immutable start report, exact E2E terminal failure and artifact identity; preparing atomic OTK finalization.",
   "fence_generation": 207
 }
