@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 274,
+  "sequence": 275,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-90-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Claiming OTK review for recovered shift 90.",
-  "fence_generation": 177
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production shift 91 for DIR-022 bounded APSB modificationTime preservation.",
+  "fence_generation": 178
 }
