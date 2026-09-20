@@ -1,15 +1,13 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-049 — CHANGE_COURSE
+Решение: DEC-050 — KEEP_COURSE
 Директива: DIR-021
 Здоровье: RED
 Фаза: boot-debugging
 
-После ОТК смены №76 производство idle. Management state фиксирует пять подряд no-progress смен; последняя смена была CORRECTED, потому что malformed immutable Reporting v2 start report остановил работу ещё до target repository.
+Смена №78 завершилась stale-recovery и ожидает независимого ОТК. Последний авторитетный heartbeat зафиксировал существенное продвижение относительно причин manager attention от смены №77: Ramdisk Tool Windows run 35480398952 уже SUCCESS, а exact Windows E2E run 35480398951 ещё выполнялся и активно опрашивался в момент исчезновения runtime.
 
-Технический курс DIR-020 признан по-прежнему правильным. Изменён только входной control-plane: следующая смена обязана собрать стартовый доклад из точных literal labels канонического `.agent/reporting.md`, проверить полный candidate shared report contract ещё ДО immutable publication, а после публикации повторно прочитать exact file и дождаться terminal SUCCESS `Agent Runtime Check` именно для report commit.
+Курс не меняется. DIR-021 остаётся активной без ослабления proof gates и без новой архитектурной разведки. До завершения ОТК смены №78 объект остаётся RED; после ОТК продолжение должно опираться только на durable evidence и точный terminal result указанного E2E run.
 
-После SUCCESS worker без повторной архитектурной разведки выполняет прежнюю bounded whole-file CAS Name/ModTime snapshot-preservation mutation, немедленно сохраняет checkpoint с точным target commit SHA и продолжает focused tests -> Windows gate -> exact Windows E2E.
-
-APFS writer вне bounded mutation остаётся заморожен. STOP, transfer и решение владельца не требуются; производство может продолжить автоматически по DIR-021.
+STOP, transfer и решение владельца не требуются. Новая директива не выпускается.
