@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-90-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T07:58:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "sanych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 90,
+  "shift_started_at_utc": "2026-09-20T07:47:01Z",
+  "shift_completed_at_utc": "2026-09-20T07:47:01Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "4b6a92daf700dc9f71acd4c38ea8ea936e670265",
+    "recovery_anchor_commit": "6ceb6cfcad680739f6c94167775b97f8aa0c2863",
+    "start_report_path": ".agent/reports/starts/shift-90-sanych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-90-sanych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "53555c67cdc30576a97126ed8e0f0d56a3a65698",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T07:47:01Z",
+      "heartbeat_stale_at_utc": "2026-09-20T07:50:01Z",
+      "heartbeat_anchor_commit": "4b6a92daf700dc9f71acd4c38ea8ea936e670265",
+      "recovery_observed_at_utc": "2026-09-20T07:58:02Z",
+      "recovery_anchor_commit": "6ceb6cfcad680739f6c94167775b97f8aa0c2863",
+      "fenced_generation": 176,
+      "activity_kind": "starting",
+      "activity_detail": "Shift 90 immutable Reporting v2 start report published; waiting for exact report commit Runtime Check before target work."
+    }
+  }
+}
