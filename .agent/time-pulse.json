@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 280,
-  "purpose": "lease_claim",
+  "sequence": 281,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 92 under DIR-023 for deterministic bounded preimage reconstruction.",
+  "activity_kind": "working",
+  "activity_detail": "Report gate passed; authoritative main.go reconstructed from bounded non-overlapping reads 1-400 and 401-800, both anchored to blob f31534635096b173809b52057bad83635ea032e6; target HEAD b5d83ecb7f4d914c00cc0ac7e568ecb724d8c567 unchanged.",
   "fence_generation": 181
 }
