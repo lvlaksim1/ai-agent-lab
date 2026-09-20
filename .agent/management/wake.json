@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "attention": true,
+  "attention": false,
   "generation": 50,
-  "reasons": ["consecutive_no_progress"],
-  "updated_at": "2026-09-20T08:02:25Z"
+  "reasons": [],
+  "updated_at": "2026-09-20T08:12:25Z"
 }
