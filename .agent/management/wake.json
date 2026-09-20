@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "attention": false,
-  "generation": 53,
-  "reasons": [],
-  "updated_at": "2026-09-20T11:45:49Z"
+  "attention": true,
+  "generation": 54,
+  "reasons": ["CONTROL_PLANE_DEFECT: shift-98 immutable start report failed exact Agent Runtime Check 35509524739; target mutation frozen pending manager recovery decision."],
+  "updated_at": "2026-09-20T12:03:48Z"
 }
