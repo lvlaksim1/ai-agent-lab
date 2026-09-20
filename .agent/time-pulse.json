@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 234,
+  "sequence": 235,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Polling exact start-report Agent Runtime Check run 35486216214 before target work.",
+  "activity_kind": "working",
+  "activity_detail": "Target 3dd7a99 now emits APSB evidence from the actual Go ramdisk evidence producer; checking CI before exact E2E consumption.",
   "fence_generation": 154
 }
