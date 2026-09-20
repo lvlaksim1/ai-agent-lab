@@ -9,33 +9,8 @@
   "last_result": "OTK_CORRECTED_7_10_SUBSTANTIAL",
   "last_completed_at": "2026-09-20T21:12:03Z",
   "heartbeat": {
-    "schema_version": 2,
-    "active": true,
-    "role": "production",
-    "worker_id": "ivanych",
-    "object_id": "ios-research-runtime",
-    "active_event": "ios-runtime-release-20260918-032",
-    "sequence": 407,
-    "time_source": "github_commit_committer_date",
-    "time_anchor_commit": "158bd430600cedb08ac6fad6cb9193599236a940",
-    "time_anchor_path": ".agent/time-pulse.json",
-    "last_seen_at": "2026-09-20T21:50:49Z",
-    "stale_at": "2026-09-20T21:53:49Z",
-    "activity_kind": "external_wait",
-    "activity_detail": "Waiting for exact Agent Runtime Check 35539898728 for immutable shift-117 start report.",
-    "external_wait": {"active":true,"kind":"github_actions_run","repository":"lvlaksim1/ai-agent-lab","run_id":35539898728,"worker_observed_status":"in_progress","since_at":"2026-09-20T21:50:49Z","last_polled_at":"2026-09-20T21:50:49Z"},
-    "source": "heartbeat"
+    "schema_version": 2,"active":true,"role":"production","worker_id":"ivanych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","sequence":408,"time_source":"github_commit_committer_date","time_anchor_commit":"ed75d1a7ccb6a5fcbc15f1a53d62cb5c01546aeb","time_anchor_path":".agent/time-pulse.json","last_seen_at":"2026-09-20T21:51:53Z","stale_at":"2026-09-20T21:54:53Z","activity_kind":"working","activity_detail":"Report gate passed; consumed E2E failure artifact and localizing established live-volume paddr/library-checksum repair path.","external_wait":null,"source":"heartbeat"
   },
-  "time_authority": "github_commit_committer_date",
-  "started_at_anchor_commit": "f83ef0a9bd40788303167951bc013d07238148c4",
-  "lease_anchor_commit": "f83ef0a9bd40788303167951bc013d07238148c4",
-  "fence_generation": 258,
-  "reporting_policy_version": 2,
-  "score_policy_version": 2,
-  "shift_number": 117,
-  "shift_start_report_path": ".agent/reports/starts/shift-117-ivanych-ios-runtime-release-20260918-032.md",
-  "shift_start_report_commit": "1ee36d5452a36447b1563641458fa0999a028878",
-  "last_runtime_loss": {
-    "role": "production","event":"ios-runtime-release-20260918-032","worker_id":"borisych","worker_last_seen_at_utc":"2026-09-20T21:02:20Z","heartbeat_stale_at_utc":"2026-09-20T21:05:20Z","heartbeat_anchor_commit":"ef578e1a64b18047b14167cd93b99e948e92f7ae","recovery_closed_at_utc":"2026-09-20T21:10:02Z","recovery_anchor_commit":"5a93cc627d2279ef7beff0ee43dd55d710a2bb9a","fenced_generation":256,"activity_kind":"external_wait","activity_detail":"DIR-027 bounded KeyOSVersion repair committed as ef22d889; actively waiting for exact Windows validation runs.","shift_number":116,"reporting_policy_version":2,"score_policy_version":2,"start_report_path":".agent/reports/starts/shift-116-borisych-ios-runtime-release-20260918-032.md","start_report_commit":"7076372c973d7c09405114de360cdb0112bda838"
-  }
+  "time_authority":"github_commit_committer_date","started_at_anchor_commit":"f83ef0a9bd40788303167951bc013d07238148c4","lease_anchor_commit":"f83ef0a9bd40788303167951bc013d07238148c4","fence_generation":258,"reporting_policy_version":2,"score_policy_version":2,"shift_number":117,"shift_start_report_path":".agent/reports/starts/shift-117-ivanych-ios-runtime-release-20260918-032.md","shift_start_report_commit":"1ee36d5452a36447b1563641458fa0999a028878",
+  "last_runtime_loss":{"role":"production","event":"ios-runtime-release-20260918-032","worker_id":"borisych","worker_last_seen_at_utc":"2026-09-20T21:02:20Z","heartbeat_stale_at_utc":"2026-09-20T21:05:20Z","heartbeat_anchor_commit":"ef578e1a64b18047b14167cd93b99e948e92f7ae","recovery_closed_at_utc":"2026-09-20T21:10:02Z","recovery_anchor_commit":"5a93cc627d2279ef7beff0ee43dd55d710a2bb9a","fenced_generation":256,"activity_kind":"external_wait","activity_detail":"DIR-027 bounded KeyOSVersion repair committed as ef22d889; actively waiting for exact Windows validation runs.","shift_number":116,"reporting_policy_version":2,"score_policy_version":2,"start_report_path":".agent/reports/starts/shift-116-borisych-ios-runtime-release-20260918-032.md","start_report_commit":"7076372c973d7c09405114de360cdb0112bda838"}
 }
