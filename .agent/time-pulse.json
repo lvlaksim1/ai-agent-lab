@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 422,
+  "sequence": 423,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "palych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Landed read-only ramdisk packaging size instrumentation at target 4306296b; awaiting exact Windows workflows for terminal evidence.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Active evidence wait for exact Windows E2E 35545935392 and Windows Build 35545935393 on target 4306296b.",
   "fence_generation": 265
 }
