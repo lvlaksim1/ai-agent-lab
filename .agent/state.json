@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T21:50:15Z",
     "stale_at": "2026-09-20T21:53:15Z",
     "activity_kind": "working",
-    "activity_detail": "Claimed production shift 117; preparing immutable start report before target work.",
+    "activity_detail": "Immutable start report published; waiting for exact Agent Runtime Check gate before target work.",
     "external_wait": null,
     "source": "production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 117,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-117-ivanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "1ee36d5452a36447b1563641458fa0999a028878",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
