@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 237,
-  "purpose": "stale_recovery_probe",
+  "sequence": 238,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "recovery_probe",
-  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Shift 83 remains live; latest target b5d83ec Ramdisk Tool Windows run 35486388002 is in progress after fixing the NX unit-test regression.",
   "fence_generation": 154
 }
