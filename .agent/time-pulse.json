@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 309,
-  "purpose": "lease_claim",
+  "sequence": 310,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 97 to continue from proven APSB LastModTime writer omission.",
+  "activity_kind": "working",
+  "activity_detail": "Report-contract barrier passed (Agent Runtime Check 35507731576 SUCCESS); beginning checksum-safe LastModTime mechanism inspection.",
   "fence_generation": 196
 }
