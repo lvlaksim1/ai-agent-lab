@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 393,
-  "purpose": "heartbeat",
+  "sequence": 394,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Reporting v2 barrier passed; resolved exact go-apfs-v2 live volume paddr and checksum APIs for bounded DIR-027 repair; preparing source-preserving target mutation.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 249
 }
