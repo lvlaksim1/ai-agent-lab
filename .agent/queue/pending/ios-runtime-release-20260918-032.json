@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-027"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Using the exact restored target main 699c240af49b00ca2168d0761700d4eb274e0ab8 and the DIR-027 lossless/atomic-tree path resolved in shift 111, execute the source-preserving local APSB MetaCryptoKeyOSVersion repair: after CreateContainer reopen the raw staging image, resolve rebuilt volume paddr, patch only uint32 KeyOSVersion at APSB offset 108, recompute Fletcher64 over block[8:], validate checksum, and WriteAt the same block. Preserve LastModTime, XID/checkpoint and adjacent MetaCrypto semantics. Then run focused tests, Windows gate and exact Windows E2E and consume terminal evidence before any further APFS change.",
+  "goal": "Using exact target main 699c240af49b00ca2168d0761700d4eb274e0ab8 and authoritative main.go blob 9eec2108fdac0f1074d66d6ffd6be1d4d428eac6 already verified in shift 113, execute DIR-027 source-preserving local APSB MetaCryptoKeyOSVersion repair: after CreateContainer reopen the raw staging image, resolve rebuilt volume paddr, patch only uint32 KeyOSVersion at APSB offset 108, recompute Fletcher64 over block[8:], validate checksum, and WriteAt the same block. Preserve LastModTime, XID/checkpoint and adjacent MetaCrypto semantics. Then run focused tests, Windows gate and exact Windows E2E and consume terminal evidence before any further APFS change.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not alter XID/checkpoint semantics.","Do not alter metaCrypto fields other than KeyOSVersion without new discriminating evidence.","Preserve the landed LastModTime fix."],
-  "predecessor_review_event_id": "review-shift-112-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-112-review-shift-112-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-112-review-shift-112-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 112,
-  "predecessor_worker_id": "palych"
+  "predecessor_review_event_id": "review-shift-113-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-113-review-shift-113-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-113-review-shift-113-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 113,
+  "predecessor_worker_id": "petrovich"
 }

@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-027 remains active; shift 112 passed the immutable Reporting v2 barrier but runtime loss occurred before the bounded KeyOSVersion offset-108 repair, and target main remains exactly 699c240a.",
-  "last_scored_shift": 112,
+  "current_blocker_summary": "DIR-027 remains active; shift 113 passed Reporting v2 and verified authoritative target/main.go preimage, then runtime loss occurred before the bounded KeyOSVersion offset-108 repair; target main remains 699c240a.",
+  "last_scored_shift": 113,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-20T19:39:24Z"
+  "updated_at": "2026-09-20T19:50:57Z"
 }
