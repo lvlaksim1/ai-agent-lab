@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 421,
+  "sequence": 422,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "palych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "DIR-028 trace: verified ramdisk helper rebuilds raw APFS then wraps it as Apple_APFS DMG; inspecting E2E packaging/visibility boundary.",
+  "activity_detail": "Landed read-only ramdisk packaging size instrumentation at target 4306296b; awaiting exact Windows workflows for terminal evidence.",
   "fence_generation": 265
 }
