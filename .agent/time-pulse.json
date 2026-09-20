@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 278,
-  "purpose": "lease_claim",
+  "sequence": 279,
+  "purpose": "heartbeat",
   "role": "otk",
   "worker_id": "otk",
   "object_id": "ios-research-runtime",
   "active_event": "review-shift-91-ios-runtime-release-20260918-032",
   "activity_kind": "otk_review",
-  "activity_detail": "Claiming OTK review for production shift 91.",
+  "activity_detail": "Shift 91 runtime-loss evidence verified; preparing atomic OTK finalization.",
   "fence_generation": 180
 }
