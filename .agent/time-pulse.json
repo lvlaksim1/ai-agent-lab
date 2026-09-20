@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 339,
-  "purpose": "heartbeat",
+  "sequence": 340,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Checkpointed exact KeyOSVersion writer defect and checksum-safe bounded repair route after confirming APSB typed layout and Fletcher64 reseal contract; target remains unchanged while implementation is prepared.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 211
 }
