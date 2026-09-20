@@ -1,3 +1,3 @@
 {
-  "schema_version":1,"sequence":217,"purpose":"heartbeat","role":"production","worker_id":"palych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"starting","activity_detail":"Immutable shift 80 start report published; waiting exact-commit Agent Runtime Check.","fence_generation":145
+  "schema_version":1,"sequence":218,"purpose":"heartbeat","role":"production","worker_id":"palych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"verification","activity_detail":"Checkpointed target f56c1d563f73c2621b4e3a5dac95330741d2b98c; awaiting focused/Windows verification for active checkpoint evidence.","fence_generation":145
 }
