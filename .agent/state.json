@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T05:01:36Z",
     "stale_at": "2026-09-20T05:04:36Z",
     "activity_kind": "starting",
-    "activity_detail": "Starting shift 87 from approved shift-86 continuation.",
+    "activity_detail": "Shift 87 start report published; awaiting exact report-commit gate.",
     "external_wait": null,
     "source": "production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 87,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-87-kuzmich-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "e58c2080f7b91b05aea3c5e0dc8c3fa779d25a53",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
