@@ -22,9 +22,9 @@
     "last_seen_at": "2026-09-20T03:03:00Z",
     "stale_at": "2026-09-20T03:06:00Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed shift 82 for DIR-022 APSB semantic comparison.",
+    "activity_detail": "Shift 82 immutable start report published; awaiting exact-commit Runtime Check.",
     "external_wait": null,
-    "source": "production_lease_claim"
+    "source": "production_start_report"
   },
   "time_authority": "github_commit_committer_date",
   "started_at_anchor_commit": "0dc6d2e76104fb72d0736f0f8a6f8c2f1718fc9b",
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 82,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-82-sanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "9662898da0558d6554f7ac4d2a426540fa38dbc7",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
