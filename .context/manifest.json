@@ -41,7 +41,8 @@
   "rules": [
     ".context/rules/ai-rules.md",
     ".context/rules/development-rules.md",
-    ".context/rules/user-rules.md"
+    ".context/rules/user-rules.md",
+    ".context/rules/project-rules.md"
   ],
   "decisions": [
     ".context/decisions/DEC-20260917-architecture.md",
