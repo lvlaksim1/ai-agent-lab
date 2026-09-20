@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "RED",
   "current_phase": "control-plane-recovery",
-  "current_blocker_summary": "Shift 79 produced no target work because exact-commit Agent Runtime Check rejected non-canonical production startup heartbeat activity. DIR-022 requires canonical starting producer repair and unchanged-gate proof before resuming exact Windows E2E failure analysis.",
-  "last_scored_shift": 79,
+  "current_blocker_summary": "DIR-022 startup control-plane defect is proven repaired. Shift 80 consumed the exact error-79 E2E and landed evidence-only active-checkpoint descriptor-ring instrumentation at target f56c1d563f73c2621b4e3a5dac95330741d2b98c; focused/Windows verification and exact E2E evidence are still required before any further writer change.",
+  "last_scored_shift": 80,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "none",
+  "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-20T01:50:11Z"
+  "updated_at": "2026-09-20T02:02:36Z"
 }
