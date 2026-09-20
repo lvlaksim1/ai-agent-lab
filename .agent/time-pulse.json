@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 296,
+  "sequence": 297,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Reporting v2 start report verified and Agent Runtime Check 35505684996 succeeded; beginning DIR-023 exact preimage verification.",
+  "activity_detail": "DIR-023 preimage verified through exact GitHub blob read; APSB modificationTime -> FixedTime CAS committed at target 415ff121bf0524a8509ec316d4fbfdc6d140a4cd; starting verification chain.",
   "fence_generation": 190
 }
