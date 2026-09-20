@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 338,
+  "sequence": 339,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Reporting gate passed; traced pinned apfswrite v0.3.0: MetaCrypto.KeyOSVersion is hardcoded to zero in fillMetaCrypto while the on-disk struct has a typed KeyOSVersion field. Evaluating minimal checksum-safe preservation path.",
+  "activity_detail": "Checkpointed exact KeyOSVersion writer defect and checksum-safe bounded repair route after confirming APSB typed layout and Fletcher64 reseal contract; target remains unchanged while implementation is prepared.",
   "fence_generation": 211
 }
