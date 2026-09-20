@@ -1,9 +1,7 @@
-# ОТК — смена №103 — Кузьмич
+Проект: iOS-Research-Runtime
+Работник: Палыч
+Смена: №104
 
-**Вердикт:** APPROVED  
-**Оценка:** 9/10  
-**Класс прогресса:** substantial
-
-Кузьмич до подтверждённого runtime loss сузил KeyOSVersion repair до конкретного checksum-safe локального APSB пути: разрешение rebuilt volume paddr, изменение только offset 108, Fletcher64 reseal, checksum validation и запись того же блока. Target остался неизменным. Следующий шаг — реализовать этот bounded patch и пройти focused tests → Windows gate → exact Windows E2E.
-
-Рейтинг: **1240 → 1280**.
+ОТК: 6/10 — APPROVED. Progress class: none.
+Runtime loss подтверждён GitHub anchors; target не изменён. Следующему: получить lossless authoritative `main.go`, затем выполнить только bounded APSB KeyOSVersion repair DIR-026 и полную verification chain.
+Рейтинг Палыча: 1250 (+10)
