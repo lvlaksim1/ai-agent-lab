@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 349,
-  "purpose": "heartbeat",
+  "sequence": 350,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "palych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Shift-104 report barrier passed via Agent Runtime Check 35516579461 SUCCESS. Target main.go was fetched; current connector returns it truncated and exposes only whole-file replacement, so no unsafe target write was attempted while seeking a lossless mutation route.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 217
 }
