@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-105-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T15:22:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "petrovich",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 105,
+  "shift_started_at_utc": "2026-09-20T15:14:13Z",
+  "shift_completed_at_utc": "2026-09-20T15:15:21Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "5278101568f5144e646078fa85323297fdcedd0d",
+    "recovery_anchor_commit": "31ff8e8cebeb39b6c29bc24fa790c934037f36ee",
+    "start_report_path": ".agent/reports/starts/shift-105-petrovich-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-105-petrovich-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "b70dc70e2eca2e79f63f2fb7f047a1ef4007a7c9",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T15:15:21Z",
+      "heartbeat_stale_at_utc": "2026-09-20T15:18:21Z",
+      "heartbeat_anchor_commit": "5278101568f5144e646078fa85323297fdcedd0d",
+      "recovery_observed_at_utc": "2026-09-20T15:22:01Z",
+      "recovery_anchor_commit": "31ff8e8cebeb39b6c29bc24fa790c934037f36ee",
+      "fenced_generation": 221,
+      "activity_kind": "working",
+      "activity_detail": "Reporting v2 gate passed via Agent Runtime Check 35518960973; exact Git blob 9eec2108fdac0f1074d66d6ffd6be1d4d428eac6 yielded lossless main.go preimage. Preparing bounded KeyOSVersion mutation."
+    }
+  }
+}
