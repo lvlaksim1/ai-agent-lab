@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-027 remains active. Shift 114 resolved exact go-apfs-v2 live volume paddr/checksum APIs; next shift should execute the established bounded KeyOSVersion repair without broad APFS rediscovery.",
-  "last_scored_shift": 114,
+  "current_blocker_summary": "DIR-027 remains active. Shift 115 re-verified the already-established live volume paddr/checksum path but runtime was lost before bounded KeyOSVersion repair; next shift should execute the established mutation without broad APFS rediscovery.",
+  "last_scored_shift": 115,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
+  "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-20T20:39:39Z"
+  "updated_at": "2026-09-20T20:50:08Z"
 }

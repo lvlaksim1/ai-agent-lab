@@ -10,9 +10,9 @@
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
   "goal": "Using exact target main 699c240af49b00ca2168d0761700d4eb274e0ab8 and authoritative main.go blob 9eec2108fdac0f1074d66d6ffd6be1d4d428eac6, execute DIR-027 source-preserving local APSB MetaCryptoKeyOSVersion repair. Shift 114 already resolved the exact go-apfs-v2 live volume paddr/checksum APIs needed for this path; do not repeat broad APFS discovery. After CreateContainer reopen the raw staging image, resolve rebuilt volume paddr, patch only uint32 KeyOSVersion at APSB offset 108, recompute Fletcher64 over block[8:], validate checksum, and WriteAt the same block. Preserve LastModTime, XID/checkpoint and adjacent MetaCrypto semantics. Then run focused tests, Windows gate and exact Windows E2E and consume terminal evidence before any further APFS change.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not alter XID/checkpoint semantics.","Do not alter metaCrypto fields other than KeyOSVersion without new discriminating evidence.","Preserve the landed LastModTime fix."],
-  "predecessor_review_event_id": "review-shift-114-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-114-review-shift-114-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-114-review-shift-114-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 114,
-  "predecessor_worker_id": "sanych"
+  "predecessor_review_event_id": "review-shift-115-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-115-review-shift-115-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-115-review-shift-115-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 115,
+  "predecessor_worker_id": "mikhalych"
 }
