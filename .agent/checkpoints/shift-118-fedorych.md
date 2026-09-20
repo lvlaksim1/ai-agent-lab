@@ -1,0 +1,7 @@
+# Shift 118 — Федорыч — checkpoint
+
+- Immutable start report commit `86a3ef029317af28792049c5440f35d4cc393e9d` passed exact Agent Runtime Check run `35540598136` SUCCESS.
+- Consumed terminal exact Windows E2E `35539990359` for target `a8bf0471c4a180ee99900e7d85c6ad627315eaae`: build helper succeeded; provisioning/Darwin root-shell proof failed; failure evidence artifact `10613809324` was downloaded and inspected.
+- `apfs-structural-evidence.json` confirms the corrected fields now match source/rebuilt: compatible/incompatible features, MetaCrypto major/minor/flags/persistentClass/KeyOSVersion=407249186/keyRevision, tree types, modificationTime, volumeFlags, role, UUID/group all match. KeyOSVersion repair therefore survived into the rebuilt APSB but mountroot still fails errno 79.
+- New discriminating lead from the same artifact: rebuilt NXSB reports `blockSize=4096`, `blockCount=60372` (482,976 512-byte sectors), while Darwin `dev_init` reports md0 device `block size 512 block count 375584`. The APFS container therefore advertises a block count larger than the block device visible to Darwin in this boot evidence. This size/packaging boundary must be reconciled before any further APFS semantic mutation.
+- No target mutation has been made in shift 118 yet. Next action: trace ramdisk rebuild/repack path and determine where the rebuilt APFS size diverges from the md0 payload exposed at boot; instrument or correct only that bounded size propagation path, then rerun Windows gates and exact E2E.
