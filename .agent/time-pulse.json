@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 204,
+  "sequence": 205,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-77-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of shift 77; retrying atomic finalization from authoritative evidence.",
-  "fence_generation": 139
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Shift 78 starting under DIR-021 after OTK correction of shift 77.",
+  "fence_generation": 140
 }
