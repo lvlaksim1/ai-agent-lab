@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 344,
+  "sequence": 345,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Reporting v2 barrier passed on exact start-report commit via Agent Runtime Check 35515922647; beginning bounded KeyOSVersion implementation.",
+  "activity_detail": "Checkpointing concrete local APSB KeyOSVersion repair implementation: resolve rebuilt volume paddr via checkpoint/object map, patch offset 108, reseal with exported CalculateFletcher64, validate checksum, then write block.",
   "fence_generation": 214
 }
