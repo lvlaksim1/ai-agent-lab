@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 220,
+  "sequence": 221,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-80-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of recovered shift 80.",
-  "fence_generation": 147
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Starting shift 81 from verified shift-80 continuation.",
+  "fence_generation": 148
 }
