@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 337,
-  "purpose": "lease_claim",
+  "sequence": 338,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 102 for DIR-026 bounded MetaCryptoKeyOSVersion preservation.",
+  "activity_kind": "working",
+  "activity_detail": "Reporting gate passed; traced pinned apfswrite v0.3.0: MetaCrypto.KeyOSVersion is hardcoded to zero in fillMetaCrypto while the on-disk struct has a typed KeyOSVersion field. Evaluating minimal checksum-safe preservation path.",
   "fence_generation": 211
 }
