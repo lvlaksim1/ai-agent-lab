@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 208,
+  "sequence": 209,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "external_wait",
-  "activity_detail": "Actively polling Ramdisk Tool Windows run 35480398952 and exact Windows E2E run 35480398951 for target 8288dfabeefd069066d931d09cb4508421eedf29.",
+  "activity_detail": "Ramdisk Tool Windows run 35480398952 SUCCESS; exact Windows E2E run 35480398951 still in_progress and is being actively polled.",
   "fence_generation": 140
 }
