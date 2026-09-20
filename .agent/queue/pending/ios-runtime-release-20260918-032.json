@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-022"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Consume exact Windows E2E run 35485676542 and its artifact for target 438ea9fcfdc33a6114ca00e0f3cbba65dd8fb69c. The run is terminal FAILURE and still shows APFS mountroot error 79, while its apfs-structural-evidence.json lacks the new APSB/Volume fields despite revisions.txt recording the current application SHA. Determine why the exact E2E evidence producer did not emit the shift-82 instrumentation (including stale integration/gate artifact provenance), repair only that evidence path if required, rerun exact evidence, then compare source/rebuilt APSB semantics before any APFS writer mutation.",
-  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID.","Do not make speculative APFS writer changes.","Preserve durable snapshot preservation.","Treat the missing APSB fields in the exact shift-82 artifact as the immediate evidence-path blocker."],
-  "predecessor_review_event_id": "review-shift-82-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-82-review-shift-82-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-82-review-shift-82-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 82,
-  "predecessor_worker_id": "sanych"
+  "goal": "Consume terminal exact Windows E2E run 35486388059 and its current APSB/Volume artifact for target b5d83ecb7f4d914c00cc0ac7e568ecb724d8c567. Compare the now-emitted source/rebuilt APSB semantics and inspect the exact pinned reader/writer mapping for the discriminating fields, especially metaCryptoKeyOsVersion (source 407249186, rebuilt 0) and modificationTime (source nonzero, rebuilt 0). Make only a causally justified bounded writer/evidence change, then run focused tests, Windows gate and exact Windows E2E. Do not change transaction/checkpoint XID semantics without separate structural proof.",
+  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Preserve durable snapshot preservation.","Treat exact run 35486388059 artifact as authoritative current APSB evidence."],
+  "predecessor_review_event_id": "review-shift-83-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-83-review-shift-83-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-83-review-shift-83-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 83,
+  "predecessor_worker_id": "mikhalych"
 }
