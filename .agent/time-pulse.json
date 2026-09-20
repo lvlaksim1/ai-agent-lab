@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 331,
-  "purpose": "external_wait_poll",
+  "sequence": 332,
+  "purpose": "evidence_checkpoint",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Immutable start report is published and contract markers verified; exact report commit Agent Runtime Check is queued and being actively polled.",
+  "activity_kind": "working",
+  "activity_detail": "Artifact 10606121140 inspected: source/rebuilt APSB differ in metaCrypto KeyOSVersion (407249186 vs 0) while adjacent metaCrypto fields and LastModTime match; investigating bounded source-preservation path.",
   "fence_generation": 208
 }
