@@ -1,1 +1,1 @@
-{"schema_version":1,"attention":true,"generation":42,"reasons":["consecutive_no_progress>=2","shift_76_corrected_control_plane"],"updated_at":"2026-09-19T23:59:50Z"}
+{"schema_version":1,"attention":false,"generation":42,"reasons":[],"updated_at":"2026-09-20T00:12:54Z"}
