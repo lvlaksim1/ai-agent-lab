@@ -10,9 +10,9 @@
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
   "goal": "Continue from shift-96 source proof: pinned go-apfs-v2 CreateContainer resolves FixedTime into builder.timestamp and writes it to FormattedBy.Timestamp, but volumeSuperblock never assigns apfsSuperblock.LastModTime; v0.3.1/main has the same omission. Establish an evidence-backed checksum/serialization-safe mechanism to set APSB LastModTime (upstream/fork or bounded post-write patch), then perform only the justified bounded mutation and verify with focused tests, Windows gate, and exact Windows E2E. Keep metaCryptoKeyOsVersion source=407249186/rebuilt=0 as a separate proven mismatch; do not touch XID/checkpoint semantics without structural proof.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Preserve durable snapshot preservation.","Treat shift-96 LastModTime source mapping as authoritative until contradicted by stronger evidence.","Any LastModTime write must preserve APFS checksum/serialization correctness and be verified before E2E conclusions."],
-  "predecessor_review_event_id": "review-shift-96-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-96-review-shift-96-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-96-review-shift-96-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 96,
-  "predecessor_worker_id": "palych"
+  "predecessor_review_event_id": "review-shift-97-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-97-review-shift-97-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-97-review-shift-97-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 97,
+  "predecessor_worker_id": "petrovich"
 }

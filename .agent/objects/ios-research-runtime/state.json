@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 96 proved the DIR-023 primitive defect in pinned go-apfs-v2: CreateContainer resolves FixedTime into builder.timestamp and volumeSuperblock writes it to FormattedBy.Timestamp, but never assigns apfsSuperblock.LastModTime. The struct field maps to reader VolumeSuperblock.ModificationTime at offset 256; v0.3.1/main has the same omission. Next action is an evidence-backed mechanism to set LastModTime with correct serialization/checksum before bounded verification; metaCryptoKeyOsVersion remains a separate proven mismatch.",
-  "last_scored_shift": 96,
+  "current_blocker_summary": "Shift 96 proved the DIR-023 primitive defect in pinned go-apfs-v2: CreateContainer resolves FixedTime into builder.timestamp and volumeSuperblock writes it to FormattedBy.Timestamp, but never assigns apfsSuperblock.LastModTime. Shift 97 ended by verified runtime loss before producing new durable engineering evidence. Next action remains an evidence-backed checksum/serialization-safe LastModTime write mechanism before bounded mutation; metaCryptoKeyOsVersion remains separate.",
+  "last_scored_shift": 97,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
+  "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 3,
   "last_checkpoint_at": "2026-09-20T11:03:55Z",
-  "updated_at": "2026-09-20T11:21:44Z"
+  "updated_at": "2026-09-20T11:39:01Z"
 }
