@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 348,
-  "purpose": "lease_claim",
+  "sequence": 349,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "palych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production lease for shift 104 after OTK shift 103 finalization.",
+  "activity_kind": "working",
+  "activity_detail": "Shift-104 report barrier passed via Agent Runtime Check 35516579461 SUCCESS. Target main.go was fetched; current connector returns it truncated and exposes only whole-file replacement, so no unsafe target write was attempted while seeking a lossless mutation route.",
   "fence_generation": 217
 }
