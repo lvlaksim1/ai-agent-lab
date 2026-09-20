@@ -8,18 +8,18 @@
   "definition_of_done": ["Use the authoritative object mission Definition of Done"],
   "current_phase": "boot-debugging",
   "health": "ORANGE",
-  "current_blocker_summary": "DIR-027 preimage blocker is resolved: exact Git blob yielded lossless authoritative main.go. Next bounded step is the source-preserving APSB KeyOSVersion offset-108 repair with checksum validation, then focused tests, Windows gate and exact Windows E2E.",
-  "shifts_since_manager_review": 1,
+  "current_blocker_summary": "DIR-027 preimage blocker is resolved and re-verified at main.go blob 9eec2108fdac0f1074d66d6ffd6be1d4d428eac6. Next bounded step is the source-preserving APSB KeyOSVersion offset-108 repair with checksum validation, then focused tests, Windows gate and exact Windows E2E.",
+  "shifts_since_manager_review": 2,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
-  "last_scored_shift": 105,
+  "last_progress_class": "incremental",
+  "last_scored_shift": 106,
   "manager_review_count": 63,
   "last_manager_review_at": "2026-09-20T14:49:43Z",
   "last_manager_decision": "DEC-064: CHANGE_COURSE; DIR-027 requires blob-verified lossless preimage before bounded KeyOSVersion repair",
   "active_directive": "DIR-027",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-20T15:40:25Z"
+  "updated_at": "2026-09-20T16:14:49Z"
 }
