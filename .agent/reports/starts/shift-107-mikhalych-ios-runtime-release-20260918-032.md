@@ -1,0 +1,7 @@
+# Стартовый доклад — смена 107 — Михалыч
+
+## ОЦЕНКА ПРЕДШЕСТВЕННИКА
+Предыдущая смена Саныча получила от ОТК 7/10 и incremental progress. Считаю оценку справедливой: он сохранил ограничения DIR-027, успешно прошёл reporting gate и повторно подтвердил lossless authoritative preimage `tools/ios-ramdisk-tool/main.go` blob `9eec2108fdac0f1074d66d6ffd6be1d4d428eac6`, но runtime был потерян до целевой мутации. Поэтому основной инженерный результат — надёжно подтверждённая граница preimage; KeyOSVersion repair и проверочная цепочка остаются невыполненными.
+
+## МОЙ ПЛАН
+Продолжаю непосредственно с подтверждённого blob `9eec2108fdac0f1074d66d6ffd6be1d4d428eac6`: реализую только source-preserving APSB MetaCryptoKeyOSVersion repair — после CreateContainer переоткрою raw staging image, разрешу rebuilt volume paddr через `CheckpointMap.PhysicalAddressByObjectIdentifier` с fallback `ObjectMapBTree.DescriptorByObjectIdentifier`, изменю только uint32 KeyOSVersion по APSB offset 108, пересчитаю Fletcher64 по `block[8:]`, проверю checksum и выполню WriteAt того же блока. LastModTime, XID/checkpoint и соседние MetaCrypto-поля не меняю. Затем выполню focused tests, Windows gate и exact Windows E2E и потреблю terminal evidence. Критерий успеха: bounded repair присутствует в target source, все обязательные проверки терминально успешны, а exact Windows E2E подтверждает исправление без нового APFS-регресса.
