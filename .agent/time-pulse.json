@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 407,
+  "sequence": 408,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Waiting for exact Agent Runtime Check 35539898728 for immutable shift-117 start report.",
+  "activity_kind": "working",
+  "activity_detail": "Report gate passed; consumed E2E failure artifact and localizing established live-volume paddr/library-checksum repair path.",
   "fence_generation": 258
 }
