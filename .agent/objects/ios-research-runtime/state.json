@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 83 repaired the exact E2E APSB evidence path. Run 35486388059 on target b5d83ec emitted current Volume/APSB evidence and still failed mountroot error 79. Source/rebuilt core feature/tree/UUID/role fields match; discriminating differences now include metaCryptoKeyOsVersion 407249186 vs 0 and modificationTime nonzero vs 0. Shift 84 lost runtime before target work; next step remains evidence-backed writer mapping analysis before any semantic mutation.",
+  "current_blocker_summary": "Shift 83 repaired the exact E2E APSB evidence path. Run 35486388059 on target b5d83ec emitted current Volume/APSB evidence and still failed mountroot error 79. Core feature/tree/UUID/role fields match; discriminating differences include metaCryptoKeyOsVersion 407249186 vs 0 and modificationTime nonzero vs 0. Shift 84 lost runtime before target work. Next step is evidence-backed pinned-writer mapping analysis before any semantic mutation.",
   "last_scored_shift": 84,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 1,
   "last_checkpoint_at": "2026-09-18T21:26:03Z",
-  "updated_at": "2026-09-20T04:15:24Z"
+  "updated_at": "2026-09-20T04:26:35Z"
 }
