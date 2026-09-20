@@ -1,26 +1,26 @@
 Проект: iOS-Research-Runtime
-Работник: Саныч
-Смена: №90
-Начало смены: 20.09.2026 10:47:01 МСК
-Конец смены: 20.09.2026 10:47:01 МСК
+Работник: Михалыч
+Смена: №91
+Начало смены: 20.09.2026 11:03:34 МСК
+Конец смены: 20.09.2026 11:04:32 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Сразу выполнить только доказанное сохранение source APSB modificationTime через существующий FixedTime mapping с whole-file/CAS безопасностью, закрепить exact target SHA, затем пройти focused tests, Windows gate и exact Windows E2E до терминального результата.
+Сразу проверить актуальный target HEAD и точное место CreateOptions, затем выполнить только whole-file/CAS-safe сохранение source APSB modificationTime через FixedTime. После записи закрепить exact target SHA и пройти focused tests, Windows gate и exact Windows E2E до терминального результата.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Саныч опубликовал корректный immutable Reporting v2 стартовый доклад с точной bounded-задачей. Exact report commit затем получил успешные GitHub Actions проверки, однако подтверждённый runtime оборвался до target-мутации или запуска инженерной проверки.
+Михалыч прошёл report barrier, закрепил точную FixedTime-границу и сохранил checkpoint, но target не менял: whole-file ответ был усечён, а небезопасную замену он правильно не выполнял. Runtime затем оборвался.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Стартовый отчёт содержит обязательные v2-маркеры; exact commit `53555c67cdc30576a97126ed8e0f0d56a3a65698` прошёл проверки SUCCESS. Последний production heartbeat зафиксирован GitHub-якорем `4b6a92daf700dc9f71acd4c38ea8ea936e670265` в 10:47:01 МСК; recovery-якорь `6ceb6cfcad680739f6c94167775b97f8aa0c2863` пришёл в 10:58:02 МСК, после stale boundary 10:50:01 МСК. Нового target progress нет.
+Heartbeat 11:04:32 МСК и recovery 11:10:02 МСК подтверждают runtime_loss после stale boundary 11:07:32 МСК. Target HEAD остаётся `b5d83ecb7f4d914c00cc0ac7e568ecb724d8c567`.
 
 ГДЕ ОСТАНОВИЛСЯ:
-На обязательном report-contract barrier перед первым substantive target action. Это runtime_loss, а не добровольная передача смены.
+Перед APSB modificationTime → FixedTime target mutation.
 
 СЛЕДУЮЩЕМУ:
-Без повторной широкой разведки выполнить только доказанную modificationTime → FixedTime мутацию, сразу закрепить точный target SHA, затем пройти focused tests, Windows gate и exact Windows E2E до терминального результата. MetaCryptoKeyOSVersion оставить evidence-only, XID/checkpoint не менять без отдельного доказательства.
+DIR-023: реконструировать authoritative preimage bounded-чтениями, проверить blob SHA, выполнить только локальную whole-file CAS мутацию и затем focused tests → Windows gate → exact Windows E2E.
 
 Оценка ОТК:
 Прогресс: 0/4
@@ -28,4 +28,4 @@
 Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
 Итого: 5/10 — APPROVED
-Рейтинг: 1230 (+0)
+Рейтинг: 1200 (+0)
