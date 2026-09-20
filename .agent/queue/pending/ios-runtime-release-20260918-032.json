@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-023"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Resume from verified shift-91 runtime loss under DIR-023. Reconstruct the authoritative tools/ios-ramdisk-tool/main.go preimage deterministically from bounded GitHub reads, verify the reconstructed bytes against the exact target blob SHA, then perform only the localized whole-file CAS preservation of source APSB modificationTime through existing FixedTime. Checkpoint the exact target SHA immediately, then run focused tests, Windows gate and exact Windows E2E and consume the terminal result.",
+  "goal": "Resume from verified shift-92 runtime loss under DIR-023. Reuse the proven deterministic bounded non-overlapping reconstruction of tools/ios-ramdisk-tool/main.go, verify the reconstructed bytes against authoritative blob f31534635096b173809b52057bad83635ea032e6, then perform only the localized whole-file CAS preservation of source APSB modificationTime through existing FixedTime. Checkpoint exact target SHA immediately, then run focused tests, Windows gate and exact Windows E2E and consume the terminal result.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Preserve durable snapshot preservation.","Treat exact run 35486388059 artifact as authoritative current APSB evidence.","Do not write a reconstructed whole file unless its preimage bytes reproduce the authoritative target blob SHA exactly."],
-  "predecessor_review_event_id": "review-shift-91-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-91-review-shift-91-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-91-review-shift-91-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 91,
-  "predecessor_worker_id": "mikhalych"
+  "predecessor_review_event_id": "review-shift-92-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-92-review-shift-92-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-92-review-shift-92-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 92,
+  "predecessor_worker_id": "borisych"
 }
