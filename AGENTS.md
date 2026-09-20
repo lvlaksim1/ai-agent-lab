@@ -1,8 +1,11 @@
-# AI agent entrypoint
+# Agent Instructions
 
-Перед любой существенной работой с этим репозиторием сначала прочитай `AI_CONTEXT.md`.
+<!-- context-capsule:begin -->
+## Context Capsule
 
-Project Context Capsule является долговременной памятью проектных Chat-сессий.
-Оперативный автономный runtime живёт в `.agent/`.
+Before substantial work, restore project context from `.context/ENTRYPOINT.md`.
 
-Не начинай восстановление проекта с нуля, пока доступен сохранённый контекст.
+Follow `.context/manifest.json` for actual project-context paths. Reconcile stored context with live repository/CI/runtime evidence before making substantial changes.
+
+Do not send project context to Context Capsule Core.
+<!-- context-capsule:end -->

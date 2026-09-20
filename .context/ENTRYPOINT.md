@@ -1,45 +1,23 @@
-# Project Context Capsule — Bootstrap Entry Point
+# Context Capsule entrypoint
 
-Authoritative branch: `work-webhook-test`.
+## Recovery protocol
 
-## Bootstrap order
+1. Read `.context/capsule.json` and verify the exact Core version and `core_commit`.
+2. Read `.context/manifest.json`.
+3. Read project identity, goals, architecture, and constraints.
+4. Read active rules and durable decisions.
+5. Read current state, blockers, next actions, and the latest handoff.
+6. Reconcile the recovered semantic state with live repository/CI/runtime evidence.
+7. Treat verified newer repository facts as authoritative and update the capsule when they change durable project meaning.
 
-Read in this order:
+A structurally valid capsule is not necessarily recovery-ready. Use `capsulectl ready` before relying on it for a fresh-chat handoff.
 
-1. `.context/manifest.json`
-2. `.context/project/identity.md`
-3. `.context/project/goals.md`
-4. `.context/project/constraints.md`
-5. `.context/current/state.md`
-6. `.context/current/blockers.md`
-7. `.context/current/next.md`
-8. `.context/handoffs/latest.md`
-9. `.context/rules/user-rules.md`
-10. `.context/rules/development-rules.md`
-11. `.context/rules/ai-rules.md`
-12. `.context/decisions/index.md`
-13. `.context/dialogues/index.md`
+Do not synchronize project context back to Context Capsule Core.
 
-Then read historical decisions/dialogues/evidence only when needed.
+## AI Agent Lab runtime integration
 
-## Integration with autonomous runtime
+Durable project semantics live in `.context/`; live mutable execution state remains authoritative in `.agent/`.
 
-Project Context Capsule stores conversational/project memory.
-The autonomous shop runtime remains authoritative for live mutable execution state.
+After semantic recovery, inspect the live `.agent/` paths needed for the current task. When acting as «Начальник участка», also read `.agent/management/interactive-bootstrap.md` before issuing management commands or reporting manager state.
 
-For current status inspect as needed:
-- `.agent/assignment.json`
-- `.agent/state.json`
-- `.agent/wake.json`
-- `.agent/management/state.json`
-- `.agent/management/wake.json`
-- `.agent/brigade.json`
-- `.agent/objects/index.json`
-- active object's mission/state/handoff.
-
-If invoked as «начальник участка», also follow `.agent/management/interactive-bootstrap.md`.
-
-## Persistence
-
-During every substantial interactive project Chat follow `.context/protocol.md`.
-Significant semantic changes must be committed back unless the user explicitly forbids repository writes.
+Do not promote routine queue, lease, heartbeat, wake, or polling churn into durable context.

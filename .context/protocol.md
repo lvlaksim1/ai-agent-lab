@@ -1,48 +1,44 @@
-# Context Persistence Protocol
+# Context Capsule protocol
 
-## Principle
+## Purpose
 
-This repository is the persistent memory for AI Agent Lab. Individual chats are ephemeral.
+A fresh chat or agent with no conversation history must be able to recover the project's durable meaning and continue from the repository alone.
 
-`.context/` stores human/AI development history and project semantics.
-`.agent/` stores live autonomous runtime state.
+## Durable layers
 
-## Start of a substantial interactive Chat
+- `project/` — identity, goals, architecture, constraints.
+- `rules/` and `decisions/` — binding rules and accepted/rejected durable choices.
+- `current/` — compact current state, unresolved blockers, and next actions.
+- `handoffs/latest.md` — concise transfer to the next chat/agent.
+- `dialogues/` — evidence-rich investigations when chronology matters.
+- `history/` — older useful context.
 
-1. bootstrap via `ENTRYPOINT.md`;
-2. create or continue one dialogue record for the current substantial session;
-3. if the Chat is the Начальник участка, also materialize the manager identity from `.agent/management/`;
-4. do not infer missing historical facts.
+## VALID vs READY
 
-## Dynamic sync triggers
+`VALID` means the capsule is structurally coherent and all indexed paths are safe and resolvable inside the repository.
 
-Persist semantic changes when they occur: owner decision, requirement, persistent preference, architecture change, blocker/root cause, rejected approach, milestone/release, plan/priority change, important verified finding, major runtime policy change, transfer/topology/reporting policy change.
+`READY` additionally means the semantic recovery set is populated enough for a fresh chat to understand the project and continue: identity, goals, architecture, constraints, current state, next action, handoff, and at least one substantive active rule or durable decision.
 
-Do not commit every conversational turn.
+## Semantic sync
 
-## What belongs where
+Persist durable decisions, requirements, rules, architecture changes, root causes, rejected approaches, milestones, and priority changes.
 
-- `.context/decisions/` — durable decisions.
-- `.context/dialogues/` — semantic history of substantial user/AI chats.
-- `.context/rules/` — durable requirements/preferences.
-- `.context/current/` — compact project working set.
-- `.context/handoffs/latest.md` — next interactive Chat.
-- `.agent/` — current queue, leases, worker/OTK runtime, manager state and object execution state.
+Do not copy routine runtime churn such as heartbeats, leases, polling ticks, queue transitions, or transient CI state into `.context/`.
 
-Do not copy volatile runtime values into Capsule as if they remained authoritative.
+## Repository mutation
 
-## End/handoff
+The canonical GitHub lifecycle prepares and validates the complete target snapshot before publication, creates one Git tree and one commit from the expected parent, rechecks the branch head, and performs a non-forced ref update.
 
-Before a substantial work segment finishes, synchronize current state, blockers, next, rules/decisions, session dialogue record, latest handoff and manifest.
-
-## History discipline
-
-Do not rewrite history. Supersede old decisions. Keep current working state compact.
-
-## Concurrency
-
-Use SHA/version-aware writes. On conflict, re-read and merge.
+If the branch moved, the ref is not updated. Unpublished Git objects may exist, but the target branch remains unchanged.
 
 ## Privacy
 
-Never persist secret values, credentials, cookies, private keys or sensitive personal data.
+Never persist credentials, secret values, cookies, private keys, or unnecessary sensitive personal information.
+
+## AI Agent Lab project-specific persistence
+
+- `.agent/` remains authoritative for queue, leases, worker/OTK runtime, manager state, and object execution state.
+- A substantial interactive Chat must recover `.context/` first and then reconcile the relevant live `.agent/` state.
+- A Chat acting as «Начальник участка» must materialize manager identity from `.agent/management/interactive-bootstrap.md`.
+- Persist semantic consequences of runtime changes, not routine volatile transitions.
+- Use SHA/CAS-aware writes for concurrent GitHub state changes.
