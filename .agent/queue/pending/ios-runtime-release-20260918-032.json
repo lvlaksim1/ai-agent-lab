@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-023"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Consume shift-95 terminal E2E evidence: target 415ff121bf0524a8509ec316d4fbfdc6d140a4cd preserves source modificationTime through CreateOptions.FixedTime, but rebuilt APSB modificationTime remains 0 and mountroot error 79 persists. Inspect the pinned APFS writer and prove the exact code/field mapping that writes VolumeSuperblock.ModificationTime; explain why FixedTime did not populate it. Only after that evidence may a new bounded writer mutation be proposed and verified. Keep metaCryptoKeyOsVersion source=407249186/rebuilt=0 as a separate proven mismatch; do not touch XID/checkpoint semantics without structural proof.",
-  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Preserve durable snapshot preservation.","Treat exact run 35505770284 artifact as authoritative current APSB evidence.","Do not infer APSB ModificationTime mapping from CreateOptions.FixedTime after the terminal artifact disproved that assumption."],
-  "predecessor_review_event_id": "review-shift-95-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-95-review-shift-95-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-95-review-shift-95-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 95,
-  "predecessor_worker_id": "kuzmich"
+  "goal": "Continue from shift-96 source proof: pinned go-apfs-v2 CreateContainer resolves FixedTime into builder.timestamp and writes it to FormattedBy.Timestamp, but volumeSuperblock never assigns apfsSuperblock.LastModTime; v0.3.1/main has the same omission. Establish an evidence-backed checksum/serialization-safe mechanism to set APSB LastModTime (upstream/fork or bounded post-write patch), then perform only the justified bounded mutation and verify with focused tests, Windows gate, and exact Windows E2E. Keep metaCryptoKeyOsVersion source=407249186/rebuilt=0 as a separate proven mismatch; do not touch XID/checkpoint semantics without structural proof.",
+  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not change APFS writer based on checkpoint XID alone.","Do not make speculative APFS writer changes.","Preserve durable snapshot preservation.","Treat shift-96 LastModTime source mapping as authoritative until contradicted by stronger evidence.","Any LastModTime write must preserve APFS checksum/serialization correctness and be verified before E2E conclusions."],
+  "predecessor_review_event_id": "review-shift-96-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-96-review-shift-96-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-96-review-shift-96-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 96,
+  "predecessor_worker_id": "palych"
 }
