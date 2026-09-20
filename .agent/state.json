@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T06:05:25Z",
     "stale_at": "2026-09-20T06:08:25Z",
     "activity_kind": "starting",
-    "activity_detail": "Materializing shift 89 and publishing immutable Reporting v2 start report.",
+    "activity_detail": "Immutable shift 89 start report published; awaiting exact report-commit Runtime Check before target work.",
     "external_wait": null
   },
   "time_authority": "github_commit_committer_date",
@@ -32,7 +32,7 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 89,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-89-petrovich-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "362c4166cff54f544264af265e93d75ef8380801",
   "last_runtime_loss": null
 }
