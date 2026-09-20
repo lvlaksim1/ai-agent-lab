@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T03:59:00Z",
     "stale_at": "2026-09-20T04:02:00Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production shift 84 for DIR-022 continuation.",
+    "activity_detail": "Start report published; awaiting exact report commit Agent Runtime Check before target work.",
     "external_wait": null,
     "source": "production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 84,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-84-borisych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "0ad58f4c762617ca1632ed4cacf7f7d2cad30ab8",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
