@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 314,
-  "purpose": "heartbeat",
+  "sequence": 315,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "blocked_control_plane",
-  "activity_detail": "Exact immutable start-report Agent Runtime Check failed; target work frozen and manager attention requested.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 199
 }
