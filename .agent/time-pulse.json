@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 295,
-  "purpose": "lease_claim",
+  "sequence": 296,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 95 under DIR-023 before immutable start-report barrier.",
+  "activity_kind": "working",
+  "activity_detail": "Reporting v2 start report verified and Agent Runtime Check 35505684996 succeeded; beginning DIR-023 exact preimage verification.",
   "fence_generation": 190
 }
