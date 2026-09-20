@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-116-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T21:10:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "borisych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 116,
+  "shift_started_at_utc": "2026-09-20T20:59:34Z",
+  "shift_completed_at_utc": "2026-09-20T21:02:20Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "ef578e1a64b18047b14167cd93b99e948e92f7ae",
+    "recovery_anchor_commit": "5a93cc627d2279ef7beff0ee43dd55d710a2bb9a",
+    "start_report_path": ".agent/reports/starts/shift-116-borisych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-116-borisych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "7076372c973d7c09405114de360cdb0112bda838",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T21:02:20Z",
+      "heartbeat_stale_at_utc": "2026-09-20T21:05:20Z",
+      "heartbeat_anchor_commit": "ef578e1a64b18047b14167cd93b99e948e92f7ae",
+      "recovery_observed_at_utc": "2026-09-20T21:10:02Z",
+      "recovery_anchor_commit": "5a93cc627d2279ef7beff0ee43dd55d710a2bb9a",
+      "fenced_generation": 256,
+      "activity_kind": "external_wait",
+      "activity_detail": "DIR-027 bounded KeyOSVersion repair committed as ef22d889; actively waiting for exact Windows validation runs."
+    }
+  }
+}
