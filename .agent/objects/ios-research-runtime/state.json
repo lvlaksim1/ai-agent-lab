@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 96 proved the pinned go-apfs-v2 FixedTime primitive does not assign APSB LastModTime/reader ModificationTime; shift 97 ended by verified runtime loss before checksum-safe mechanism proof. Under DIR-024, next production must prove the smallest typed LastModTime assignment and normal checksum/write path before bounded mutation; XID/checkpoint and metaCryptoKeyOsVersion remain frozen absent new evidence.",
+  "current_blocker_summary": "Shift 98 target work was frozen by a Reporting v2 start-report format defect: required canonical section markers lacked trailing colons. DIR-025 requires canonical render/validate preflight and exact Agent Runtime Check SUCCESS, then resumes the checksum-safe APSB LastModTime mechanism proof from DIR-024; XID/checkpoint and metaCryptoKeyOsVersion remain frozen absent new evidence.",
   "last_scored_shift": 97,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 3,
   "last_checkpoint_at": "2026-09-20T11:03:55Z",
-  "updated_at": "2026-09-20T11:45:49Z"
+  "updated_at": "2026-09-20T12:03:48Z"
 }
