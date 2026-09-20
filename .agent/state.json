@@ -22,9 +22,9 @@
     "last_seen_at": "2026-09-20T01:00:51Z",
     "stale_at": "2026-09-20T01:03:51Z",
     "activity_kind": "starting",
-    "activity_detail": "Shift 78 starting under DIR-021 after OTK correction of shift 77.",
+    "activity_detail": "Shift 78 start report published; waiting for exact-commit Runtime Check before target work.",
     "external_wait": null,
-    "source": "production_lease_claim"
+    "source": "production_start_report"
   },
   "time_authority": "github_commit_committer_date",
   "started_at_anchor_commit": "4f056672b166c5f429038ab2f28f87a6fcb154ed",
@@ -33,7 +33,7 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 78,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-78-fedorych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "c53eb04c5f94179af309952b118694ee48ac79e1",
   "last_runtime_loss": {"role":"production","event":"ios-runtime-release-20260918-032","worker_id":"borisych","worker_last_seen_at_utc":"2026-09-19T23:51:41Z","heartbeat_stale_at_utc":"2026-09-19T23:54:41Z","heartbeat_anchor_commit":"81ac98820f164fee8615460f5ec5fa3a69caa529","recovery_closed_at_utc":"2026-09-19T23:58:01Z","recovery_anchor_commit":"92146b832defa5ba334947b4bc1b6ee8bf632b6a","fenced_generation":135,"activity_kind":"blocked_control_plane","activity_detail":"Immutable shift 76 start report fails Reporting v2 literal marker contract; target work remains forbidden.","shift_number":76,"reporting_policy_version":2,"score_policy_version":2,"start_report_path":".agent/reports/starts/shift-76-borisych-ios-runtime-release-20260918-032.md","start_report_commit":"ce8b85b1e9fc8e69bc3374ab4f9f5ab8e7bda55d"}
 }
