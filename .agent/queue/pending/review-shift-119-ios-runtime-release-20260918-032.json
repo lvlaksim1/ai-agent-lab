@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-119-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T22:50:30Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "kuzmich",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 119,
+  "shift_started_at_utc": "2026-09-20T22:37:43Z",
+  "shift_completed_at_utc": "2026-09-20T22:37:43Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "58e58e3201213a557f72be7d07d7802d0589db43",
+    "recovery_anchor_commit": "56ade0f0e179da88b63b018c3e197bfb6069a411"
+  },
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T22:37:43Z",
+      "heartbeat_stale_at_utc": "2026-09-20T22:40:43Z",
+      "heartbeat_anchor_commit": "58e58e3201213a557f72be7d07d7802d0589db43",
+      "recovery_observed_at_utc": "2026-09-20T22:50:30Z",
+      "recovery_anchor_commit": "56ade0f0e179da88b63b018c3e197bfb6069a411",
+      "fenced_generation": 264,
+      "activity_kind": "starting",
+      "activity_detail": "Claimed production shift 119 for DIR-027 continuation."
+    }
+  }
+}
