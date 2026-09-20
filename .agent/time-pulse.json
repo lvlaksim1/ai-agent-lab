@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 408,
+  "sequence": 409,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Report gate passed; consumed E2E failure artifact and localizing established live-volume paddr/library-checksum repair path.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Corrected DIR-027 repair landed as a8bf0471; waiting for exact target validation workflows to materialize.",
   "fence_generation": 258
 }
