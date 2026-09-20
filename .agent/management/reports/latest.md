@@ -1,15 +1,15 @@
 # Отчёт начальника участка
 
 Объект: iOS-Research-Runtime
-Решение: DEC-048 — CHANGE_COURSE
-Директива: DIR-020
+Решение: DEC-049 — CHANGE_COURSE
+Директива: DIR-021
 Здоровье: RED
 Фаза: boot-debugging
 
-После ОТК смены №75 производство idle; management state фиксирует четыре подряд no-progress смены. DIR-019 уже устранил повторную техническую разведку, но смена №75 остановилась перед target commit из-за опасения, что доступный GitHub Contents write заменяет весь файл.
+После ОТК смены №76 производство idle. Management state фиксирует пять подряд no-progress смен; последняя смена была CORRECTED, потому что malformed immutable Reporting v2 start report остановил работу ещё до target repository.
 
-Новый курс устраняет именно этот execution blocker без изменения продуктовой цели: после успешного обязательного start-report gate worker обязан получить полный текущий `tools/ios-ramdisk-tool/main.go` и его blob SHA, выполнить ровно одну заранее локализованную Name/ModTime snapshot-preservation замену с проверкой единственного совпадения и отправить полный результат через `update_file` с исходным blob SHA как CAS guard. Сразу после успешного target commit — checkpoint с точным target SHA.
+Технический курс DIR-020 признан по-прежнему правильным. Изменён только входной control-plane: следующая смена обязана собрать стартовый доклад из точных literal labels канонического `.agent/reporting.md`, проверить полный candidate shared report contract ещё ДО immutable publication, а после публикации повторно прочитать exact file и дождаться terminal SUCCESS `Agent Runtime Check` именно для report commit.
 
-Если полный файл недоступен/усечён, ожидаемый фрагмент не совпадает ровно один раз или CAS отклонён, target не меняется и фиксируется конкретный blocker. Поиск альтернативного write-механизма запрещён.
+После SUCCESS worker без повторной архитектурной разведки выполняет прежнюю bounded whole-file CAS Name/ModTime snapshot-preservation mutation, немедленно сохраняет checkpoint с точным target commit SHA и продолжает focused tests -> Windows gate -> exact Windows E2E.
 
-APFS writer вне bounded mutation остаётся заморожен. STOP, transfer и решение владельца не требуются; производство может продолжить автоматически по DIR-020.
+APFS writer вне bounded mutation остаётся заморожен. STOP, transfer и решение владельца не требуются; производство может продолжить автоматически по DIR-021.
