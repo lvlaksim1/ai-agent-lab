@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 330,
-  "purpose": "lease_claim",
+  "sequence": 331,
+  "purpose": "external_wait_poll",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production lease for shift 101 to inspect authoritative Windows E2E artifact 10606121140 and continue the bounded mountroot error 79 evidence chain.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Immutable start report is published and contract markers verified; exact report commit Agent Runtime Check is queued and being actively polled.",
   "fence_generation": 208
 }
