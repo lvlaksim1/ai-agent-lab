@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 304,
+  "sequence": 305,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "palych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-95-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of shift 95 runtime loss and terminal verification evidence.",
-  "fence_generation": 192
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 96 to inspect pinned APFS writer mapping after terminal DIR-023 E2E evidence.",
+  "fence_generation": 193
 }
