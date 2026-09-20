@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 372,
-  "purpose": "lease_claim",
+  "sequence": 373,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 109 for DIR-027 bounded APSB KeyOSVersion repair.",
+  "activity_kind": "working",
+  "activity_detail": "Start-report gate passed; acquiring authoritative main.go preimage for bounded DIR-027 mutation.",
   "fence_generation": 234
 }
