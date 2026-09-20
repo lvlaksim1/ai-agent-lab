@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Artifact 10606121140 exposes a bounded APSB discriminator: source metaCryptoKeyOsVersion=407249186 (0x18462122) while rebuilt=0; adjacent MetaCrypto fields and LastModTime match. Preserve KeyOSVersion checksum/serialization-safe before touching XID/checkpoint or other metaCrypto fields.",
+  "current_blocker_summary": "Shift 101 isolates source metaCryptoKeyOsVersion=407249186 (0x18462122) versus rebuilt=0 while adjacent MetaCrypto fields and LastModTime match. Preserve KeyOSVersion through the checksum/serialization-safe writer path before any broader APFS change.",
   "last_scored_shift": 101,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 4,
   "last_checkpoint_at": "2026-09-20T13:29:08Z",
-  "updated_at": "2026-09-20T13:38:46Z"
+  "updated_at": "2026-09-20T13:48:52Z"
 }
