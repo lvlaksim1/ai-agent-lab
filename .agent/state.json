@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T03:17:45Z",
     "stale_at": "2026-09-20T03:20:45Z",
     "activity_kind": "starting",
-    "activity_detail": "Materializing shift 83 and publishing immutable start report before target work.",
+    "activity_detail": "Shift 83 immutable start report published; waiting for exact report-commit runtime gate.",
     "external_wait": null,
     "source": "relay_production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 83,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-83-mikhalych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "c00d8710b23d504360fc29834b8639e4ce54a16a",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
