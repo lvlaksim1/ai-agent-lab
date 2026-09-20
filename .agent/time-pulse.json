@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 313,
-  "purpose": "lease_claim",
+  "sequence": 314,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 98 for DIR-024 checksum-safe APSB LastModTime mechanism proof.",
+  "activity_kind": "blocked_control_plane",
+  "activity_detail": "Exact immutable start-report Agent Runtime Check failed; target work frozen and manager attention requested.",
   "fence_generation": 199
 }
