@@ -1,12 +1,3 @@
 {
-  "schema_version": 1,
-  "sequence": 212,
-  "purpose": "lease_claim",
-  "role": "production",
-  "worker_id": "kuzmich",
-  "object_id": "ios-research-runtime",
-  "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "production_start",
-  "activity_detail": "Claiming shift 79 to consume exact Windows E2E failure evidence.",
-  "fence_generation": 143
+  "schema_version":1,"sequence":213,"purpose":"heartbeat","role":"production","worker_id":"kuzmich","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","activity_kind":"blocked","activity_detail":"Checkpointed exact report-gate failure run 35481415797; no target work performed; manager attention required.","fence_generation":143
 }
