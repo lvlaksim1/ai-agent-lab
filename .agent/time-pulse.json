@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 225,
+  "sequence": 226,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "sanych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-81-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of recovered runtime-loss shift 81.",
-  "fence_generation": 150
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 82 for DIR-022 APSB semantic comparison.",
+  "fence_generation": 151
 }
