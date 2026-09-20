@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-027 preimage blocker is resolved and re-verified at main.go blob 9eec2108fdac0f1074d66d6ffd6be1d4d428eac6. Next bounded step remains the source-preserving APSB KeyOSVersion offset-108 repair with checksum validation, then focused tests, Windows gate and exact Windows E2E.",
-  "last_scored_shift": 108,
+  "current_blocker_summary": "DIR-027 remains the bounded source-preserving APSB KeyOSVersion offset-108 repair with Fletcher64 validation; shift 109 ended by verified runtime loss before target mutation.",
+  "last_scored_shift": 109,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-20T17:33:12Z"
+  "updated_at": "2026-09-20T18:03:45Z"
 }
