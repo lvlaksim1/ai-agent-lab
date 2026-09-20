@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 264,
-  "purpose": "lease_claim",
+  "sequence": 265,
+  "purpose": "heartbeat",
   "role": "otk",
   "worker_id": "otk",
   "object_id": "ios-research-runtime",
   "active_event": "review-shift-88-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Claiming independent OTK review for recovered shift 88.",
-  "fence_generation": 170
+  "activity_kind": "persisting",
+  "activity_detail": "Finalizing independent OTK review for recovered shift 88 atomically.",
+  "fence_generation": 171
 }
