@@ -1,3 +1,3 @@
 {
-  "schema_version":1,"sequence":214,"purpose":"lease_claim","role":"otk","worker_id":"otk","object_id":"ios-research-runtime","active_event":"review-shift-79-ios-runtime-release-20260918-032","activity_kind":"otk_review","activity_detail":"Claiming OTK review for shift 79 report-gate failure.","fence_generation":144
+  "schema_version":1,"sequence":215,"purpose":"heartbeat","role":"otk","worker_id":"otk","object_id":"ios-research-runtime","active_event":"review-shift-79-ios-runtime-release-20260918-032","activity_kind":"otk_review","activity_detail":"OTK evidence complete; preparing atomic shift 79 finalization.","fence_generation":144
 }
