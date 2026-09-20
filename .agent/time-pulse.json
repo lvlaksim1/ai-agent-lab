@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 401,
-  "purpose": "lease_claim",
+  "sequence": 402,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 116 for DIR-027 continuation.",
+  "activity_kind": "working",
+  "activity_detail": "Reporting v2 barrier passed; verified exact target main and authoritative main.go preimage; preparing bounded DIR-027 KeyOSVersion mutation.",
   "fence_generation": 255
 }
