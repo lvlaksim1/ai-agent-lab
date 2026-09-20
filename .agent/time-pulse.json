@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 308,
+  "sequence": 309,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-96-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Claiming OTK lease for independent review of shift 96.",
-  "fence_generation": 195
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 97 to continue from proven APSB LastModTime writer omission.",
+  "fence_generation": 196
 }
