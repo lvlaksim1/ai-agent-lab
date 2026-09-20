@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 325,
-  "purpose": "lease_claim",
+  "sequence": 326,
+  "purpose": "engineering_checkpoint",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Starting shift 100 to consume terminal E2E 35511828863 and continue APFS error-79 diagnosis.",
+  "activity_kind": "investigating",
+  "activity_detail": "Start-report gate passed; exact E2E 35511828863 confirmed terminal failure at provisioning/root-shell proof and artifact 10606121140 is authoritative next evidence source.",
   "fence_generation": 205
 }
