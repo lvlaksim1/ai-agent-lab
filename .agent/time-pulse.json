@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 352,
-  "purpose": "lease_claim",
+  "sequence": 353,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 105 under DIR-027.",
+  "activity_kind": "working",
+  "activity_detail": "Reporting v2 gate passed via Agent Runtime Check 35518960973; exact Git blob 9eec2108fdac0f1074d66d6ffd6be1d4d428eac6 yielded lossless main.go preimage. Preparing bounded KeyOSVersion mutation.",
   "fence_generation": 220
 }
