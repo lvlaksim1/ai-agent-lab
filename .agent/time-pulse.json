@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 297,
+  "sequence": 298,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "DIR-023 preimage verified through exact GitHub blob read; APSB modificationTime -> FixedTime CAS committed at target 415ff121bf0524a8509ec316d4fbfdc6d140a4cd; starting verification chain.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Actively polling verification workflows for target 415ff121bf0524a8509ec316d4fbfdc6d140a4cd, including Windows Build and Ramdisk Tool Windows.",
   "fence_generation": 190
 }
