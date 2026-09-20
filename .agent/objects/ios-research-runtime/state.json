@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 116 landed KeyOSVersion repair as ef22d889 and exact Windows E2E 35537412314 is terminal FAILURE. OTK found the implementation deviated from DIR-027's established live-volume paddr/library-checksum path; correct that bounded repair and consume terminal validation before any broader APFS change.",
-  "last_scored_shift": 116,
-  "last_otk_verdict": "CORRECTED",
+  "current_blocker_summary": "Shift 117 corrected DIR-027 as target a8bf0471; Ramdisk Tool Windows and Windows Build succeeded, while exact Windows E2E 35539990359 is terminal FAILURE. Consume that exact failure evidence and localize the next structural boot blocker before any broader APFS mutation.",
+  "last_scored_shift": 117,
+  "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-20T21:22:25Z"
+  "updated_at": "2026-09-20T22:03:53Z"
 }

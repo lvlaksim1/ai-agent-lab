@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-027"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Consume exact terminal Windows E2E failure run 35537412314 for target ef22d889c400add80c28544e309160c816e0382f. Correct the bounded DIR-027 implementation: use the already-established rebuilt live-volume paddr resolution and library checksum calculation/validation path instead of scanning for the first APSB and using a new custom Fletcher implementation. Preserve only source MetaCryptoKeyOSVersion; do not alter LastModTime, XID/checkpoint or adjacent MetaCrypto semantics. Then run focused tests, Windows gate and exact Windows E2E and consume terminal evidence before any broader APFS change.",
-  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not alter XID/checkpoint semantics.","Do not alter metaCrypto fields other than KeyOSVersion without new discriminating evidence.","Preserve the landed LastModTime fix."],
-  "predecessor_review_event_id": "review-shift-116-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-116-review-shift-116-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-116-review-shift-116-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 116,
-  "predecessor_worker_id": "borisych"
+  "goal": "Consume exact terminal Windows E2E failure run 35539990359 for target a8bf0471c4a180ee99900e7d85c6ad627315eaae. Inspect the exact failure evidence/artifact and localize the next evidence-backed structural boot blocker. Preserve the corrected live-volume paddr/library-checksum KeyOSVersion path; do not alter LastModTime, XID/checkpoint or adjacent MetaCrypto semantics without new discriminating evidence. Continue the causal chain with the smallest justified repair/instrumentation and terminal verification.",
+  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter metaCrypto fields other than already-corrected KeyOSVersion without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume mapping path."],
+  "predecessor_review_event_id": "review-shift-117-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-117-review-shift-117-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-117-review-shift-117-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 117,
+  "predecessor_worker_id": "ivanych"
 }
