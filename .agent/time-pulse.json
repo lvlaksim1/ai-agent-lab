@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 252,
-  "purpose": "stale_recovery_probe",
-  "role": "production",
-  "worker_id": "fedorych",
+  "sequence": 253,
+  "purpose": "lease_claim",
+  "role": "otk",
+  "worker_id": "otk",
   "object_id": "ios-research-runtime",
-  "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "recovery_probe",
-  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
-  "fence_generation": 163
+  "active_event": "review-shift-86-ios-runtime-release-20260918-032",
+  "activity_kind": "otk_review",
+  "activity_detail": "Claiming OTK review for recovered shift 86.",
+  "fence_generation": 165
 }
