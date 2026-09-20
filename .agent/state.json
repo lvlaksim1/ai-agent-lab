@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-20T18:27:21Z",
     "stale_at": "2026-09-20T18:30:21Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production shift 110 for DIR-027 continuation.",
+    "activity_detail": "Start report published; waiting for exact report commit Agent Runtime Check before target work.",
     "external_wait": null,
     "source": "relay_production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 110,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-110-fedorych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "ce9b50edf9ff12b94cb6d9ce3c9476c2a98df02e",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
