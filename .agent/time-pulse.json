@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 379,
-  "purpose": "lease_claim",
+  "sequence": 380,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 111 for DIR-027 after completed OTK shift 110.",
+  "activity_kind": "working",
+  "activity_detail": "Reporting v2 gate passed; authoritative main.go blob and pinned APFS paddr/checksum APIs verified; preparing bounded DIR-027 mutation.",
   "fence_generation": 240
 }
