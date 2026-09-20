@@ -5,23 +5,21 @@
   "project_name": "iOS-Research-Runtime",
   "target_ref": "main",
   "owner_goal": "Deliver the verified Windows-native v0.1.0 release defined by the object mission.",
-  "definition_of_done": [
-    "Use the authoritative object mission Definition of Done"
-  ],
+  "definition_of_done": ["Use the authoritative object mission Definition of Done"],
   "current_phase": "control-plane-recovery",
   "health": "RED",
-  "current_blocker_summary": "Shift 79 exact-commit Agent Runtime Check failed because the production lease-claim state emitted non-canonical heartbeat.activity_kind production_start; canonical startup kind is starting. Pending OTK review must complete first, then repair/verify the producer without weakening invariants before resuming exact Windows E2E failure analysis.",
-  "shifts_since_manager_review": 0,
-  "consecutive_no_progress": 0,
+  "current_blocker_summary": "Shift 79 exact-commit Agent Runtime Check failed because the production lease-claim state emitted non-canonical heartbeat.activity_kind production_start; canonical startup kind is starting. DIR-022 remains active: repair/verify producer without weakening invariants, then resume exact Windows E2E failure analysis.",
+  "shifts_since_manager_review": 1,
+  "consecutive_no_progress": 1,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
-  "last_scored_shift": 78,
+  "last_progress_class": "none",
+  "last_scored_shift": 79,
   "manager_review_count": 50,
   "last_manager_review_at": "2026-09-20T01:39:43Z",
   "last_manager_decision": "DEC-051: CHANGE_COURSE; repair non-canonical production_start activity kind under DIR-022",
   "active_directive": "DIR-022",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-20T01:39:43Z"
+  "updated_at": "2026-09-20T01:50:11Z"
 }
