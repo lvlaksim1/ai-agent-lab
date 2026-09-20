@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 286,
-  "purpose": "heartbeat",
+  "sequence": 287,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Immutable shift-93 report gate passed: Agent Runtime Check 35502842923 SUCCESS; beginning DIR-023 bounded preimage verification.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 184
 }
