@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-97-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-20T11:34:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "petrovich",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 97,
+  "shift_started_at_utc": "2026-09-20T11:23:49Z",
+  "shift_completed_at_utc": "2026-09-20T11:24:29Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "6a8b38c81e4a86fbd936393b3870eb9e7a32c859",
+    "recovery_anchor_commit": "0f8444f65b11250f4e16e00e3b7f2c954be9a1e3",
+    "start_report_path": ".agent/reports/starts/shift-97-petrovich-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-97-petrovich-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "3dd380abdcd716e075c7fed80b09dde268920738",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-20T11:24:29Z",
+      "heartbeat_stale_at_utc": "2026-09-20T11:27:29Z",
+      "heartbeat_anchor_commit": "6a8b38c81e4a86fbd936393b3870eb9e7a32c859",
+      "recovery_observed_at_utc": "2026-09-20T11:34:01Z",
+      "recovery_anchor_commit": "0f8444f65b11250f4e16e00e3b7f2c954be9a1e3",
+      "fenced_generation": 197,
+      "activity_kind": "working",
+      "activity_detail": "Report-contract barrier passed (Agent Runtime Check 35507731576 SUCCESS); beginning checksum-safe LastModTime mechanism inspection."
+    }
+  }
+}
