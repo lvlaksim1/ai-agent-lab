@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 461,
-  "purpose": "lease_claim",
+  "sequence": 462,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "palych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production lease for shift 128 under DIR-029.",
+  "activity_kind": "working",
+  "activity_detail": "Shift 128 report-contract barrier passed; entering DIR-029 deeper read-only APFS discriminator work.",
   "fence_generation": 288
 }
