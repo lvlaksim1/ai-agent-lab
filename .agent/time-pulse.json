@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 562,
-  "purpose": "otk_lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "sequence": 563,
+  "purpose": "lease_claim",
+  "role": "production",
+  "worker_id": "borisych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-147-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of shift 147 after verified runtime-loss recovery.",
-  "fence_generation": 348
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 148 for DIR-029 exact E2E root-record evidence comparison.",
+  "fence_generation": 349
 }
