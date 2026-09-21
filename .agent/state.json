@@ -15,16 +15,16 @@
     "worker_id": "fedorych",
     "object_id": "ios-research-runtime",
     "active_event": "ios-runtime-release-20260918-032",
-    "sequence": 533,
+    "sequence": 534,
     "time_source": "github_commit_committer_date",
-    "time_anchor_commit": "053e8f7a663d9b57f91e29d770e38cb55ac9891c",
+    "time_anchor_commit": "498cbc595d44143e110b7457a1a3318b2918c7fc",
     "time_anchor_path": ".agent/time-pulse.json",
-    "last_seen_at": "2026-09-21T12:06:22Z",
-    "stale_at": "2026-09-21T12:09:22Z",
+    "last_seen_at": "2026-09-21T12:06:47Z",
+    "stale_at": "2026-09-21T12:09:47Z",
     "activity_kind": "starting",
-    "activity_detail": "Claiming production shift 142 to continue DIR-029 deeper read-only lookup/content comparison after OTK shift 141.",
-    "external_wait": null,
-    "source": "production_claim"
+    "activity_detail": "Immutable Reporting v2 start report published for shift 142; awaiting exact report-commit Agent Runtime Check barrier.",
+    "external_wait": {"kind":"github_actions","commit":"eb3dc85c8e5d61cad2bacb58ca9edb53005c97c3","check":"Agent Runtime Check","status":"pending"},
+    "source": "production_heartbeat"
   },
   "time_authority": "github_commit_committer_date",
   "started_at_anchor_commit": "053e8f7a663d9b57f91e29d770e38cb55ac9891c",
@@ -33,7 +33,7 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 142,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-142-fedorych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "eb3dc85c8e5d61cad2bacb58ca9edb53005c97c3",
   "last_runtime_loss": null
 }
