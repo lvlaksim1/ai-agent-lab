@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 577,
-  "purpose": "heartbeat",
+  "sequence": 578,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Checkpointed evidence-only child-leaf instrumentation at target 3b0f5648; waiting for exact target CI.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 357
 }
