@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 477,
+  "sequence": 478,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "external_wait",
-  "activity_detail": "Actively polling corrected target b75810a: Ramdisk Tool Windows 35563857686 and exact Windows E2E 35563857728 are in progress.",
+  "activity_detail": "Corrected target b75810a passed Ramdisk tests and is building; exact E2E 35563857728 is progressing through setup.",
   "fence_generation": 294
 }
