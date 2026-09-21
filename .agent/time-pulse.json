@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "sequence": 591,
+  "sequence": 592,
   "purpose": "lease_claim",
   "role": "otk",
   "worker_id": "otk",
@@ -8,5 +8,5 @@
   "active_event": "review-shift-154-ios-runtime-release-20260918-032",
   "activity_kind": "otk_review",
   "activity_detail": "Claiming OTK review for recovered shift 154.",
-  "fence_generation": 367
+  "fence_generation": 368
 }
