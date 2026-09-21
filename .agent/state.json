@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T03:25:22Z",
     "stale_at": "2026-09-21T03:28:22Z",
     "activity_kind": "starting",
-    "activity_detail": "Starting shift 126 on DIR-029 read-only APFS failure localization.",
+    "activity_detail": "Immutable shift-126 start report published; waiting for exact report-contract barrier.",
     "external_wait": null,
     "source": "production_lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 126,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-126-fedorych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "9ece02ca8be8078dab5f3beca908d27502e49745",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
