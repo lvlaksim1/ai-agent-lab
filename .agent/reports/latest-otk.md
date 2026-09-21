@@ -1,31 +1,23 @@
 Проект: iOS-Research-Runtime
-Работник: Петрович
-Смена: №129
-Начало смены: 21.09.2026 07:40:23 МСК
-Конец смены: 21.09.2026 07:42:48 МСК
-Причина завершения: runtime_loss
-
-ЗАКЛЮЧЕНИЕ ОТК:
+ОТК: независимая проверка
+Смена: №130 — Саныч
+Рабочее время: 21.09.2026 08:10:27–08:15:14 МСК
 
 ЧТО ПЛАНИРОВАЛ:
-Петрович планировал продолжить DIR-029 от доказанной границы errno 79/md0 и получить следующий минимальный read-only discriminator конкретного live-volume APFS object/lookup/validation failure.
+Саныч принял DIR-029 на уже локализованной границе и планировал узкую read-only цепочку live-volume OMAP -> root-tree OID -> physical block -> header/checksum/type/XID с последующим exact-E2E.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Exact E2E artifact повторно потреблён; durable checkpoint уточнил mount boundary и доказал доступность live-volume object mapping. Следующий минимальный probe локализован до OMAP -> root-tree OID -> physical block -> object header/checksum/type/XID.
+В `b38244f...` добавлена read-only root-tree диагностика; в `b75810a...` исправлен selector lookup на APSB XID. Writer semantics не менялись.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Checkpoint `4fd2e45508ac4ce7fb6753296cfa54604382bf0e`; runtime loss независимо подтверждён heartbeat/recovery anchors. Спекулятивных APFS mutation не было.
+Ramdisk Tool Windows `35563857686` SUCCESS. Exact Windows E2E `35563857728` после runtime loss завершился FAILURE и сохранил artifact. Runtime loss подтверждён GitHub-якорями 05:15:14 -> stale 05:18:14 -> recovery 05:22:01 UTC.
 
 ГДЕ ОСТАНОВИЛСЯ:
-Read-only object-map/root-tree instrumentation ещё не реализована.
+На активном ожидании exact E2E; остановка недобровольная.
 
 СЛЕДУЮЩЕМУ:
-Реализовать только этот narrow DIR-029 probe и потребить focused/Windows/exact-E2E evidence до любой semantic repair.
+Потребить artifact `35563857728`, извлечь root-tree physical/header/checksum/type/XID evidence и продолжить только по первому доказанному расхождению.
 
-Оценка ОТК:
-Прогресс: 3/4
-Инженерное качество: 3/3
-Эффективность/фокус: 2/2
-Стартовая оценка и план: 1/1
-Итого: 9/10 — APPROVED
-Рейтинг: 1280 (+40)
+ОЦЕНКА ОТК: 3/4 + 3/3 + 2/2 + 1/1 = 9/10 — APPROVED
+Рейтинг Саныча: 1300 -> 1340
+Progress class: substantial

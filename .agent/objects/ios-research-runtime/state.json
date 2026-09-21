@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029: shift 129 narrowed the next causal discriminator to read-only live-volume OMAP -> root-tree OID -> resolved physical block -> object header/checksum/type/XID validation; implement and consume this probe before any APFS semantic mutation.",
-  "last_scored_shift": 129,
+  "current_blocker_summary": "DIR-029: shift 130 landed and corrected read-only live-volume OMAP -> root-tree physical/header/checksum/type/XID instrumentation; exact E2E 35563857728 is terminal FAILURE. Consume its artifact and localize the first concrete root-tree structural/lookup/validation mismatch before any APFS semantic mutation.",
+  "last_scored_shift": 130,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T05:03:47Z"
+  "updated_at": "2026-09-21T05:31:24Z"
 }
