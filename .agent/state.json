@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T13:46:56Z",
     "stale_at": "2026-09-21T13:49:56Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production shift 145; materializing DIR-029 context before immutable start report.",
+    "activity_detail": "Immutable Reporting v2 start report published; waiting for exact report commit Agent Runtime Check before target work.",
     "external_wait": null,
     "source": "production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 145,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-145-petrovich-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "a7167f224a76e7e69ee25233c5fe40c2bb497fa9",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
