@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 489,
-  "purpose": "lease_claim",
+  "sequence": 490,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 133 for DIR-031 control-plane recovery before target work.",
+  "activity_kind": "working",
+  "activity_detail": "DIR-031 exact gate is green; resumed DIR-029 and localized missing extentref/snapMeta physical/header/checksum instrumentation in apfs_evidence_output.go.",
   "fence_generation": 303
 }
