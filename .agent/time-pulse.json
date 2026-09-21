@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 541,
-  "purpose": "lease_claim",
+  "sequence": 542,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 143 for DIR-029 bounded APFS discriminator.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 334
 }
