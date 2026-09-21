@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-149-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-21T16:35:53Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "production_event": "ios-runtime-release-20260918-032",
+  "worker_id": "ivanych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 149,
+  "shift_started_at_utc": "2026-09-21T16:34:24Z",
+  "shift_completed_at_utc": "2026-09-21T16:35:53Z",
+  "start_report_path": ".agent/reports/starts/shift-149-ivanych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "842709f4cd543075d2ccb3dd539c0c954f69ee4f",
+  "predecessor_review_event_id": "review-shift-148-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-148-review-shift-148-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-148-review-shift-148-ios-runtime-release-20260918-032.md",
+  "evidence": [
+    ".agent/checkpoints/shift-149-dir033-report-gate.md",
+    "https://github.com/lvlaksim1/ai-agent-lab/actions/runs/35626501531"
+  ],
+  "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main","commit":"a4897aa79186d0e492ca0e5f8fbdd0ad4338bcc9"},
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "stop": {
+    "kind": "blocked",
+    "actionable_next_step": false,
+    "reason": "The immutable shift-149 start-report commit has a terminal failed exact Agent Runtime Check because the lease-claim producer projected illegal heartbeat activity_kind lease_claim into processing state; target work is forbidden after this barrier failure.",
+    "exhaustion_evidence": ["The report itself is canonical Reporting v2 and immutable, so it cannot be rewritten.","Exact run 35626501531 is terminal failure at Validate agent runtime invariants.","Validator/liveness contract permits starting but not lease_claim for processing heartbeat; the defect is localized to producer-state projection."],
+    "external_action": "Control-plane/next production transition must project lease-claim processing heartbeat as activity_kind starting, then publish a new immutable canonical start report and obtain exact Agent Runtime Check SUCCESS before target mutation.",
+    "short_shift_justification": "Mandatory report-contract barrier failed immediately; continuing into target work is explicitly forbidden, and the immutable report commit cannot be repaired in-place."
+  }
+}
