@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 584,
+  "sequence": 585,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Canonical Reporting v2 start report published for shift 153; entering exact report-contract barrier.",
+  "activity_kind": "engineering",
+  "activity_detail": "DIR-034 gate green; consumed E2E 35634992757 artifact. Extentref child-leaf evidence proves source 719 records across 7 leaves versus rebuilt 1360 across 13, with first record divergence and no identical key/value pairs; next discriminator is ownership/file-extent correlation before APFS mutation.",
   "fence_generation": 363
 }
