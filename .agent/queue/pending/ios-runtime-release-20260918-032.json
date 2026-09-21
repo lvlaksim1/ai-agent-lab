@@ -8,12 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Resume DIR-029 from evidence-only target 3b0f5648f004f58daef526082b3d2a32d132edcf. First pass a fresh Reporting v2 exact Agent Runtime Check; then consume terminal Windows End-to-End Boot run 35634992757 and compare source/rebuilt extentref child-leaf key/value semantics. Determine the first causal divergence or prove equivalence before any APFS semantic mutation.",
-  "constraints": ["Do not rewrite shift-152 immutable start report; create the next shift's own valid report.","Do not repeat speculative APFS changes.","Do not treat extentref root-index NumberOfKeys 7-vs-13 alone as corruption; validate child-leaf records/keys/values.","Do not alter XID/checkpoint semantics or MetaCrypto fields without new discriminating evidence."],
-  "wait_for": {"kind":"github_actions_run","repository":"lvlaksim1/iOS-Research-Runtime","run_id":35634992757,"target_sha":"3b0f5648f004f58daef526082b3d2a32d132edcf"},
-  "predecessor_review_event_id": "review-shift-152-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-152-review-shift-152-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-152-review-shift-152-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 152,
-  "predecessor_worker_id": "palych"
+  "goal": "Resume DIR-029 from target 3b0f5648f004f58daef526082b3d2a32d132edcf. Reporting v2 barrier is proven green by shift-153 exact Agent Runtime Check 35643479244. Consume the established extentref child-leaf evidence (source 719 records across 7 leaves; rebuilt 1360 across 13; first record divergence; no identical key/value pairs) and correlate ownership/file-extent ranges and refcounts with rebuilt allocation/file layout. Determine whether the divergence is expected from additional rebuilt files/sysroot or identifies a causal structural inconsistency before any APFS semantic mutation.",
+  "constraints": ["Do not repeat speculative APFS changes.","Do not treat extentref record-count divergence alone as corruption; correlate ownership/file extents/refcounts with actual rebuilt allocation layout.","Do not alter XID/checkpoint semantics or MetaCrypto fields without new discriminating evidence."],
+  "predecessor_review_event_id": "review-shift-153-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-153-review-shift-153-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-153-review-shift-153-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 153,
+  "predecessor_worker_id": "petrovich"
 }

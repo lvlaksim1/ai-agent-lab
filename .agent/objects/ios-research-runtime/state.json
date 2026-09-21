@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 152 exact Agent Runtime Check 35638258123 proves a non-canonical Reporting v2 start report. DIR-034 requires producer-path repair and fresh green Runtime Check; then resume DIR-029 at terminal E2E 35634992757 and extentref child-leaf comparison.",
-  "last_scored_shift": 152,
+  "current_blocker_summary": "DIR-034 is proven green by exact Agent Runtime Check 35643479244. DIR-029 now has extentref child-leaf divergence evidence: source 719 records/7 leaves versus rebuilt 1360/13 with no identical key/value pairs. Next discriminator is ownership/file-extent range/refcount correlation against rebuilt allocation layout before any APFS semantic mutation.",
+  "last_scored_shift": 153,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "none",
+  "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T18:39:31Z"
+  "updated_at": "2026-09-21T19:38:12Z"
 }
