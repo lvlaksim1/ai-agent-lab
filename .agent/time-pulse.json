@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 583,
-  "purpose": "lease_claim",
+  "sequence": 584,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "starting",
-  "activity_detail": "Claiming production lease for shift 153 under DIR-034.",
+  "activity_detail": "Canonical Reporting v2 start report published for shift 153; entering exact report-contract barrier.",
   "fence_generation": 363
 }
