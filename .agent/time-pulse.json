@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 534,
+  "sequence": 535,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Immutable Reporting v2 start report published for shift 142; awaiting exact report-commit Agent Runtime Check barrier.",
+  "activity_kind": "working",
+  "activity_detail": "Reporting v2 gate passed. DIR-029 narrowed behind green auxiliary-tree object headers/checksums to APFS B-tree node header fields: flags, level and key count; checkpoint persisted before bounded read-only instrumentation.",
   "fence_generation": 329
 }
