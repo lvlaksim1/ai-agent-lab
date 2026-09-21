@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T08:24:24Z",
     "stale_at": "2026-09-21T08:27:24Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production lease for shift 136 continuation of DIR-029.",
+    "activity_detail": "Start report published; awaiting exact report-contract gate evidence before target work.",
     "external_wait": null,
     "source": "lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 136,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-136-palych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "777cd67d669bd3a4b23301de5b15f13cae7e9460",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
