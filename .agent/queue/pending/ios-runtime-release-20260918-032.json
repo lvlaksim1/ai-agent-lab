@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Shift 120 disproved the ramdisk packaging-size discriminator while mountroot error 79 persists. Follow DIR-029: localize the first failing APFS object/lookup/validation/invariant through read-only evidence before any further semantic mutation; if a bounded causal defect is proven, apply only the smallest correction and consume focused tests, Windows gate and exact Windows E2E terminal evidence in the same live shift.",
+  "goal": "Continue DIR-029 after verified runtime loss in shift 121: localize the first failing APFS object/lookup/validation/invariant through read-only evidence before any further semantic mutation; if a bounded causal defect is proven, apply only the smallest correction and consume focused tests, Windows gate and exact Windows E2E terminal evidence in the same live shift.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter adjacent MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform further APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
-  "predecessor_review_event_id": "review-shift-120-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-120-review-shift-120-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-120-review-shift-120-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 120,
-  "predecessor_worker_id": "palych"
+  "predecessor_review_event_id": "review-shift-121-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-121-review-shift-121-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-121-review-shift-121-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 121,
+  "predecessor_worker_id": "petrovich"
 }
