@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 493,
-  "purpose": "otk_finalize",
-  "role": "otk",
-  "worker_id": "otk",
+  "sequence": 494,
+  "purpose": "lease_claim",
+  "role": "production",
+  "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-133-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Finalizing independent OTK review for shift 133.",
-  "fence_generation": 305
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 134 to continue DIR-029 read-only extentref/snapMeta evidence.",
+  "fence_generation": 306
 }
