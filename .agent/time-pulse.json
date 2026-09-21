@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 526,
-  "purpose": "otk_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "sequence": 527,
+  "purpose": "lease_claim",
+  "role": "production",
+  "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-140-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Reviewing recovered runtime-loss shift 140.",
-  "fence_generation": 325
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production shift 141 and materializing inherited DIR-029/DIR-032 context before the Reporting v2 barrier.",
+  "fence_generation": 326
 }
