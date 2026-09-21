@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-032 temporarily preempts DIR-029: recurring mandatory Agent Runtime Check 35587838815 failed at the shift-139 immutable start-report barrier; restore the exact control-plane invariant first, then resume target 735c8e4d5ae8187ff813b57a36c664c1b015085f / exact E2E 35583468605 evidence consumption.",
-  "last_scored_shift": 139,
+  "current_blocker_summary": "DIR-032 report-contract barrier is proven green by shift-140 Agent Runtime Check 35592640284; resume DIR-029 read-only extentref/snapmeta evidence on target 735c8e4d5ae8187ff813b57a36c664c1b015085f / exact E2E 35583468605.",
+  "last_scored_shift": 140,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "none",
+  "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T10:48:25Z"
+  "updated_at": "2026-09-21T11:36:19Z"
 }
