@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "attention": false,
-  "generation": 79,
-  "reasons": [],
-  "updated_at": "2026-09-21T18:39:31Z"
+  "attention": true,
+  "generation": 80,
+  "reasons": ["post-fence orchestration write observed after verified stale-worker recovery; review zombie-write fencing integrity before next production shift"],
+  "updated_at": "2026-09-21T19:47:59Z"
 }

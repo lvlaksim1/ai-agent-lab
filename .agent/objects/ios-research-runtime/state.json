@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-034 is proven green by exact Agent Runtime Check 35643479244. DIR-029 now has extentref child-leaf divergence evidence: source 719 records/7 leaves versus rebuilt 1360/13 with no identical key/value pairs. Next discriminator is ownership/file-extent range/refcount correlation against rebuilt allocation layout before any APFS semantic mutation.",
-  "last_scored_shift": 153,
-  "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
+  "current_blocker_summary": "Control-plane fencing integrity requires manager review: shift-154 execution published orchestration checkpoint fde4f271641096f20249686f0bd730c2d1a7241f after recovery fence d8681f004c84d1536c5c1cc65a557aa0a45c9c73. DIR-029 remains pending from the last independently valid evidence.",
+  "last_scored_shift": 154,
+  "last_otk_verdict": "CORRECTED",
+  "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T19:38:12Z"
+  "updated_at": "2026-09-21T19:47:59Z"
 }
