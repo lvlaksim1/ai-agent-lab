@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029 remains active: shift 127 landed and consumed API-visible exact-E2E APFS failure marker evidence at target c1bd3925, confirming mountroot errno 79 on BSD root md0. The first deeper live-volume APFS object/lookup/validation discriminator is still not localized; continue narrow read-only instrumentation before any semantic mutation.",
-  "last_scored_shift": 127,
+  "current_blocker_summary": "DIR-029 remains active: shift 127 proved the API-visible mountroot errno 79 / BSD root md0 boundary; shift 128 passed the report barrier but runtime was lost before a deeper live-volume APFS object/lookup/validation discriminator was durably produced. Continue narrow read-only instrumentation before any semantic mutation.",
+  "last_scored_shift": 128,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
+  "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T04:23:17Z"
+  "updated_at": "2026-09-21T04:39:03Z"
 }
