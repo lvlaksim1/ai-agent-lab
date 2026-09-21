@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "attention": true,
+  "attention": false,
   "generation": 78,
-  "reasons": ["BLOCKED verdict on shift 149: exact Reporting v2 barrier still fails; producer-state projection is now localized to illegal processing activity_kind lease_claim instead of starting."],
-  "updated_at": "2026-09-21T16:50:52Z"
+  "reasons": [],
+  "updated_at": "2026-09-21T17:01:34Z"
 }
