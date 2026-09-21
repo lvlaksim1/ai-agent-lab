@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 452,
-  "purpose": "heartbeat_refresh",
+  "sequence": 453,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Checkpointed exact E2E job/log-route evidence; next action is read-only API-visible APFS failure instrumentation.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 282
 }
