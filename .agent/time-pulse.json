@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 450,
-  "purpose": "lease_claim",
+  "sequence": 451,
+  "purpose": "heartbeat_refresh",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Starting shift 126 on DIR-029 read-only APFS failure localization.",
+  "activity_kind": "working",
+  "activity_detail": "Report gate 35557486919 SUCCESS; exact E2E logs endpoint unavailable, preparing read-only API-visible failure instrumentation.",
   "fence_generation": 282
 }
