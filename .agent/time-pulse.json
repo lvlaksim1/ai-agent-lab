@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 472,
+  "sequence": 473,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Reporting v2 barrier passed; root-tree evidence schema landed and implementation is in progress.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Root-tree instrumentation target b38244f is in CI; actively polling Ramdisk Tool Windows and exact Windows E2E.",
   "fence_generation": 294
 }
