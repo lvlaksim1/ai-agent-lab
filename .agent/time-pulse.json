@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 439,
-  "purpose": "heartbeat",
+  "sequence": 440,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Target 667dc6a verification is running; Ramdisk Tool Windows 35551527270 and exact Windows E2E 35551527247 are in progress.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 274
 }
