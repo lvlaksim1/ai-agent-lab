@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 427,
-  "purpose": "lease_claim",
+  "sequence": 428,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 121 for DIR-029 read-only APFS mountroot localization.",
+  "activity_kind": "working",
+  "activity_detail": "Start-report Runtime Check 35548352652 succeeded; beginning DIR-029 read-only APFS localization.",
   "fence_generation": 268
 }
