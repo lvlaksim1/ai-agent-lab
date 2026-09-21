@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T04:24:57Z",
     "stale_at": "2026-09-21T04:27:57Z",
     "activity_kind": "starting",
-    "activity_detail": "Materializing shift 128 and publishing immutable start report before target work.",
+    "activity_detail": "Immutable shift-128 start report published; waiting for mandatory report-contract barrier.",
     "external_wait": null,
     "source": "lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 128,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-128-palych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "774f89a1dd5458cc8edbf79a0e78fb975c6ea600",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
