@@ -21,10 +21,10 @@
     "time_anchor_path": ".agent/time-pulse.json",
     "last_seen_at": "2026-09-21T16:34:24Z",
     "stale_at": "2026-09-21T16:37:24Z",
-    "activity_kind": "lease_claim",
-    "activity_detail": "Production shift 149 claimed under DIR-033; preparing canonical Reporting v2 start report.",
-    "external_wait": null,
-    "source": "production_lease_claim"
+    "activity_kind": "report_gate",
+    "activity_detail": "Canonical Reporting v2 start report published; awaiting exact Agent Runtime Check for report commit 842709f4cd543075d2ccb3dd539c0c954f69ee4f.",
+    "external_wait": {"kind":"github_actions","workflow":"Agent Runtime Check","commit":"842709f4cd543075d2ccb3dd539c0c954f69ee4f"},
+    "source": "production_report_gate"
   },
   "time_authority": "github_commit_committer_date",
   "started_at_anchor_commit": "984b9f0d5faf1749d06fc710ec170de219a018aa",
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 149,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-149-ivanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "842709f4cd543075d2ccb3dd539c0c954f69ee4f",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
