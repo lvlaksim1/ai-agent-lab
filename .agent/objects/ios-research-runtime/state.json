@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029: exact E2E 35563857728 proves source/rebuilt live-volume root-tree OMAP mapping, object header/type and checksum are valid. Next discriminator remains read-only extentref/snapshot-metadata tree mapping/header/checksum validation before any APFS semantic mutation; shift 132 was stopped at a control-plane report-contract failure before target work.",
+  "current_blocker_summary": "DIR-031: shift 132 mandatory Agent Runtime Check 35566785730 failed before target work. Restore the exact control-plane invariant contract and prove the gate green, then resume DIR-029 at read-only extentref/snapshot-metadata tree mapping/header/checksum validation.",
   "last_scored_shift": 132,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T06:38:20Z"
+  "updated_at": "2026-09-21T06:47:17Z"
 }
