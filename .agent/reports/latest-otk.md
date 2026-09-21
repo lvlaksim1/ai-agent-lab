@@ -1,18 +1,10 @@
-# ОТК — смена №146 — Саныч
+# ОТК — смена №147 — Михалыч
 
-**ЧТО ПЛАНИРОВАЛ:**
-Саныч принял подтверждённый Петровичем discriminator `extentref keys 7 vs 13` и планировал получить bounded read-only сравнение extentref root records/keys/values, чтобы локализовать конкретный тип записей до любой APFS semantic mutation.
+Вердикт: **APPROVED**  
+Оценка: **9/10**  
+Progress class: **substantial**  
+Рейтинг: **1380 (+40)**
 
-**ЧТО ФАКТИЧЕСКИ СДЕЛАНО:**
-До потери runtime Саныч сохранил технический checkpoint: проверен pinned BTreeNode API и подтверждено, что он позволяет вывести extentref root key/value records для требуемого сравнения. Изменений APFS semantics и target repository до этого не зафиксировано.
+Target commit `a4897aa79186d0e492ca0e5f8fbdd0ad4338bcc9` минимально добавил read-only вывод extentref root records; Ramdisk Tool Windows `35613817140` завершился SUCCESS после подтверждённой потери runtime. Следующий шаг — exact Windows E2E и фактическое сравнение source/rebuilt root records; APFS semantics до причинного discriminator не менять.
 
-**ЧТО ПОДТВЕРЖДЕНО:**
-Следующий шаг DIR-029 технически исполним существующим pinned API без спекулятивной мутации writer. Runtime loss подтверждён GitHub-якорями: последний heartbeat 21.09.2026 17:04:39 МСК, stale boundary 17:07:39 МСК, recovery 17:10:02 МСК.
-
-**ГДЕ ОСТАНОВИЛСЯ:**
-Смена оборвалась после API/checkpoint локализации, до получения самого сравнения extentref root records. Причинный APFS defect по-прежнему не локализован.
-
-**СЛЕДУЮЩЕМУ:**
-Реализовать/выполнить read-only вывод extentref root keys/values для source и rebuilt, объяснить `7` против `13`, и только после конкретного causal mismatch рассматривать bounded semantic repair.
-
-**ОЦЕНКА ОТК:** 6/10 — APPROVED; рейтинг Саныча 1390 (+10); progress class incremental.
+Полный immutable отчёт: `.agent/reports/otk/shift-147-review-shift-147-ios-runtime-release-20260918-032.md`.
