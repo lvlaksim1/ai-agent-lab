@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-137-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-21T09:10:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "petrovich",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 137,
+  "shift_started_at_utc": "2026-09-21T09:02:54Z",
+  "shift_completed_at_utc": "2026-09-21T09:04:55Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "8fa82d9a272fdf901167c4735c2cbfb6cc787cf8",
+    "recovery_anchor_commit": "5f029fcc8c8d3fccfe3e71d5295cc4bee01b9111",
+    "start_report_path": ".agent/reports/starts/shift-137-petrovich-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-137-petrovich-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "6cda796b136cd6e9d56d209ba0f41121f6bb3c6c",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-21T09:04:55Z",
+      "heartbeat_stale_at_utc": "2026-09-21T09:07:55Z",
+      "heartbeat_anchor_commit": "8fa82d9a272fdf901167c4735c2cbfb6cc787cf8",
+      "recovery_observed_at_utc": "2026-09-21T09:10:02Z",
+      "recovery_anchor_commit": "5f029fcc8c8d3fccfe3e71d5295cc4bee01b9111",
+      "fenced_generation": 316,
+      "activity_kind": "external_wait",
+      "activity_detail": "DIR-029 read-only auxiliary-tree OMAP evidence landed; waiting for exact target CI on commit 0d28714c2e0af6768b0e81c9971422a14206a711."
+    }
+  }
+}
