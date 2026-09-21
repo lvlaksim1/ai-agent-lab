@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T07:00:28Z",
     "stale_at": "2026-09-21T07:03:28Z",
     "activity_kind": "starting",
-    "activity_detail": "Shift 133 claimed; materializing DIR-031 control-plane recovery before target work.",
+    "activity_detail": "Shift 133 start report published; awaiting exact report-contract gate before substantive work.",
     "external_wait": null,
     "source": "production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 133,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-133-ivanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "042ed347b5850bca6cc3cf1b91cd0243b1e522a8",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
