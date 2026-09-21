@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029 child-leaf instrumentation landed at target 3b0f5648; exact Windows E2E run 35634992757 was still in progress at shift-151 runtime loss. Consume terminal evidence, then compare source/rebuilt extentref child-leaf key/value semantics before any APFS semantic mutation.",
-  "last_scored_shift": 151,
+  "current_blocker_summary": "Shift 152 runtime loss occurred at mandatory report barrier; exact Agent Runtime Check 35638258123 later failed. No target mutation occurred. Fresh shift must pass its own Reporting v2 gate, then consume terminal Windows E2E 35634992757 and compare extentref child-leaf evidence.",
+  "last_scored_shift": 152,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
+  "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T18:01:37Z"
+  "updated_at": "2026-09-21T18:39:31Z"
 }

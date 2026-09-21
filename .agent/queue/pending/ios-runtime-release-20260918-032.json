@@ -8,12 +8,12 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Resume DIR-029 from evidence-only target 3b0f5648f004f58daef526082b3d2a32d132edcf. First consume terminal Windows End-to-End Boot run 35634992757. Then compare source/rebuilt extentref child-leaf key/value semantics emitted by the new recursive diagnostics and determine the first causal divergence or prove equivalence. Do not mutate APFS writer/XID/MetaCrypto semantics before a new bounded discriminator exists.",
-  "constraints": ["Do not repeat DIR-033; its report/control-plane repair is already proven green.","Do not treat extentref root-index NumberOfKeys 7-vs-13 alone as corruption; validate child-leaf records/keys/values.","Do not alter XID/checkpoint semantics or MetaCrypto fields without new discriminating evidence.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
+  "goal": "Resume DIR-029 from evidence-only target 3b0f5648f004f58daef526082b3d2a32d132edcf. First pass a fresh Reporting v2 exact Agent Runtime Check; then consume terminal Windows End-to-End Boot run 35634992757 and compare source/rebuilt extentref child-leaf key/value semantics. Determine the first causal divergence or prove equivalence before any APFS semantic mutation.",
+  "constraints": ["Do not rewrite shift-152 immutable start report; create the next shift's own valid report.","Do not repeat speculative APFS changes.","Do not treat extentref root-index NumberOfKeys 7-vs-13 alone as corruption; validate child-leaf records/keys/values.","Do not alter XID/checkpoint semantics or MetaCrypto fields without new discriminating evidence."],
   "wait_for": {"kind":"github_actions_run","repository":"lvlaksim1/iOS-Research-Runtime","run_id":35634992757,"target_sha":"3b0f5648f004f58daef526082b3d2a32d132edcf"},
-  "predecessor_review_event_id": "review-shift-151-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-151-review-shift-151-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-151-review-shift-151-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 151,
-  "predecessor_worker_id": "kuzmich"
+  "predecessor_review_event_id": "review-shift-152-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-152-review-shift-152-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-152-review-shift-152-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 152,
+  "predecessor_worker_id": "palych"
 }
