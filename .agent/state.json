@@ -8,7 +8,7 @@
   "last_event": "review-shift-121-ios-runtime-release-20260918-032",
   "last_result": "APPROVED",
   "last_completed_at": "2026-09-21T01:04:55Z",
-  "heartbeat": {"schema_version":2,"active":true,"role":"production","worker_id":"sanych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","sequence":431,"time_source":"github_commit_committer_date","time_anchor_commit":"2510ffde9e7953b0e41eff0d28a322d2e13bc706","time_anchor_path":".agent/time-pulse.json","last_seen_at":"2026-09-21T01:06:13Z","stale_at":"2026-09-21T01:09:13Z","activity_kind":"starting","activity_detail":"Claiming production shift 122 to continue DIR-029 read-only APFS mountroot localization.","external_wait":null,"source":"production_claim"},
+  "heartbeat": {"schema_version":2,"active":true,"role":"production","worker_id":"sanych","object_id":"ios-research-runtime","active_event":"ios-runtime-release-20260918-032","sequence":431,"time_source":"github_commit_committer_date","time_anchor_commit":"2510ffde9e7953b0e41eff0d28a322d2e13bc706","time_anchor_path":".agent/time-pulse.json","last_seen_at":"2026-09-21T01:06:13Z","stale_at":"2026-09-21T01:09:13Z","activity_kind":"starting","activity_detail":"Immutable shift-122 start report published; awaiting exact report-contract gate before target work.","external_wait":null,"source":"production_claim"},
   "time_authority":"github_commit_committer_date",
   "started_at_anchor_commit":"2510ffde9e7953b0e41eff0d28a322d2e13bc706",
   "lease_anchor_commit":"2510ffde9e7953b0e41eff0d28a322d2e13bc706",
@@ -16,7 +16,7 @@
   "reporting_policy_version":2,
   "score_policy_version":2,
   "shift_number":122,
-  "shift_start_report_path":null,
-  "shift_start_report_commit":null,
+  "shift_start_report_path":".agent/reports/starts/shift-122-sanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit":"5ecaf719416af6064ebe43f8cfc111f335f50a14",
   "last_runtime_loss":{"role":"production","event":"ios-runtime-release-20260918-032","worker_id":"petrovich","worker_last_seen_at_utc":"2026-09-21T00:39:06Z","heartbeat_stale_at_utc":"2026-09-21T00:42:06Z","heartbeat_anchor_commit":"e55f624f33f75d734e9d74268a4bcb575b018c63","recovery_closed_at_utc":"2026-09-21T00:46:01Z","recovery_anchor_commit":"a660f31f07dc0cd1e2a65a95eaf14ff1e7a4ab80","fenced_generation":269,"activity_kind":"working","activity_detail":"Start-report Runtime Check 35548352652 succeeded; beginning DIR-029 read-only APFS localization.","shift_number":121,"reporting_policy_version":2,"score_policy_version":2,"start_report_path":".agent/reports/starts/shift-121-petrovich-ios-runtime-release-20260918-032.md","start_report_commit":"9e583f5240ff2c64bc586710612e8e5788950f70"}
 }
