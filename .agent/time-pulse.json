@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 466,
+  "sequence": 467,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Shift 129 report-contract barrier passed; inspecting current exact-E2E/APFS diagnostic surface for the next DIR-029 read-only discriminator.",
+  "activity_detail": "Shift 129 checkpointed exact artifact analysis; next DIR-029 step is read-only live-volume OMAP -> root-tree object resolution/header/checksum/type/XID instrumentation.",
   "fence_generation": 291
 }
