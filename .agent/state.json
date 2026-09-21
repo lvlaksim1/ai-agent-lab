@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T07:34:47Z",
     "stale_at": "2026-09-21T07:37:47Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production lease for shift 135 continuation under DIR-029.",
+    "activity_detail": "Shift 135 immutable start report published; awaiting exact report-commit Runtime Check gate.",
     "external_wait": null,
     "source": "lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 135,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-135-kuzmich-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "0be1fd59c73c8c123a5363686c47f9b3d0361e9e",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
