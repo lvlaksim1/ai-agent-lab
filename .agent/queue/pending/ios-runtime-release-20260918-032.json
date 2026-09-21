@@ -6,13 +6,13 @@
   "priority": 90,
   "status": "pending",
   "object_id": "ios-research-runtime",
-  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-033"},
+  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Under DIR-033, first repair the demonstrated control-plane producer-state projection so a lease-claim pulse projects processing heartbeat activity_kind starting (not lease_claim), without weakening any validator or invariant. Publish the next canonical immutable Reporting v2 start report and require its exact Agent Runtime Check SUCCESS. Only after that green gate resume DIR-029 from target a4897aa79186d0e492ca0e5f8fbdd0ad4338bcc9: consume exact Windows E2E evidence and continue the read-only extentref root-record/keys/values comparison for NumberOfKeys 7-vs-13; no APFS semantic mutation before a causal defect is localized.",
-  "constraints": ["The next production claim must project processing heartbeat activity_kind starting; pulse purpose may remain lease_claim.","Require exact Agent Runtime Check SUCCESS for the fresh immutable canonical Reporting v2 start report before target work.","Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates or scheduler immutability.","Do not repeat generic mountroot errno 79 / BSD root md0, generic superblock analysis, root-tree OMAP/header/checksum evidence, or validated extentref/snapmeta header/subtype/Fletcher checks.","Do not alter XID/checkpoint semantics or MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
-  "predecessor_review_event_id": "review-shift-149-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-149-review-shift-149-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-149-review-shift-149-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 149,
-  "predecessor_worker_id": "ivanych"
+  "goal": "Resume DIR-029 directly from target a4897aa79186d0e492ca0e5f8fbdd0ad4338bcc9. DIR-033 is proven green by exact Agent Runtime Check 35633016653. Validate the extentref child leaves read-only: compare source/rebuilt child-leaf key/value semantics behind the root-index NumberOfKeys 7-vs-13 layout difference and determine whether any causal semantic divergence exists. Do not mutate APFS writer/XID/MetaCrypto semantics before a new discriminator localizes a bounded defect.",
+  "constraints": ["Do not repeat DIR-033; exact Agent Runtime Check 35633016653 is authoritative SUCCESS.","Do not treat extentref root-index NumberOfKeys 7-vs-13 alone as corruption; validate child-leaf records/keys/values.","Do not repeat generic mountroot errno 79 / BSD root md0, generic superblock analysis, root-tree OMAP/header/checksum evidence, or validated extentref/snapmeta header/subtype/Fletcher checks.","Do not alter XID/checkpoint semantics or MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
+  "predecessor_review_event_id": "review-shift-150-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-150-review-shift-150-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-150-review-shift-150-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 150,
+  "predecessor_worker_id": "fedorych"
 }
