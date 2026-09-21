@@ -5,9 +5,9 @@
   "worker_id": null,
   "started_at": null,
   "lease_until": null,
-  "last_event": "ios-runtime-release-20260918-032",
-  "last_result": "RUNTIME_LOSS_PENDING_REVIEW",
-  "last_completed_at": "2026-09-21T01:38:26Z",
+  "last_event": "review-shift-123-ios-runtime-release-20260918-032",
+  "last_result": "OTK_APPROVED_10",
+  "last_completed_at": "2026-09-21T01:46:05Z",
   "heartbeat": {
     "schema_version": 2,
     "active": false,
@@ -22,9 +22,9 @@
     "last_seen_at": "2026-09-21T01:38:26Z",
     "stale_at": null,
     "activity_kind": "idle",
-    "activity_detail": "Recovered stale production execution; pending independent OTK review.",
+    "activity_detail": "OTK finalized shift 123 after verified runtime-loss recovery.",
     "external_wait": null,
-    "source": "recovered_by_stale_guard"
+    "source": "otk_finalize"
   },
   "time_authority": "github_commit_committer_date",
   "started_at_anchor_commit": null,

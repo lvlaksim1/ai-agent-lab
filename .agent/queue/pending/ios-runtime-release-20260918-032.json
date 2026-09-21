@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Continue DIR-029 after verified runtime loss in shift 122: resolve the authoritative active APFS volume through NX object mappings rather than physical-first APSB scanning, then read-only localize the first failing object/lookup/validation/invariant before any semantic mutation; if a bounded causal defect is proven, apply only the smallest correction and consume focused tests, Windows gate and exact Windows E2E terminal evidence in the same live shift.",
+  "goal": "Continue DIR-029 from target 667dc6aeb273270dcb0798eecaf027b97ceffd85: consume exact Windows E2E 35551527247 and its artifact, use the authoritative live-volume evidence to localize the first failing object/lookup/validation/invariant before any semantic mutation; if a bounded causal defect is proven, apply only the smallest correction and consume focused tests, Windows gate and exact Windows E2E terminal evidence in the same live shift.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter adjacent MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform further APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
-  "predecessor_review_event_id": "review-shift-122-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-122-review-shift-122-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-122-review-shift-122-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 122,
-  "predecessor_worker_id": "sanych"
+  "predecessor_review_event_id": "review-shift-123-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-123-review-shift-123-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-123-review-shift-123-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 123,
+  "predecessor_worker_id": "mikhalych"
 }

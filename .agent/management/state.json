@@ -8,18 +8,18 @@
   "definition_of_done": ["Use the authoritative object mission Definition of Done"],
   "current_phase": "boot-debugging",
   "health": "ORANGE",
-  "current_blocker_summary": "DIR-029 read-only localization found the current evidence scanner selects the first physically parseable APSB rather than resolving the authoritative active volume through NX object mappings. Next evidence step is authoritative live-volume resolution before semantic mutation.",
-  "shifts_since_manager_review": 2,
+  "current_blocker_summary": "DIR-029 authoritative live-volume resolution landed at target 667dc6a; exact E2E 35551527247 is terminal FAILURE and must now be consumed to localize the first live-volume causal invariant before semantic mutation.",
+  "shifts_since_manager_review": 3,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
-  "last_scored_shift": 122,
+  "last_progress_class": "substantial",
+  "last_scored_shift": 123,
   "manager_review_count": 71,
   "last_manager_review_at": "2026-09-21T00:22:05Z",
   "last_manager_decision": "DEC-072: CORRECT_COURSE; close packaging-size discriminator and localize APFS mountroot error 79 read-only before mutation",
   "active_directive": "DIR-029",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-21T01:34:59Z"
+  "updated_at": "2026-09-21T01:46:05Z"
 }
