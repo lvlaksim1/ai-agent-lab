@@ -1,14 +1,12 @@
-# Manager report — DEC-081
+# Manager report — DEC-082
 
 Object: `ios-research-runtime`
 Health: ORANGE
 Decision: KEEP_COURSE
 Active directive: DIR-029
 
-The temporary control-plane barrier from DIR-032 is fulfilled. By shift 142 the Reporting v2 / Agent Runtime Check gate was passing and production had resumed the preserved DIR-029 APFS evidence chain.
+Manager attention was raised by two consecutive no-progress shifts. Review shows this is not a technical exhaustion signal: shift 144 passed the immutable Reporting v2 / exact Agent Runtime Check barrier, inherited the correct bounded evidence-first plan, and then ended by independently verified runtime loss before target mutation or new engineering evidence.
 
-The last three scored shifts do not justify another course change. Shift 142 produced verified narrowing: behind already-green auxiliary-tree object headers/checksums, the next bounded read-only discriminator is the APFS B-tree node header fields `Flags`, `Level`, and `NumberOfKeys` for source/rebuilt extentref and snapmeta roots. The shift then ended by independently verified runtime loss before instrumentation, not because the evidence path was exhausted.
+The APFS blocker is unchanged. The nearest untested discriminator remains read-only comparison of B-tree node `Flags`, `Level`, and `NumberOfKeys` for source/rebuilt extentref and snapmeta roots. Production should execute that discriminator, then focused Go tests, Windows gate and exact Windows E2E, and consume the first concrete difference before any APFS semantic mutation.
 
-DIR-032 is closed and DIR-029 is effective again. The next shift should implement only that bounded read-only instrumentation, run focused Go tests, Windows gate and exact Windows E2E, consume the discriminator, and avoid APFS semantic mutation until a concrete causal defect is proven.
-
-Health remains ORANGE. No owner decision, STOP, transfer, or architecture change is required; production may continue.
+DIR-029 remains active. Health remains ORANGE. No owner decision, STOP, transfer, architecture change or proof-gate relaxation is justified. If a live shift reaches this boundary and the discriminator is technically unobtainable, return the exhausted route to management instead of repeating it speculatively.
