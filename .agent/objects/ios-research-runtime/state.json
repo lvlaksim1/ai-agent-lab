@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 148 exposed a recurrent Reporting v2 producer-path defect: its immutable start report omitted canonical literal metadata/markers and exact Agent Runtime Check 35620263457 failed. DIR-033 must repair the demonstrated producer/validator contract without weakening invariants; after a green exact runtime check, resume DIR-029 extentref root-record comparison from target a4897aa79186d0e492ca0e5f8fbdd0ad4338bcc9.",
-  "last_scored_shift": 148,
+  "current_blocker_summary": "Shift 149 localized the recurrent report barrier to producer-state projection: lease-claim pulse purpose may be lease_claim, but processing heartbeat must project activity_kind starting. Exact Agent Runtime Check 35626501531 failed on the illegal lease_claim activity kind. Repair this producer transition without weakening invariants, prove a fresh canonical report with exact Runtime Check SUCCESS, then resume DIR-029 extentref 7-vs-13 from target a4897aa79186d0e492ca0e5f8fbdd0ad4338bcc9.",
+  "last_scored_shift": 149,
   "last_otk_verdict": "BLOCKED",
-  "last_progress_class": "none",
+  "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T15:57:40Z"
+  "updated_at": "2026-09-21T16:50:52Z"
 }

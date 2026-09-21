@@ -6,13 +6,13 @@
   "priority": 90,
   "status": "pending",
   "object_id": "ios-research-runtime",
-  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
+  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-033"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "After manager/control-plane clears the Reporting v2 barrier, continue DIR-029 from target a4897aa79186d0e492ca0e5f8fbdd0ad4338bcc9. Ramdisk Tool Windows 35613817140 is terminal SUCCESS. Run/consume the exact Windows E2E evidence path, compare emitted source/rebuilt extentref root records/keys/values, explain the NumberOfKeys 7-vs-13 mismatch, and continue deeper only from the resulting discriminator; do not perform APFS semantic mutation until a causal defect is localized.",
-  "constraints": ["First publish the next shift start report using the canonical Reporting v2 literal serialization and require exact Agent Runtime Check SUCCESS before target work.","Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not repeat generic mountroot errno 79 / BSD root md0, generic superblock analysis, root-tree OMAP/header/checksum evidence, or validated extentref/snapmeta header/subtype/Fletcher checks.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
-  "predecessor_review_event_id": "review-shift-148-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-148-review-shift-148-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-148-review-shift-148-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 148,
-  "predecessor_worker_id": "borisych"
+  "goal": "Under DIR-033, first repair the demonstrated control-plane producer-state projection so a lease-claim pulse projects processing heartbeat activity_kind starting (not lease_claim), without weakening any validator or invariant. Publish the next canonical immutable Reporting v2 start report and require its exact Agent Runtime Check SUCCESS. Only after that green gate resume DIR-029 from target a4897aa79186d0e492ca0e5f8fbdd0ad4338bcc9: consume exact Windows E2E evidence and continue the read-only extentref root-record/keys/values comparison for NumberOfKeys 7-vs-13; no APFS semantic mutation before a causal defect is localized.",
+  "constraints": ["The next production claim must project processing heartbeat activity_kind starting; pulse purpose may remain lease_claim.","Require exact Agent Runtime Check SUCCESS for the fresh immutable canonical Reporting v2 start report before target work.","Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates or scheduler immutability.","Do not repeat generic mountroot errno 79 / BSD root md0, generic superblock analysis, root-tree OMAP/header/checksum evidence, or validated extentref/snapmeta header/subtype/Fletcher checks.","Do not alter XID/checkpoint semantics or MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
+  "predecessor_review_event_id": "review-shift-149-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-149-review-shift-149-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-149-review-shift-149-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 149,
+  "predecessor_worker_id": "ivanych"
 }
