@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 575,
-  "purpose": "lease_claim",
+  "sequence": 576,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 151 to resume DIR-029 at extentref child-leaf validation.",
+  "activity_kind": "working",
+  "activity_detail": "Shift 151 report gate passed; consuming extentref child-leaf evidence under DIR-029.",
   "fence_generation": 357
 }
