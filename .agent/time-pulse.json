@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 507,
-  "purpose": "lease_claim",
+  "sequence": 508,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 137 for DIR-029 continuation.",
+  "activity_kind": "external_wait",
+  "activity_detail": "DIR-029 read-only auxiliary-tree OMAP evidence landed; waiting for exact target CI on commit 0d28714c2e0af6768b0e81c9971422a14206a711.",
   "fence_generation": 315
 }
