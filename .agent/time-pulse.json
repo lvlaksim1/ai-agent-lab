@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 442,
-  "purpose": "heartbeat",
+  "sequence": 443,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "blocked_control_plane",
-  "activity_detail": "Start-report Agent Runtime Check 35554810708 failed; target work is prohibited and manager attention has been raised.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 276
 }
