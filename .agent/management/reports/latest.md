@@ -1,14 +1,14 @@
-# Manager report — DEC-080
+# Manager report — DEC-081
 
 Object: `ios-research-runtime`
 Health: ORANGE
-Decision: CHANGE_COURSE
-Active directive: DIR-032
+Decision: KEEP_COURSE
+Active directive: DIR-029
 
-Shift 139 did not reach target work. Its immutable start report was published, but mandatory Agent Runtime Check `35587838815` for binding commit `29b993565a0bf08fc346ab51daed56ef7d1f3005` failed specifically at `Validate agent runtime invariants`.
+The temporary control-plane barrier from DIR-032 is fulfilled. By shift 142 the Reporting v2 / Agent Runtime Check gate was passing and production had resumed the preserved DIR-029 APFS evidence chain.
 
-Because this is a recurring start-report barrier failure after the earlier DIR-031 incident, the next shift must repair the control-plane path before spending another shift on APFS. DIR-032 requires the worker to obtain the exact rejected invariant from the authoritative failing case, repair only the demonstrated producer/validator mismatch, preserve every safety invariant, and prove the corrected path with a successful authoritative Agent Runtime Check.
+The last three scored shifts do not justify another course change. Shift 142 produced verified narrowing: behind already-green auxiliary-tree object headers/checksums, the next bounded read-only discriminator is the APFS B-tree node header fields `Flags`, `Level`, and `NumberOfKeys` for source/rebuilt extentref and snapmeta roots. The shift then ended by independently verified runtime loss before instrumentation, not because the evidence path was exhausted.
 
-The APFS course itself is not discarded. After the barrier is green, production returns directly to DIR-029 at target `735c8e4d5ae8187ff813b57a36c664c1b015085f`, consumes exact Windows E2E `35583468605`, and continues the bounded read-only `extentref/snapmeta` discriminator without reopening closed hypotheses.
+DIR-032 is closed and DIR-029 is effective again. The next shift should implement only that bounded read-only instrumentation, run focused Go tests, Windows gate and exact Windows E2E, consume the discriminator, and avoid APFS semantic mutation until a concrete causal defect is proven.
 
-Health remains ORANGE. No owner decision, STOP, or transfer is required; production may resume under DIR-032.
+Health remains ORANGE. No owner decision, STOP, transfer, or architecture change is required; production may continue.
