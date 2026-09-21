@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 523,
-  "purpose": "lease_claim",
+  "sequence": 524,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 140 to execute DIR-032 control-plane repair before resuming DIR-029.",
+  "activity_kind": "working",
+  "activity_detail": "DIR-032 exact failure localized to malformed shift-139 start report; shift-140 immutable v2 report passed Agent Runtime Check 35592640284. Binding report and resuming DIR-029 evidence chain.",
   "fence_generation": 324
 }
