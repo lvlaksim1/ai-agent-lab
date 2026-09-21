@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-150-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-21T17:46:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "fedorych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 150,
+  "shift_started_at_utc": "2026-09-21T17:35:18Z",
+  "shift_completed_at_utc": "2026-09-21T17:37:23Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "9e15e55f43fc0bd3007527fe11f5ff2877fd0af5",
+    "recovery_anchor_commit": "c0e68c687fda145ec212ceeb49231c2994351c7a",
+    "start_report_path": ".agent/reports/starts/shift-150-fedorych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-150-fedorych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "909b034f13e0ea0f87ce0aa469bb3bb63d196091",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-21T17:37:23Z",
+      "heartbeat_stale_at_utc": "2026-09-21T17:40:23Z",
+      "heartbeat_anchor_commit": "9e15e55f43fc0bd3007527fe11f5ff2877fd0af5",
+      "recovery_observed_at_utc": "2026-09-21T17:46:01Z",
+      "recovery_anchor_commit": "c0e68c687fda145ec212ceeb49231c2994351c7a",
+      "fenced_generation": 355,
+      "activity_kind": "working",
+      "activity_detail": "DIR-033 proven green; exact E2E artifact consumed. Extentref 7-vs-13 root index count explained as expected layout-dependent leaf fanout; next validating child leaves read-only."
+    }
+  }
+}
