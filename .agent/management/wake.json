@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "attention": true,
+  "attention": false,
   "generation": 77,
-  "reasons": ["OTK shift 148 verdict BLOCKED: immutable Reporting v2 start report failed exact Agent Runtime Check before target work; manager/control-plane review required."],
-  "updated_at": "2026-09-21T15:51:23Z"
+  "reasons": [],
+  "updated_at": "2026-09-21T15:57:40Z"
 }
