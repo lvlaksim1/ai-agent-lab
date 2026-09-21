@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 566,
+  "sequence": 567,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-148-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Claiming OTK lease for independent review of shift 148.",
-  "fence_generation": 351
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "lease_claim",
+  "activity_detail": "Claiming production lease for shift 149 under DIR-033.",
+  "fence_generation": 352
 }
