@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 571,
+  "sequence": 572,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Immutable Reporting v2 start report published; verifying exact report commit and mandatory Runtime Check barrier.",
+  "activity_kind": "working",
+  "activity_detail": "DIR-033 proven green; exact E2E artifact consumed. Extentref 7-vs-13 root index count explained as expected layout-dependent leaf fanout; next validating child leaves read-only.",
   "fence_generation": 354
 }
