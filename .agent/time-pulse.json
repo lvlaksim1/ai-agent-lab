@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 449,
+  "sequence": 450,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-125-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independently reviewing shift 125 runtime-loss evidence and production progress.",
-  "fence_generation": 281
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Starting shift 126 on DIR-029 read-only APFS failure localization.",
+  "fence_generation": 282
 }
