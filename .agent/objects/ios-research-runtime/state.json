@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029 remains active: APFS error 79 is narrowed behind green auxiliary-tree object headers/checksums; next discriminator is bounded read-only B-tree node Flags/Level/NumberOfKeys for source/rebuilt extentref and snapmeta roots before any APFS semantic mutation.",
-  "last_scored_shift": 144,
+  "current_blocker_summary": "DIR-029 now has a concrete extentref node-shape discriminator: source and rebuilt roots both flags=1/level=1 with valid checksums, but NumberOfKeys differs 7 vs 13; snapmeta shape matches 3/0/0. Next bounded read-only step is extentref root record/key/value comparison before semantic mutation.",
+  "last_scored_shift": 145,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "none",
+  "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T13:39:44Z"
+  "updated_at": "2026-09-21T14:01:34Z"
 }

@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Continue DIR-029 after shift 144 runtime loss. The report-contract barrier succeeded, but no target mutation occurred. Extend the read-only evidence path to compare APFS B-tree node Flags, Level and NumberOfKeys for source/rebuilt extentref and snapmeta roots; consume focused tests/Windows gate/exact E2E and continue deeper only from the first concrete discriminator.",
+  "goal": "Continue DIR-029 from the first concrete node-shape discriminator produced by shift 145. Exact E2E run 35608022767 on target bbe4b974 produced apfs-structural-evidence.json: extentref source flags=1/level=1/keys=7 versus rebuilt flags=1/level=1/keys=13, while snapmeta matches flags=3/level=0/keys=0. Compare extentref root records/keys/values to explain the 7-vs-13 mismatch and continue deeper only from bounded evidence; do not perform APFS semantic mutation until a causal defect is localized.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not repeat generic mountroot errno 79 / BSD root md0, generic superblock analysis, root-tree OMAP/header/checksum evidence, or validated extentref/snapmeta header/subtype/Fletcher checks.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
-  "predecessor_review_event_id": "review-shift-144-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-144-review-shift-144-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-144-review-shift-144-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 144,
-  "predecessor_worker_id": "palych"
+  "predecessor_review_event_id": "review-shift-145-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-145-review-shift-145-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-145-review-shift-145-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 145,
+  "predecessor_worker_id": "petrovich"
 }

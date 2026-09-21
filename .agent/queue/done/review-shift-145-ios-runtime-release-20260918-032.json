@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-145-ios-runtime-release-20260918-032",
+  "type": "supervisor-review",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "source_event": "ios-runtime-release-20260918-032",
+  "shift_number": 145,
+  "worker_id": "petrovich",
+  "verdict": "APPROVED",
+  "score": 10,
+  "score_policy_version": 2,
+  "progress_class": "substantial",
+  "rating_delta": 50,
+  "review_path": ".agent/reviews/shift-145-review-shift-145-ios-runtime-release-20260918-032.md",
+  "otk_report_path": ".agent/reports/otk/shift-145-review-shift-145-ios-runtime-release-20260918-032.md",
+  "start_report_path": ".agent/reports/starts/shift-145-petrovich-ios-runtime-release-20260918-032.md",
+  "target_commit": "bbe4b9748466ed243f9ba595c2dd22018c9fd65f",
+  "windows_build_run": 35608022838,
+  "windows_e2e_run": 35608022767,
+  "completed_at": "2026-09-21T14:01:34Z"
+}

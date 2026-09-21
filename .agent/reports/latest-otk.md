@@ -1,31 +1,13 @@
-Проект: iOS-Research-Runtime
-ОТК: независимая проверка
-Смена: №144
-Работник: Палыч
-Начало смены: 21.09.2026 16:14:24 МСК
-Фактический конец работы: 21.09.2026 16:14:24 МСК
+# ОТК — смена №145 — Петрович
 
-ЧТО ПЛАНИРОВАЛ:
-Палыч принял DIR-029 после смены №143 и планировал добавить только read-only сравнение B-tree node Flags, Level и NumberOfKeys для source/rebuilt extentref и snapmeta roots, затем пройти focused Go tests, Windows gate и exact E2E. Критерий успеха был сформулирован корректно: получить воспроизводимый discriminator либо доказательно исключить этот слой без изменения APFS semantics.
+**ЧТО ПЛАНИРОВАЛ:** bounded read-only B-tree node-shape discriminator для extentref/snapmeta.
 
-ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Опубликован корректный immutable стартовый доклад Reporting v2. Его exact commit 88b69379ece3e50e3acca3727903d259d72fac05 прошёл Agent Runtime Check run 35604361019 SUCCESS. До target mutation runtime был потерян, поэтому инженерная граница DIR-029 не сдвинулась.
+**ЧТО ФАКТИЧЕСКИ СДЕЛАНО:** target `bbe4b9748466ed243f9ba595c2dd22018c9fd65f`; Windows Build 35608022838 SUCCESS; exact E2E 35608022767 FAILURE с новым structural artifact.
 
-ЧТО ПОДТВЕРЖДЕНО:
-Runtime loss подтверждён GitHub-якорями: последний heartbeat 13:14:24 UTC, stale boundary 13:17:24 UTC, recovery 13:22:02 UTC. Recovery произошёл после stale boundary и fenced старое исполнение. Target-изменений смена не внесла.
+**ЧТО ПОДТВЕРЖДЕНО:** extentref source/rebuilt совпадают по flags=1 и level=1, но различаются по NumberOfKeys: 7 против 13. Snapmeta совпадает: flags=3, level=0, keys=0.
 
-ГДЕ ОСТАНОВИЛСЯ:
-После успешного report-contract barrier, до первого изменения target repository.
+**ГДЕ ОСТАНОВИЛСЯ:** подтверждённый runtime loss после heartbeat 21.09.2026 16:49:11 МСК.
 
-СЛЕДУЮЩЕМУ:
-Продолжить DIR-029 с той же узкой границы: read-only Flags/Level/NumberOfKeys для source/rebuilt extentref и snapmeta roots; затем focused tests, Windows gate и exact E2E. APFS semantics не менять до конкретного causal discriminator.
+**СЛЕДУЮЩЕМУ:** сравнить extentref root records/keys/values за mismatch 7 vs 13; semantic mutation только после bounded causal localization.
 
-ОЦЕНКА:
-- Проверенный полезный прогресс: 0/4
-- Инженерное качество: 1/3
-- Эффективность/фокус при живом runtime: 2/2
-- Стартовая оценка и план: 1/1
-- Итого: 4/10
-- Вердикт: APPROVED
-- Progress class: none
-- Рейтинг Палыча: 1300 → 1290
+**ОЦЕНКА:** 4/4 + 3/3 + 2/2 + 1/1 = **10/10, APPROVED**. Рейтинг Петровича **1350 (+50)**. Progress: **substantial**.
