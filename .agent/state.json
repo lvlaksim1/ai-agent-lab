@@ -22,8 +22,8 @@
     "last_seen_at": "2026-09-21T01:36:16Z",
     "stale_at": "2026-09-21T01:39:16Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production shift 123 to continue DIR-029 authoritative active-volume read-only localization.",
-    "external_wait": null,
+    "activity_detail": "Start report published; waiting for exact report-commit Runtime Check before target work.",
+    "external_wait": {"kind":"github_actions","run_name":"Agent Runtime Check","head_sha":"b9658d06c14d4087a1ab0e626ca7649ebb53b851"},
     "source": "production"
   },
   "time_authority": "github_commit_committer_date",
@@ -33,7 +33,7 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 123,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-123-mikhalych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "b9658d06c14d4087a1ab0e626ca7649ebb53b851",
   "last_runtime_loss": null
 }
