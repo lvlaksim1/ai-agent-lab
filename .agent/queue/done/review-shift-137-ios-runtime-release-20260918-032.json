@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-137-ios-runtime-release-20260918-032",
+  "type": "supervisor-review",
+  "status": "done",
+  "object_id": "ios-research-runtime",
+  "source_event": "ios-runtime-release-20260918-032",
+  "shift_number": 137,
+  "worker_id": "petrovich",
+  "verdict": "APPROVED",
+  "score": 7,
+  "progress_class": "substantial",
+  "review_path": ".agent/reviews/shift-137-review-shift-137-ios-runtime-release-20260918-032.md",
+  "otk_report_path": ".agent/reports/otk/shift-137-review-shift-137-ios-runtime-release-20260918-032.md",
+  "start_report_path": ".agent/reports/starts/shift-137-petrovich-ios-runtime-release-20260918-032.md",
+  "target_commit": "0d28714c2e0af6768b0e81c9971422a14206a711",
+  "completed_at": "2026-09-21T09:22:39Z"
+}
