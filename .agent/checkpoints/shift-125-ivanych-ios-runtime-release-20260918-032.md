@@ -1,0 +1,7 @@
+# Shift 125 — Иваныч — checkpoint
+
+- Production lease claimed with fence generation 279 and immutable Reporting v2 start report at commit `6ac2778acf5b3fcb6297c904a7a7b4a9d0fa2def`.
+- Exact start-report `Agent Runtime Check` run `35556892023` completed SUCCESS. Current liveness contract and validator both admit canonical production `activity_kind=starting`; DIR-030 control-plane gate is therefore proven restored without weakening invariants.
+- Resumed DIR-029 and consumed exact Windows E2E run `35551527247` for target `667dc6aeb273270dcb0798eecaf027b97ceffd85`: terminal FAILURE occurs in `Run provisioning and Darwin root-shell proof`; artifact `10618019838` (`ios-darwin-windows-e2e`, sha256 `f88861a58e9f2b239d08baf4307a37431164a64b799bd9feea22f0c0101f6ae1`) exists and is unexpired.
+- The current connector exposes run/job/step metadata and artifact metadata but not the binary artifact body. No APFS semantic mutation has been made. Target `main` remains exactly `667dc6aeb273270dcb0798eecaf027b97ceffd85`.
+- Next evidence-backed action is to continue the evidence-acquisition ladder: obtain the relevant failure fragment through logs/durable diagnostics or add read-only CI instrumentation that surfaces the first live-volume APFS object/lookup/validation invariant through an API-visible route. Do not mutate XID/checkpoint, adjacent MetaCrypto fields, packaging, or other APFS semantics before that discriminator.
