@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-132-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-21T06:10:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "borisych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 132,
+  "shift_started_at_utc": "2026-09-21T06:02:26Z",
+  "shift_completed_at_utc": "2026-09-21T06:03:15Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "fc111219b0da11a46db4bad40b0f0dca8585b6c7",
+    "recovery_anchor_commit": "26df08dda07e69ee981cbbae92c456a639d719b2",
+    "start_report_path": ".agent/reports/starts/shift-132-borisych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-132-borisych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "55f29e4c5560511a18e8add6bb80f18bf70e6e3b",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-21T06:03:15Z",
+      "heartbeat_stale_at_utc": "2026-09-21T06:06:15Z",
+      "heartbeat_anchor_commit": "fc111219b0da11a46db4bad40b0f0dca8585b6c7",
+      "recovery_observed_at_utc": "2026-09-21T06:10:02Z",
+      "recovery_anchor_commit": "26df08dda07e69ee981cbbae92c456a639d719b2",
+      "fenced_generation": 301,
+      "activity_kind": "blocked_control_plane",
+      "activity_detail": "Exact start-report commit Agent Runtime Check 35566785730 failed; target work remains forbidden."
+    }
+  }
+}
