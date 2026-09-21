@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 512,
+  "sequence": 513,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Start-report Runtime Check 35583266694 passed; beginning terminal DIR-029 evidence consumption.",
+  "activity_detail": "Consumed run 35581261071: source extentref OID 51196 is absent from OMAP because auxiliary tree is physical; bounded evidence resolver fix landed at target 735c8e4d5ae8187ff813b57a36c664c1b015085f.",
   "fence_generation": 318
 }
