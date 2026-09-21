@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 457,
+  "sequence": 458,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Committed narrow read-only exact-E2E APFS failure marker instrumentation at target c1bd3925; waiting for its workflow run to materialize.",
+  "activity_detail": "Consumed APFS marker evidence: mountroot fails errno 79 on BSD root md0; continuing to localize a deeper object/validation discriminator.",
   "fence_generation": 285
 }
