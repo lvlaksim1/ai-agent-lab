@@ -15,14 +15,14 @@
     "worker_id": "sanych",
     "object_id": "ios-research-runtime",
     "active_event": "ios-runtime-release-20260918-032",
-    "sequence": 476,
+    "sequence": 477,
     "time_source": "github_commit_committer_date",
-    "time_anchor_commit": "43cad5c489be123848c4f992829e045d00b50bb5",
+    "time_anchor_commit": "bdc7151f1d0934f87f3cb82936b3682b6f4f14ec",
     "time_anchor_path": ".agent/time-pulse.json",
-    "last_seen_at": "2026-09-21T05:14:51Z",
-    "stale_at": "2026-09-21T05:17:51Z",
+    "last_seen_at": "2026-09-21T05:15:14Z",
+    "stale_at": "2026-09-21T05:18:14Z",
     "activity_kind": "external_wait",
-    "activity_detail": "Actively polling corrected target b75810a: Ramdisk Tool Windows 35563857686 and exact Windows E2E 35563857728 are in progress.",
+    "activity_detail": "Corrected target b75810a passed Ramdisk tests and is building; exact E2E 35563857728 is progressing through setup.",
     "external_wait": {
       "active": true,
       "kind": "github_actions_run",
@@ -31,8 +31,8 @@
       "worker_observed_status": "in_progress",
       "since_at": "2026-09-21T05:14:51Z",
       "since_anchor_commit": "43cad5c489be123848c4f992829e045d00b50bb5",
-      "last_polled_at": "2026-09-21T05:14:51Z",
-      "last_polled_anchor_commit": "43cad5c489be123848c4f992829e045d00b50bb5"
+      "last_polled_at": "2026-09-21T05:15:14Z",
+      "last_polled_anchor_commit": "bdc7151f1d0934f87f3cb82936b3682b6f4f14ec"
     }
   },
   "time_authority": "github_commit_committer_date",
