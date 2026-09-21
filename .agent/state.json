@@ -15,16 +15,16 @@
     "worker_id": "sanych",
     "object_id": "ios-research-runtime",
     "active_event": "ios-runtime-release-20260918-032",
-    "sequence": 588,
+    "sequence": 589,
     "time_source": "github_commit_committer_date",
-    "time_anchor_commit": "51629f03967b76d7c38f68af716dc74efdf7528c",
+    "time_anchor_commit": "9d2e4bf8f1067449f8dc79db89d7e65d6b4ecf9f",
     "time_anchor_path": ".agent/time-pulse.json",
-    "last_seen_at": "2026-09-21T19:39:32Z",
-    "stale_at": "2026-09-21T19:42:32Z",
+    "last_seen_at": "2026-09-21T19:39:53Z",
+    "stale_at": "2026-09-21T19:42:53Z",
     "activity_kind": "starting",
-    "activity_detail": "Claiming shift 154; resolving predecessor OTK evidence before immutable start report.",
+    "activity_detail": "Canonical Reporting v2 start report published for shift 154; entering exact report-contract barrier.",
     "external_wait": null,
-    "source": "production_lease_claim"
+    "source": "production_heartbeat"
   },
   "time_authority": "github_commit_committer_date",
   "started_at_anchor_commit": "51629f03967b76d7c38f68af716dc74efdf7528c",
@@ -33,7 +33,7 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 154,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-154-sanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "84515c38b5349055fb8a3d8b7f5c2b81bbceace4",
   "last_runtime_loss": null
 }
