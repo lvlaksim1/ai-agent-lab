@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 555,
+  "sequence": 556,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-146-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Claiming OTK review for recovered shift 146.",
-  "fence_generation": 344
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production shift 147 for DIR-029 extentref root-record discriminator.",
+  "fence_generation": 346
 }
