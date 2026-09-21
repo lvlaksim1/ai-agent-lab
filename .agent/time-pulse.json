@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 513,
+  "sequence": 514,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Consumed run 35581261071: source extentref OID 51196 is absent from OMAP because auxiliary tree is physical; bounded evidence resolver fix landed at target 735c8e4d5ae8187ff813b57a36c664c1b015085f.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Actively waiting for exact target CI after physical-tree evidence resolver fix; Windows E2E 35583468605 and Ramdisk Tool 35583468564 are in progress.",
   "fence_generation": 318
 }
