@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T17:52:26Z",
     "stale_at": "2026-09-21T17:55:26Z",
     "activity_kind": "starting",
-    "activity_detail": "Claiming shift 151 to resume DIR-029 at extentref child-leaf validation.",
+    "activity_detail": "Immutable Reporting v2 start report published; verifying exact report commit and mandatory Runtime Check barrier.",
     "external_wait": null,
     "source": "production_lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 151,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-151-kuzmich-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "46a603f1ed35db9c7853c2e30f553ed0f5122703",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
