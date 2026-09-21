@@ -1,12 +1,14 @@
-# Manager report — DEC-073
+# Manager report — DEC-074
 
 Object: `ios-research-runtime`
 Health: ORANGE
-Decision: KEEP_COURSE
-Active directive: DIR-029
+Decision: CHANGE_COURSE
+Active directive: DIR-030
 
-Three scored shifts have elapsed since the prior management review. Shift 123 delivered substantial verified progress: target `667dc6aeb273270dcb0798eecaf027b97ceffd85` now resolves the authoritative live APFS volume via `VolumeBySelector("0")`; exact Windows build/gate `35551527270` succeeded. Exact Windows E2E `35551527247` then completed with terminal FAILURE.
+Shift 124 did not reach iOS target work. Its immutable start report was published at `5b8120358e51610f53328c94fd6780bce8b2ddb5`, and exact `Agent Runtime Check` run `35554810708` failed in `Validate agent runtime invariants`. At that triggering commit the production claim state used `heartbeat.activity_kind = "lease_claim"`, while the authoritative validator's allowed activity list does not include `lease_claim`.
 
-That failure is the next discriminating evidence point already anticipated by DIR-029, not grounds for another speculative mutation. The next production shift should consume the exact E2E artifact and localize the first concrete live-volume APFS object/lookup/validation/invariant that fails. Only a bounded defect directly supported by that evidence may be corrected, followed by focused tests → Windows gate → exact Windows E2E.
+This is a concrete control-plane contract mismatch: the runtime can author a state that its mandatory gate rejects. Stale recovery correctly fenced the abandoned execution and returned production to idle. No new APFS conclusion follows from this failure.
 
-No owner decision, STOP, transfer, architecture change or replacement directive is required. Production may resume automatically under DIR-029. Health remains ORANGE until the error-79 causal boundary is localized and any resulting bounded correction is verified.
+DIR-030 therefore temporarily gates target work. The next shift must repair the producer/validator activity contract at the narrowest authoritative source without weakening scheduler immutability, single-worker fencing, GitHub time authority, stale recovery, Reporting v2, OTK, or start-report gates; focused validation and a successful authoritative Agent Runtime Check are required. After that proof, production resumes the existing DIR-029 APFS localization course.
+
+No owner decision, STOP or transfer is required. Existing authorization covers this control-plane repair and automatic resumption after successful verification.
