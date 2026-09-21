@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 574,
+  "sequence": 575,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-150-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of recovered shift 150.",
-  "fence_generation": 356
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming shift 151 to resume DIR-029 at extentref child-leaf validation.",
+  "fence_generation": 357
 }
