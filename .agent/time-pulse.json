@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 426,
+  "sequence": 427,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-120-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of shift 120 runtime-loss evidence and terminal E2E.",
-  "fence_generation": 266
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production shift 121 for DIR-029 read-only APFS mountroot localization.",
+  "fence_generation": 268
 }
