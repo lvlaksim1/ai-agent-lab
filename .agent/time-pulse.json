@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 478,
-  "purpose": "heartbeat",
+  "sequence": 479,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Corrected target b75810a passed Ramdisk tests and is building; exact E2E 35563857728 is progressing through setup.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 294
 }
