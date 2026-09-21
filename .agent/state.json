@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T00:38:23Z",
     "stale_at": "2026-09-21T00:41:23Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production shift 121; materializing inherited DIR-029 context before immutable start report.",
+    "activity_detail": "Immutable shift 121 start report published; awaiting exact Runtime Check barrier before target work.",
     "external_wait": null,
     "source": "lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 121,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-121-petrovich-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "9e583f5240ff2c64bc586710612e8e5788950f70",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
