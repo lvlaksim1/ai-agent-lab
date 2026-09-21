@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 436,
-  "purpose": "lease_claim",
+  "sequence": 437,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 123 to continue DIR-029 authoritative active-volume read-only localization.",
+  "activity_kind": "working",
+  "activity_detail": "Start-report Runtime Check 35551448895 succeeded; beginning DIR-029 authoritative active-volume read-only localization.",
   "fence_generation": 274
 }
