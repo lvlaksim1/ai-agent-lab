@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "attention": true,
+  "attention": false,
   "generation": 79,
-  "reasons": ["three shifts since manager review", "shift 152 exact Agent Runtime Check failed after runtime loss"],
+  "reasons": [],
   "updated_at": "2026-09-21T18:39:31Z"
 }
