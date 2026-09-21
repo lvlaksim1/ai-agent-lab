@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 569,
+  "sequence": 570,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-149-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Independent OTK review of shift 149.",
-  "fence_generation": 353
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production lease under DIR-033; materializing context before Reporting v2 barrier.",
+  "fence_generation": 354
 }
