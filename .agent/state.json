@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T09:02:54Z",
     "stale_at": "2026-09-21T09:05:54Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed shift 137; preparing immutable Reporting v2 start report before DIR-029 work.",
+    "activity_detail": "Immutable Reporting v2 start report published; awaiting exact Agent Runtime Check before target work.",
     "external_wait": null,
     "source": "production_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 137,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-137-petrovich-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "6cda796b136cd6e9d56d209ba0f41121f6bb3c6c",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
