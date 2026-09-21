@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029 narrowed further: exact E2E 35583468605 shows source/rebuilt extentref and snapmeta auxiliary-tree headers have expected subtype and valid Fletcher checksums; continue deeper read-only lookup/content comparison before any APFS semantic mutation.",
-  "last_scored_shift": 141,
+  "current_blocker_summary": "DIR-029 narrowed behind green auxiliary-tree object headers/checksums to APFS B-tree node header fields Flags/Level/NumberOfKeys; next step is bounded read-only source/rebuilt instrumentation and exact verification before any APFS semantic mutation.",
+  "last_scored_shift": 142,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T12:04:40Z"
+  "updated_at": "2026-09-21T12:35:14Z"
 }

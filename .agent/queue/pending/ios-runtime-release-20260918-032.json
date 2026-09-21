@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Continue DIR-029 after shift 141 runtime loss. Exact E2E 35583468605 already confirms source/rebuilt extentref and snapmeta auxiliary-tree headers have expected subtype and valid Fletcher checksums. Continue deeper read-only lookup/content comparison for extentref and snapshot-metadata trees to localize the first concrete structural/lookup/validation mismatch; only then perform a bounded repair if causality is proven.",
-  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not repeat generic mountroot errno 79 / BSD root md0, generic superblock analysis, root-tree OMAP/header/checksum evidence, or the now-validated extentref/snapmeta header/subtype/Fletcher checks.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
-  "predecessor_review_event_id": "review-shift-141-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-141-review-shift-141-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-141-review-shift-141-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 141,
-  "predecessor_worker_id": "ivanych"
+  "goal": "Continue DIR-029 after shift 142 runtime loss. Existing evidence excludes extentref/snapmeta object header subtype and Fletcher checksum as the immediate mismatch. Extend the read-only evidence path to compare APFS B-tree node Flags, Level and NumberOfKeys for source/rebuilt extentref and snapmeta roots; consume focused tests/Windows gate/exact E2E and continue deeper only from the first concrete discriminator.",
+  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not repeat generic mountroot errno 79 / BSD root md0, generic superblock analysis, root-tree OMAP/header/checksum evidence, or validated extentref/snapmeta header/subtype/Fletcher checks.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
+  "predecessor_review_event_id": "review-shift-142-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-142-review-shift-142-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-142-review-shift-142-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 142,
+  "predecessor_worker_id": "fedorych"
 }
