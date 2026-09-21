@@ -8,18 +8,18 @@
   "definition_of_done": ["Use the authoritative object mission Definition of Done"],
   "current_phase": "boot-debugging",
   "health": "ORANGE",
-  "current_blocker_summary": "DIR-029 instrumentation landed at target 0d28714c2e0af6768b0e81c9971422a14206a711; consume terminal boot-proof run 35581261071 and localize the first source/rebuilt extentref/snapmeta OMAP/header/checksum discriminator before any APFS semantic mutation.",
-  "shifts_since_manager_review": 1,
+  "current_blocker_summary": "DIR-029 evidence resolver repaired at target 735c8e4d5ae8187ff813b57a36c664c1b015085f; Ramdisk Tool and Windows Build pass, exact Windows E2E 35583468605 is terminal FAILURE and its artifact must be consumed to localize the first source/rebuilt extentref/snapmeta discriminator before APFS semantic mutation.",
+  "shifts_since_manager_review": 2,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
-  "last_scored_shift": 137,
+  "last_scored_shift": 138,
   "manager_review_count": 78,
   "last_manager_review_at": "2026-09-21T08:48:54Z",
   "last_manager_decision": "DEC-079: KEEP_COURSE; two no-progress shifts do not invalidate DIR-029",
   "active_directive": "DIR-029",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-21T09:22:39Z"
+  "updated_at": "2026-09-21T09:48:46Z"
 }
