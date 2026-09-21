@@ -15,16 +15,16 @@
     "worker_id": "petrovich",
     "object_id": "ios-research-runtime",
     "active_event": "ios-runtime-release-20260918-032",
-    "sequence": 507,
+    "sequence": 508,
     "time_source": "github_commit_committer_date",
-    "time_anchor_commit": "9fd0993636231f80fcf64722695c2d991cb44258",
+    "time_anchor_commit": "8fa82d9a272fdf901167c4735c2cbfb6cc787cf8",
     "time_anchor_path": ".agent/time-pulse.json",
-    "last_seen_at": "2026-09-21T09:02:54Z",
-    "stale_at": "2026-09-21T09:05:54Z",
-    "activity_kind": "starting",
-    "activity_detail": "Immutable Reporting v2 start report published; awaiting exact Agent Runtime Check before target work.",
-    "external_wait": null,
-    "source": "production_claim"
+    "last_seen_at": "2026-09-21T09:04:55Z",
+    "stale_at": "2026-09-21T09:07:55Z",
+    "activity_kind": "external_wait",
+    "activity_detail": "DIR-029 read-only auxiliary-tree OMAP evidence landed; waiting for exact target CI on commit 0d28714c2e0af6768b0e81c9971422a14206a711.",
+    "external_wait": {"repository":"lvlaksim1/iOS-Research-Runtime","commit":"0d28714c2e0af6768b0e81c9971422a14206a711","runs":[35581260902,35581260847]},
+    "source": "heartbeat"
   },
   "time_authority": "github_commit_committer_date",
   "started_at_anchor_commit": "9fd0993636231f80fcf64722695c2d991cb44258",
@@ -36,21 +36,6 @@
   "shift_start_report_path": ".agent/reports/starts/shift-137-petrovich-ios-runtime-release-20260918-032.md",
   "shift_start_report_commit": "6cda796b136cd6e9d56d209ba0f41121f6bb3c6c",
   "last_runtime_loss": {
-    "role": "production",
-    "event": "ios-runtime-release-20260918-032",
-    "worker_id": "palych",
-    "worker_last_seen_at_utc": "2026-09-21T08:25:42Z",
-    "heartbeat_stale_at_utc": "2026-09-21T08:28:42Z",
-    "heartbeat_anchor_commit": "c222f295b68901c06adcf230e63a21a770d34ad0",
-    "recovery_closed_at_utc": "2026-09-21T08:34:01Z",
-    "recovery_anchor_commit": "4464cd4e3fae3a388447311ac21a8646eab34833",
-    "fenced_generation": 313,
-    "activity_kind": "working",
-    "activity_detail": "Start-report Runtime Check 35577778759 succeeded; inspecting target implementation for bounded DIR-029 tree evidence.",
-    "shift_number": 136,
-    "reporting_policy_version": 2,
-    "score_policy_version": 2,
-    "start_report_path": ".agent/reports/starts/shift-136-palych-ios-runtime-release-20260918-032.md",
-    "start_report_commit": "777cd67d669bd3a4b23301de5b15f13cae7e9460"
+    "role":"production","event":"ios-runtime-release-20260918-032","worker_id":"palych","worker_last_seen_at_utc":"2026-09-21T08:25:42Z","heartbeat_stale_at_utc":"2026-09-21T08:28:42Z","heartbeat_anchor_commit":"c222f295b68901c06adcf230e63a21a770d34ad0","recovery_closed_at_utc":"2026-09-21T08:34:01Z","recovery_anchor_commit":"4464cd4e3fae3a388447311ac21a8646eab34833","fenced_generation":313,"activity_kind":"working","activity_detail":"Start-report Runtime Check 35577778759 succeeded; inspecting target implementation for bounded DIR-029 tree evidence.","shift_number":136,"reporting_policy_version":2,"score_policy_version":2,"start_report_path":".agent/reports/starts/shift-136-palych-ios-runtime-release-20260918-032.md","start_report_commit":"777cd67d669bd3a4b23301de5b15f13cae7e9460"
   }
 }
