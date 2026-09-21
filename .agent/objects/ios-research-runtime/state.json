@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Exact E2E 35545935392 disproved ramdisk packaging-size divergence; BSD root reaches md0 but apfs_vfsop_mountroot still returns error 79. DIR-029 requires read-only localization of the first failing APFS object/lookup/validation/invariant before any further semantic mutation.",
-  "last_scored_shift": 121,
+  "current_blocker_summary": "DIR-029 read-only localization found the current evidence scanner selects the first physically parseable APSB rather than resolving the authoritative active volume through NX object mappings. Next evidence step is to resolve that live mapping and localize the first mountroot-rejected object/lookup/invariant before any semantic mutation.",
+  "last_scored_shift": 122,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "none",
+  "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T01:04:55Z"
+  "updated_at": "2026-09-21T01:34:59Z"
 }
