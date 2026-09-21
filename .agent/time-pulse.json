@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 576,
+  "sequence": 577,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Shift 151 report gate passed; consuming extentref child-leaf evidence under DIR-029.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Checkpointed evidence-only child-leaf instrumentation at target 3b0f5648; waiting for exact target CI.",
   "fence_generation": 357
 }
