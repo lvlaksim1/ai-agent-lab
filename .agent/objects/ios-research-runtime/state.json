@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029 now has a concrete extentref node-shape discriminator: source and rebuilt roots both flags=1/level=1 with valid checksums, but NumberOfKeys differs 7 vs 13; snapmeta shape matches 3/0/0. Next bounded read-only step is extentref root record/key/value comparison before semantic mutation.",
-  "last_scored_shift": 145,
+  "current_blocker_summary": "DIR-029 extentref root mismatch remains the active discriminator: source/rebuilt root shape differs by NumberOfKeys 7 vs 13; pinned BTreeNode API is confirmed capable of emitting the root key/value records needed for the next read-only comparison.",
+  "last_scored_shift": 146,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
+  "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T14:01:34Z"
+  "updated_at": "2026-09-21T14:23:24Z"
 }

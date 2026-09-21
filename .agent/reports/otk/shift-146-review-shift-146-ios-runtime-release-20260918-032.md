@@ -13,6 +13,13 @@
 Смена оборвалась после API/checkpoint локализации, до получения самого сравнения extentref root records. Причинный APFS defect по-прежнему не локализован.
 
 **СЛЕДУЮЩЕМУ:**
-Реализовать/выполнить read-only вывод extentref root keys/values для source и rebuilt, объяснить `7` против `13`, и только после конкретного causal mismatch рассматривать bounded semantic repair.
+Не возвращаться к уже закрытым superblock/header/checksum гипотезам. Реализовать/выполнить read-only вывод extentref root keys/values для source и rebuilt, объяснить `7` против `13`, и только после конкретного causal mismatch рассматривать bounded semantic repair.
 
-**ОЦЕНКА ОТК:** 6/10 — APPROVED; рейтинг Саныча 1390 (+10); progress class incremental.
+**ОЦЕНКА ОТК:**
+- Полезный подтверждённый прогресс: **1/4**
+- Инженерное качество: **2/3**
+- Эффективность/фокус при живом runtime: **2/2**
+- Стартовая оценка и план: **1/1**
+- **Итого: 6/10 — APPROVED**
+- Рейтинг Саныча: **1390 (+10)**
+- Класс прогресса: **incremental**
