@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 474,
+  "sequence": 475,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "external_wait",
-  "activity_detail": "Polling Ramdisk Tool Windows 35563745520 for target b38244f; job remains in progress during Setup Go.",
+  "activity_detail": "Ramdisk Tool Windows 35563745520 remains in Test for target b38244f; continuing active evidence wait.",
   "fence_generation": 294
 }
