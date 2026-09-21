@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 470,
-  "purpose": "manager_review",
-  "role": "manager",
-  "worker_id": "manager",
+  "sequence": 471,
+  "purpose": "lease_claim",
+  "role": "production",
+  "worker_id": "sanych",
   "object_id": "ios-research-runtime",
-  "active_event": "management-review-076",
-  "activity_kind": "management_review",
-  "activity_detail": "Reviewing three shifts since the previous manager review; DIR-029 remains evidence-led.",
-  "fence_generation": 293
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production shift 130 for DIR-029 continuation.",
+  "fence_generation": 294
 }
