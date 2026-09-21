@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 547,
-  "purpose": "lease_claim",
+  "sequence": 548,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 145 for DIR-029 continuation.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Polling exact start-report Agent Runtime Check run 35607865000 before target work.",
   "fence_generation": 340
 }
