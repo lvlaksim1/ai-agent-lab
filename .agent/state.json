@@ -22,9 +22,9 @@
     "last_seen_at": "2026-09-21T04:40:23Z",
     "stale_at": "2026-09-21T04:43:23Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production lease for shift 129 under DIR-029.",
-    "external_wait": null,
-    "source": "production_lease_claim"
+    "activity_detail": "Start report published for shift 129; awaiting mandatory report-contract barrier.",
+    "external_wait": {"kind":"github_actions","target":"Agent Runtime Check","commit":"6f0421f90ba141bbbd079f119c347f7832f61463"},
+    "source": "production_start_report"
   },
   "time_authority": "github_commit_committer_date",
   "started_at_anchor_commit": "600a139bf2a415734dd37e66a894941b96e97659",
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 129,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-129-petrovich-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "6f0421f90ba141bbbd079f119c347f7832f61463",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
