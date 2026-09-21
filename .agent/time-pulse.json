@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 475,
+  "sequence": 476,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Ramdisk Tool Windows 35563745520 remains in Test for target b38244f; continuing active evidence wait.",
+  "activity_kind": "working",
+  "activity_detail": "Consumed failed Ramdisk test, corrected volume superblock XID lookup, target now b75810a; awaiting new CI registration.",
   "fence_generation": 294
 }
