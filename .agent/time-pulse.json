@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 447,
-  "purpose": "heartbeat_refresh",
+  "sequence": 448,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Checkpointed DIR-030 success and exact E2E 35551527247 metadata; continuing evidence-acquisition ladder without APFS semantic mutation.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 279
 }
