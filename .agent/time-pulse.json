@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 568,
-  "purpose": "heartbeat_refresh",
-  "role": "production",
-  "worker_id": "ivanych",
+  "sequence": 569,
+  "purpose": "lease_claim",
+  "role": "otk",
+  "worker_id": "otk",
   "object_id": "ios-research-runtime",
-  "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "blocked_control_plane",
-  "activity_detail": "DIR-033 localized producer-state defect after exact report gate failure; target remains frozen.",
-  "fence_generation": 352
+  "active_event": "review-shift-149-ios-runtime-release-20260918-032",
+  "activity_kind": "otk_review",
+  "activity_detail": "Independent OTK review of shift 149.",
+  "fence_generation": 353
 }
