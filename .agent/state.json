@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T18:24:41Z",
     "stale_at": "2026-09-21T18:27:41Z",
     "activity_kind": "starting",
-    "activity_detail": "Lease claimed; consuming inherited evidence before immutable start-report barrier.",
+    "activity_detail": "Immutable start report published; awaiting exact report-contract gate before target work.",
     "external_wait": null,
     "source": "lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 152,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-152-palych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "e9c740d1aacd51af3ec1aca13f05bb3bfe60a414",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
