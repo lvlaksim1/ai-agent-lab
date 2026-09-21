@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T14:03:07Z",
     "stale_at": "2026-09-21T14:06:07Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed shift 146 for DIR-029 extentref root-record discriminator.",
+    "activity_detail": "Shift 146 start report published; waiting for exact report-commit Agent Runtime Check before target work.",
     "external_wait": null
   },
   "time_authority": "github_commit_committer_date",
@@ -32,8 +32,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 146,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-146-sanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "7147d9124e7bb8b9eefdffa9a97ab4c23dd7057f",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
