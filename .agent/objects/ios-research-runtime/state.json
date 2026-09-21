@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029 remains active: target 667dc6a has authoritative live-volume resolution; Windows gate 35551527270 succeeded and exact Windows E2E 35551527247 failed terminally. Consume that artifact and localize the first concrete live-volume APFS invariant failure before semantic mutation.",
+  "current_blocker_summary": "Control-plane gate blocks production: shift 124 emitted heartbeat.activity_kind=lease_claim, but the mandatory Agent Runtime Check validator rejects that producer-authored value. DIR-030 requires a narrow producer/validator contract repair and successful runtime check before resuming DIR-029 APFS localization.",
   "last_scored_shift": 123,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T02:25:12Z"
+  "updated_at": "2026-09-21T02:48:50Z"
 }
