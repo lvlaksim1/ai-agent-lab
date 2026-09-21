@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-140-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-21T11:22:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "borisych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 140,
+  "shift_started_at_utc": "2026-09-21T11:09:56Z",
+  "shift_completed_at_utc": "2026-09-21T11:11:02Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "b3d41ab16017ee01c758038ce3dcbfb7a38e87a2",
+    "recovery_anchor_commit": "6a3c84bbb3768b47ae9058514ca8330d3fe8b46b",
+    "start_report_path": ".agent/reports/starts/shift-140-borisych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-140-borisych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "2a2b7122901c809ee62e2f5b67877ea2076964bc",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-21T11:11:02Z",
+      "heartbeat_stale_at_utc": "2026-09-21T11:14:02Z",
+      "heartbeat_anchor_commit": "b3d41ab16017ee01c758038ce3dcbfb7a38e87a2",
+      "recovery_observed_at_utc": "2026-09-21T11:22:02Z",
+      "recovery_anchor_commit": "6a3c84bbb3768b47ae9058514ca8330d3fe8b46b",
+      "fenced_generation": 325,
+      "activity_kind": "working",
+      "activity_detail": "DIR-032 exact failure localized to malformed shift-139 start report; shift-140 immutable v2 report passed Agent Runtime Check 35592640284. Binding report and resuming DIR-029 evidence chain."
+    }
+  }
+}
