@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 540,
+  "sequence": 541,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-142-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Reviewing recovered shift 142.",
-  "fence_generation": 333
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production shift 143 for DIR-029 bounded APFS discriminator.",
+  "fence_generation": 334
 }
