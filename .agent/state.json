@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T13:06:25Z",
     "stale_at": "2026-09-21T13:09:25Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production shift 143 for DIR-029 bounded APFS discriminator; preparing immutable start report.",
+    "activity_detail": "Immutable Reporting v2 start report published; waiting for exact report commit Agent Runtime Check before target work.",
     "external_wait": null,
     "source": "lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 143,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-143-kuzmich-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "31aebf79ac79c3aca6dbc3ca48529ce07ffaa482",
   "last_runtime_loss": {
     "role": "otk",
     "event": "review-shift-142-ios-runtime-release-20260918-032",
