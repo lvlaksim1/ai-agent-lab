@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 485,
-  "purpose": "lease_claim",
+  "sequence": 486,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production lease for shift 132 continuation of DIR-029.",
+  "activity_kind": "blocked_control_plane",
+  "activity_detail": "Exact start-report commit Agent Runtime Check 35566785730 failed; target work remains forbidden.",
   "fence_generation": 300
 }
