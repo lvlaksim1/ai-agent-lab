@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "scoring_version": 2,
-  "shift_counter": 135,
-  "next_member_id": "palych",
+  "shift_counter": 136,
+  "next_member_id": "petrovich",
   "rotation_order": ["petrovich","sanych","mikhalych","borisych","ivanych","fedorych","kuzmich","palych"],
   "members": [
     {"id":"petrovich","display_name":"Петрович","rating":1280,"shifts_scored":17,"total_score":113,"average_score":6.65,"best_score":9,"last_score":9,"cheat_strikes":0},
@@ -12,6 +12,6 @@
     {"id":"ivanych","display_name":"Иваныч","rating":1350,"shifts_scored":17,"total_score":120,"average_score":7.06,"best_score":10,"last_score":8,"cheat_strikes":0},
     {"id":"fedorych","display_name":"Федорыч","rating":1270,"shifts_scored":17,"total_score":112,"average_score":6.59,"best_score":10,"last_score":6,"cheat_strikes":0},
     {"id":"kuzmich","display_name":"Кузьмич","rating":1320,"shifts_scored":17,"total_score":117,"average_score":6.88,"best_score":9,"last_score":5,"cheat_strikes":0},
-    {"id":"palych","display_name":"Палыч","rating":1300,"shifts_scored":16,"total_score":110,"average_score":6.88,"best_score":9,"last_score":5,"cheat_strikes":0}
+    {"id":"palych","display_name":"Палыч","rating":1300,"shifts_scored":17,"total_score":115,"average_score":6.76,"best_score":9,"last_score":5,"cheat_strikes":0}
   ]
 }
