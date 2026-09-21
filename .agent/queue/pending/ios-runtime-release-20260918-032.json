@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Continue DIR-029 from shift 138. Consume exact terminal Windows End-to-End Boot run 35583468605 and its artifact for target commit 735c8e4d5ae8187ff813b57a36c664c1b015085f. The bounded read-only evidence resolver now correctly distinguishes physical auxiliary-tree OIDs from OMAP-mapped virtual OIDs; Ramdisk Tool Windows 35583468564 and Windows Build 35583468642 are SUCCESS. Compare source/rebuilt extentref/snapmeta physical/OMAP resolution, object header OID/XID/type/subtype and stored/computed Fletcher checksum. Localize the first concrete structural/lookup/validation mismatch; only then perform a bounded repair if causality is proven.",
+  "goal": "Continue DIR-029 from shift 139 after manager/control-plane review. Consume exact terminal Windows End-to-End Boot run 35583468605 and its artifact for target commit 735c8e4d5ae8187ff813b57a36c664c1b015085f. Compare source/rebuilt extentref/snapmeta physical/OMAP resolution, object header OID/XID/type/subtype and stored/computed Fletcher checksum. Localize the first concrete structural/lookup/validation mismatch; only then perform a bounded repair if causality is proven.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not repeat generic mountroot errno 79 / BSD root md0, generic superblock analysis, or already-validated root-tree OMAP/header/checksum evidence.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
-  "predecessor_review_event_id": "review-shift-138-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-138-review-shift-138-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-138-review-shift-138-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 138,
-  "predecessor_worker_id": "sanych"
+  "predecessor_review_event_id": "review-shift-139-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-139-review-shift-139-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-139-review-shift-139-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 139,
+  "predecessor_worker_id": "mikhalych"
 }

@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029 evidence resolver repaired at target 735c8e4d5ae8187ff813b57a36c664c1b015085f; Ramdisk Tool and Windows Build pass, exact Windows E2E 35583468605 is terminal FAILURE and its artifact must be consumed to localize the first source/rebuilt extentref/snapmeta discriminator before APFS semantic mutation.",
-  "last_scored_shift": 138,
+  "current_blocker_summary": "DIR-029 remains at target 735c8e4d5ae8187ff813b57a36c664c1b015085f with exact Windows E2E 35583468605 terminal FAILURE awaiting artifact consumption; shift 139 made no target change because mandatory Agent Runtime Check 35587838815 failed before target work.",
+  "last_scored_shift": 139,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
+  "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T09:48:46Z"
+  "updated_at": "2026-09-21T10:35:30Z"
 }
