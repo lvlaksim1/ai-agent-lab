@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029 remains active: exact Windows E2E 35551527247 still lacks the first API-visible live-volume APFS object/lookup/validation discriminator. Shift 126 exhausted the immediate exact-run/job/log route far enough to justify narrow read-only CI instrumentation as the next step; no APFS semantic mutation is justified yet.",
-  "last_scored_shift": 126,
+  "current_blocker_summary": "DIR-029 remains active: shift 127 landed and consumed API-visible exact-E2E APFS failure marker evidence at target c1bd3925, confirming mountroot errno 79 on BSD root md0. The first deeper live-volume APFS object/lookup/validation discriminator is still not localized; continue narrow read-only instrumentation before any semantic mutation.",
+  "last_scored_shift": 127,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "substantial",
+  "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T03:51:37Z"
+  "updated_at": "2026-09-21T04:23:17Z"
 }
