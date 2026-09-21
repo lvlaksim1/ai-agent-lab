@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 543,
+  "sequence": 544,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "palych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-143-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Reviewing recovered shift 143.",
-  "fence_generation": 336
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production shift 144 for DIR-029 bounded B-tree node discriminator.",
+  "fence_generation": 337
 }
