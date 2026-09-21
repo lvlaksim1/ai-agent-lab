@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 441,
-  "purpose": "lease_claim",
+  "sequence": 442,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "lease_claim",
-  "activity_detail": "Claiming production shift 124 for DIR-029 continuation.",
+  "activity_kind": "blocked_control_plane",
+  "activity_detail": "Start-report Agent Runtime Check 35554810708 failed; target work is prohibited and manager attention has been raised.",
   "fence_generation": 276
 }
