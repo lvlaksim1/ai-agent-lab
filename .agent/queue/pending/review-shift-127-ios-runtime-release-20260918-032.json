@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-127-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-21T04:10:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "kuzmich",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 127,
+  "shift_started_at_utc": "2026-09-21T04:03:37Z",
+  "shift_completed_at_utc": "2026-09-21T04:06:13Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "76658cc468c2b573235fb045f07584a5b85417be",
+    "recovery_anchor_commit": "89fe1ebd9e00ec4209eaa6bc270d1e9c2d9bd872",
+    "start_report_path": ".agent/reports/starts/shift-127-kuzmich-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-127-kuzmich-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "d9d13a5b845763e3bd641f516d0a2bb82fef8594",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-21T04:06:13Z",
+      "heartbeat_stale_at_utc": "2026-09-21T04:09:13Z",
+      "heartbeat_anchor_commit": "76658cc468c2b573235fb045f07584a5b85417be",
+      "recovery_observed_at_utc": "2026-09-21T04:10:01Z",
+      "recovery_anchor_commit": "89fe1ebd9e00ec4209eaa6bc270d1e9c2d9bd872",
+      "fenced_generation": 286,
+      "activity_kind": "working",
+      "activity_detail": "Consumed APFS marker evidence: mountroot fails errno 79 on BSD root md0; continuing to localize a deeper object/validation discriminator."
+    }
+  }
+}
