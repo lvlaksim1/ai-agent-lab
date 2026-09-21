@@ -8,11 +8,12 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Resume DIR-029 directly from target a4897aa79186d0e492ca0e5f8fbdd0ad4338bcc9. DIR-033 is proven green by exact Agent Runtime Check 35633016653. Validate the extentref child leaves read-only: compare source/rebuilt child-leaf key/value semantics behind the root-index NumberOfKeys 7-vs-13 layout difference and determine whether any causal semantic divergence exists. Do not mutate APFS writer/XID/MetaCrypto semantics before a new discriminator localizes a bounded defect.",
-  "constraints": ["Do not repeat DIR-033; exact Agent Runtime Check 35633016653 is authoritative SUCCESS.","Do not treat extentref root-index NumberOfKeys 7-vs-13 alone as corruption; validate child-leaf records/keys/values.","Do not repeat generic mountroot errno 79 / BSD root md0, generic superblock analysis, root-tree OMAP/header/checksum evidence, or validated extentref/snapmeta header/subtype/Fletcher checks.","Do not alter XID/checkpoint semantics or MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
-  "predecessor_review_event_id": "review-shift-150-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-150-review-shift-150-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-150-review-shift-150-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 150,
-  "predecessor_worker_id": "fedorych"
+  "goal": "Resume DIR-029 from evidence-only target 3b0f5648f004f58daef526082b3d2a32d132edcf. First consume terminal Windows End-to-End Boot run 35634992757. Then compare source/rebuilt extentref child-leaf key/value semantics emitted by the new recursive diagnostics and determine the first causal divergence or prove equivalence. Do not mutate APFS writer/XID/MetaCrypto semantics before a new bounded discriminator exists.",
+  "constraints": ["Do not repeat DIR-033; its report/control-plane repair is already proven green.","Do not treat extentref root-index NumberOfKeys 7-vs-13 alone as corruption; validate child-leaf records/keys/values.","Do not alter XID/checkpoint semantics or MetaCrypto fields without new discriminating evidence.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
+  "wait_for": {"kind":"github_actions_run","repository":"lvlaksim1/iOS-Research-Runtime","run_id":35634992757,"target_sha":"3b0f5648f004f58daef526082b3d2a32d132edcf"},
+  "predecessor_review_event_id": "review-shift-151-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-151-review-shift-151-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-151-review-shift-151-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 151,
+  "predecessor_worker_id": "kuzmich"
 }

@@ -8,18 +8,18 @@
   "definition_of_done": ["Use the authoritative object mission Definition of Done"],
   "current_phase": "boot-debugging",
   "health": "ORANGE",
-  "current_blocker_summary": "DIR-033 is proven green by exact Agent Runtime Check 35633016653. DIR-029 now resumes at the narrowed read-only extentref boundary: the root-index NumberOfKeys 7-vs-13 difference is consistent with layout-dependent leaf fanout; validate source/rebuilt child-leaf key/value semantics before any APFS mutation.",
-  "shifts_since_manager_review": 1,
+  "current_blocker_summary": "DIR-029 child-leaf instrumentation landed at target 3b0f5648; exact Windows E2E run 35634992757 was still in progress at shift-151 runtime loss. Consume terminal evidence, then compare source/rebuilt extentref child-leaf key/value semantics before any APFS semantic mutation.",
+  "shifts_since_manager_review": 2,
   "consecutive_no_progress": 0,
   "consecutive_corrected": 0,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
-  "last_scored_shift": 150,
+  "last_scored_shift": 151,
   "manager_review_count": 84,
   "last_manager_review_at": "2026-09-21T17:01:34Z",
   "last_manager_decision": "DEC-085: KEEP_COURSE; keep DIR-033 on localized lease-claim producer-state projection defect",
   "active_directive": "DIR-033",
   "owner_decision_required": false,
   "stop_production": false,
-  "updated_at": "2026-09-21T17:50:57Z"
+  "updated_at": "2026-09-21T18:01:37Z"
 }
