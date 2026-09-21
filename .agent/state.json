@@ -15,14 +15,14 @@
     "worker_id": "mikhalych",
     "object_id": "ios-research-runtime",
     "active_event": "ios-runtime-release-20260918-032",
-    "sequence": 559,
+    "sequence": 560,
     "time_source": "github_commit_committer_date",
-    "time_anchor_commit": "55d39c2b26e1b824ca4f60eba3b00cd78e684c4c",
+    "time_anchor_commit": "a14ff5eb7dd84fa87d86a9f4877724fbc1a99505",
     "time_anchor_path": ".agent/time-pulse.json",
-    "last_seen_at": "2026-09-21T14:41:35Z",
-    "stale_at": "2026-09-21T14:44:35Z",
+    "last_seen_at": "2026-09-21T14:42:06Z",
+    "stale_at": "2026-09-21T14:45:06Z",
     "activity_kind": "external_wait",
-    "activity_detail": "Actively waiting for Ramdisk Tool Windows run 35613817140 on target commit a4897aa7.",
+    "activity_detail": "Ramdisk Tool Windows run 35613817140 remains in progress; target evidence patch checkpoint is durable.",
     "external_wait": {
       "active": true,
       "kind": "github_actions_run",
@@ -31,8 +31,8 @@
       "worker_observed_status": "in_progress",
       "since_at": "2026-09-21T14:41:35Z",
       "since_anchor_commit": "55d39c2b26e1b824ca4f60eba3b00cd78e684c4c",
-      "last_polled_at": "2026-09-21T14:41:35Z",
-      "last_polled_anchor_commit": "55d39c2b26e1b824ca4f60eba3b00cd78e684c4c"
+      "last_polled_at": "2026-09-21T14:42:06Z",
+      "last_polled_anchor_commit": "a14ff5eb7dd84fa87d86a9f4877724fbc1a99505"
     },
     "source": "production_heartbeat"
   },
