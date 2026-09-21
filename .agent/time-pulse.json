@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 579,
+  "sequence": 580,
   "purpose": "lease_claim",
-  "role": "otk",
-  "worker_id": "otk",
+  "role": "production",
+  "worker_id": "palych",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-151-ios-runtime-release-20260918-032",
-  "activity_kind": "otk_review",
-  "activity_detail": "Claiming OTK lease for independent review of shift 151.",
-  "fence_generation": 359
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production lease to consume terminal exact E2E evidence and continue DIR-029 child-leaf comparison.",
+  "fence_generation": 360
 }
