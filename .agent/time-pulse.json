@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 437,
+  "sequence": 438,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Start-report Runtime Check 35551448895 succeeded; beginning DIR-029 authoritative active-volume read-only localization.",
+  "activity_detail": "Landed evidence-only live-volume resolution at target 667dc6aeb273270dcb0798eecaf027b97ceffd85; checking verification workflows.",
   "fence_generation": 274
 }
