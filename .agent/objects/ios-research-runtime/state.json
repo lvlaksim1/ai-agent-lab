@@ -4,7 +4,7 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Shift 152 runtime loss occurred at mandatory report barrier; exact Agent Runtime Check 35638258123 later failed. No target mutation occurred. Fresh shift must pass its own Reporting v2 gate, then consume terminal Windows E2E 35634992757 and compare extentref child-leaf evidence.",
+  "current_blocker_summary": "Shift 152 exact Agent Runtime Check 35638258123 proves a non-canonical Reporting v2 start report. DIR-034 requires producer-path repair and fresh green Runtime Check; then resume DIR-029 at terminal E2E 35634992757 and extentref child-leaf comparison.",
   "last_scored_shift": 152,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "none",
