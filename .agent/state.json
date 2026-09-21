@@ -15,14 +15,14 @@
     "worker_id": "sanych",
     "object_id": "ios-research-runtime",
     "active_event": "ios-runtime-release-20260918-032",
-    "sequence": 473,
+    "sequence": 474,
     "time_source": "github_commit_committer_date",
-    "time_anchor_commit": "19bdb36011777c5a41e7234269eb1de909946506",
+    "time_anchor_commit": "63d32c6a2e8c05d78675779982a261b51ed94108",
     "time_anchor_path": ".agent/time-pulse.json",
-    "last_seen_at": "2026-09-21T05:13:09Z",
-    "stale_at": "2026-09-21T05:16:09Z",
+    "last_seen_at": "2026-09-21T05:13:31Z",
+    "stale_at": "2026-09-21T05:16:31Z",
     "activity_kind": "external_wait",
-    "activity_detail": "Polling Ramdisk Tool Windows 35563745520 for target b38244f; job remains in progress during Setup Go.",
+    "activity_detail": "Ramdisk Tool Windows 35563745520 remains in Test for target b38244f; continuing active evidence wait.",
     "external_wait": {
       "active": true,
       "kind": "github_actions_run",
@@ -31,8 +31,8 @@
       "worker_observed_status": "in_progress",
       "since_at": "2026-09-21T05:12:46Z",
       "since_anchor_commit": "00b68d5f3ed50997b0c1c21151a510fdb1902993",
-      "last_polled_at": "2026-09-21T05:13:09Z",
-      "last_polled_anchor_commit": "19bdb36011777c5a41e7234269eb1de909946506"
+      "last_polled_at": "2026-09-21T05:13:31Z",
+      "last_polled_anchor_commit": "63d32c6a2e8c05d78675779982a261b51ed94108"
     }
   },
   "time_authority": "github_commit_committer_date",
