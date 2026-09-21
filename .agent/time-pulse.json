@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 431,
-  "purpose": "lease_claim",
+  "sequence": 432,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 122 to continue DIR-029 read-only APFS mountroot localization.",
+  "activity_kind": "working",
+  "activity_detail": "Start-report Runtime Check 35549810991 succeeded; DIR-029 read-only localization found current evidence scanner selects the first parseable APSB by physical scan rather than resolving the active volume through NX object mappings.",
   "fence_generation": 271
 }
