@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 533,
-  "purpose": "lease_claim",
+  "sequence": 534,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "fedorych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 142 to continue DIR-029 deeper read-only lookup/content comparison after OTK shift 141.",
+  "activity_detail": "Immutable Reporting v2 start report published for shift 142; awaiting exact report-commit Agent Runtime Check barrier.",
   "fence_generation": 329
 }
