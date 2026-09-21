@@ -1,31 +1,31 @@
 Проект: iOS-Research-Runtime
-Работник: Палыч
-Смена: №128
-Начало смены: 21.09.2026 07:24:57 МСК
-Конец смены: 21.09.2026 07:25:50 МСК
+Работник: Петрович
+Смена: №129
+Начало смены: 21.09.2026 07:40:23 МСК
+Конец смены: 21.09.2026 07:42:48 МСК
 Причина завершения: runtime_loss
 
 ЗАКЛЮЧЕНИЕ ОТК:
 
 ЧТО ПЛАНИРОВАЛ:
-Палыч планировал продолжить DIR-029 от уже подтверждённого mountroot errno 79 на BSD root md0 и получить следующий минимальный read-only дискриминатор конкретного live-volume APFS object/lookup/validation failure, не меняя APFS-семантику до доказанной причинности.
+Петрович планировал продолжить DIR-029 от доказанной границы errno 79/md0 и получить следующий минимальный read-only discriminator конкретного live-volume APFS object/lookup/validation failure.
 
 ЧТО ФАКТИЧЕСКИ СДЕЛАНО:
-Корректно принял смену, опубликовал immutable стартовый доклад и прошёл обязательный report-contract barrier. После этого authoritative heartbeat зафиксировал вход в более глубокую read-only локализацию DIR-029. До потери runtime новый технический checkpoint, target-коммит или проверочный результат не появился.
+Exact E2E artifact повторно потреблён; durable checkpoint уточнил mount boundary и доказал доступность live-volume object mapping. Следующий минимальный probe локализован до OMAP -> root-tree OID -> physical block -> object header/checksum/type/XID.
 
 ЧТО ПОДТВЕРЖДЕНО:
-Последний authoritative heartbeat имеет GitHub-время 21.09.2026 07:25:50 МСК. Stale boundary наступила в 07:28:50 МСК, а recovery pulse пришёл в 07:34:02 МСК и fenced старое исполнение. В target-репозитории за фактический интервал смены новых коммитов нет. Runtime loss подтверждён независимо; APFS semantics не изменялись.
+Checkpoint `4fd2e45508ac4ce7fb6753296cfa54604382bf0e`; runtime loss независимо подтверждён heartbeat/recovery anchors. Спекулятивных APFS mutation не было.
 
 ГДЕ ОСТАНОВИЛСЯ:
-Смена оборвалась сразу после прохождения report-contract barrier и входа в DIR-029 deeper read-only APFS discriminator work. Первый новый live-volume object/lookup/validation discriminator ещё не локализован.
+Read-only object-map/root-tree instrumentation ещё не реализована.
 
 СЛЕДУЮЩЕМУ:
-Продолжить DIR-029 с уже доказанной границы mountroot errno 79 / BSD root md0. Не повторять этот marker; получить следующий минимальный read-only API-visible discriminator конкретного APFS object/lookup/validation failure и только после причинного доказательства рассматривать bounded semantic repair.
+Реализовать только этот narrow DIR-029 probe и потребить focused/Windows/exact-E2E evidence до любой semantic repair.
 
 Оценка ОТК:
-Прогресс: 0/4
-Инженерное качество: 2/3
+Прогресс: 3/4
+Инженерное качество: 3/3
 Эффективность/фокус: 2/2
 Стартовая оценка и план: 1/1
-Итого: 5/10 — APPROVED
-Рейтинг: 1300 (+0)
+Итого: 9/10 — APPROVED
+Рейтинг: 1280 (+40)

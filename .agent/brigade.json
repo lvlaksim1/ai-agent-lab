@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "scoring_version": 2,
-  "shift_counter": 128,
-  "next_member_id": "petrovich",
+  "shift_counter": 129,
+  "next_member_id": "sanych",
   "rotation_order": ["petrovich","sanych","mikhalych","borisych","ivanych","fedorych","kuzmich","palych"],
   "members": [
-    {"id":"petrovich","display_name":"Петрович","rating":1240,"shifts_scored":16,"total_score":104,"average_score":6.50,"best_score":9,"last_score":5,"cheat_strikes":0},
+    {"id":"petrovich","display_name":"Петрович","rating":1280,"shifts_scored":17,"total_score":113,"average_score":6.65,"best_score":9,"last_score":9,"cheat_strikes":0},
     {"id":"sanych","display_name":"Саныч","rating":1300,"shifts_scored":16,"total_score":110,"average_score":6.88,"best_score":10,"last_score":8,"cheat_strikes":0},
     {"id":"mikhalych","display_name":"Михалыч","rating":1300,"shifts_scored":16,"total_score":110,"average_score":6.88,"best_score":10,"last_score":10,"cheat_strikes":0},
     {"id":"borisych","display_name":"Борисыч","rating":1230,"shifts_scored":16,"total_score":103,"average_score":6.44,"best_score":9,"last_score":5,"cheat_strikes":0},
