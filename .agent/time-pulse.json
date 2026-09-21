@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 585,
-  "purpose": "heartbeat",
+  "sequence": 586,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "engineering",
-  "activity_detail": "DIR-034 gate green; consumed E2E 35634992757 artifact. Extentref child-leaf evidence proves source 719 records across 7 leaves versus rebuilt 1360 across 13, with first record divergence and no identical key/value pairs; next discriminator is ownership/file-extent correlation before APFS mutation.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 363
 }
