@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 432,
-  "purpose": "heartbeat",
+  "sequence": 433,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Start-report Runtime Check 35549810991 succeeded; DIR-029 read-only localization found current evidence scanner selects the first parseable APSB by physical scan rather than resolving the active volume through NX object mappings.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 271
 }
