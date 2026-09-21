@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 548,
+  "sequence": 549,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "external_wait",
-  "activity_detail": "Polling exact start-report Agent Runtime Check run 35607865000 before target work.",
+  "activity_detail": "DIR-029 node-shape diagnostics committed at bbe4b974; polling Windows Build 35608022838 and exact E2E 35608022767.",
   "fence_generation": 340
 }
