@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 456,
+  "sequence": 457,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "kuzmich",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "working",
-  "activity_detail": "Reporting v2 exact-commit Runtime Check passed; beginning DIR-029 read-only APFS instrumentation work.",
+  "activity_detail": "Committed narrow read-only exact-E2E APFS failure marker instrumentation at target c1bd3925; waiting for its workflow run to materialize.",
   "fence_generation": 285
 }
