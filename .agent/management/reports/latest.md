@@ -1,12 +1,12 @@
-# Manager report — DEC-082
+# Manager report — DEC-083
 
 Object: `ios-research-runtime`
 Health: ORANGE
 Decision: KEEP_COURSE
 Active directive: DIR-029
 
-Manager attention was raised by two consecutive no-progress shifts. Review shows this is not a technical exhaustion signal: shift 144 passed the immutable Reporting v2 / exact Agent Runtime Check barrier, inherited the correct bounded evidence-first plan, and then ended by independently verified runtime loss before target mutation or new engineering evidence.
+Three shifts since the previous review produced real progress. Shift 147 was accepted APPROVED 9/10 with substantial progress, and target main remains at `a4897aa79186d0e492ca0e5f8fbdd0ad4338bcc9`, where bounded read-only APFS root-record instrumentation was added. The patch emits B-tree root records without changing APFS writer semantics.
 
-The APFS blocker is unchanged. The nearest untested discriminator remains read-only comparison of B-tree node `Flags`, `Level`, and `NumberOfKeys` for source/rebuilt extentref and snapmeta roots. Production should execute that discriminator, then focused Go tests, Windows gate and exact Windows E2E, and consume the first concrete difference before any APFS semantic mutation.
+Production is idle (NO_WORKER). The technical boundary is now specific: consume the exact E2E evidence from the landed instrumentation and compare source/rebuilt extentref root records to explain NumberOfKeys 7 vs 13. Any semantic repair must be justified by the first concrete record divergence.
 
-DIR-029 remains active. Health remains ORANGE. No owner decision, STOP, transfer, architecture change or proof-gate relaxation is justified. If a live shift reaches this boundary and the discriminator is technically unobtainable, return the exhausted route to management instead of repeating it speculatively.
+DIR-029 remains active; health remains ORANGE. No owner decision, STOP, transfer, architecture change or proof-gate relaxation is justified.
