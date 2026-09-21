@@ -22,7 +22,7 @@
     "last_seen_at": "2026-09-21T09:25:48Z",
     "stale_at": "2026-09-21T09:28:48Z",
     "activity_kind": "starting",
-    "activity_detail": "Claimed production lease for shift 138; preparing immutable start report before target work.",
+    "activity_detail": "Immutable start report published; awaiting exact report commit Runtime Check before target work.",
     "external_wait": null,
     "source": "lease_claim"
   },
@@ -33,8 +33,8 @@
   "reporting_policy_version": 2,
   "score_policy_version": 2,
   "shift_number": 138,
-  "shift_start_report_path": null,
-  "shift_start_report_commit": null,
+  "shift_start_report_path": ".agent/reports/starts/shift-138-sanych-ios-runtime-release-20260918-032.md",
+  "shift_start_report_commit": "40f40821b9cbe2d64c1592c4f99c158927030d43",
   "last_runtime_loss": {
     "role": "production",
     "event": "ios-runtime-release-20260918-032",
