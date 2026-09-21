@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029 authoritative live-volume resolution landed at target 667dc6a; Ramdisk Tool Windows succeeded and exact Windows E2E 35551527247 failed. Next evidence step is to consume that E2E artifact and localize the first live-volume object/lookup/validation/invariant failure before semantic mutation.",
+  "current_blocker_summary": "DIR-029 remains active: target 667dc6a has authoritative live-volume resolution; Windows gate 35551527270 succeeded and exact Windows E2E 35551527247 failed terminally. Consume that artifact and localize the first concrete live-volume APFS invariant failure before semantic mutation.",
   "last_scored_shift": 123,
   "last_otk_verdict": "APPROVED",
   "last_progress_class": "substantial",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T01:46:05Z"
+  "updated_at": "2026-09-21T02:25:12Z"
 }
