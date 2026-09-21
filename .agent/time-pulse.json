@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 527,
-  "purpose": "lease_claim",
+  "sequence": 528,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming production shift 141 and materializing inherited DIR-029/DIR-032 context before the Reporting v2 barrier.",
+  "activity_kind": "working",
+  "activity_detail": "Reporting v2 gate passed. Consumed exact E2E 35583468605 artifact: source/rebuilt extentref and snapmeta auxiliary-tree headers have expected subtype and valid Fletcher checksums; recording durable DIR-029 discriminator before deeper read-only lookup/content comparison.",
   "fence_generation": 326
 }
