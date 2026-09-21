@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 567,
-  "purpose": "lease_claim",
+  "sequence": 568,
+  "purpose": "heartbeat_refresh",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "lease_claim",
-  "activity_detail": "Claiming production lease for shift 149 under DIR-033.",
+  "activity_kind": "blocked_control_plane",
+  "activity_detail": "DIR-033 localized producer-state defect after exact report gate failure; target remains frozen.",
   "fence_generation": 352
 }
