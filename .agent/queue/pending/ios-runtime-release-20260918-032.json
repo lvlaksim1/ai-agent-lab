@@ -8,11 +8,11 @@
   "object_id": "ios-research-runtime",
   "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Continue DIR-029 from shift 131 evidence. Do not repeat generic mountroot/APSB/root-tree mapping analysis. Obtain read-only source/rebuilt live-volume extentrefTreeOid and snapMetaTreeOid evidence through their OMAP resolution and physical blocks; compare object header OID/XID/type/subtype and stored/computed Fletcher checksum. Localize the first concrete structural/lookup/validation mismatch, and only then perform a bounded repair if causality is proven.",
+  "goal": "Continue DIR-029 from shift 133. DIR-031 exact start-report gate is proven green. Do not repeat generic mountroot/APSB/root-tree mapping analysis. Implement only the missing read-only evidence path in apfs_evidence_output.go needed to obtain source/rebuilt live-volume extentrefTreeOid and snapMetaTreeOid through OMAP resolution and physical blocks; compare object header OID/XID/type/subtype and stored/computed Fletcher checksum. Localize the first concrete structural/lookup/validation mismatch, and only then perform a bounded repair if causality is proven.",
   "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not repeat generic mountroot errno 79 / BSD root md0, generic superblock analysis, or already-validated root-tree OMAP/header/checksum evidence.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
-  "predecessor_review_event_id": "review-shift-132-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-132-review-shift-132-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-132-review-shift-132-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 132,
-  "predecessor_worker_id": "borisych"
+  "predecessor_review_event_id": "review-shift-133-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-133-review-shift-133-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-133-review-shift-133-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 133,
+  "predecessor_worker_id": "ivanych"
 }
