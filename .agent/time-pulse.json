@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 559,
+  "sequence": 560,
   "purpose": "external_wait_poll",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
   "activity_kind": "external_wait",
-  "activity_detail": "Actively waiting for Ramdisk Tool Windows run 35613817140 on target commit a4897aa7.",
+  "activity_detail": "Ramdisk Tool Windows run 35613817140 remains in progress; target evidence patch checkpoint is durable.",
   "fence_generation": 346
 }
