@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 563,
-  "purpose": "lease_claim",
+  "sequence": 564,
+  "purpose": "heartbeat",
   "role": "production",
   "worker_id": "borisych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "starting",
-  "activity_detail": "Claiming shift 148 for DIR-029 exact E2E root-record evidence comparison.",
+  "activity_kind": "blocked_control_plane",
+  "activity_detail": "Mandatory exact start-report Agent Runtime Check 35620263457 failed at Validate agent runtime invariants; target mutation remains forbidden.",
   "fence_generation": 349
 }
