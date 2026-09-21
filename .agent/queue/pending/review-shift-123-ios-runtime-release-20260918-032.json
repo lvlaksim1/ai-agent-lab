@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-123-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-21T01:46:01Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "mikhalych",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 123,
+  "shift_started_at_utc": "2026-09-21T01:36:16Z",
+  "shift_completed_at_utc": "2026-09-21T01:38:26Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "ab7a0f669bdd3609a2085b4e115f5674fd912451",
+    "recovery_anchor_commit": "a20ecdcc4a88da5ed82f22d07ac2a2510103c6ab",
+    "start_report_path": ".agent/reports/starts/shift-123-mikhalych-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-123-mikhalych-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "b9658d06c14d4087a1ab0e626ca7649ebb53b851",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-21T01:38:26Z",
+      "heartbeat_stale_at_utc": "2026-09-21T01:41:26Z",
+      "heartbeat_anchor_commit": "ab7a0f669bdd3609a2085b4e115f5674fd912451",
+      "recovery_observed_at_utc": "2026-09-21T01:46:01Z",
+      "recovery_anchor_commit": "a20ecdcc4a88da5ed82f22d07ac2a2510103c6ab",
+      "fenced_generation": 275,
+      "activity_kind": "external_wait",
+      "activity_detail": "Target 667dc6a verification is running; Ramdisk Tool Windows 35551527270 and exact Windows E2E 35551527247 are in progress."
+    }
+  }
+}
