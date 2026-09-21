@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 506,
-  "purpose": "heartbeat",
-  "role": "otk",
-  "worker_id": "otk",
+  "sequence": 507,
+  "purpose": "lease_claim",
+  "role": "production",
+  "worker_id": "petrovich",
   "object_id": "ios-research-runtime",
-  "active_event": "review-shift-136-ios-runtime-release-20260918-032",
-  "activity_kind": "persisting",
-  "activity_detail": "Finalizing independent OTK verdict for recovered shift 136 atomically.",
-  "fence_generation": 314
+  "active_event": "ios-runtime-release-20260918-032",
+  "activity_kind": "starting",
+  "activity_detail": "Claiming production shift 137 for DIR-029 continuation.",
+  "fence_generation": 315
 }
