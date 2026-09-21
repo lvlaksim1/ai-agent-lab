@@ -6,13 +6,13 @@
   "priority": 90,
   "status": "pending",
   "object_id": "ios-research-runtime",
-  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-027"},
+  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-028"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Continue from shift 118 evidence: trace ramdisk packaging and explain the APFS-container-versus-md0 size mismatch observed after consuming exact Windows E2E 35539990359. Preserve corrected KeyOSVersion live-volume paddr/library-checksum path and landed LastModTime fix. Use the smallest evidence-backed repair or instrumentation, then run focused Windows verification and exact E2E to terminal evidence.",
-  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter metaCrypto fields other than already-corrected KeyOSVersion without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume mapping path."],
-  "predecessor_review_event_id": "review-shift-119-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-119-review-shift-119-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-119-review-shift-119-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 119,
-  "predecessor_worker_id": "kuzmich"
+  "goal": "Shift 120 terminal evidence disproved the suspected ramdisk packaging size mismatch: patched_dmg_bytes=192298899 and md0 capacity=192299008 bytes differ only by 109-byte rounding to the next 512-byte sector, while mountroot error 79 persists. Await/consume the manager course required by DIR-028 before broadening APFS semantics, then execute only the nearest evidence-backed step.",
+  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter adjacent MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not broaden APFS semantics before manager review of the DIR-028 negative packaging discriminator."],
+  "predecessor_review_event_id": "review-shift-120-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-120-review-shift-120-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-120-review-shift-120-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 120,
+  "predecessor_worker_id": "palych"
 }
