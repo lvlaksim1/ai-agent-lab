@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 515,
-  "purpose": "heartbeat",
+  "sequence": 516,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "sanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "external_wait",
-  "activity_detail": "Polled target CI: Ramdisk Tool 35583468564 remains in progress; continuing active evidence wait for commit 735c8e4d5ae8187ff813b57a36c664c1b015085f.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 318
 }
