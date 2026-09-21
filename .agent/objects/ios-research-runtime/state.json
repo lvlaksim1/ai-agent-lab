@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "DIR-029 resumed after DIR-031 gate SUCCESS. Next evidence boundary is read-only live-volume extentrefTreeOid/snapMetaTreeOid OMAP resolution to physical blocks with object header and Fletcher checksum comparison; no new APFS semantic mutation before a concrete mismatch is localized.",
-  "last_scored_shift": 134,
+  "current_blocker_summary": "DIR-029: obtain read-only live-volume extentrefTreeOid/snapMetaTreeOid OMAP resolution to physical blocks with object header and Fletcher checksum comparison; no new APFS semantic mutation before a concrete mismatch is localized.",
+  "last_scored_shift": 135,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "incremental",
+  "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T07:26:29Z"
+  "updated_at": "2026-09-21T07:46:49Z"
 }
