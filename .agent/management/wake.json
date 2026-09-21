@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "attention": true,
+  "attention": false,
   "generation": 65,
-  "reasons": ["DIR-028_PACKAGING_NEGATIVE_DISCRIMINATOR"],
-  "updated_at": "2026-09-21T00:12:38Z"
+  "reasons": [],
+  "updated_at": "2026-09-21T00:22:05Z"
 }
