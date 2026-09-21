@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 528,
-  "purpose": "heartbeat",
+  "sequence": 529,
+  "purpose": "stale_recovery_probe",
   "role": "production",
   "worker_id": "ivanych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Reporting v2 gate passed. Consumed exact E2E 35583468605 artifact: source/rebuilt extentref and snapmeta auxiliary-tree headers have expected subtype and valid Fletcher checksums; recording durable DIR-029 discriminator before deeper read-only lookup/content comparison.",
+  "activity_kind": "recovery_probe",
+  "activity_detail": "Checking exact GitHub-anchored heartbeat freshness before the next production clock.",
   "fence_generation": 326
 }
