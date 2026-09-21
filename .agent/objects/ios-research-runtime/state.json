@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "ORANGE",
   "current_phase": "boot-debugging",
-  "current_blocker_summary": "Control-plane gate blocks production: shift 124 emitted heartbeat.activity_kind=lease_claim, but the mandatory Agent Runtime Check validator rejects that producer-authored value. DIR-030 requires a narrow producer/validator contract repair and successful runtime check before resuming DIR-029 APFS localization.",
-  "last_scored_shift": 124,
+  "current_blocker_summary": "DIR-030 control-plane gate is proven restored by Agent Runtime Check 35556892023 SUCCESS. DIR-029 remains active: exact Windows E2E 35551527247 fails during provisioning/root-shell proof; artifact metadata is known, but the first live-volume APFS object/lookup/validation invariant still requires read-only evidence acquisition.",
+  "last_scored_shift": 125,
   "last_otk_verdict": "APPROVED",
-  "last_progress_class": "none",
+  "last_progress_class": "incremental",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T03:01:39Z"
+  "updated_at": "2026-09-21T03:23:47Z"
 }

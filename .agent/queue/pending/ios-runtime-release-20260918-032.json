@@ -6,13 +6,13 @@
   "priority": 90,
   "status": "pending",
   "object_id": "ios-research-runtime",
-  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-030"},
+  "source": {"kind":"continuation","from_event":"ios-runtime-release-20260918-032","directive":"DIR-029"},
   "target": {"repository":"lvlaksim1/iOS-Research-Runtime","ref":"main"},
-  "goal": "Execute DIR-030 first: repair the narrow production-claim activity-kind producer/validator contract and obtain a successful authoritative Agent Runtime Check without weakening invariants. Only after that gate succeeds, resume DIR-029 from target 667dc6aeb273270dcb0798eecaf027b97ceffd85: consume exact Windows E2E 35551527247 and its artifact, localize the first failing live-volume APFS object/lookup/validation/invariant before semantic mutation, and continue the bounded verification chain.",
-  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","Do not touch iOS-Research-Runtime target work until DIR-030 control-plane gate is proven successful.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter adjacent MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform further APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
-  "predecessor_review_event_id": "review-shift-124-ios-runtime-release-20260918-032",
-  "predecessor_review_path": ".agent/reviews/shift-124-review-shift-124-ios-runtime-release-20260918-032.md",
-  "predecessor_otk_report_path": ".agent/reports/otk/shift-124-review-shift-124-ios-runtime-release-20260918-032.md",
-  "predecessor_shift_number": 124,
-  "predecessor_worker_id": "borisych"
+  "goal": "Continue DIR-029 from target 667dc6aeb273270dcb0798eecaf027b97ceffd85 and exact Windows E2E 35551527247. Continue the evidence-acquisition ladder: obtain the relevant failure fragment through available logs/durable diagnostics or add narrow read-only CI instrumentation that surfaces the first failing live-volume APFS object/lookup/validation/invariant through an API-visible route. Only after that discriminator is proven may a bounded semantic repair be considered, followed by focused tests, Windows gate and exact Windows E2E.",
+  "constraints": ["Do not weaken runtime/reporting/heartbeat/lease/fencing/OTK proof gates.","DIR-030 is complete; preserve its proven producer/validator contract.","Do not alter XID/checkpoint semantics without new discriminating evidence.","Do not alter adjacent MetaCrypto fields without new discriminating evidence.","Preserve the landed LastModTime fix and corrected live-volume KeyOSVersion mapping/checksum path.","Do not perform further APFS semantic or packaging mutation before read-only evidence localizes a bounded causal defect."],
+  "predecessor_review_event_id": "review-shift-125-ios-runtime-release-20260918-032",
+  "predecessor_review_path": ".agent/reviews/shift-125-review-shift-125-ios-runtime-release-20260918-032.md",
+  "predecessor_otk_report_path": ".agent/reports/otk/shift-125-review-shift-125-ios-runtime-release-20260918-032.md",
+  "predecessor_shift_number": 125,
+  "predecessor_worker_id": "ivanych"
 }
