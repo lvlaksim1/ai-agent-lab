@@ -1,14 +1,14 @@
-# Manager report — DEC-076
+# Manager report — DEC-077
 
 Object: `ios-research-runtime`
 Health: ORANGE
-Decision: KEEP_COURSE
-Active directive: DIR-029
+Decision: CHANGE_COURSE
+Active directive: DIR-031
 
-Production is currently idle after OTK finalized shift 129. The last scored shift is APPROVED with substantial progress, and the investigation has narrowed the next causal discriminator to the live-volume OMAP -> root-tree object boundary.
+Production is idle after shift 132. The APFS technical investigation itself remains convergent under DIR-029, with the next evidence boundary already narrowed to read-only extentref/snapshot-metadata tree mapping/header/checksum validation.
 
-The project is still blocked at Darwin/APFS mountroot error 79, so health remains ORANGE and the release Definition of Done is not yet reached. But the last three shifts have produced useful narrowing rather than speculative APFS mutations.
+Shift 132 could not reach that work because its mandatory exact start-report Agent Runtime Check `35566785730` failed in `Validate agent runtime invariants` for commit `55f29e4c5560511a18e8add6bb80f18bf70e6e3b`. This is now the immediate blocker.
 
-Course therefore stays unchanged. The next production shift should implement and consume the narrow read-only resolution of live-volume OMAP -> root-tree OID -> physical block, validate object header/checksum/type/XID, and permit a semantic APFS correction only if that evidence identifies a bounded causal defect.
+DIR-031 therefore temporarily prioritizes the control-plane gate: identify the exact rejected invariant, make only the smallest compatible correction without weakening any safety/proof invariant, and obtain an authoritative successful Agent Runtime Check. After that proof, production resumes DIR-029 at the existing extentref/snapshot-metadata discriminator rather than reopening prior APFS hypotheses.
 
-No owner decision, STOP, transfer, or new directive is required.
+No owner decision, STOP or transfer is required.
