@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "review-shift-151-ios-runtime-release-20260918-032",
+  "created_at": "2026-09-21T17:58:02Z",
+  "type": "supervisor-review",
+  "priority": 100,
+  "status": "pending",
+  "object_id": "ios-research-runtime",
+  "source": {
+    "kind": "runtime_loss_recovery",
+    "production_event": "ios-runtime-release-20260918-032"
+  },
+  "worker_id": "kuzmich",
+  "shift_policy_version": 4,
+  "reporting_policy_version": 2,
+  "score_policy_version": 2,
+  "otk_finalize_policy_version": 1,
+  "shift_number": 151,
+  "shift_started_at_utc": "2026-09-21T17:52:26Z",
+  "shift_completed_at_utc": "2026-09-21T17:54:59Z",
+  "target": {
+    "repository": "lvlaksim1/iOS-Research-Runtime",
+    "ref": "main"
+  },
+  "continuation_id": "ios-runtime-release-20260918-032",
+  "evidence": {
+    "journal_path": ".agent/journal/ios-runtime-release-20260918-032.md",
+    "heartbeat_anchor_commit": "b08d859634c0a28dec7f6f4095487064345361df",
+    "recovery_anchor_commit": "8c1c6cb301cab1beb3a0321ef564220614965d88",
+    "start_report_path": ".agent/reports/starts/shift-151-kuzmich-ios-runtime-release-20260918-032.md"
+  },
+  "start_report_path": ".agent/reports/starts/shift-151-kuzmich-ios-runtime-release-20260918-032.md",
+  "start_report_commit": "46a603f1ed35db9c7853c2e30f553ed0f5122703",
+  "stop": {
+    "kind": "runtime_loss",
+    "actionable_next_step": true,
+    "reason": "Verified GitHub-anchored heartbeat became stale before the next production clock.",
+    "runtime_loss_evidence": {
+      "worker_last_seen_at_utc": "2026-09-21T17:54:59Z",
+      "heartbeat_stale_at_utc": "2026-09-21T17:57:59Z",
+      "heartbeat_anchor_commit": "b08d859634c0a28dec7f6f4095487064345361df",
+      "recovery_observed_at_utc": "2026-09-21T17:58:02Z",
+      "recovery_anchor_commit": "8c1c6cb301cab1beb3a0321ef564220614965d88",
+      "fenced_generation": 358,
+      "activity_kind": "external_wait",
+      "activity_detail": "Checkpointed evidence-only child-leaf instrumentation at target 3b0f5648; waiting for exact target CI."
+    }
+  }
+}
