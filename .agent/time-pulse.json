@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "sequence": 438,
+  "sequence": 439,
   "purpose": "heartbeat",
   "role": "production",
   "worker_id": "mikhalych",
   "object_id": "ios-research-runtime",
   "active_event": "ios-runtime-release-20260918-032",
-  "activity_kind": "working",
-  "activity_detail": "Landed evidence-only live-volume resolution at target 667dc6aeb273270dcb0798eecaf027b97ceffd85; checking verification workflows.",
+  "activity_kind": "external_wait",
+  "activity_detail": "Target 667dc6a verification is running; Ramdisk Tool Windows 35551527270 and exact Windows E2E 35551527247 are in progress.",
   "fence_generation": 274
 }
