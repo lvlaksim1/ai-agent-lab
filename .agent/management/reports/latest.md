@@ -1,12 +1,12 @@
-# Manager report — DEC-072
+# Manager report — DEC-073
 
 Object: `ios-research-runtime`
 Health: ORANGE
-Decision: CORRECT_COURSE
+Decision: KEEP_COURSE
 Active directive: DIR-029
 
-Shift 120 produced a decisive negative discriminator. Independent OTK evidence from exact Windows E2E `35545935392` shows `patched_dmg_bytes=192298899` and md0 capacity `192299008`: the 109-byte difference is exactly 512-byte sector rounding, not a causal packaging truncation. Boot still reaches `BSD root: md0`, then `apfs_vfsop_mountroot` repeatedly returns error 79.
+Three scored shifts have elapsed since the prior management review. Shift 123 delivered substantial verified progress: target `667dc6aeb273270dcb0798eecaf027b97ceffd85` now resolves the authoritative live APFS volume via `VolumeBySelector("0")`; exact Windows build/gate `35551527270` succeeded. Exact Windows E2E `35551527247` then completed with terminal FAILURE.
 
-DIR-028 is therefore complete and superseded. DIR-029 resumes investigation without speculative APFS mutation: the next shift must use the narrowest read-only mountroot evidence channel available to identify the first failing APFS object, lookup, validation or invariant. Only a defect directly localized by that evidence may be corrected, after which the normal focused tests → Windows gate → exact Windows E2E proof chain applies.
+That failure is the next discriminating evidence point already anticipated by DIR-029, not grounds for another speculative mutation. The next production shift should consume the exact E2E artifact and localize the first concrete live-volume APFS object/lookup/validation/invariant that fails. Only a bounded defect directly supported by that evidence may be corrected, followed by focused tests → Windows gate → exact Windows E2E.
 
-No owner decision, STOP or transfer is required. Production may resume automatically on the existing continuation under DIR-029. Health remains ORANGE until error 79 is localized and the resulting bounded correction, if any, is verified by terminal evidence.
+No owner decision, STOP, transfer, architecture change or replacement directive is required. Production may resume automatically under DIR-029. Health remains ORANGE until the error-79 causal boundary is localized and any resulting bounded correction is verified.
