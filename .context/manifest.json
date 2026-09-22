@@ -4,8 +4,8 @@
   "repository": "lvlaksim1/ai-agent-lab",
   "default_branch": "main",
   "authoritative_context_branch": "work-webhook-test",
-  "context_version": "1.3.0",
-  "installed_from": "Context Capsule Core v1.3.0",
+  "context_version": "1.3.1",
+  "installed_from": "Context Capsule Core v1.3.1",
   "last_context_update": "2026-09-19T12:59:13Z",
   "last_session_id": "CHAT-20260919-project-audit-p0-stabilization",
   "active_handoff": ".context/handoffs/latest.md",
@@ -84,5 +84,5 @@
     "volatile_runtime_excluded": true,
     "atomic_git_publication": true
   },
-  "updated_at": "2026-09-20"
+  "updated_at": "2026-09-22"
 }
