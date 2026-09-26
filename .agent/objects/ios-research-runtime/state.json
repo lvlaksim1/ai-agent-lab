@@ -4,12 +4,12 @@
   "status": "ACTIVE",
   "health": "RED",
   "current_phase": "control-plane-fencing-repair",
-  "current_blocker_summary": "Confirmed post-fence zombie write: recovered shift-154 execution committed fde4f271641096f20249686f0bd730c2d1a7241f after recovery/fence anchor d8681f004c84d1536c5c1cc65a557aa0a45c9c73. DIR-035 blocks new production until fail-closed fencing is proven; DIR-029 evidence is preserved for later revalidation.",
+  "current_blocker_summary": "DIR-035 control-plane remediation is authorized as the next shift; the fencing regression and Agent Runtime Check must pass before returning to DIR-029.",
   "last_scored_shift": 154,
   "last_otk_verdict": "CORRECTED",
   "last_progress_class": "none",
   "last_event": "ios-runtime-release-20260918-032",
   "checkpoint_generation": 6,
   "last_checkpoint_at": "2026-09-20T14:18:20Z",
-  "updated_at": "2026-09-21T19:57:58Z"
+  "updated_at": "2026-09-26T12:46:52Z"
 }
