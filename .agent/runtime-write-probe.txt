@@ -1,0 +1,3 @@
+runtime_write_probe
+source=current_interactive_chat
+purpose=verify_github_write_path
