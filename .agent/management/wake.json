@@ -1,7 +1,10 @@
 {
   "schema_version": 1,
-  "attention": false,
-  "generation": 80,
-  "reasons": [],
-  "updated_at": "2026-09-21T19:57:58Z"
+  "attention": true,
+  "generation": 81,
+  "reasons": [
+    "owner_requested_resume",
+    "DIR-035_fencing_repair"
+  ],
+  "updated_at": "2026-09-26"
 }
