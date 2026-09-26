@@ -5,21 +5,23 @@
   "project_name": "iOS-Research-Runtime",
   "target_ref": "main",
   "owner_goal": "Deliver the verified Windows-native v0.1.0 release defined by the object mission.",
-  "definition_of_done": ["Use the authoritative object mission Definition of Done"],
+  "definition_of_done": [
+    "Use the authoritative object mission Definition of Done"
+  ],
   "current_phase": "control-plane-fencing-repair",
   "health": "RED",
-  "current_blocker_summary": "Confirmed zombie-write fencing defect: shift-154 recovery advanced the fence at d8681f0 (19:46:02Z), yet the fenced execution committed checkpoint fde4f27 at 19:46:15Z. New production shifts must not start until stale-worker writes fail closed and the regression/runtime gates are green.",
+  "current_blocker_summary": "DIR-035 remediation is now eligible as the next constrained production shift. iOS product mutation remains paused until fail-closed fencing regression and Agent Runtime Check are green.",
   "shifts_since_manager_review": 0,
   "consecutive_no_progress": 1,
   "consecutive_corrected": 1,
   "last_otk_verdict": "CORRECTED",
   "last_progress_class": "none",
   "last_scored_shift": 154,
-  "manager_review_count": 86,
-  "last_manager_review_at": "2026-09-21T19:57:58Z",
-  "last_manager_decision": "DEC-087: CHANGE_COURSE; close confirmed post-fence zombie-write path before production resumes",
+  "manager_review_count": 87,
+  "last_manager_review_at": "2026-09-26T12:46:52Z",
+  "last_manager_decision": "DEC-088: CHANGE_COURSE; authorize constrained DIR-035 fencing remediation shift",
   "active_directive": "DIR-035",
   "owner_decision_required": false,
-  "stop_production": true,
-  "updated_at": "2026-09-21T19:57:58Z"
+  "stop_production": false,
+  "updated_at": "2026-09-26T12:46:52Z"
 }
