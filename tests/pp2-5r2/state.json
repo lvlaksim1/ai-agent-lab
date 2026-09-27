@@ -1,10 +1,10 @@
 {
   "experiment": "PP2/5R-2",
   "schema_version": 1,
-  "status": "ACTIVE",
+  "status": "COMPLETED",
   "generation": 2,
   "owner": "B",
   "owner_runtime": "B-g2",
-  "phase": "RECOVERY_TAKEOVER",
-  "last_transition": "STALE_TAKEOVER"
+  "phase": "NORMAL_COMPLETE",
+  "last_transition": "NORMAL_COMPLETE"
 }
