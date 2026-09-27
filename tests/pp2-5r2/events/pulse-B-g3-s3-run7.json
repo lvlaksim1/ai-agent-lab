@@ -1,0 +1,1 @@
+{"event":"PULSE","slot":"B","generation":3,"sequence":3,"register_updated_at":"2026-09-27T23:34:25.640304+00:00","register_update_status":"SUCCESS","osb_first":0,"osb_retry_success":0,"osb_retry_osb":0,"other_write_error":0,"cadence_violation":2,"measured_interval_seconds":6.38931}
