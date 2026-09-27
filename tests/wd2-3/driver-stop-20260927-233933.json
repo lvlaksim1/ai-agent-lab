@@ -1,0 +1,1 @@
+{"experiment":"WD2/3","event":"DRIVER_STOP","runtime_timestamp":"2026-09-27T23:39:33+03:00","renewal_intentionally_stopped_after_cycle":6,"last_watchdog_schedule":"DTSTART:20260927T204223Z","observation":"watchdog task reported last_run_time 2026-09-27T20:37:08.048383Z during active renewals; this is anomalous and retained for analysis"}
