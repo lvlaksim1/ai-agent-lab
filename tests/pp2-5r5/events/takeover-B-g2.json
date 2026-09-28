@@ -1,0 +1,9 @@
+{
+  "experiment": "PP2/5R-5",
+  "event": "TAKEOVER",
+  "old_generation": 1,
+  "old_owner": "A",
+  "new_generation": 2,
+  "new_owner": "B",
+  "new_owner_runtime": "B-g2"
+}
