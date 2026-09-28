@@ -1,14 +1,14 @@
 {
   "experiment": "PP2/5R-4",
   "schema_version": 1,
-  "status": "ACTIVE",
+  "status": "ABORTED",
   "generation": 1,
-  "owner": "A",
-  "owner_runtime": "A-g1",
-  "phase": "SILENT_HOLD_RECOVERY",
-  "last_transition": "RECOVERY_RESUME_FENCING",
+  "owner": "OPERATOR_ABORT",
+  "owner_runtime": null,
+  "phase": "ABORTED_BY_OPERATOR",
+  "last_transition": "OPERATOR_ABORT_AFTER_STALLED_TAKEOVER",
   "guard_result": "PASS",
-  "fencing_result": null,
+  "fencing_result": "NOT_PROVEN_IN_R4",
   "osb_probe_result": "OSB_RETRY_SUCCESS",
-  "continuation_note": "Original A-g1 run reached Pulse Register seq5 SILENT_HOLD, then ended before state transition/B arming. Guard and OSB control were already proven; this continuation resumes only the unfinished fencing phase."
+  "continuation_note": "PP2/5R-4 was stopped because B takeover did not occur and A-g1 continued its wait loop beyond the intended stop condition. Any FENCED_OLD_RUNTIME telemetry produced after this operator abort is NOT evidence of takeover fencing."
 }
