@@ -2,10 +2,10 @@
   "experiment": "PP2/5R-5",
   "schema_version": 1,
   "status": "ACTIVE",
-  "generation": 1,
-  "owner": "A",
-  "owner_runtime": "A-g1",
-  "phase": "OWNER_ACTIVE",
-  "last_transition": "A_CLAIM",
-  "fencing_result": null
+  "generation": 2,
+  "owner": "B",
+  "owner_runtime": "B-g2",
+  "phase": "TAKEOVER",
+  "last_transition": "FORCED_TAKEOVER_COMPONENT_TEST",
+  "fencing_result": "WAITING_FOR_OLD_A"
 }
