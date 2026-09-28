@@ -5,9 +5,10 @@
   "generation": 1,
   "owner": "A",
   "owner_runtime": "A-g1",
-  "phase": "GUARD_TEST",
-  "last_transition": "NORMAL_CLAIM",
-  "guard_result": null,
+  "phase": "SILENT_HOLD_RECOVERY",
+  "last_transition": "RECOVERY_RESUME_FENCING",
+  "guard_result": "PASS",
   "fencing_result": null,
-  "osb_probe_result": null
+  "osb_probe_result": "OSB_RETRY_SUCCESS",
+  "continuation_note": "Original A-g1 run reached Pulse Register seq5 SILENT_HOLD, then ended before state transition/B arming. Guard and OSB control were already proven; this continuation resumes only the unfinished fencing phase."
 }
