@@ -1,0 +1,40 @@
+name: SRRM Reaction Poller Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-reaction-poller-probe.yml'
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Poll PR reaction and self-reset
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: "1"
+          OWNER_LOGIN: "lvlaksim1"
+          REACTION: "eyes"
+        shell: bash
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 36); do
+            json="$(gh api -H "Accept: application/vnd.github+json" "repos/$REPO/issues/$PR_NUMBER/reactions")"
+            rid="$(jq -r --arg u "$OWNER_LOGIN" --arg r "$REACTION" '.[] | select(.user.login==$u and .content==$r) | .id' <<<"$json" | head -n1)"
+            if [[ -n "$rid" ]]; then
+              echo "REACTION_DETECTED id=$rid poll=$i utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              gh api --method DELETE -H "Accept: application/vnd.github+json" "repos/$REPO/issues/$PR_NUMBER/reactions/$rid"
+              echo "REACTION_REMOVED id=$rid utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "REACTION_NOT_DETECTED"
+          exit 1
