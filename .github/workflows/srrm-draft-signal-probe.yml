@@ -1,0 +1,25 @@
+name: SRRM Draft Signal Probe
+
+on:
+  pull_request_target:
+    types: [converted_to_draft]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  signal-and-reset:
+    if: github.event.pull_request.number == 1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Record signal
+        run: |
+          echo "SRRM_DRAFT_SIGNAL=1"
+          echo "UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+      - name: Reset PR to ready
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr ready "$NUMBER" --repo "$REPO"
