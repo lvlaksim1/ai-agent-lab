@@ -1,0 +1,22 @@
+name: SRRM Branch Signal Probe
+
+on:
+  create:
+
+permissions:
+  contents: write
+
+jobs:
+  signal-and-reset:
+    if: github.ref_type == 'branch' && github.ref == 'srrm-direct-signal'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Record signal
+        run: |
+          echo "SRRM_BRANCH_SIGNAL=srrm-direct-signal"
+          echo "UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+      - name: Delete signal branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: gh api --method DELETE "repos/$REPO/git/refs/heads/srrm-direct-signal"
