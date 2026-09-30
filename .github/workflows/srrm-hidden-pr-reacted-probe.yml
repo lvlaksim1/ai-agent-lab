@@ -1,0 +1,14 @@
+name: SRRM Hidden PR Reacted Probe
+
+on:
+  pull_request_target:
+    types: [reacted]
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "EVENT_NAME=${{ github.event_name }}"
+          echo "ACTION=${{ github.event.action }}"
+          cat "$GITHUB_EVENT_PATH"
