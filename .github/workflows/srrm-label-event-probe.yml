@@ -1,0 +1,15 @@
+name: SRRM Label Event Probe
+
+on:
+  pull_request_target:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    if: github.event.pull_request.number == 1 && github.event.label.name == 'documentation'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "SRRM_LABEL_EVENT_OK"
