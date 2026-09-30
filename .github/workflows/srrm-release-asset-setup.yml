@@ -1,0 +1,28 @@
+name: SRRM Release Asset Setup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-release-asset-setup.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create tiny transport asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'SRRM_PULSE\n' > srrm-pulse.txt
+          if gh release view srrm-transport-probe --repo "$REPO" >/dev/null 2>&1; then
+            gh release upload srrm-transport-probe srrm-pulse.txt --repo "$REPO" --clobber
+          else
+            gh release create srrm-transport-probe srrm-pulse.txt --repo "$REPO" --title "SRRM transport probe" --notes "Temporary transport research asset."
+          fi
