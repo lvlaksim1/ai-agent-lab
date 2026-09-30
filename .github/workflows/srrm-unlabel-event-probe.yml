@@ -1,0 +1,26 @@
+name: SRRM Unlabel Event Probe
+
+on:
+  pull_request_target:
+    types: [unlabeled]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  route-and-rearm:
+    if: github.event.pull_request.number == 1 && (github.event.label.name == 'documentation' || github.event.label.name == 'bug' || github.event.label.name == 'enhancement' || github.event.label.name == 'question')
+    name: signal-${{ github.event.label.name }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Record command
+        run: echo "SRRM_COMMAND=${{ github.event.label.name }}"
+      - name: Rearm command label
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+          LABEL: ${{ github.event.label.name }}
+        run: gh pr edit "$NUMBER" --repo "$REPO" --add-label "$LABEL"
