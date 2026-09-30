@@ -1,0 +1,18 @@
+name: SRRM Hidden Reacted Activities Probe
+
+on:
+  issues:
+    types: [reacted]
+  issue_comment:
+    types: [reacted]
+  pull_request_review_comment:
+    types: [reacted]
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "EVENT_NAME=${{ github.event_name }}"
+          echo "ACTION=${{ github.event.action }}"
+          cat "$GITHUB_EVENT_PATH"
