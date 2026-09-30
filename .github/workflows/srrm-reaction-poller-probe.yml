@@ -14,28 +14,37 @@ permissions:
 jobs:
   poll:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
-      - name: Poll PR reaction and self-reset
+      - name: Receive and self-reset PR reactions
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           PR_NUMBER: "1"
           OWNER_LOGIN: "lvlaksim1"
-          REACTION: "eyes"
+          TARGET_COUNT: "16"
         shell: bash
         run: |
           set -euo pipefail
-          for i in $(seq 1 120); do
+          count=0
+          for poll in $(seq 1 300); do
             json="$(gh api -H "Accept: application/vnd.github+json" "repos/$REPO/issues/$PR_NUMBER/reactions")"
-            rid="$(jq -r --arg u "$OWNER_LOGIN" --arg r "$REACTION" '.[] | select(.user.login==$u and .content==$r) | .id' <<<"$json" | head -n1)"
-            if [[ -n "$rid" ]]; then
-              echo "REACTION_DETECTED id=$rid poll=$i utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-              gh api --method DELETE -H "Accept: application/vnd.github+json" "repos/$REPO/issues/$PR_NUMBER/reactions/$rid"
-              echo "REACTION_REMOVED id=$rid utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-              exit 0
+            mapfile -t rows < <(jq -r --arg u "$OWNER_LOGIN" '.[] | select(.user.login==$u) | [.id,.content] | @tsv' <<<"$json")
+            if (( ${#rows[@]} > 0 )); then
+              for row in "${rows[@]}"; do
+                rid="${row%%$'\t'*}"
+                reaction="${row#*$'\t'}"
+                count=$((count + 1))
+                echo "SIGNAL_DETECTED seq=$count reaction=$reaction id=$rid poll=$poll utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+                gh api --method DELETE -H "Accept: application/vnd.github+json" "repos/$REPO/issues/$PR_NUMBER/reactions/$rid"
+                echo "SIGNAL_RESET seq=$count reaction=$reaction id=$rid utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              done
+              if (( count >= TARGET_COUNT )); then
+                echo "TARGET_REACHED count=$count"
+                exit 0
+              fi
             fi
-            sleep 5
+            sleep 3
           done
-          echo "REACTION_NOT_DETECTED"
+          echo "TIMEOUT count=$count"
           exit 1
