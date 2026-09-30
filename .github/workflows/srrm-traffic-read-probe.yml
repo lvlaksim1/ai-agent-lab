@@ -1,0 +1,28 @@
+name: SRRM Traffic Read Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-traffic-read-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  read-traffic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read clone and view traffic
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "CLONES_BEGIN"
+          gh api "repos/$REPO/traffic/clones"
+          echo "CLONES_END"
+          echo "VIEWS_BEGIN"
+          gh api "repos/$REPO/traffic/views"
+          echo "VIEWS_END"
