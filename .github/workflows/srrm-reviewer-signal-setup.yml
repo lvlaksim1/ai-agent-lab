@@ -1,0 +1,39 @@
+name: SRRM Reviewer Signal Setup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-reviewer-signal-setup.yml'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  create-standing-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Create bot-authored standing PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch="srrm-reviewer-signal"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$branch"
+          printf 'standing SRRM reviewer signal\n' > .srrm-reviewer-signal-anchor
+          git add .srrm-reviewer-signal-anchor
+          if ! git diff --cached --quiet; then
+            git commit -m "test: add SRRM reviewer signal anchor"
+          fi
+          git push --force-with-lease origin "$branch"
+          if ! gh pr list --head "$branch" --state open --json number --jq '.[0].number' | grep -q .; then
+            gh pr create --base main --head "$branch" --title "SRRM reviewer signal channel" --body "Temporary standing PR for direct Scheduled Runtime → GitHub reviewer-signal experiments."
+          fi
