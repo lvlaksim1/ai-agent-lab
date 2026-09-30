@@ -1,0 +1,36 @@
+name: SRRM Review Signal Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-review-signal-probe.yml'
+  pull_request_review:
+    types: [dismissed]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  signal:
+    if: github.event_name == 'push' || github.event.pull_request.number == 1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Record event
+        run: |
+          echo "EVENT=${{ github.event_name }}"
+          echo "ACTION=${{ github.event.action }}"
+          echo "UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+      - name: Seed next standing review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api --method POST \
+            -H "Accept: application/vnd.github+json" \
+            "repos/$REPO/pulls/1/reviews" \
+            -f body='SRRM_STANDING_REVIEW_SIGNAL' \
+            -f event='COMMENT'
