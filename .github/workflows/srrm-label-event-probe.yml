@@ -6,10 +6,19 @@ on:
 
 permissions:
   contents: read
+  issues: write
+  pull-requests: write
 
 jobs:
-  observe:
+  observe-and-reset:
     if: github.event.pull_request.number == 1 && github.event.label.name == 'documentation'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "SRRM_LABEL_EVENT_OK"
+      - name: Record signal
+        run: echo "SRRM_LABEL_EVENT_OK"
+      - name: Reset signal label
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.pull_request.number }}
+        run: gh api -X DELETE "repos/$REPO/issues/$NUMBER/labels/documentation"
