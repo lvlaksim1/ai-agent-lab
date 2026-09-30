@@ -33,4 +33,4 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             "repos/$REPO/pulls/1/reviews" \
             -f body='SRRM_STANDING_REVIEW_SIGNAL' \
-            -f event='COMMENT'
+            -f event='REQUEST_CHANGES'
