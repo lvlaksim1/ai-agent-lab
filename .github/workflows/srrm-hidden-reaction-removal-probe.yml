@@ -1,0 +1,22 @@
+name: SRRM Hidden Reaction Removal Probe
+
+on:
+  pull_request:
+    types: [unreacted, reaction_created, reaction_deleted, reaction_removed]
+  pull_request_target:
+    types: [unreacted, reaction_created, reaction_deleted, reaction_removed]
+  issues:
+    types: [unreacted, reaction_created, reaction_deleted, reaction_removed]
+  issue_comment:
+    types: [unreacted, reaction_created, reaction_deleted, reaction_removed]
+  pull_request_review_comment:
+    types: [unreacted, reaction_created, reaction_deleted, reaction_removed]
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "EVENT_NAME=${{ github.event_name }}"
+          echo "ACTION=${{ github.event.action }}"
+          cat "$GITHUB_EVENT_PATH"
