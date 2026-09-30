@@ -1,0 +1,14 @@
+name: SRRM Raw Reaction Trigger Probe
+
+on:
+  reaction:
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump event
+        run: |
+          echo "EVENT_NAME=${{ github.event_name }}"
+          echo "ACTION=${{ github.event.action }}"
+          cat "$GITHUB_EVENT_PATH"
