@@ -2,21 +2,35 @@ name: SRRM Branch Signal Probe
 
 on:
   create:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-branch-signal-probe.yml'
 
 permissions:
   contents: write
 
 jobs:
   signal-and-reset:
-    if: github.ref_type == 'branch' && github.ref == 'srrm-direct-signal'
+    if: github.event_name == 'push' || (github.event.ref_type == 'branch' && github.event.ref == 'srrm-direct-signal')
     runs-on: ubuntu-latest
     steps:
       - name: Record signal
+        if: github.event_name == 'create'
         run: |
           echo "SRRM_BRANCH_SIGNAL=srrm-direct-signal"
           echo "UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-      - name: Delete signal branch
+      - name: Delete signal branch if present
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
-        run: gh api --method DELETE "repos/$REPO/git/refs/heads/srrm-direct-signal"
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(gh api "repos/$REPO/git/ref/heads/srrm-direct-signal" --jq '.object.sha' 2>/dev/null || true)"
+          if [[ -n "$sha" ]]; then
+            gh api --method DELETE "repos/$REPO/git/refs/heads/srrm-direct-signal"
+            echo "BRANCH_RESET=1"
+          else
+            echo "BRANCH_RESET=0"
+          fi
