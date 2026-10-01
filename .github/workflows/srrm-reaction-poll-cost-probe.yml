@@ -1,0 +1,92 @@
+name: SRRM Reaction Poll Cost Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-reaction-poll-cost-probe.yml'
+
+permissions:
+  issues: read
+  pull-requests: read
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Poll PR reactions with ETag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: "1"
+          OWNER_LOGIN: "lvlaksim1"
+          INTERVAL_SECONDS: "1"
+          TARGET_REACTION: "eyes"
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://api.github.com/repos/$REPO/issues/$PR_NUMBER/reactions?per_page=100"
+          etag=""
+          polls=0
+          n200=0
+          n304=0
+          first_used=""
+          first_remaining=""
+          last_used=""
+          last_remaining=""
+          deadline=$(( $(date +%s) + 90 ))
+
+          while (( $(date +%s) < deadline )); do
+            polls=$((polls+1))
+            rm -f /tmp/h /tmp/b
+            args=(
+              -sS -D /tmp/h -o /tmp/b -w '%{http_code}'
+              -H "Authorization: Bearer $GH_TOKEN"
+              -H "Accept: application/vnd.github+json"
+              -H "X-GitHub-Api-Version: 2022-11-28"
+            )
+            if [[ -n "$etag" ]]; then
+              args+=( -H "If-None-Match: $etag" )
+            fi
+            code="$(curl "${args[@]}" "$url")"
+            new_etag="$(awk 'BEGIN{IGNORECASE=1} /^etag:/ {sub(/^[^:]*:[[:space:]]*/,""); sub(/\r$/,""); print; exit}' /tmp/h)"
+            used="$(awk 'BEGIN{IGNORECASE=1} /^x-ratelimit-used:/ {sub(/^[^:]*:[[:space:]]*/,""); sub(/\r$/,""); print; exit}' /tmp/h)"
+            remaining="$(awk 'BEGIN{IGNORECASE=1} /^x-ratelimit-remaining:/ {sub(/^[^:]*:[[:space:]]*/,""); sub(/\r$/,""); print; exit}' /tmp/h)"
+            [[ -n "$new_etag" ]] && etag="$new_etag"
+            [[ -z "$first_used" && -n "$used" ]] && first_used="$used"
+            [[ -z "$first_remaining" && -n "$remaining" ]] && first_remaining="$remaining"
+            [[ -n "$used" ]] && last_used="$used"
+            [[ -n "$remaining" ]] && last_remaining="$remaining"
+
+            if [[ "$code" == "200" ]]; then
+              n200=$((n200+1))
+              row="$(jq -r --arg u "$OWNER_LOGIN" --arg c "$TARGET_REACTION" '.[] | select(.user.login==$u and .content==$c) | [.id,.created_at] | @tsv' /tmp/b | tail -n1)"
+              if [[ -n "$row" ]]; then
+                rid="${row%%$'\t'*}"
+                created="${row#*$'\t'}"
+                detected="$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)"
+                latency_ms="$(python3 - "$created" "$detected" <<'PY'
+import sys
+from datetime import datetime
+a=datetime.fromisoformat(sys.argv[1].replace("Z","+00:00"))
+b=datetime.fromisoformat(sys.argv[2].replace("Z","+00:00"))
+print(round((b-a).total_seconds()*1000))
+PY
+)"
+                echo "DETECTED interval=$INTERVAL_SECONDS target=$TARGET_REACTION reaction_id=$rid created_at=$created detected_at=$detected latency_ms=$latency_ms poll=$polls"
+                echo "SUMMARY polls=$polls http200=$n200 http304=$n304 first_used=$first_used last_used=$last_used first_remaining=$first_remaining last_remaining=$last_remaining"
+                exit 0
+              fi
+            elif [[ "$code" == "304" ]]; then
+              n304=$((n304+1))
+            else
+              echo "UNEXPECTED_HTTP=$code"
+              cat /tmp/b || true
+            fi
+            sleep "$INTERVAL_SECONDS"
+          done
+
+          echo "TIMEOUT interval=$INTERVAL_SECONDS polls=$polls http200=$n200 http304=$n304 first_used=$first_used last_used=$last_used first_remaining=$first_remaining last_remaining=$last_remaining"
+          exit 2
