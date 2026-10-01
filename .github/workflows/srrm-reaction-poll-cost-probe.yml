@@ -16,58 +16,86 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Idle ETag polling at 5s
+      - name: Detect multiple owner reactions at 5s cadence
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           PR_NUMBER: "1"
+          OWNER_LOGIN: "lvlaksim1"
         shell: bash
         run: |
           set -euo pipefail
           url="https://api.github.com/repos/$REPO/issues/$PR_NUMBER/reactions?per_page=100"
           etag=""
+          declare -A seen=()
+          declare -a order=()
           polls=0
           n200=0
           n304=0
           first_used=""
           last_used=""
-          first_remaining=""
-          last_remaining=""
+          deadline=$(( $(date +%s) + 100 ))
 
-          for i in $(seq 1 12); do
+          baseline="$(curl -sS             -D /tmp/h0             -o /tmp/b0             -w '%{http_code}'             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             "$url")"
+          if [[ "$baseline" != "200" ]]; then
+            echo "BASELINE_HTTP=$baseline"
+            exit 2
+          fi
+          etag="$(awk 'BEGIN{IGNORECASE=1} /^etag:/ {sub(/^[^:]*:[[:space:]]*/,""); sub(/\r$/,""); print; exit}' /tmp/h0)"
+          first_used="$(awk 'BEGIN{IGNORECASE=1} /^x-ratelimit-used:/ {sub(/^[^:]*:[[:space:]]*/,""); sub(/\r$/,""); print; exit}' /tmp/h0)"
+          last_used="$first_used"
+
+          while IFS=$'\t' read -r id content created; do
+            [[ -z "$id" ]] && continue
+            seen["$id"]=1
+          done < <(jq -r --arg u "$OWNER_LOGIN" '.[] | select(.user.login==$u) | [.id,.content,.created_at] | @tsv' /tmp/b0)
+
+          echo "BASELINE owner_reactions=${#seen[@]} used=$first_used"
+
+          while (( $(date +%s) < deadline )); do
+            sleep 5
             polls=$((polls+1))
             rm -f /tmp/h /tmp/b
-            args=(
-              -sS -D /tmp/h -o /tmp/b -w '%{http_code}'
-              -H "Authorization: Bearer $GH_TOKEN"
-              -H "Accept: application/vnd.github+json"
-              -H "X-GitHub-Api-Version: 2022-11-28"
-            )
-            if [[ -n "$etag" ]]; then
-              args+=( -H "If-None-Match: $etag" )
-            fi
-
-            code="$(curl "${args[@]}" "$url")"
+            code="$(curl -sS -D /tmp/h -o /tmp/b -w '%{http_code}'               -H "Authorization: Bearer $GH_TOKEN"               -H "Accept: application/vnd.github+json"               -H "X-GitHub-Api-Version: 2022-11-28"               -H "If-None-Match: $etag"               "$url")"
             new_etag="$(awk 'BEGIN{IGNORECASE=1} /^etag:/ {sub(/^[^:]*:[[:space:]]*/,""); sub(/\r$/,""); print; exit}' /tmp/h)"
             used="$(awk 'BEGIN{IGNORECASE=1} /^x-ratelimit-used:/ {sub(/^[^:]*:[[:space:]]*/,""); sub(/\r$/,""); print; exit}' /tmp/h)"
-            remaining="$(awk 'BEGIN{IGNORECASE=1} /^x-ratelimit-remaining:/ {sub(/^[^:]*:[[:space:]]*/,""); sub(/\r$/,""); print; exit}' /tmp/h)"
             [[ -n "$new_etag" ]] && etag="$new_etag"
-
-            [[ -z "$first_used" && -n "$used" ]] && first_used="$used"
-            [[ -z "$first_remaining" && -n "$remaining" ]] && first_remaining="$remaining"
             [[ -n "$used" ]] && last_used="$used"
-            [[ -n "$remaining" ]] && last_remaining="$remaining"
 
-            if [[ "$code" == "200" ]]; then
-              n200=$((n200+1))
-            elif [[ "$code" == "304" ]]; then
+            if [[ "$code" == "304" ]]; then
               n304=$((n304+1))
-            else
-              echo "UNEXPECTED_HTTP poll=$polls code=$code"
+              echo "POLL poll=$polls code=304 used=$used detected=${#order[@]}"
+              continue
+            fi
+            if [[ "$code" != "200" ]]; then
+              echo "POLL poll=$polls unexpected_http=$code"
+              continue
             fi
 
-            echo "POLL poll=$polls code=$code used=$used remaining=$remaining"
-            if (( i < 12 )); then sleep 5; fi
+            n200=$((n200+1))
+            while IFS=$'\t' read -r id content created; do
+              [[ -z "$id" ]] && continue
+              if [[ -z "${seen[$id]+x}" ]]; then
+                seen["$id"]=1
+                detected="$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)"
+                order+=("$content")
+                echo "SIGNAL seq=${#order[@]} id=$id content=$content created_at=$created detected_at=$detected"
+              fi
+            done < <(jq -r --arg u "$OWNER_LOGIN" '.[] | select(.user.login==$u) | [.id,.content,.created_at] | @tsv' /tmp/b)
+
+            echo "POLL poll=$polls code=200 used=$used detected=${#order[@]}"
+
+            if (( ${#order[@]} >= 3 )); then
+              printf 'ORDER'
+              for op in "${order[@]}"; do printf ' %s' "$op"; done
+              printf '\n'
+              echo "SUMMARY polls=$polls http200=$n200 http304=$n304 first_used=$first_used last_used=$last_used signals=${#order[@]}"
+              exit 0
+            fi
           done
 
-          echo "SUMMARY polls=$polls http200=$n200 http304=$n304 first_used=$first_used last_used=$last_used first_remaining=$first_remaining last_remaining=$last_remaining"
+          printf 'ORDER'
+          for op in "${order[@]}"; do printf ' %s' "$op"; done
+          printf '\n'
+          echo "SUMMARY polls=$polls http200=$n200 http304=$n304 first_used=$first_used last_used=$last_used signals=${#order[@]}"
+          exit 3
