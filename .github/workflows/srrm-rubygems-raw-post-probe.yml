@@ -1,0 +1,43 @@
+name: SRRM RubyGems Raw POST Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-rubygems-raw-post-probe.yml'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe raw reaction POST against GitHub RubyGems registry
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          raw='{"action":"created","reaction":{"content":"rocket"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"},"sender":{"login":"lvlaksim1"}}'
+          url='https://rubygems.pkg.github.com/lvlaksim1/api/v1/gems'
+
+          call() {
+            name="$1"; shift
+            code="$(curl -sS -o /tmp/body -w '%{http_code}' \
+              -H "User-Agent: GitHub-Hookshot/test" \
+              -H "Content-Type: application/json" \
+              -X POST --data-binary "$raw" \
+              "$@" "$url")"
+            echo "${name}_HTTP=$code"
+            if [[ -s /tmp/body ]]; then
+              echo -n "${name}_BODY="
+              tr '\n' ' ' </tmp/body | head -c 900
+              echo
+            fi
+          }
+
+          call BEARER -H "Authorization: Bearer $GH_TOKEN"
+          call PLAIN_AUTH -H "Authorization: $GH_TOKEN"
+          call BASIC -u "lvlaksim1:$GH_TOKEN"
