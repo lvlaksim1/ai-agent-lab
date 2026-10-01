@@ -7,21 +7,23 @@ on:
       - '.github/workflows/srrm-github-loopback-api-probe.yml'
 
 permissions:
-  contents: write
+  contents: read
   actions: write
 
 jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe repository_dispatch/workflow_dispatch request shapes
+      - name: Probe raw reaction payload against no-body Actions endpoints
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
+          TARGET_RUN: "36790770227"
         shell: bash
         run: |
           set +e
           api="https://api.github.com/repos/$REPO"
+          body='{"action":"created","reaction":{"content":"eyes"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"},"sender":{"login":"lvlaksim1"}}'
 
           call() {
             name="$1"; shift
@@ -36,19 +38,9 @@ jobs:
             echo
           }
 
-          call repo_dispatch_query_empty \
-            -X POST "$api/dispatches?event_type=srrm_query_empty" \
+          call rerun_failed_with_reaction_body \
+            -X POST "$api/actions/runs/$TARGET_RUN/rerun-failed-jobs" \
             -H "Content-Type: application/json" \
-            -d '{}'
-
-          call repo_dispatch_query_reaction_body \
-            -X POST "$api/dispatches?event_type=srrm_query_reaction" \
-            -H "Content-Type: application/json" \
-            -d '{"action":"created","reaction":{"content":"eyes"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"}}'
-
-          call repo_dispatch_form_payload \
-            -X POST "$api/dispatches?event_type=srrm_form" \
-            -H "Content-Type: application/x-www-form-urlencoded" \
-            --data-urlencode 'payload={"action":"created","reaction":{"content":"eyes"}}'
+            -d "$body"
 
           echo "PROBE_DONE"
