@@ -14,7 +14,7 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe whether GITHUB_TOKEN can create/delete repository webhook
+      - name: Probe undocumented CLI hook creation
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -22,14 +22,15 @@ jobs:
         run: |
           set +e
           api="https://api.github.com/repos/$REPO/hooks"
-          body='{"name":"web","active":false,"events":["reaction"],"config":{"url":"https://example.com/srrm-probe","content_type":"json","insecure_ssl":"0"}}'
+          body='{"name":"cli","active":false,"events":["reaction"],"config":{"content_type":"json"}}'
           code="$(curl -sS -o /tmp/body -w '%{http_code}'             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             -H "Content-Type: application/json"             -X POST             -d "$body"             "$api")"
-          echo "CREATE_HTTP=$code"
+          echo "CREATE_CLI_HTTP=$code"
           cat /tmp/body
           echo
-
           if [[ "$code" == "201" ]]; then
             id="$(jq -r '.id' /tmp/body)"
+            echo "HOOK_ID=$id"
+            echo "WS_URL=$(jq -r '.ws_url // empty' /tmp/body)"
             dcode="$(curl -sS -o /tmp/dbody -w '%{http_code}'               -H "Authorization: Bearer $GH_TOKEN"               -H "Accept: application/vnd.github+json"               -H "X-GitHub-Api-Version: 2022-11-28"               -X DELETE               "$api/$id")"
             echo "DELETE_HTTP=$dcode"
             cat /tmp/dbody
