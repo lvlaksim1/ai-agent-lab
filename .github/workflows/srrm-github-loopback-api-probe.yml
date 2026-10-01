@@ -1,0 +1,54 @@
+name: SRRM GitHub Loopback API Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-github-loopback-api-probe.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe repository_dispatch/workflow_dispatch request shapes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set +e
+          api="https://api.github.com/repos/$REPO"
+
+          call() {
+            name="$1"; shift
+            echo "=== $name ==="
+            code="$(curl -sS -o /tmp/body -w '%{http_code}' \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "$@")"
+            echo "HTTP=$code"
+            cat /tmp/body
+            echo
+          }
+
+          call repo_dispatch_query_empty \
+            -X POST "$api/dispatches?event_type=srrm_query_empty" \
+            -H "Content-Type: application/json" \
+            -d '{}'
+
+          call repo_dispatch_query_reaction_body \
+            -X POST "$api/dispatches?event_type=srrm_query_reaction" \
+            -H "Content-Type: application/json" \
+            -d '{"action":"created","reaction":{"content":"eyes"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"}}'
+
+          call repo_dispatch_form_payload \
+            -X POST "$api/dispatches?event_type=srrm_form" \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            --data-urlencode 'payload={"action":"created","reaction":{"content":"eyes"}}'
+
+          echo "PROBE_DONE"
