@@ -15,7 +15,7 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Rerequest fixed check suite with raw reaction payload
+      - name: Rerequest same fixed check suite twice
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -24,13 +24,15 @@ jobs:
         run: |
           set -euo pipefail
           url="https://api.github.com/repos/$REPO/check-suites/$SUITE_ID/rerequest"
-          body='{"action":"created","reaction":{"content":"eyes"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"}}'
-          code="$(curl -sS -o /tmp/body -w '%{http_code}' \
-            -H "Authorization: Bearer $GH_TOKEN" \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            -H "Content-Type: application/json" \
-            -X POST -d "$body" "$url")"
-          echo "REREQUEST_HTTP=$code"
-          cat /tmp/body || true
-          echo
+          body='{"action":"created","reaction":{"content":"heart"}}'
+          for n in 1 2; do
+            code="$(curl -sS -o "/tmp/body$n" -w '%{http_code}' \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              -H "Content-Type: application/json" \
+              -X POST -d "$body" "$url")"
+            echo "POST_$n=$code"
+            cat "/tmp/body$n" || true
+            echo
+          done
