@@ -14,19 +14,41 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe two immediate webhook-equivalent reruns
+      - name: Probe stable workflow_dispatch URL with raw reaction payload
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
-          TARGET_RUN: "36821505084"
+          WF: "srrm-workflow-dispatch-loopback-receiver.yml"
         shell: bash
         run: |
-          set -euo pipefail
-          url="https://api.github.com/repos/$REPO/actions/runs/$TARGET_RUN/rerun-failed-jobs"
-          body='{"action":"created","reaction":{"content":"eyes"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"}}'
-          for n in 1 2; do
-            code="$(curl -sS -o "/tmp/body$n" -w '%{http_code}'               -u "x-access-token:$GH_TOKEN"               -H "Accept: application/vnd.github+json"               -H "X-GitHub-Api-Version: 2022-11-28"               -H "Content-Type: application/json"               -X POST -d "$body" "$url")"
-            echo "POST_$n=$code"
-            cat "/tmp/body$n" || true
+          set +e
+          api="https://api.github.com/repos/$REPO/actions/workflows/$WF/dispatches"
+          body='{"action":"created","reaction":{"content":"eyes"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"},"sender":{"login":"lvlaksim1"}}'
+
+          call() {
+            name="$1"; shift
+            echo "=== $name ==="
+            code="$(curl -sS -o /tmp/body -w '%{http_code}' \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "$@")"
+            echo "HTTP=$code"
+            cat /tmp/body
             echo
-          done
+          }
+
+          call query_ref_json \
+            -X POST "$api?ref=main" \
+            -H "Content-Type: application/json" \
+            -d "$body"
+
+          call query_ref_form \
+            -X POST "$api?ref=main" \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            --data-urlencode "payload=$body"
+
+          call body_ref_plus_raw_keys \
+            -X POST "$api" \
+            -H "Content-Type: application/json" \
+            -d '{"ref":"main","action":"created","reaction":{"content":"eyes"}}'
