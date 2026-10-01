@@ -1,0 +1,44 @@
+name: SRRM Latest Rerun Endpoint Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-latest-rerun-endpoint-probe.yml'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe symbolic latest-run rerun URLs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          WF_ID: "371655967"
+          WF_FILE: "srrm-failed-run-doorbell-probe.yml"
+        shell: bash
+        run: |
+          set +e
+          body='{"action":"created","reaction":{"content":"eyes"}}'
+          call() {
+            name="$1"; url="$2"
+            echo "=== $name ==="
+            code="$(curl -sS -o /tmp/body -w '%{http_code}' \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              -H "Content-Type: application/json" \
+              -X POST -d "$body" "$url")"
+            echo "HTTP=$code"
+            cat /tmp/body
+            echo
+          }
+          base="https://api.github.com/repos/$REPO/actions"
+          call runs_latest "$base/runs/latest/rerun-failed-jobs"
+          call workflow_id_latest "$base/workflows/$WF_ID/runs/latest/rerun-failed-jobs"
+          call workflow_file_latest "$base/workflows/$WF_FILE/runs/latest/rerun-failed-jobs"
+          call workflow_id_latest_query "$base/workflows/$WF_ID/runs/latest/rerun-failed-jobs?branch=main"
