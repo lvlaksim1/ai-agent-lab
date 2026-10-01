@@ -14,7 +14,7 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Surrogate reaction webhook to dispatching doorbell
+      - name: Probe two immediate webhook-equivalent reruns
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -22,9 +22,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          body='{"action":"created","reaction":{"content":"rocket"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"},"sender":{"login":"lvlaksim1"}}'
-          code="$(curl -sS -o /tmp/body -w '%{http_code}'             -u "x-access-token:$GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             -H "Content-Type: application/json"             -X POST             -d "$body"             "https://api.github.com/repos/$REPO/actions/runs/$TARGET_RUN/rerun-failed-jobs")"
-          echo "HTTP=$code"
-          cat /tmp/body
-          echo
-          test "$code" = "201"
+          url="https://api.github.com/repos/$REPO/actions/runs/$TARGET_RUN/rerun-failed-jobs"
+          body='{"action":"created","reaction":{"content":"eyes"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"}}'
+          for n in 1 2; do
+            code="$(curl -sS -o "/tmp/body$n" -w '%{http_code}'               -u "x-access-token:$GH_TOKEN"               -H "Accept: application/vnd.github+json"               -H "X-GitHub-Api-Version: 2022-11-28"               -H "Content-Type: application/json"               -X POST -d "$body" "$url")"
+            echo "POST_$n=$code"
+            cat "/tmp/body$n" || true
+            echo
+          done
