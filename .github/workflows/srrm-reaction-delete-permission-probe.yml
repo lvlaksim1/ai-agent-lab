@@ -1,0 +1,32 @@
+name: SRRM Reaction Delete Permission Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-reaction-delete-permission-probe.yml'
+
+permissions:
+  issues: write
+  pull-requests: write
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete connector-created reaction and verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RID: "537770353"
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://api.github.com/repos/$REPO/issues/1/reactions/$RID"
+          code="$(curl -sS -o /tmp/del -w '%{http_code}'             -H "Authorization: Bearer $GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             -X DELETE "$url")"
+          echo "DELETE_HTTP=$code"
+          cat /tmp/del || true
+          echo
+          echo "REACTIONS_AFTER_DELETE"
+          gh api -H "Accept: application/vnd.github+json" "repos/$REPO/issues/1/reactions"
