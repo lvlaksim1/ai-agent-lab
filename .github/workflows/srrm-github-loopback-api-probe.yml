@@ -14,15 +14,15 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: End-to-end surrogate for repository webhook
+      - name: Surrogate reaction webhook to dispatching doorbell
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
-          TARGET_RUN: "36790770227"
+          TARGET_RUN: "36821505084"
         shell: bash
         run: |
           set -euo pipefail
-          body='{"action":"created","reaction":{"content":"heart"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"},"sender":{"login":"lvlaksim1"}}'
+          body='{"action":"created","reaction":{"content":"rocket"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"},"sender":{"login":"lvlaksim1"}}'
           code="$(curl -sS -o /tmp/body -w '%{http_code}'             -u "x-access-token:$GH_TOKEN"             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2022-11-28"             -H "Content-Type: application/json"             -X POST             -d "$body"             "https://api.github.com/repos/$REPO/actions/runs/$TARGET_RUN/rerun-failed-jobs")"
           echo "HTTP=$code"
           cat /tmp/body
