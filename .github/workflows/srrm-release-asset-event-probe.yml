@@ -1,0 +1,21 @@
+name: SRRM Release Asset Event Probe
+
+on:
+  release:
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Capture release event
+        env:
+          ACTION: ${{ github.event.action }}
+          RELEASE_ID: ${{ github.event.release.id }}
+        run: |
+          echo "EVENT_NAME=$GITHUB_EVENT_NAME"
+          echo "ACTION=$ACTION"
+          echo "RELEASE_ID=$RELEASE_ID"
+          cat "$GITHUB_EVENT_PATH"
