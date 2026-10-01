@@ -1,0 +1,44 @@
+name: SRRM GHCR Native Event Control
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-ghcr-native-event-control.yml'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start GHCR upload session with Hookshot profile
+        env:
+          TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          raw='{"action":"created","reaction":{"content":"rocket"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"},"sender":{"login":"lvlaksim1"}}'
+          acode="$(curl -sS -o /tmp/auth.json -w '%{http_code}' \
+            -u "lvlaksim1:$TOKEN" \
+            'https://ghcr.io/token?service=ghcr.io&scope=repository:lvlaksim1/srrm-reaction-probe:pull,push')"
+          echo "AUTH_HTTP=$acode"
+          tok="$(jq -r '.token // .access_token // empty' /tmp/auth.json)"
+          echo "REGISTRY_TOKEN_PRESENT=$([[ -n "$tok" ]] && echo 1 || echo 0)"
+          [[ -n "$tok" ]] || exit 0
+          ucode="$(curl -sS -D /tmp/up.h -o /tmp/up.b -w '%{http_code}' \
+            -H "Authorization: Bearer $tok" \
+            -H 'Content-Type: application/json' \
+            -H 'User-Agent: GitHub-Hookshot/test' \
+            -H 'X-GitHub-Event: reaction' \
+            -X POST --data-binary "$raw" \
+            'https://ghcr.io/v2/lvlaksim1/srrm-reaction-probe/blobs/uploads/')"
+          echo "UPLOAD_INIT_HTTP=$ucode"
+          loc="$(grep -i '^location:' /tmp/up.h | tail -n1 | cut -d: -f2- | sed 's/^[[:space:]]*//' | tr -d '\r' || true)"
+          echo "LOCATION_PRESENT=$([[ -n "$loc" ]] && echo 1 || echo 0)"
+          if [[ -s /tmp/up.b ]]; then
+            msg="$(jq -r '.errors[0].message // .message // empty' /tmp/up.b 2>/dev/null || true)"
+            [[ -n "$msg" ]] && echo "UPLOAD_MESSAGE=$msg" || true
+          fi
