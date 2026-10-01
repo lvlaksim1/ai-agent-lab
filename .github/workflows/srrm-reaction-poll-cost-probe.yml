@@ -22,7 +22,7 @@ jobs:
           REPO: ${{ github.repository }}
           PR_NUMBER: "1"
           OWNER_LOGIN: "lvlaksim1"
-          INTERVAL_SECONDS: "3"
+          INTERVAL_SECONDS: "5"
           TARGET_REACTION: "eyes"
         shell: bash
         run: |
