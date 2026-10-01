@@ -1,0 +1,36 @@
+name: SRRM Maven Raw Body Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-maven-raw-body-probe.yml'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: PUT raw reaction body to GitHub Maven Packages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          raw='{"action":"created","reaction":{"content":"rocket"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"},"sender":{"login":"lvlaksim1"}}'
+          base='https://maven.pkg.github.com/lvlaksim1/ai-agent-lab'
+          path='srrm/probe/0.0.1/probe-0.0.1.json'
+          code="$(curl -sS -o /tmp/body -w '%{http_code}' \
+            -u "lvlaksim1:$GH_TOKEN" \
+            -H "Content-Type: application/json" \
+            -H "User-Agent: GitHub-Hookshot/test" \
+            -X PUT --data-binary "$raw" \
+            "$base/$path")"
+          echo "MAVEN_PUT_HTTP=$code"
+          if [[ -s /tmp/body ]]; then
+            tr '\n' ' ' </tmp/body | head -c 1200
+            echo
+          fi
