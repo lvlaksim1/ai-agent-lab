@@ -7,14 +7,14 @@ on:
       - '.github/workflows/srrm-github-loopback-api-probe.yml'
 
 permissions:
-  contents: read
   actions: write
+  contents: read
 
 jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe raw reaction payload against no-body Actions endpoints
+      - name: Probe Basic-auth raw reaction payload to stable failed run
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -22,25 +22,15 @@ jobs:
         shell: bash
         run: |
           set +e
-          api="https://api.github.com/repos/$REPO"
-          body='{"action":"created","reaction":{"content":"eyes"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"},"sender":{"login":"lvlaksim1"}}'
-
-          call() {
-            name="$1"; shift
-            echo "=== $name ==="
-            code="$(curl -sS -o /tmp/body -w '%{http_code}' \
-              -H "Authorization: Bearer $GH_TOKEN" \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2022-11-28" \
-              "$@")"
-            echo "HTTP=$code"
-            cat /tmp/body
-            echo
-          }
-
-          call rerun_failed_with_reaction_body \
-            -X POST "$api/actions/runs/$TARGET_RUN/rerun-failed-jobs" \
+          body='{"action":"created","reaction":{"content":"heart"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"},"sender":{"login":"lvlaksim1"}}'
+          code="$(curl -sS -o /tmp/body -w '%{http_code}' \
+            -u "x-access-token:$GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
             -H "Content-Type: application/json" \
-            -d "$body"
-
-          echo "PROBE_DONE"
+            -X POST \
+            -d "$body" \
+            "https://api.github.com/repos/$REPO/actions/runs/$TARGET_RUN/rerun-failed-jobs")"
+          echo "HTTP=$code"
+          cat /tmp/body
+          echo
