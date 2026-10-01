@@ -1,0 +1,16 @@
+name: SRRM Workflow Dispatch Loopback Receiver
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [srrm_workflow_dispatch_probe]
+
+jobs:
+  receive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mark receipt
+        run: |
+          echo "EVENT_NAME=${{ github.event_name }}"
+          echo "ACTION=${{ github.event.action }}"
+          echo "SRRM_WORKFLOW_DISPATCH_RECEIVED=1"
