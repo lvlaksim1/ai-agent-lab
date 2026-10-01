@@ -1,0 +1,15 @@
+name: SRRM Registry Package Event Probe
+
+on:
+  registry_package:
+    types: [published, updated]
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Capture package event
+        run: |
+          echo "EVENT_NAME=$GITHUB_EVENT_NAME"
+          echo "ACTION=${{ github.event.action }}"
+          cat "$GITHUB_EVENT_PATH"
