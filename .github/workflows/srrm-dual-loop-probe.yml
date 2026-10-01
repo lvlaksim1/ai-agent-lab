@@ -7,8 +7,8 @@ on:
       - '.github/workflows/srrm-dual-loop-probe.yml'
 
 permissions:
-  issues: read
-  pull-requests: read
+  issues: write
+  pull-requests: write
   contents: read
 
 jobs:
@@ -91,11 +91,36 @@ jobs:
                       f"detected_at={now} poll={polls} telegram_alive={t.is_alive()} used={used}",
                       flush=True,
                   )
-                  if t.is_alive():
-                      print("RESULT=PASS_REACTION_DETECTED_DURING_BLOCKING_LONG_POLL", flush=True)
+                  if not t.is_alive():
+                      print("RESULT=FAIL_BLOCKING_LOOP_ALREADY_ENDED", flush=True)
+                      raise SystemExit(2)
+
+                  print("DETECTED_DURING_BLOCKING_LONG_POLL=1", flush=True)
+                  time.sleep(5)
+
+                  delete_url=f"https://api.github.com/repos/{repo}/issues/{pr}/reactions/{rid}"
+                  dr=urllib.request.Request(
+                      delete_url,
+                      headers={
+                          "Authorization": f"Bearer {token}",
+                          "Accept": "application/vnd.github+json",
+                          "X-GitHub-Api-Version": "2022-11-28",
+                          "User-Agent": "srrm-dual-loop-probe",
+                      },
+                      method="DELETE",
+                  )
+                  with urllib.request.urlopen(dr, timeout=20) as resp:
+                      print(f"DELETE status={resp.status} telegram_alive={t.is_alive()}", flush=True)
+
+                  time.sleep(5)
+                  status2,h2,body2=req()
+                  present=any(str(y.get("id"))==rid for y in (body2 or []))
+                  print(f"VERIFY present={present} telegram_alive={t.is_alive()}", flush=True)
+                  if not present and t.is_alive():
+                      print("RESULT=PASS_DETECT_AND_RESET_DURING_BLOCKING_LONG_POLL", flush=True)
                       raise SystemExit(0)
-                  print("RESULT=FAIL_BLOCKING_LOOP_ALREADY_ENDED", flush=True)
-                  raise SystemExit(2)
+                  print("RESULT=FAIL_RESET_OR_CONCURRENCY", flush=True)
+                  raise SystemExit(4)
           print("RESULT=TIMEOUT", flush=True)
           raise SystemExit(3)
           PY
