@@ -1,0 +1,43 @@
+name: SRRM Maven Method Override Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-maven-method-override-probe.yml'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe POST-to-PUT method override variants
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          raw='{"action":"created","reaction":{"content":"rocket"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"}}'
+          base='https://maven.pkg.github.com/lvlaksim1/ai-agent-lab/srrm'
+
+          call() {
+            name="$1"; url="$2"
+            code="$(curl -sS -o /tmp/body -w '%{http_code}' \
+              -u "lvlaksim1:$GH_TOKEN" \
+              -H "Content-Type: application/json" \
+              -H "User-Agent: GitHub-Hookshot/test" \
+              -X POST --data-binary "$raw" "$url")"
+            echo "${name}_HTTP=$code"
+            if [[ -s /tmp/body ]]; then
+              tr '\n' ' ' </tmp/body | head -c 500
+              echo
+            fi
+          }
+
+          call Q_UNDERSCORE "$base/override-a/0.0.1/override-a-0.0.1.json?_method=PUT"
+          call Q_METHOD "$base/override-b/0.0.1/override-b-0.0.1.json?method=PUT"
+          call Q_HTTP_METHOD "$base/override-c/0.0.1/override-c-0.0.1.json?http_method=PUT"
+          call Q_METHOD_OVERRIDE "$base/override-d/0.0.1/override-d-0.0.1.json?method_override=PUT"
