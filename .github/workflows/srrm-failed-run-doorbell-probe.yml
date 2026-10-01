@@ -7,7 +7,7 @@ on:
       - '.github/workflows/srrm-failed-run-doorbell-probe.yml'
 
 permissions:
-  contents: read
+  contents: write
   issues: write
   pull-requests: write
 
@@ -15,7 +15,7 @@ jobs:
   doorbell:
     runs-on: ubuntu-latest
     steps:
-      - name: Read and reset reaction opcode
+      - name: Read opcode, dispatch work, and reset reaction
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -26,6 +26,7 @@ jobs:
           set -euo pipefail
           json="$(gh api -H "Accept: application/vnd.github+json" "repos/$REPO/issues/$PR_NUMBER/reactions")"
           mapfile -t rows < <(jq -r --arg u "$OWNER_LOGIN" '.[] | select(.user.login==$u) | [.id,.content,.created_at] | @tsv' <<<"$json")
+
           if (( ${#rows[@]} == 0 )); then
             echo "SRRM_OPCODE=NONE"
           else
@@ -33,12 +34,18 @@ jobs:
             rest="${last#*$'\t'}"
             reaction="${rest%%$'\t'*}"
             echo "SRRM_OPCODE=$reaction"
+
+            payload="$(jq -nc --arg op "$reaction" '{event_type:"srrm_reaction",client_payload:{opcode:$op,source:"pr-reaction-doorbell"}}')"
+            gh api --method POST "repos/$REPO/dispatches" --input - <<<"$payload"
+            echo "SRRM_DISPATCHED=$reaction"
+
             for row in "${rows[@]}"; do
               id="${row%%$'\t'*}"
               gh api --method DELETE -H "Accept: application/vnd.github+json" "repos/$REPO/issues/$PR_NUMBER/reactions/$id"
             done
             echo "REACTIONS_RESET=${#rows[@]}"
           fi
+
       - name: Keep doorbell rerunnable
         run: |
           echo "INTENTIONAL_FAILURE=1"
