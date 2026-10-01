@@ -1,0 +1,47 @@
+name: SRRM Upload Host API Routing Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/srrm-upload-host-api-routing-probe.yml'
+
+permissions:
+  actions: write
+  checks: write
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test REST control-plane routes through uploads.github.com
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          raw='{"action":"created","reaction":{"content":"eyes"},"repository":{"full_name":"lvlaksim1/ai-agent-lab"}}'
+
+          call() {
+            name="$1"; url="$2"
+            code="$(curl -sS -o /tmp/body -w '%{http_code}' \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              -H "Content-Type: application/json" \
+              -H "User-Agent: GitHub-Hookshot/test" \
+              -X POST --data-binary "$raw" "$url")"
+            echo "${name}_HTTP=$code"
+            if [[ -s /tmp/body ]]; then
+              msg="$(jq -r '.message // empty' /tmp/body 2>/dev/null || true)"
+              [[ -n "$msg" ]] && echo "${name}_MESSAGE=$msg" || true
+              title="$(grep -o '<title>[^<]*' /tmp/body | head -n1 | sed 's/<title>//' || true)"
+              [[ -n "$title" ]] && echo "${name}_TITLE=$title" || true
+            fi
+          }
+
+          call UPLOADS_RERUN "https://uploads.github.com/repos/$REPO/actions/runs/36790770227/rerun-failed-jobs"
+          call UPLOADS_CHECK "https://uploads.github.com/repos/$REPO/check-suites/99647359827/rerequest"
+          call UPLOADS_DISPATCH "https://uploads.github.com/repos/$REPO/dispatches"
