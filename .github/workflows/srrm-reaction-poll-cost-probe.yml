@@ -67,14 +67,7 @@ jobs:
                 rid="${row%%$'\t'*}"
                 created="${row#*$'\t'}"
                 detected="$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)"
-                latency_ms="$(python3 - "$created" "$detected" <<'PY'
-import sys
-from datetime import datetime
-a=datetime.fromisoformat(sys.argv[1].replace("Z","+00:00"))
-b=datetime.fromisoformat(sys.argv[2].replace("Z","+00:00"))
-print(round((b-a).total_seconds()*1000))
-PY
-)"
+                latency_ms="$(python3 -c 'import sys; from datetime import datetime; a=datetime.fromisoformat(sys.argv[1].replace("Z","+00:00")); b=datetime.fromisoformat(sys.argv[2].replace("Z","+00:00")); print(round((b-a).total_seconds()*1000))' "$created" "$detected")"
                 echo "DETECTED interval=$INTERVAL_SECONDS target=$TARGET_REACTION reaction_id=$rid created_at=$created detected_at=$detected latency_ms=$latency_ms poll=$polls"
                 echo "SUMMARY polls=$polls http200=$n200 http304=$n304 first_used=$first_used last_used=$last_used first_remaining=$first_remaining last_remaining=$last_remaining"
                 exit 0
