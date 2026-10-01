@@ -1,0 +1,18 @@
+name: SRRM Reaction Dispatch Receiver
+
+on:
+  repository_dispatch:
+    types: [srrm_reaction]
+
+jobs:
+  receive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show opcode
+        env:
+          OPCODE: ${{ github.event.client_payload.opcode }}
+          SOURCE: ${{ github.event.client_payload.source }}
+        run: |
+          echo "SRRM_RECEIVED_OPCODE=$OPCODE"
+          echo "SRRM_SOURCE=$SOURCE"
+          echo "UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
