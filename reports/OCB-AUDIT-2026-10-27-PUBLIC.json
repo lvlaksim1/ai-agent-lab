@@ -1,0 +1,504 @@
+{
+  "date": "2026-10-27",
+  "scope": "all tracked textual files of public repositories",
+  "repos": {
+    "evrasia-mini": {
+      "status": "ok",
+      "commit": "5f655e19aea8eb13e5c280bb961f0718b2515891",
+      "scanned_text_files": 3,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "time-machine": {
+      "status": "ok",
+      "commit": "a5a3e6f7eee24f21536e408422263f6c3dcefb60",
+      "scanned_text_files": 51,
+      "skipped_binary": 5,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "web-research": {
+      "status": "ok",
+      "commit": "169804aad4831e66112983767ce9848ecf26c127",
+      "scanned_text_files": 94,
+      "skipped_binary": 1,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "evrasia-hd": {
+      "status": "ok",
+      "commit": "e9c1aa939ee5188fd6bc0ee85b775bacd05cb130",
+      "scanned_text_files": 63,
+      "skipped_binary": 2,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "extension-builder": {
+      "status": "ok",
+      "commit": "HEAD",
+      "scanned_text_files": 0,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "apk-research": {
+      "status": "ok",
+      "commit": "75665ad39b103703ba5cd7b60823d411a43fcfab",
+      "scanned_text_files": 176,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "iOS-Research-Runtime": {
+      "status": "ok",
+      "commit": "0b633cbafd2a0198a9053c6f760d9590c2496e14",
+      "scanned_text_files": 180,
+      "skipped_binary": 1,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "edo_documents": {
+      "status": "ok",
+      "commit": "b7e625dbf5f081505dee67666220b103ca0a88a6",
+      "scanned_text_files": 10,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "ai-agent-lab": {
+      "status": "ok",
+      "commit": "7c3a4517501ed8b88a3b8b1129f1e02a4c728cbe",
+      "scanned_text_files": 49,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 1,
+      "files": [
+        {
+          "path": ".github/workflows/ocb-repository-audit-20261027.yml",
+          "count": 7,
+          "lines": [
+            {
+              "line": 1,
+              "text": "name: One-time OCB repository content audit"
+            },
+            {
+              "line": 5,
+              "text": "    paths: [\".github/workflows/ocb-repository-audit-20261027.yml\"]"
+            },
+            {
+              "line": 21,
+              "text": "          pattern = re.compile(r\"\\bOCB(?:3|_BACKOFF)?\\b|OpenAI.s safety checks|три попытки|трёх попыток|трех попыток\", re.I)"
+            },
+            {
+              "line": 22,
+              "text": "          root = Path(tempfile.mkdtemp(prefix=\"ocb-audit-\"))"
+            },
+            {
+              "line": 56,
+              "text": "          dest=Path(\"reports/OCB-AUDIT-2026-10-27-PUBLIC.json\")"
+            },
+            {
+              "line": 65,
+              "text": "          git add reports/OCB-AUDIT-2026-10-27-PUBLIC.json"
+            },
+            {
+              "line": 67,
+              "text": "            git commit -m \"audit: full content scan of public repos for OCB references\""
+            }
+          ]
+        }
+      ]
+    },
+    "repo-factory": {
+      "status": "ok",
+      "commit": "67fcab51e2a54d560b3b2e26e87d9079f762aa61",
+      "scanned_text_files": 40,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "telegram-receiver": {
+      "status": "ok",
+      "commit": "07aac7bc37da631e56ca413278f88469d969d61e",
+      "scanned_text_files": 50,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "telegram-receiver-test-consumer": {
+      "status": "ok",
+      "commit": "6398e1f7f3fdef05f2337adbd3482708e605d824",
+      "scanned_text_files": 2,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "context-capsule": {
+      "status": "ok",
+      "commit": "01e55e55d355164956a43bfaa2b4ba797789cda8",
+      "scanned_text_files": 82,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "resident-expert": {
+      "status": "ok",
+      "commit": "7065a31b70253c9047fe7a5d45b42e7e23cd80a8",
+      "scanned_text_files": 49,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "agent-control-plane": {
+      "status": "ok",
+      "commit": "fad386df72518ecbdd75b0fd1dc54a5b93c43ec8",
+      "scanned_text_files": 236,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "agent-control-plane-gateway": {
+      "status": "ok",
+      "commit": "a1ea4e8c807e012b55fa4982332987ffbcaf04bc",
+      "scanned_text_files": 6,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "google-apps-script-connector": {
+      "status": "ok",
+      "commit": "6b636ecab48f9d4c2a432c9e4b5e65f0ff634a24",
+      "scanned_text_files": 18,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "runtime-write-probe-public": {
+      "status": "ok",
+      "commit": "b2705052f1424db69626b242527deb0a4491c2cd",
+      "scanned_text_files": 2,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "Qwen-Desktop-Local-Bridge": {
+      "status": "ok",
+      "commit": "ca97e358b7c219679010e2ca81d01eb117f5cc28",
+      "scanned_text_files": 33,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "Baraban": {
+      "status": "ok",
+      "commit": "e787e385a4705a3aa6cdf73d6eb2f0ee2ecb3161",
+      "scanned_text_files": 61,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "chatgpt-desktop-local-bridge": {
+      "status": "ok",
+      "commit": "f08aed887bb35d65386a1cf50b2b9861457e269a",
+      "scanned_text_files": 154,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "project-alpha": {
+      "status": "ok",
+      "commit": "4db8c4f5a840836c4ab7c04aa38bbbc19dba3397",
+      "scanned_text_files": 88,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "extension-installer": {
+      "status": "ok",
+      "commit": "7e7736ea716c2f2bd52f2eafe0135c382ef9ae8e",
+      "scanned_text_files": 42,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "network-recorder": {
+      "status": "ok",
+      "commit": "dcd94966492d0987c329dad8176393f7533312a8",
+      "scanned_text_files": 10,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "context-capsule-project-manager": {
+      "status": "ok",
+      "commit": "5deb1c6920ff1d4030dc529cc76c9344bdee817d",
+      "scanned_text_files": 108,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "service-agent-base": {
+      "status": "ok",
+      "commit": "ce8106cb97c18e352bb87326563d8f04a5a1bfa3",
+      "scanned_text_files": 41,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "mailru-desktop": {
+      "status": "ok",
+      "commit": "d55de32267df63c1983d84b82140999a2c7c5080",
+      "scanned_text_files": 242,
+      "skipped_binary": 1,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "megafon-desktop": {
+      "status": "ok",
+      "commit": "6556eea2f334ae8dbe04c4ced7eceeff7512804f",
+      "scanned_text_files": 83,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "expert-base": {
+      "status": "ok",
+      "commit": "47d26b7b208155ddd196e196d1eeba7c8e0d6d53",
+      "scanned_text_files": 27,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 1,
+      "files": [
+        {
+          "path": "docs/PROJECT_MANAGER_TO_EXPERT_MIGRATION.md",
+          "count": 1,
+          "lines": [
+            {
+              "line": 22,
+              "text": "PP-RM, очереди, публикация веток, особенности диспетчеризации, OCB и другие механизмы организации работы. Не является профессиональным ресурсом предметной специализации, если сама специализация не включает эти механизмы."
+            }
+          ]
+        }
+      ]
+    },
+    "ios-expert": {
+      "status": "ok",
+      "commit": "675324409bfceb21010f4f16a45c0033f0ed3959",
+      "scanned_text_files": 128,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 8,
+      "files": [
+        {
+          "path": ".context/expert/migration/EXCLUDED_PROJECT_STATE.md",
+          "count": 1,
+          "lines": [
+            {
+              "line": 8,
+              "text": "- PP-RM/OCB/Watchdog/failover/publication решения DEC-0003..DEC-0020, кроме тех случаев, где отдельный технический факт iOS используется лишь как provenance;"
+            }
+          ]
+        },
+        {
+          "path": ".context/expert/migration/IOS_PM_MIGRATION.md",
+          "count": 1,
+          "lines": [
+            {
+              "line": 26,
+              "text": "- OCB и обходные пути публикации GitHub;"
+            }
+          ]
+        },
+        {
+          "path": ".context/expert/training/learning-cycles/CYCLE-001/EVALUATION-RESULT.md",
+          "count": 1,
+          "lines": [
+            {
+              "line": 44,
+              "text": "**RULE_KNOWN:** замороженная рубрика; одинаковые 10 критериев по 0/1/2; раздельные роли; только чтение; отсутствие изменений G/D; отсутствие причинных заявлений на основании двух синтетических заданий; запись в Библиотеку с повторным чтением до GitHub; не более трёх попыток публикации при OCB, без слепого повтора неизвестного эффекта."
+            }
+          ]
+        },
+        {
+          "path": ".context/expert/training/learning-cycles/CYCLE-001/PRETEST-RESULT.md",
+          "count": 1,
+          "lines": [
+            {
+              "line": 57,
+              "text": "- При явном временном OCB допускаются исходный запрос и максимум **два идентичных повтора** с паузой не менее пяти секунд; обычная ошибка не считается OCB. Неизвестный результат записи подлежит сверке без слепой повторной мутации."
+            }
+          ]
+        },
+        {
+          "path": ".context/expert/training/learning-cycles/CYCLE-001/REPORT.md",
+          "count": 1,
+          "lines": [
+            {
+              "line": 75,
+              "text": "**RULE_KNOWN:** роли не смешивать; использовать проверенные неизменяемые входы; не редактировать PRETEST/POSTTEST/LEARN/EVALUATE и не изменять старый PP-RM schema10; не повышать G/D; сначала Библиотека с обратным чтением, затем GitHub с проверкой неизвестного исхода; не более трёх попыток при явном OCB, не менее пяти секунд между последов"
+            }
+          ]
+        },
+        {
+          "path": ".context/expert/training/learning-cycles/CYCLE-002/LEARNING-CARD-G0.md",
+          "count": 1,
+          "lines": [
+            {
+              "line": 101,
+              "text": "- Ограничение процесса: ≤5 активных задач, ≥5 секунд между внешними запросами, максимум 3 попытки при явном OCB с предварительным контрольным чтением при неизвестном исходе."
+            }
+          ]
+        },
+        {
+          "path": ".context/expert/training/learning-cycles/CYCLE-002/PLAN.md",
+          "count": 1,
+          "lines": [
+            {
+              "line": 48,
+              "text": "Сначала проверенная Библиотека, далее GitHub при возможности. При OCB — максимум три попытки записи с предварительным обратным чтением результата, затем продолжать от Библиотеки; если без GitHub работа невозможна — остановить и сообщить пользователю. Между внешними запросами ≥5 секунд, одновременно ≤5 задач. Не трогать CYCLE-001, старый P"
+            }
+          ]
+        },
+        {
+          "path": ".context/memory/procedural.md",
+          "count": 6,
+          "lines": [
+            {
+              "line": 5,
+              "text": "## Действующий порядок OCB — решения Владельца 16.10 и 27.10.2026"
+            },
+            {
+              "line": 8,
+              "text": "1. Worker фиксирует исходный запрос, идентификатор запуска, явный OCB и состояние получателя."
+            },
+            {
+              "line": 10,
+              "text": "3. Выполняет исходное обращение и до двух дополнительных при OCB в пределах текущего запуска, соблюдая интервал не менее пяти секунд."
+            },
+            {
+              "line": 11,
+              "text": "4. После третьего OCB сохраняет готовые результаты, неопределённость, зависимости и ожидающую работу в Библиотеке; передаёт выполнение следующему запуску."
+            },
+            {
+              "line": 15,
+              "text": "**Обычный интерактивный чат:** OCB3 к нему не относится. Команда Владельца «опубликуй» означает непосредственную публикацию. При OCB исполнитель сообщает фактический исход, а решение о следующем обращении к затронутой операции принимает Владелец."
+            },
+            {
+              "line": 19,
+              "text": "Актуальный общий регламент: `lvlaksim1/pp-rm/docs/current/OCB-owner-rules-2026-10-16.md`."
+            }
+          ]
+        }
+      ]
+    },
+    "att51": {
+      "status": "ok",
+      "commit": "af544bb266688f6e7c5a50d849649b19176c4810",
+      "scanned_text_files": 612,
+      "skipped_binary": 3117,
+      "skipped_large": 24,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "max-android-research": {
+      "status": "ok",
+      "commit": "e2477471a729ad7eac8cf51822b2530654367d6a",
+      "scanned_text_files": 75,
+      "skipped_binary": 0,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 0,
+      "files": []
+    },
+    "max-desktop": {
+      "status": "ok",
+      "commit": "24488ee0fa09f104ee245d470677f0d008785817",
+      "scanned_text_files": 164,
+      "skipped_binary": 1,
+      "skipped_large": 0,
+      "errors": 0,
+      "hit_files": 2,
+      "files": [
+        {
+          "path": "README.md",
+          "count": 1,
+          "lines": [
+            {
+              "line": 40,
+              "text": "В пользовательской сети `TLS_HANDSHAKE` завершается EOF ещё до получения сертификата даже после трёх попыток на IP-адресах `api2.oneme.ru`. Проверка [GitHub Actions 40248116311](https://github.com/lvlaksim1/max-desktop/actions/runs/40248116311) подтвердила успешные TLS 1.3 и `SESSION_INIT` для трёх продакшен-узлов: `api2.oneme.ru`, `api.o"
+            }
+          ]
+        },
+        {
+          "path": "docs/protocol/tls-auth-diagnostics-2026-10-26.md",
+          "count": 1,
+          "lines": [
+            {
+              "line": 79,
+              "text": "На Windows в установленной версии 0.1.4 кнопка `Проверить соединение (без номера)` завершилась ошибкой `TLS_HANDSHAKE / EOF`. Серверный сертификат не был получен **ни в одной из трёх попыток** к основному узлу `api2.oneme.ru`. Таким образом, проблемы `SESSION_INIT`, номера телефона и запроса SMS здесь исключены: до них клиент не доходит."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
