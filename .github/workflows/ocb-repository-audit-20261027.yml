@@ -1,0 +1,69 @@
+name: One-time OCB repository content audit
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/ocb-repository-audit-20261027.yml"]
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan all public repositories and publish a structured inventory
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os, json, re, subprocess, tempfile, time
+          from pathlib import Path
+          repos = """evrasia-mini time-machine web-research evrasia-hd extension-builder apk-research iOS-Research-Runtime edo_documents ai-agent-lab repo-factory telegram-receiver telegram-receiver-test-consumer context-capsule resident-expert agent-control-plane agent-control-plane-gateway google-apps-script-connector runtime-write-probe-public Qwen-Desktop-Local-Bridge Baraban chatgpt-desktop-local-bridge project-alpha extension-installer network-recorder context-capsule-project-manager service-agent-base mailru-desktop megafon-desktop expert-base ios-expert att51 max-android-research max-desktop""".split()
+          pattern = re.compile(r"\bOCB(?:3|_BACKOFF)?\b|OpenAI.s safety checks|три попытки|трёх попыток|трех попыток", re.I)
+          root = Path(tempfile.mkdtemp(prefix="ocb-audit-"))
+          data = {"date": "2026-10-27", "scope": "all tracked textual files of public repositories", "repos": {}}
+          for repo in repos:
+              target = root / repo
+              cmd = ["git","clone","--quiet","--depth","1","--single-branch","https://github.com/lvlaksim1/"+repo+".git",str(target)]
+              p = subprocess.run(cmd, text=True, capture_output=True, timeout=240)
+              if p.returncode:
+                  data["repos"][repo] = {"status": "clone_failed", "error": p.stderr[-350:]}
+                  print("CLONE_FAIL", repo, p.stderr[-150:], flush=True)
+                  continue
+              paths = subprocess.run(["git","-C",str(target),"ls-files","-z"],capture_output=True).stdout.decode("utf-8","replace").split("\0")
+              matches = []; scanned=0; binary=0; large=0; errors=0
+              for path in filter(None,paths):
+                  fp=target/path
+                  if not fp.is_file():
+                      continue
+                  try:
+                      if fp.stat().st_size > 4000000:
+                          large+=1; continue
+                      raw=fp.read_bytes()
+                      if b"\0" in raw[:1024]:
+                          binary+=1;continue
+                      text=raw.decode("utf-8")
+                  except UnicodeDecodeError:
+                      binary+=1;continue
+                  except Exception:
+                      errors+=1;continue
+                  scanned+=1
+                  lines=[{"line":i,"text":line[:340]} for i,line in enumerate(text.splitlines(),1) if pattern.search(line)]
+                  if lines:
+                      matches.append({"path":path,"count":len(lines),"lines":lines[:45]})
+              data["repos"][repo]={"status":"ok","commit":subprocess.run(["git","-C",str(target),"rev-parse","HEAD"],capture_output=True,text=True).stdout.strip(),"scanned_text_files":scanned,"skipped_binary":binary,"skipped_large":large,"errors":errors,"hit_files":len(matches),"files":matches}
+              print("SCAN",repo,"text",scanned,"hit_files",len(matches),"skipped",binary+large,"errors",errors, flush=True)
+          Path("reports").mkdir(exist_ok=True)
+          dest=Path("reports/OCB-AUDIT-2026-10-27-PUBLIC.json")
+          dest.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print("REPORT",str(dest),len(dest.read_bytes()),flush=True)
+          PY
+      - name: Publish inventory to repository
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/OCB-AUDIT-2026-10-27-PUBLIC.json
+          if ! git diff --cached --quiet; then
+            git commit -m "audit: full content scan of public repos for OCB references"
+            git push origin HEAD:main
+          fi
